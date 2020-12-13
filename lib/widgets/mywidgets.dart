@@ -492,7 +492,74 @@ class AssesmentItem extends StatelessWidget {
   }
 }
 
+class DialogWithField extends StatelessWidget {
+  final String title;
+  final VoidCallback onClick;
+  // final List<Widget> actions;
+  
+  
+  DialogWithField({
+    this.title,
+    this.onClick
+    // this.content,
+    // this.actions = const [],
+  });
 
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+        height: 250,
+        width: 200,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+             Align(
+                alignment: Alignment.center,
+                child:  HHTextView(
+                  title: "New Note",
+                  size: 18,
+                  color: HH_Colors.color_707070,
+                ),
+              ),
+              SizedBox(
+                height: 10,),
+              HHEditText(
+                minLines: 4,
+              ),
+              
+              SizedBox(
+                height: 20.0,
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  child: Center(
+                    child: RaisedButton(
+                      onPressed: () {
+                        onClick();
+                      },
+                      child: Text(
+                        "Save & Send",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      color: HH_Colors.purpleColor,
+                    )
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 OutlineInputBorder normalOutlineInputBorder() {
   return OutlineInputBorder(
