@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/language.dart';
@@ -131,7 +132,16 @@ class SettingsPageState extends State<SettingsPage>{
           showDialog(
             context: context,
             builder: (BuildContext dialogContext) {
-              return CustomDialog();
+              return DialogWithButtons(
+                onDenyPress: () {
+                  Navigator.pop(context);
+                },
+
+                onLogoutPress: (){
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, LoginPage.RouteName);
+                },
+              );
             },
           );
 

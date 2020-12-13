@@ -72,15 +72,16 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
     if(confpassword != newpassword){
       setState(() {
-        confPasswordErrorMsg = "Please enter a confirm password."; 
+        confPasswordErrorMsg = "Confirm password do not matched."; 
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
       });
+      return;
     }
 
     setState(() {
-        confPasswordErrorMsg = "Passwords do not matched."; 
+        confPasswordErrorMsg = "Please enter a confirm password."; 
         errorOld = true;
         errorNew = true;
         errorConfirm = true;    
@@ -107,7 +108,6 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: 'Please enter correct old password',
                     showeye: true,
                     onClickEye: () {
-                      print("Count was selected.");
                       setState(() {
                         secureOld = !secureOld;
                       });
@@ -122,7 +122,6 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: 'Please enter a valid password',
                     showeye: true,
                     onClickEye: () {
-                      print("Count was selected.");
                       setState(() {
                         secureNew = !secureNew;
                       });
@@ -137,7 +136,6 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: confPasswordErrorMsg,
                     showeye: true,
                     onClickEye: () {
-                      print("Count was selected.");
                       setState(() {
                         secureConfirm = !secureConfirm;
                       });

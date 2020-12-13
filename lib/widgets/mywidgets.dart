@@ -152,12 +152,13 @@ class HHTextView extends StatelessWidget {
   double size;
   var color;
   var alignment = TextAlign.left;
+  var textweight = FontWeight.w200;
 
-  HHTextView({@required this.title, @required this.size, @required this.color, this.alignment});
+  HHTextView({@required this.title, @required this.size, @required this.color, this.alignment, this.textweight});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontWeight: textweight?? FontWeight.w200));
   }
 }
 
@@ -226,8 +227,8 @@ class HHEditTextState extends State<HHEditText> {
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText??false ,
       controller: widget.controller,
-      minLines: widget.minLines,
-      maxLines: widget.minLines,
+      minLines: widget.minLines?? 1,
+      maxLines: widget.minLines?? 1,
       decoration: InputDecoration(
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
           errorText: widget.error != null && widget.error ? widget.errorText : null,
@@ -704,6 +705,81 @@ class CustomDialog extends StatelessWidget {
             ),
           ),
         )
+    );
+  }
+}
+
+class DialogWithButtons extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+  final VoidCallback onLogoutPress;
+  final VoidCallback onDenyPress;
+  
+  
+  DialogWithButtons({
+    this.title,
+    this.content,
+    this.onLogoutPress,
+    this.onDenyPress,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)),
+      child: Container(
+          height: 170,
+          width: 170,
+        child: Padding(
+          padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                child: Column(
+                    children: [
+                      HHTextView(title: "Logout", size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
+                      SizedBox(height: 20),
+                      HHTextView(title: "Are you sure you want to log out of the app ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w300)
+                    ],
+                  )
+              ),
+              SizedBox(height: 20,),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () => {
+                          onDenyPress(),
+                        },
+                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: InkWell(
+                        onTap: () => {
+                          onLogoutPress()
+                        },
+                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      )
     );
   }
 }
