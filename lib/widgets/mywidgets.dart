@@ -30,7 +30,7 @@ class HHButton extends StatelessWidget {
       },
       child: Text(
         title,
-        style: TextStyle(color: isEnable??false ?Colors.white:HH_Colors.color_949494,
+        style: TextStyle(color: isEnable??true ?Colors.white:HH_Colors.color_949494,
         fontSize: textSize?? 22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),

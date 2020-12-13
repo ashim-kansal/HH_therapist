@@ -81,7 +81,7 @@ class DashboardState extends State<Dashboard> {
 
   ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 1?'assets/images/ic_library_select.png':'assets/images/ic_library.png', height: 20, width: 20,),
+                icon: Image.asset('assets/images/ic_chat.png', height: 20, width: 20, color: tabIndex == 1?HH_Colors.accentColor: HH_Colors.grey_707070,),
                 title: Text('My Chat'),
 
               ),

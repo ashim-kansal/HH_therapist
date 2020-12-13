@@ -15,6 +15,7 @@ import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
+import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/sessions.dart';
@@ -67,6 +68,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ReviewPage());
     case SettingsPage.RouteName:
       return MaterialPageRoute(builder: (context) => SettingsPage());
+    case FeedbackPage.RouteName:
+      return MaterialPageRoute(builder: (context) => FeedbackPage());
     case LanguagePage.RouteName:
       return MaterialPageRoute(builder: (context) => LanguagePage());
     case NotificationPage.RouteName:

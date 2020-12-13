@@ -46,6 +46,8 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
   void populateData() {
     for (int i = 0; i < 10; i++)
       widget.list.add(ListItem<String>("$i Nov\nMon"));
+
+    widget.list[0].isSelected = true;
   }
 
   @override
@@ -69,12 +71,12 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
               color: widget.list[index].isSelected ? HH_Colors.primaryColor : Colors.white,
 
             ),
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
             child: Center(
               child: Text(
                 widget.list[index].data,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: widget.list[index].isSelected? Colors.white : HH_Colors.grey_707070),
+                style: TextStyle(fontSize: 14, color: widget.list[index].isSelected? Colors.white : HH_Colors.grey_707070),
               ),),
           ),
           onTap: (){

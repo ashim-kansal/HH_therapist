@@ -46,7 +46,9 @@ class TharapistCell extends StatelessWidget {
             ],
           ),
 
-          showBook?InkWell(child: Container(
+          showBook?
+          InkWell(
+            child: Container(
             // margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(

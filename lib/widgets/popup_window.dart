@@ -30,6 +30,11 @@ class _PopupMenuWidgetState extends State<PopupMenuWidget> {
 
 class HHOptionButton extends StatelessWidget{
 
+  final VoidCallback onClickCancel;
+  final VoidCallback onClickReSchedule;
+  HHOptionButton({this.onClickCancel, this.onClickReSchedule});
+
+
   @override
   Widget build(BuildContext context) {
     return
@@ -49,11 +54,15 @@ class HHOptionButton extends StatelessWidget{
                   child: new Column(
                     children: [
                       InkWell(
-                        child: Text('add'),
-                        onTap: (){ Navigator.pop(context, 'add');},
+                        child: Text('cancel'),
+                        onTap: (){ Navigator.pop(context, 'cancel');
+                        onClickCancel();
+                        },
                       ),InkWell(
-                        child: Text('remove'),
-                        onTap: (){ Navigator.pop(context, 'add');},
+                        child: Text('re-schedule'),
+                        onTap: (){ Navigator.pop(context, 're-schedule');
+                        onClickReSchedule();
+                        },
                       )
                     ],
                   ),

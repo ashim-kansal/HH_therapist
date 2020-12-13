@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/change_password.dart';
+import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -101,7 +102,7 @@ class SettingsPageState extends State<SettingsPage>{
         Container(width: MediaQuery.of(context).size.width, color: HH_Colors.grey_707070, margin: EdgeInsets.fromLTRB(0,10, 0 ,15), height: 0.5,),
       InkWell(
         onTap: (){
-          Navigator.pushNamed(context, LanguagePage.RouteName);
+          Navigator.pushNamed(context, FeedbackPage.RouteName);
         },
         child:    Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -110,7 +111,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Image.asset('assets/images/ic_programs.png',height: 20, width: 20, color: HH_Colors.color_949494),
                 SizedBox(width: 10,),
-                Text('Program', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text('Contact to Admin', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(
@@ -126,7 +127,7 @@ class SettingsPageState extends State<SettingsPage>{
 
       InkWell(
         onTap: (){
-          Navigator.pushNamed(context, LanguagePage.RouteName);
+          // CustomDial
         },
         child:    Row(
           children: [

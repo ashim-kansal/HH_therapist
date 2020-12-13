@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/inputquestion_widget.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
@@ -254,12 +255,15 @@ class UpcomingSessionItem extends StatelessWidget {
               child:
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        Text('Session1', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.accentColor, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
+
+
+                      Text('Session1', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.accentColor, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
                       Row(children: [
                         Text('Therapist:', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
                         SizedBox(width: 5,),
@@ -279,38 +283,44 @@ class UpcomingSessionItem extends StatelessWidget {
                   completed?
                       Container()
                       :
-                  Column( children: [Row(
-                    children: [
-                      ButtonTheme(
-                        height: 35,
-                        minWidth: 35,
-                        child: RaisedButton(
-                          color: Colors.white,
-                          child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
-                          onPressed: (){
-                            // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-                          },
-                          shape: CircleBorder(),
+                  Column( children: [
+                   Container(
+                     child:  Row(
+                     children: [
+                       ButtonTheme(
+                         height: 35,
+                         minWidth: 35,
+                         child: RaisedButton(
+                           color: Colors.white,
+                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
+                           onPressed: (){
+                             // Navigator.pushNamed(context, MyChat.RouteName);
+                           },
+                           shape: CircleBorder(),
 
-                        ),
-                      ),
+                         ),
+                       ),
 
-                      ButtonTheme(
-                          height: 35,
-                          minWidth: 35,
-                          child: RaisedButton(
+                       ButtonTheme(
+                           height: 35,
+                           minWidth: 35,
+                           child: RaisedButton(
 
-                              color: Colors.white,
-                              child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                              onPressed: (){
-                                // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-                              },
-                              shape: CircleBorder()
-                          )),
-                      Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
+                               color: Colors.white,
+                               child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                               onPressed: (){
+                                 // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                               },
+                               shape: CircleBorder()
+                           )),
+                       HHOptionButton(onClickReSchedule: (){
+                         Navigator.pushNamed(context, BookSessionPage.RouteName);
+                       },),
+                       // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
 
-                    ],
-                  )],)
+                     ],
+                   ), height: 50,)
+                  ],)
                 ],
 
               ),
