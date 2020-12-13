@@ -79,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
       emailerror = false;
       pwderror = false;
     });
+    Navigator.pop(context);
     Navigator.pushNamed(context, Dashboard.RouteName);
   }
 

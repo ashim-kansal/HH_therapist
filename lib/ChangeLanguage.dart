@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 
@@ -105,7 +106,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                           isEnable: true,
                           onClick: (){
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, MyGoals.RouteName);
+                            Navigator.pushNamed(context, LoginPage.RouteName);
                           }),
                         ))),
               ],

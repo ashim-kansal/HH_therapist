@@ -50,9 +50,11 @@ class NotesPageState extends State<NotesPage> {
                         onTap: () {
                           showDialog(
                             context: context,
+                            barrierDismissible: false,
                             builder: (BuildContext dialogContext) {
                               return DialogWithField(
                                   onClick: () {
+                                    Navigator.pop(context);
                                     addItem();
                                   },
                                 );

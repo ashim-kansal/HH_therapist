@@ -151,12 +151,13 @@ class HHTextView extends StatelessWidget {
   var title;
   double size;
   var color;
+  var alignment = TextAlign.left;
 
-  HHTextView({@required this.title, @required this.size, @required this.color});
+  HHTextView({@required this.title, @required this.size, @required this.color, this.alignment});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: TextStyle(color: color, fontSize: size));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size));
   }
 }
 
@@ -575,3 +576,135 @@ OutlineInputBorder errorOutlineInputBorder() {
     borderSide: BorderSide(color: Color(0xffff8a73)),
   );
 }
+
+class CustomAlertDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+
+  CustomAlertDialog({
+    this.title,
+    this.content,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+        child:
+        Container(
+          height: 250,
+          width: 200,
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(15, 2, 15, 2),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Center(
+                          child: Image.asset("assets/images/thumb.png", height: 80, width: 80,)
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    HHTextView(
+                      title: title,
+                      size: 18,
+                      color: HH_Colors.color_707070,
+                      alignment: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child:  Image.asset("assets/images/ic_close_red.png", height: 30, width: 30,)
+
+              )
+
+            ],
+            ),
+        )
+    );
+  }
+}
+
+class CustomDialog extends StatelessWidget {
+  final String title;
+  final String content;
+  final List<Widget> actions;
+
+  final VoidCallback onLogoutPress;
+
+
+  CustomDialog({
+    this.title,
+    this.content,
+    this.onLogoutPress,
+    this.actions = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          height: 160,
+          width: 160,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15, 4, 15, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
+                      children: [
+                        HHTextView(title: "Logout", size: 22, color: HH_Colors.color_707070,),
+                        SizedBox(height: 20),
+                        HHTextView(title: "Are you sure you want to log out of the app ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center,)
+                      ],
+                    )
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070,),
+                      ),
+                    Container(
+                      width: 0.5,
+                       height: 50,
+                    color: HH_Colors.borderGrey,),
+                      Padding(
+                        padding: EdgeInsets.all(15),
+                        child: InkWell(
+                          onTap: () => {
+                            onLogoutPress()
+                          },
+                          child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070,),),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+    );
+  }
+}
+

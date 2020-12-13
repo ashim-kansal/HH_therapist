@@ -42,8 +42,15 @@ class FeedbackPageState extends State<FeedbackPage> {
                 ),
               ])),
           HHButton(title: "Send", type: 4, onClick: (){
-            // Navigator.pushNamed(context, Dashboard.RouteName);
-          },)
+            showDialog(
+              context: context,
+              builder: (BuildContext dialogContext) {
+                return CustomAlertDialog(
+                  title: "We appreciate your feedback. Our team will have a look at it shortly.",
+                );
+              },
+            );
+            },)
 
         ],
       ));

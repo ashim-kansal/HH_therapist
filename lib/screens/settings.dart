@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
+import 'package:flutter_app/widgets/mywidgets.dart';
 
 class SettingsPage extends StatefulWidget{
   static const String RouteName = '/settings';
@@ -127,7 +128,13 @@ class SettingsPageState extends State<SettingsPage>{
 
       InkWell(
         onTap: (){
-          // CustomDial
+          showDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return CustomDialog();
+            },
+          );
+
         },
         child:    Row(
           children: [
