@@ -25,6 +25,8 @@ import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/sessionsDetails.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -67,10 +69,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SettingsPage());
     case LanguagePage.RouteName:
       return MaterialPageRoute(builder: (context) => LanguagePage());
+    case NotificationPage.RouteName:
+      return MaterialPageRoute(builder: (context) => NotificationPage());
     case ChnagePasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChnagePasswordPage());
     case ChatPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatPage());
+    case SessionDetails.RouteName:
+      return MaterialPageRoute(builder: (context) => SessionDetails());
     case NotesPage.RouteName:
       return MaterialPageRoute(builder: (context) => NotesPage());
     case AssessmentFormPage.RouteName:

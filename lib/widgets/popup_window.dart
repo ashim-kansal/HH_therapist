@@ -41,7 +41,7 @@ class HHOptionButton extends StatelessWidget{
             onSelected: (String value) {
               print("You selected $value");
             },
-          captureInheritedThemes: false,
+          // captureInheritedThemes: false,
             icon: Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,),
             itemBuilder: (BuildContext context) {
               return [

@@ -46,6 +46,11 @@ class _LoginPageState extends State<LoginPage> {
     String email = emailController.text;
     String password = passwordController.text;
 
+    var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+
     if(email.trim().length == 0 && password.trim().length == 0){
       setState(() {
         emailerror = true;
@@ -54,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    if(email.trim().length == 0){
+    if(email.trim().length == 0 || !emailRegex.hasMatch(email)){
       setState(() {
         emailerror = true;
         pwderror = false;
@@ -62,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    if(password.trim().length == 0){
+    if(password.trim().length == 0 || !pwdRegex.hasMatch(password)){
       setState(() {
         emailerror= false;
         pwderror = true;
@@ -169,7 +174,6 @@ class _LoginPageState extends State<LoginPage> {
                                 errorText: 'Please enter a valid password',
                                 showeye: true,
                                 onClickEye: () {
-                                  print("Count was selected.");
                                   setState(() {
                                     securepwd = !securepwd;
                                   });

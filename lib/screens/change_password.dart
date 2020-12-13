@@ -20,6 +20,74 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
   bool errorNew = false;
   bool errorConfirm = false;
 
+  String confPasswordErrorMsg = "Please enter a confirm password";
+
+  bool secureOld = true;
+  bool secureNew = true;
+  bool secureConfirm = true;
+
+  void passwordHandler() {
+
+    String oldpwd = oldPasswordController.text;
+    String newpassword = newPasswordController.text;
+    String confpassword = cPasswordController.text;
+
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
+    if(oldpwd.trim().length == 0 && newpassword.trim().length == 0 && confpassword.trim().length == 0){
+      setState(() {
+        errorOld = true;
+        errorNew = true;
+        errorConfirm = true;
+      });
+      return;
+    }
+
+    if(oldpwd.trim().length == 0){
+      setState(() {
+        errorOld = true;
+        errorNew = false;
+        errorConfirm = false;
+      });
+      return;
+    }
+
+    if(newpassword.trim().length == 0 || !pwdRegex.hasMatch(newpassword)){
+      setState(() {
+        errorOld = false;
+        errorNew = true;
+        errorConfirm = false;
+      });
+      return;
+    }
+
+    if(confpassword.trim().length == 0 || !pwdRegex.hasMatch(confpassword)){
+      setState(() {
+        errorOld = false;
+        errorNew = false;
+        errorConfirm = true;
+      });
+      return;
+    }
+
+    if(confpassword != newpassword){
+      setState(() {
+        confPasswordErrorMsg = "Please enter a confirm password."; 
+        errorOld = false;
+        errorNew = false;
+        errorConfirm = true;    
+      });
+    }
+
+    setState(() {
+        confPasswordErrorMsg = "Passwords do not matched."; 
+        errorOld = true;
+        errorNew = true;
+        errorConfirm = true;    
+      });
+
+  }
+
   @override
   Widget build(BuildContext context) => MyWidget(
       title: HHString.change_password,
@@ -33,33 +101,52 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
               children: [
                 HHEditText(
                     hint: "Old Password",
-                    obscureText: true,
+                    obscureText: secureOld,
                     controller: oldPasswordController,
                     error: errorOld,
                     errorText: 'Please enter correct old password',
-                    showeye: true
+                    showeye: true,
+                    onClickEye: () {
+                      print("Count was selected.");
+                      setState(() {
+                        secureOld = !secureOld;
+                      });
+                    },
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
                     hint: "New Password",
-                    obscureText: true,
+                    obscureText: secureNew,
                     controller: newPasswordController,
                     error: errorNew,
                     errorText: 'Please enter a valid password',
-                    showeye: true
+                    showeye: true,
+                    onClickEye: () {
+                      print("Count was selected.");
+                      setState(() {
+                        secureNew = !secureNew;
+                      });
+                    },
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
                     hint: "Confirm Password",
-                    obscureText: true,
+                    obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,
-                    errorText: 'Passwords do not matched',
-                    showeye: true
+                    errorText: confPasswordErrorMsg,
+                    showeye: true,
+                    onClickEye: () {
+                      print("Count was selected.");
+                      setState(() {
+                        secureConfirm = !secureConfirm;
+                      });
+                    },
                 )
               ],
             ),
-            HHButton(title: 'Save', type: 4, isEnable: true,)
+            HHButton(title: 'Save', type: 4, isEnable: true,
+            onClick: (){ passwordHandler();},)
           ],
         ),
       )

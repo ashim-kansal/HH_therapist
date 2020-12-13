@@ -20,6 +20,9 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController cpasswordController = TextEditingController();
 
+  bool securePwd = true;
+  bool secureCPwd = true;
+
   @override
   void dispose() {
     super.dispose();
@@ -32,6 +35,8 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     String password = passwordController.text;
     String cPassword = cpasswordController.text;
 
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
     if(password.trim().length == 0 && cPassword.trim().length == 0){
       setState(() {
         widget.pwderror = true;
@@ -40,7 +45,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       return;
     }
 
-    if(password.trim().length == 0){
+    if(password.trim().length == 0 || !pwdRegex.hasMatch(password)){
       setState(() {
         widget.pwderror = true;
         widget.cpwderror = false;
@@ -48,7 +53,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       return;
     }
 
-    if(cPassword.trim().length == 0){
+    if(cPassword.trim().length == 0 || !pwdRegex.hasMatch(cPassword)){
       setState(() {
         widget.pwderror = false;
         widget.cpwderror = true;
@@ -126,24 +131,34 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                   padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
                                   child: HHEditText(
                                     hint: "Enter New Password",
-                                    obscureText: true,
+                                    obscureText: securePwd,
                                     controller: passwordController,
                                     error: widget.pwderror,
                                     errorText:
                                     'Please enter a new password',
-                                    showeye: true
+                                    showeye: true,
+                                    onClickEye: () {
+                                      setState(() {
+                                        securePwd = !securePwd;
+                                      });
+                                    },
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
                                     hint: "Confirm Password",
-                                    obscureText: true,
+                                    obscureText: secureCPwd,
                                     controller: cpasswordController,
                                     error: widget.cpwderror,
                                     errorText:
                                     'Please enter a valid confirm password',
-                                    showeye: true
+                                    showeye: true,
+                                    onClickEye: () {
+                                      setState(() {
+                                        secureCPwd = !secureCPwd;
+                                      });
+                                    },
                                   ),
                                 ),
                                 Padding(

@@ -27,7 +27,9 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
 
     String email = emailController.text;
 
-    if(email.trim().length == 0){
+    var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+    if(email.trim().length == 0 || !emailRegex.hasMatch(email)){
       setState(() {
         widget.error = true;
       });
