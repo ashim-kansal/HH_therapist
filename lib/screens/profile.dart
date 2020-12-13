@@ -68,8 +68,50 @@ class _CreateAccountState extends State<ProfilePage> {
                           children: <Widget>[
 
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                              child: Container(
+                              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                              child: Stack(
+                                  children: <Widget>[
+                                    Container(
+                                        decoration: new BoxDecoration(color: Colors.white),
+                                        alignment: Alignment.center,
+                                        child: CircleAvatar(
+                                          radius: 55,
+                                          backgroundColor: HH_Colors.color_F2EEEE,
+                                          child: CircleAvatar(
+                                            backgroundImage: AssetImage("assets/images/userimage.png"),
+                                            radius: 46,
+                                          ),
+                                        )
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 155),
+                                      child: Container(
+                                        width: 35,
+                                        height:35,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [//background color of box
+                                            BoxShadow(
+                                              color: HH_Colors.color_F2EEEE,
+                                              blurRadius: 65.0, // soften the shadow
+                                              spreadRadius: 1.0, //extend the shadow
+                                              offset: Offset(
+                                                15.0, // Move to right 10  horizontally
+                                                15.0, // Move to bottom 10 Vertically
+                                              ),
+                                            )
+                                          ],
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.camera_alt,
+                                            size: 20,
+                                          ), onPressed: () {  },
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                                 // width: 120,
                                 // height: 140,
                                 // decoration: BoxDecoration(
@@ -78,9 +120,8 @@ class _CreateAccountState extends State<ProfilePage> {
                                 //   border: Border.all(color: Color(0xffF2EEEE)),
                                 //   borderRadius: BorderRadius.all(Radius.circular(50.0))
                                 // ),
-                                child: Image.asset('assets/images/userimage.png', 
-                                height: 120,
-                                width: 90),)
+                                // child: Image.asset('assets/images/userimage.png', 
+                                // height: 120,
                             ),
 
                             Flexible(

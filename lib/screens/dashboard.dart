@@ -4,6 +4,7 @@ import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/library.dart';
+import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -46,6 +47,19 @@ class DashboardState extends State<Dashboard> {
           ),
           backgroundColor: Theme.of(context).accentColor,
           elevation: 0,
+          actions: [
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton( 
+                icon: Icon(
+                    Icons.notifications_on_outlined,
+                    color: Colors.white, ),
+                    onPressed: () => {
+                      Navigator.pushNamed(context, NotificationPage.RouteName)
+                    },
+              )
+            )
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
             selectedItemColor: HH_Colors.accentColor,

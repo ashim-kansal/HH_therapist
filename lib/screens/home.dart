@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child:       Column(
+      child: Column(
       children: [
         Card(
           elevation: 10,

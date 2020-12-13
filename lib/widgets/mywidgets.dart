@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class HHButton extends StatelessWidget {
   var title = "";
@@ -30,7 +31,7 @@ class HHButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(color: isEnable??false ?Colors.white:HH_Colors.color_949494,
-        fontSize: textSize == null ? 22: textSize, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
+        fontSize: textSize?? 22, fontWeight: FontWeight.w500, fontFamily: "ProximaNova"),
         textAlign: TextAlign.center,
       ),
     );
@@ -40,20 +41,22 @@ class HHButton extends StatelessWidget {
 class HHHomeButton extends StatelessWidget {
   var title = "";
   var type = 1;
+  var bColor = HH_Colors.accentColor;
+  var arrowContainerColor = HH_Colors.light_accentcolor;
   final VoidCallback onClick;
 
-  HHHomeButton({@required this.title, @required this.type, this.onClick});
+  HHHomeButton({@required this.title, @required this.type, this.onClick, this.bColor, this.arrowContainerColor});
 
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
       padding: EdgeInsets.only(left: 20),
-      color: HH_Colors.accentColor,
+      color: bColor?? HH_Colors.accentColor,
       onPressed: () {
         onClick();
       },
 
-      focusColor: HH_Colors.accentColor,
+      focusColor: bColor?? HH_Colors.accentColor,
       // width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +67,7 @@ class HHHomeButton extends StatelessWidget {
             textAlign: TextAlign.start,
           ),
           Container(
-            color: HH_Colors.light_accentcolor,
+            color: arrowContainerColor?? HH_Colors.light_accentcolor,
             padding: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
             child: Center(
               child: Icon(
@@ -343,6 +346,142 @@ class DrinkingDiaryCell extends StatelessWidget{
           )
 
         ],
+      ),
+    );
+  }
+}
+
+// NOTIFICATION
+
+class NotificationList extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  
+  
+  NotificationList({
+    @required
+    this.title,
+    @required
+    this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+      // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      child: Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: new Container(
+            // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            height: MediaQuery.of(context).size.width / 4,
+            decoration: BoxDecoration(
+              //  color: HH_Colors.color_F3F3F3,
+            ),
+            child: Column(children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                color: HH_Colors.color_F3F3F3,
+                child: new ListTile(
+                  title: Column(children: [
+                  HHTextView(
+                    title: this.title,
+                    color: HH_Colors.grey_35444D,
+                    size: 16,
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: HHTextView(
+                      title: this.subtitle,
+                      color: HH_Colors.color_92ABBB,
+                      size: 14,
+                    ),
+                  )
+              ],),
+              )
+            ),
+            ],)
+          ),
+          secondaryActions: <Widget>[
+            Container(
+              child: new IconSlideAction(
+                color: Colors.red,
+                icon: Icons.delete,
+                // onTap: () => _showSnackBar('Delete'),
+              ),
+            )
+          ],
+        )
+    );
+  }
+}
+
+class AddFileCard extends StatelessWidget {
+  var title;
+  double size;
+  var color;
+
+  AddFileCard({@required this.title, @required this.size, @required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return 
+    Card(
+      elevation: 7,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      child: Container(
+        padding: EdgeInsets.fromLTRB(15, 5, 14, 8),
+        child: Center(child:  Column(children: [
+          Image.asset('assets/images/fileadd.png', height: 80 ,width: 50,),
+          Text(title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 14))
+        ],)
+       ),
+      ),
+    );
+  }
+}
+
+class AssesmentItem extends StatelessWidget {
+  var title;
+  var subTitle;
+  var value;
+  double size;
+  var color;
+
+  AssesmentItem({@required this.title, @required this.value, @required this.subTitle, this.size, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return 
+    Container(
+      padding: EdgeInsets.fromLTRB(15, 5, 14, 8),
+      child: Center(child:  Column(children: [
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: Text(title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 16))),
+        Container(
+          margin: EdgeInsets.only(top: 5),
+          padding: EdgeInsets.only(bottom: 5),
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: HH_Colors.borderGrey, width: 0.8)),
+          ),
+          child: Row(
+            children: <Widget>[
+              Expanded(child: Stack(children: [
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(subTitle, style: TextStyle(color: HH_Colors.color_707070, fontSize: 14))
+                ),
+                Positioned(child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(value, style: TextStyle(color: HH_Colors.color_707070, fontSize: 14)))),
+              ]),
+            )
+          ],),
+        )
+      ],)
       ),
     );
   }
