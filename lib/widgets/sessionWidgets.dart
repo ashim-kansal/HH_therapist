@@ -36,7 +36,12 @@ class SessionCard extends StatelessWidget {
                   children: [
                     Text('22 Nov, 2020, 1:30 PM', style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                    HHOptionButton()
+                    HHOptionButton(onClickReSchedule: (){
+                      Navigator.pushNamed(context, BookSessionPage.RouteName);
+                    },
+                    onClickCancel: (){
+
+                    },),
                   ],
 
                 ),
@@ -257,28 +262,33 @@ class UpcomingSessionItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                  InkWell(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
 
-                      Text('Session1', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.accentColor, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
-                      Row(children: [
-                        Text('Therapist:', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
-                        SizedBox(width: 5,),
-                        Text('Jordan T', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontFamily: 'ProximaNova'),),
-                      ]),
-                      Row(children: [
-                        Text('No. of clients:', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontWeight: FontWeight.w400, fontFamily: 'ProximaNova'),),
-                        SizedBox(width: 5,),
-                        Text('1', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontFamily: 'ProximaNova'),),
-                     ]),
-                      Row(children: [
-                        Icon(Icons.access_time_sharp, color: HH_Colors.accentColor,size: 15,),
-                        Text('22 Nov, 2020, 1:30 PM', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                      ]),
-                    ],
+                        Text('Session1', textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.accentColor, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
+                        Row(children: [
+                          Text('Therapist:', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontWeight: FontWeight.w500, fontFamily: 'ProximaNova'),),
+                          SizedBox(width: 5,),
+                          Text('Jordan T', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontFamily: 'ProximaNova'),),
+                        ]),
+                        Row(children: [
+                          Text('No. of clients:', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontWeight: FontWeight.w400, fontFamily: 'ProximaNova'),),
+                          SizedBox(width: 5,),
+                          Text('1', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070, fontFamily: 'ProximaNova'),),
+                        ]),
+                        Row(children: [
+                          Icon(Icons.access_time_sharp, color: HH_Colors.accentColor,size: 15,),
+                          Text('22 Nov, 2020, 1:30 PM', textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                        ]),
+                      ],
+                    ),
+                    onTap: (){
+                      onClick();
+                    },
                   ),
                   completed?
                       Container()

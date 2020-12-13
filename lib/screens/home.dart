@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/journal.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -48,7 +49,7 @@ class HomePageState extends State<HomePage> {
                 },),
                 SizedBox(height: 15),
                 HHHomeButton(title: 'Review & Reply', type: 2, onClick: (){
-                  Navigator.pushNamed(context, SessionPage.RouteName);
+                  Navigator.pushNamed(context, ReviewPage.RouteName);
                 },),
               ],
             ),

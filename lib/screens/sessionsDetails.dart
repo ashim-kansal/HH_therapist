@@ -234,7 +234,7 @@ class SessionPageState extends State<SessionDetails>{
                 title: "Submit",
                 type: 4,
                 onClick: () {
-                  
+                    Navigator.pop(context);
                 },
               ),
             ),

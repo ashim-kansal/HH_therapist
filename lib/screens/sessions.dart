@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
@@ -58,7 +59,9 @@ class SessionPageState extends State<SessionPage>{
 
   Widget getUpcomingList(){
     return ListView.separated(itemBuilder: (context, index){
-      return UpcomingSessionItem(name: 'abc', role: '', onClick: (){}, completed: !isSwitched,);
+      return UpcomingSessionItem(name: 'abc', role: '', onClick: (){
+        Navigator.pushNamed(context, SessionDetails.RouteName);
+      }, completed: !isSwitched,);
     },
         separatorBuilder: (context, index) {
           return Divider();
