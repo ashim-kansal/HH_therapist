@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 
 class Splash extends StatefulWidget{
@@ -20,7 +21,7 @@ class SplashState extends State<Splash>{
     Timer(Duration(seconds: 3),
             ()=>{
                   Navigator.pop(context),
-                  Navigator.pushNamed(context, Dashboard.RouteName )
+                  Navigator.pushNamed(context, LoginPage.RouteName)
                 }
     );
   }

@@ -39,7 +39,7 @@ class MyWidget extends StatelessWidget{
               // This trailing comma makes auto-formatting nicer for build methods.
             )),
         floatingActionButton: new Visibility(
-          visible: (showFloatingButton==null || !showFloatingButton )? false:true,
+          visible: showFloatingButton??false? true:false,
           child: new FloatingActionButton(child: new Icon(Icons.add),
           ),
     ),

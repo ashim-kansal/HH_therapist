@@ -5,6 +5,7 @@ import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
+import 'package:flutter_app/screens/Notes.dart';
 import 'package:flutter_app/screens/aboutus.dart';
 import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
@@ -76,6 +77,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ChatPage());
     case SessionDetails.RouteName:
       return MaterialPageRoute(builder: (context) => SessionDetails());
+    case NotesPage.RouteName:
+      return MaterialPageRoute(builder: (context) => NotesPage());
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));
