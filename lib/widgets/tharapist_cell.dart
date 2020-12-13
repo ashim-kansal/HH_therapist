@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/Notes.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/utils/colors.dart';
 
@@ -59,7 +60,9 @@ class TharapistCell extends StatelessWidget {
           },): Row(
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, NotesPage.RouteName);
+                },
                 child: Image.asset('assets/images/ic_file.png',
                     width: 20.0, height: 20.0),
               ),
