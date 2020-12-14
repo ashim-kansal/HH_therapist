@@ -784,3 +784,85 @@ class DialogWithButtons extends StatelessWidget {
   }
 }
 
+class DrinkingDiaryDateWidget extends StatefulWidget{
+  var list = [];
+
+
+  @override
+  State<StatefulWidget> createState() => DrinkingDiaryDateWidgetState();
+
+}
+
+class DrinkingDiaryDateWidgetState extends State<DrinkingDiaryDateWidget>{
+
+  void populateData() {
+    for (int i = 0; i < 10; i++)
+      widget.list.add(ListItem<String>("Mon\n$i"));
+
+    widget.list[0].isSelected = true;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.list??List();
+
+    populateData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: widget.list.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+              color: HH_Colors.color_F2EEEE,
+
+            ),
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            child: Center(
+              child: Text(
+                widget.list[index].data,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: HH_Colors.grey_585858, fontFamily: "ProximaNova",
+                fontWeight: widget.list[index].isSelected? FontWeight.w700: FontWeight.w300),
+              ),),
+          ),
+          onTap: (){
+            setItemSelected(index);
+          },
+        );
+
+
+
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
+      },
+    );
+  }
+
+  void setItemSelected(int index) {
+    setState(() {
+      for (int i = 0; i < widget.list.length; i++){
+        if(index == i) {
+          widget.list[i].isSelected = true;
+        }else{
+          widget.list[i].isSelected = false;
+        }
+      }
+
+
+    });
+  }
+}
+
+class ListItem<String> {
+  bool isSelected = false; //Selection property to highlight or not
+  String data; //Data of the user
+  ListItem(this.data); //Constructor to assign the data
+}

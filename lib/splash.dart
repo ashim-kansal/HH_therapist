@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
-import 'package:flutter_app/login.dart';
-import 'package:flutter_app/screens/dashboard.dart';
 
 class Splash extends StatefulWidget{
 
@@ -30,24 +28,12 @@ class SplashState extends State<Splash>{
     return 
       Container(
         color: Color(0xff777CEA),
-        child: 
-        // Column(children: [
-          Flexible(
-            // child: Container(
-              child: Image.asset('assets/images/ic_appicon_white.png', 
-                height: 100,
-                width: 150,
-                fit: BoxFit.none,
-                cacheHeight: 100,
-                cacheWidth: 150,
-                ),
-                
-            ),
-            
-          // )
-          
-        // ],)
-       
+        child: Center(
+          child: Image.asset('assets/images/ic_appicon_white.png',
+          height: 100,
+          width: 150,
+        ),
+        )
         
 
     );

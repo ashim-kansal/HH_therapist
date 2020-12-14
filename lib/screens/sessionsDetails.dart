@@ -93,28 +93,8 @@ class SessionPageState extends State<SessionDetails>{
                               ],
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 10, left: 10),
-                            decoration: BoxDecoration(
-                              color: HH_Colors.color_F2EEEE,
-                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5.0), bottomRight : Radius.circular(5.0))
-                            ),
-                            padding: EdgeInsets.fromLTRB(15,10,15,10),
-                            child: Expanded(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CalenderCell(date: '12', day: 'Mon',),
-                                  CalenderCell(date: '13', day: 'Tue',),
-                                  CalenderCell(date: '14', day: 'Wed',),
-                                  CalenderCell(date: '15', day: 'Thu',),
-                                  CalenderCell(date: '16', day: 'Fri',),
-                                  CalenderCell(date: '17', day: 'Sat',),
-                                  CalenderCell(date: '18', day: 'Sun',),
-                                ],
-                              ),
-                            ),
-                          ),
+                           Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
+                            child: DrinkingDiaryDateWidget()),
                           SizedBox(height: 10,),
                           Card(
                             elevation: 10,
