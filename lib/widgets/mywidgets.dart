@@ -158,7 +158,7 @@ class HHTextView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size, fontWeight: textweight?? FontWeight.w200));
+    return Text(title, textAlign: alignment?? TextAlign.left, style: TextStyle(color: color, fontSize: size,fontFamily: "ProximaNova", fontWeight: textweight?? FontWeight.w200));
   }
 }
 
@@ -172,7 +172,7 @@ class HHTextViewBoarder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(title, 
-    style: TextStyle(color: color, fontSize: size));
+    style: TextStyle(color: color, fontSize: size,fontFamily: "ProximaNova",));
   }
 }
 
@@ -230,6 +230,7 @@ class HHEditTextState extends State<HHEditText> {
       minLines: widget.minLines?? 1,
       maxLines: widget.minLines?? 1,
       decoration: InputDecoration(
+        counterText: '',
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
           errorText: widget.error != null && widget.error ? widget.errorText : null,
           errorStyle: TextStyle(color: Color(0xffff8a73)),
