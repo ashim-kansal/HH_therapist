@@ -243,7 +243,7 @@ class HHEditTextState extends State<HHEditText> {
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye??false ?
               IconButton(
-                icon: Icon(Icons.remove_red_eye, size: 20, color: Color(0xffCBCBCB)),
+                icon: Icon(Icons.remove_red_eye, size: 20, color: widget.obscureText?? false ? Color(0xffCBCBCB) : HH_Colors.accentColor),
                 onPressed: (){
                   // widget.obscureText = !widget.obscureText;
                   // print(widget.obscureText);
