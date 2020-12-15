@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
                               child: 
                               HHEditText(
-                                hint: "Enter Email Id",
+                                hint: "Enter Email",
                                 controller: emailController,
                                 error: emailerror,
                                 errorText: 'Please enter a valid email address',

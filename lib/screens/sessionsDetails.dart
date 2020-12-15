@@ -190,7 +190,9 @@ class SessionPageState extends State<SessionDetails>{
         Container(
           padding: EdgeInsets.fromLTRB(20,0,20,20),
           // margin: EdgeInsets.only(bottom: 20),
-          child: Row(children: [
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
             AddFileCard(title: "Add Prescription", size: 22, color: HH_Colors),
             AddFileCard(title: "Add Prescription", size: 22, color: HH_Colors),
           ],)

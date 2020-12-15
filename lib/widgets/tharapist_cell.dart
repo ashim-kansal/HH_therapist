@@ -66,7 +66,7 @@ class TharapistCell extends StatelessWidget {
                   Navigator.pushNamed(context, NotesPage.RouteName);
                 },
                 child: Image.asset('assets/images/ic_file.png',
-                    width: 20.0, height: 20.0),
+                    width: 25.0, height: 25.0),
               ),
               SizedBox(width: 10,),
               GestureDetector(
@@ -74,7 +74,7 @@ class TharapistCell extends StatelessWidget {
                     Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments('Michigan alcohol Test', false));
                 },
                 child: Image.asset('assets/images/ic_unknown.png',
-                    width: 20.0, height: 20.0),
+                    width: 25.0, height: 25.0),
               )
               
             ],

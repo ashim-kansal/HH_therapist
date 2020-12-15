@@ -26,6 +26,24 @@ class _OtpState extends State<OtpPage> {
 
   TextEditingController currController = new TextEditingController();
 
+  FocusNode firstinput;
+  FocusNode secondinput;
+  FocusNode thirdinput;
+  FocusNode fourthinput;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    currController = controller1;
+
+    firstinput = FocusNode();
+    secondinput = FocusNode();
+    thirdinput = FocusNode();
+    fourthinput = FocusNode();
+  }
+
+
   @override
   void dispose() {
     super.dispose();
@@ -35,17 +53,49 @@ class _OtpState extends State<OtpPage> {
     controller4.dispose();
     controller5.dispose();
     controller6.dispose();
+
+    firstinput.dispose();
+    secondinput.dispose();
+    thirdinput.dispose();
+    fourthinput.dispose();
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    currController = controller1;
-  }
 
   @override
   Widget build(BuildContext context) {
+
+     void focusToField(val, type) {
+
+      switch (type) {
+        case "first":
+          if(val.trim().length != 0){
+            secondinput.requestFocus();
+          }
+          break;
+        case "second":
+          if(val.trim().length == 0){
+            firstinput.requestFocus();
+            return;
+          }
+          thirdinput.requestFocus();
+          break;
+        case "third":
+          if(val.trim().length == 0){
+            secondinput.requestFocus();
+            return;
+          }
+          fourthinput.requestFocus();
+          break;
+        case "fourth":
+          if(val.trim().length == 0){
+            thirdinput.requestFocus();
+            return;
+          }
+          break;
+        default:
+      }
+    }
+
     final _formKey = GlobalKey<FormState>();
 
     List<Widget> widgetList = [
@@ -62,11 +112,15 @@ class _OtpState extends State<OtpPage> {
             child: new TextField(
               inputFormatters: [
                 LengthLimitingTextInputFormatter(1),
-              ],decoration: InputDecoration(
-                border: InputBorder.none),
-              enabled: false,
+              ],
+              onChanged: (val) => focusToField(val, "first"),
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+              border: InputBorder.none),
+              enabled: true,
+              focusNode: firstinput,
               controller: controller1,
-              autofocus: false,
+              autofocus: true,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 24.0, color: Colors.black),
             )),
@@ -83,11 +137,14 @@ class _OtpState extends State<OtpPage> {
           child: new TextField(
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
-            ],decoration: InputDecoration(
+            ],
+            onChanged: (val) => focusToField(val, "second"),
+            focusNode: secondinput,
+            decoration: InputDecoration(
               border: InputBorder.none),
             controller: controller2,
             autofocus: false,
-            enabled: false,
+            enabled: true,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 24.0, color: Colors.black),
@@ -109,10 +166,12 @@ class _OtpState extends State<OtpPage> {
             ],decoration: InputDecoration(
               border: InputBorder.none),
             keyboardType: TextInputType.number,
+            onChanged: (val) => focusToField(val, "third"),
             controller: controller3,
+            focusNode: thirdinput,
             textAlign: TextAlign.center,
             autofocus: false,
-            enabled: false,
+            enabled: true,
             style: TextStyle(fontSize: 24.0, color: Colors.black),
           ),
         ),
@@ -130,16 +189,40 @@ class _OtpState extends State<OtpPage> {
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
             ],
+            onChanged: (val) => focusToField(val, "fourth"),
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
                 border: InputBorder.none),
             textAlign: TextAlign.center,
             controller: controller4,
+            focusNode: fourthinput,
             autofocus: false,
+            enabled: true,
             style: TextStyle(fontSize: 24.0, color: Colors.black),
           ),
         ),
       )
     ];
+
+    void otpVerifyHandler() {
+
+      if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
+        showDialog(
+          context: context,
+          builder: (BuildContext dialogContext) {
+            return DialogWithSingleButton(
+              title: "Alert",
+              content: "Please enter the valid OTP.",
+            );
+          },
+        );
+        return;
+      }
+
+      Navigator.pop(context);
+      Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+    
+    }
 
     return Scaffold(
         appBar: AppBar(
@@ -153,7 +236,8 @@ class _OtpState extends State<OtpPage> {
         ),
         body: Material(
           color: Theme.of(context).accentColor,
-          child: Container(
+          child: SingleChildScrollView(
+            child: Container(
               padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -229,8 +313,7 @@ class _OtpState extends State<OtpPage> {
                                       ),
                                     
                                       onPressed: (){
-                                        Navigator.pop(context);
-                                        Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                                        otpVerifyHandler();
                                       },
                                       shape: CircleBorder()
                                   )
@@ -249,7 +332,8 @@ class _OtpState extends State<OtpPage> {
                 ],
 
               )
-          ),
+            ),
+          ) 
           // backgroundColor: Colors.white,
           // This trailing comma makes auto-formatting nicer for build methods.
         ));

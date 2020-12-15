@@ -103,7 +103,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
                                   child: HHEditText(
-                                    hint: "Enter Email Id",
+                                    hint: "Enter Email",
                                     obscureText: false,
                                     controller: emailController,
                                     error: widget.error,
