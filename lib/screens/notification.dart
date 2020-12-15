@@ -27,43 +27,51 @@ class _NotificationState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
 
-    return new MyWidget(
-      title: 'Notification',
-      sideMargin: 15,
-        child: new Container(
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text("Notification", style: TextStyle(color: Colors.white)),
+          centerTitle: true,
+          iconTheme: IconThemeData(
+            color: Colors.white, //change your color here
+          ),
+          backgroundColor: Theme.of(context).accentColor,
+          elevation: 0,
+
+        ),
+
+        body:  new Container(
             width: double.infinity,
             height: double.infinity,
             color: Colors.white,
             child: Column(children: [
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
+               NotificationList(title:
                   "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
+                    subtitle: "Now"
               ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
+              SizedBox(height: 1),
+               NotificationList(title:
                   "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
+                    subtitle: "Now"
               ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
+              SizedBox(height: 1),
+              NotificationList(title:
                   "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
+                    subtitle: "Now"
               ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
+              SizedBox(height: 1),
+              NotificationList(title:
                   "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
+                    subtitle: "Now"
+    ),
+              SizedBox(height: 1),
+              NotificationList(title:
+                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
+                    subtitle: "Now"
               ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
+              SizedBox(height: 1),
+              NotificationList(title:
                   "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
-              ),
-              Padding(padding: EdgeInsets.only(bottom: 5),
-                child: NotificationList(title: 
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"),
+                    subtitle: "Now"
               ),
 
             ],)

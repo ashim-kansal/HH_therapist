@@ -43,6 +43,7 @@ class HHOptionButton extends StatelessWidget{
         width: 30.0,
           height: 30,// you can adjust the width as you need
         child: PopupMenuButton<String>(
+          offset: Offset(20,20),
             onSelected: (String value) {
               print("You selected $value");
             },

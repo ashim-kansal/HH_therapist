@@ -98,7 +98,7 @@ class DashboardState extends State<Dashboard> {
 
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 2?'assets/images/ic_tab_assessment_select.png':'assets/images/ic_tab_assessment.png' , height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 2?'assets/images/ic_settings_select.png':'assets/images/ic_settings.png' , height: 20, width: 20,),
                 title: Text('Settings'),
               )
             ]

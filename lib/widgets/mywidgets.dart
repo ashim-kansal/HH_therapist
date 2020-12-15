@@ -379,10 +379,10 @@ class NotificationList extends StatelessWidget {
       // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: Slidable(
           actionPane: SlidableDrawerActionPane(),
-          actionExtentRatio: 0.25,
+          // actionExtentRatio: 0.25,
           child: new Container(
             // padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-            height: MediaQuery.of(context).size.width / 4,
+            // height: MediaQuery.of(context).size.width / 4,
             decoration: BoxDecoration(
               //  color: HH_Colors.color_F3F3F3,
             ),
@@ -412,8 +412,10 @@ class NotificationList extends StatelessWidget {
           ),
           secondaryActions: <Widget>[
             Container(
-              margin: EdgeInsets.only(bottom: 1),
+              // height: MediaQuery.of(context).size.width / 4,
+              // margin: EdgeInsets.only(bottom: 5),
               child: new IconSlideAction(
+
                 color: Colors.red,
                 icon: Icons.delete,
                 // onTap: () => _showSnackBar('Delete'),

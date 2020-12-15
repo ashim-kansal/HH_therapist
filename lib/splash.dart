@@ -20,7 +20,7 @@ class SplashState extends State<Splash>{
     Timer(Duration(seconds: 3),
             ()=>{
                   Navigator.pop(context),
-                  Navigator.pushNamed(context, OtpPage.RouteName)
+                  Navigator.pushNamed(context, SelectLanguage.RouteName)
                 }
     );
   }
