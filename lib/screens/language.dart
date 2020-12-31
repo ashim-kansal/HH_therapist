@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
+import 'package:toast/toast.dart';
 
 class LanguagePage extends StatefulWidget {
   static const String RouteName = '/select_anguage';
+  
+  String languagedata;
+
+  LanguagePage({Key key, @required this.languagedata}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => LanguagePageState();
@@ -14,13 +21,31 @@ class LanguagePageState extends State<LanguagePage> {
   bool english = false;
   bool french = false;
   bool spanish = false;
+  String selectedLang = "";
 
   @override
   void initState() {
     super.initState();
-    english = true;
-    french = true;
-    spanish = true;
+    selectedLang = widget.languagedata;
+    // english = true;
+    // french = true;
+    // spanish = true;
+  }
+
+  void changeLanguage (String lang){
+    SettingAPIService settingAPIService = new SettingAPIService();
+
+    settingAPIService.changeLanguage(lang).then((value) => {
+      showToast(value.responseMessage)
+    });
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -48,12 +73,15 @@ class LanguagePageState extends State<LanguagePage> {
                 Container(
                     padding: EdgeInsets.only(right: 10),
                     child: Checkbox(
-                      value: english,
+                      value: this.selectedLang == "EN" ? true : false,
                       activeColor: HH_Colors.color_17AB35,
                       onChanged: (value) {
                         setState(() {
-                          english = value;
+                          selectedLang = "EN";
                         });
+
+                        this.changeLanguage("EN");
+
                       },
                     ))
               ],
@@ -84,12 +112,14 @@ class LanguagePageState extends State<LanguagePage> {
                 Container(
                     padding: EdgeInsets.only(right: 10),
                     child: Checkbox(
-                      value: this.french,
+                      value: this.selectedLang == "FR" ? true : false,
+                      // this.french,
                       activeColor: HH_Colors.color_17AB35,
                       onChanged: (value) {
                         setState(() {
-                          french = value;
+                          selectedLang = "FR";
                         });
+                        this.changeLanguage("FR");
                       },
                     ))
               ],
@@ -118,12 +148,13 @@ class LanguagePageState extends State<LanguagePage> {
                 Container(
                     margin: EdgeInsets.only(right: 10),
                     child: Checkbox(
-                      value: spanish,
+                      value: this.selectedLang == "ES" ? true : false,
                       activeColor: HH_Colors.color_17AB35,
                       onChanged: (value) {
                         setState(() {
-                          spanish = value;
+                          selectedLang = "ES";
                         });
+                        this.changeLanguage("ES");
                       },
                     ))
               ],
@@ -136,4 +167,10 @@ class LanguagePageState extends State<LanguagePage> {
           ),
         ],
       ));
+}
+
+class LanguageArguments {
+  final String language;
+
+  LanguageArguments(this.language);
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
-import 'package:flutter_app/login.dart';
+import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
@@ -74,6 +77,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                                   elevation: 16,
                                   style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
                                   onChanged: (String newValue) {
+                                    SetStringToSP("language", newValue);
                                     setState(() {
                                       dropdownValue = newValue;
                                     });
@@ -104,9 +108,10 @@ class SelectLanguageState extends State<StatefulWidget> {
                           child: HHButton(title: "Get Started", 
                           type: 2, 
                           isEnable: true,
-                          onClick: (){
+                          onClick: () async {
+                            SetStringToSP("language", dropdownValue);
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, LoginPage.RouteName);
+                            Navigator.pushNamed(context, MyGoals.RouteName);
                           }),
                         ))),
               ],

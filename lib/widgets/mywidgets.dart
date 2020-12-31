@@ -188,6 +188,7 @@ class HHEditText extends StatefulWidget {
   var errorText = "";
   bool obscureText = false;
   var showeye = false;
+  var enabled = true;
   // var controller = null;
   var inputType = TextInputType.text;
 
@@ -202,6 +203,7 @@ class HHEditText extends StatefulWidget {
       this.inputType,
       this.controller,
       this.onClickEye,
+      this.enabled,
       this.showeye})
       : super(key: key);
 
@@ -224,6 +226,7 @@ class HHEditTextState extends State<HHEditText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      enabled: widget.enabled?? true,
       // obscureText: widget.obscureText != null && widget.error ? true : false,
       obscureText: widget.obscureText??false ,
       controller: widget.controller,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/feedback.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
 
 class SettingsPage extends StatefulWidget{
   static const String RouteName = '/settings';
@@ -19,10 +22,46 @@ class SettingsPageState extends State<SettingsPage>{
 
   bool isSwitched = false;
 
+  String language = "";
+
+  // bool notifyStatus = false; 
+
+  UserAPIServices userAPIServices = new UserAPIServices();
+
   @override
   void initState() {
     super.initState();
-    isSwitched = true;
+    
+    userAPIServices.getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          isSwitched = value.result.notificationStatus??false;
+          language = value.result.appLanguage??"";
+        })
+      }
+    });
+    // isSwitched??true;
+  }
+
+  void notificationHandler(bool value){
+    setState(() {
+      isSwitched = value;
+    });
+
+    // API call
+    SettingAPIService settingAPIService = new SettingAPIService();
+
+    settingAPIService.updateNotificationStatus(value).then((value) => {
+      showToast(value.responseMessage),
+    });
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -30,7 +69,7 @@ class SettingsPageState extends State<SettingsPage>{
     children: [
       InkWell(
         onTap: (){
-          Navigator.pushNamed(context, LanguagePage.RouteName);
+          Navigator.pushNamed(context, LanguagePage.RouteName, arguments: LanguageArguments(language));
         },
         child:
         Row(
@@ -90,9 +129,7 @@ class SettingsPageState extends State<SettingsPage>{
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 value: isSwitched,
                 onChanged: (value){
-                  setState(() {
-                    isSwitched = value;
-                  });
+                  notificationHandler(value);
                 },
 
               ),
