@@ -71,7 +71,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case FeedbackPage.RouteName:
       return MaterialPageRoute(builder: (context) => FeedbackPage());
     case LanguagePage.RouteName:
-      return MaterialPageRoute(builder: (context) => LanguagePage());
+      final LanguageArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => LanguagePage(languagedata: args.language));
     case NotificationPage.RouteName:
       return MaterialPageRoute(builder: (context) => NotificationPage());
     case ChnagePasswordPage.RouteName:

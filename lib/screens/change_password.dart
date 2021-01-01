@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
 
 class ChnagePasswordPage extends StatefulWidget {
   static const String RouteName = '/chnage_password';
@@ -72,21 +74,39 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
     if(confpassword != newpassword){
       setState(() {
-        confPasswordErrorMsg = "Confirm password do not matched."; 
+        confPasswordErrorMsg = "Please enter a confirm password."; 
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
       });
-      return;
     }
 
     setState(() {
-        confPasswordErrorMsg = "Please enter a confirm password."; 
-        errorOld = true;
-        errorNew = true;
+        confPasswordErrorMsg = "Passwords do not matched."; 
+        errorOld = false;
+        errorNew = false;
         errorConfirm = true;    
       });
 
+      SettingAPIService settingAPIService = new SettingAPIService();
+
+      settingAPIService.changePassword(oldpwd, newpassword, confpassword).then((value) => {
+        showToast(value.responseMsg),
+        if(value.responseCode == 200){
+          oldpwd = '',
+          newpassword = '',
+          confpassword = ''
+        }
+      });
+
+  }
+
+   //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -108,6 +128,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: 'Please enter correct old password',
                     showeye: true,
                     onClickEye: () {
+                      print("Count was selected.");
                       setState(() {
                         secureOld = !secureOld;
                       });
@@ -122,6 +143,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: 'Please enter a valid password',
                     showeye: true,
                     onClickEye: () {
+                      print("Count was selected.");
                       setState(() {
                         secureNew = !secureNew;
                       });
@@ -136,6 +158,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                     errorText: confPasswordErrorMsg,
                     showeye: true,
                     onClickEye: () {
+                      print("Count was selected.");
                       setState(() {
                         secureConfirm = !secureConfirm;
                       });

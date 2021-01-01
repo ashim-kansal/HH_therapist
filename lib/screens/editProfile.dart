@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/otp.dart';
+import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const String RouteName = '/editProfile';
 
-  EditProfilePage({Key key, this.title}) : super(key: key);
+  Result data;
+
+  EditProfilePage({Key key, this.title, this.data}) : super(key: key);
 
   final String title;
   var error = false;
@@ -17,17 +23,53 @@ class EditProfilePage extends StatefulWidget {
 
 class _CreateAccountState extends State<EditProfilePage> {
 
-  String stateDropdown = 'Select State';
+  String stateDropdown = 'Select Province';
   String countryDropdown = 'Select Country';
+ 
+  String countryCode;
+  String profileImage;
 
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController cpasswordController = TextEditingController();
+  TextEditingController fname = TextEditingController();
+  TextEditingController lname = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController number = TextEditingController();
+  TextEditingController email = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
-    passwordController.dispose();
-    cpasswordController.dispose();
+    fname.dispose();
+    lname.dispose();
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    fname.text = widget.data.firstName;
+    lname.text = widget.data.lastName;
+    number.text = widget.data.mobileNumber;
+    address.text = widget.data.address;
+    email.text = widget.data.email;
+    profileImage = widget.data.profilePic;
+  }
+
+  void updateProfile () {
+    UserAPIServices userAPIServices = new UserAPIServices();
+
+    userAPIServices.updateProfileDetails(fname.text, lname.text, number.text, address.text).then((value) => {
+      showToast(value.responseMessage),
+      if(value.responseCode == 200){
+        // Navigator.pushNamed(context, ProfilePage.RouteName)
+      }
+    });
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -69,31 +111,39 @@ class _CreateAccountState extends State<EditProfilePage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                               child: Container(
-                                // width: 120,
-                                // height: 140,
-                                // decoration: BoxDecoration(
-                                //   color: Color(0xffF2EEEE),
-                                //   // shape: BoxShape.circle,
-                                //   border: Border.all(color: Color(0xffF2EEEE)),
-                                //   borderRadius: BorderRadius.all(Radius.circular(50.0))
-                                // ),
-                                child: Image.asset('assets/images/userimage.png', 
+                                child: profileImage == null ? Image.asset('assets/images/userimage.png', 
                                 height: 120,
-                                width: 90),)
+                                width: 90) : 
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(profileImage),
+                                  radius: 46,
+                                ),
+                                )
                             ),
                            
                             Form(
                               key: _formKey,
                               child: Column(children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
+                                  padding: EdgeInsets.fromLTRB(5, 25, 5, 10),
                                   child: HHEditText(
-                                    hint: "Full Name",
+                                    hint: "First Name",
                                     obscureText: false,
-                                    controller: cpasswordController,
+                                    controller: fname,
                                     error: widget.error,
                                     errorText:
-                                    'Please enter your full name',
+                                    'Please enter your first name',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
+                                  child: HHEditText(
+                                    hint: "Last Name",
+                                    obscureText: false,
+                                    controller: lname,
+                                    error: widget.error,
+                                    errorText:
+                                    'Please enter your last name',
                                   ),
                                 ),
                                 Padding(
@@ -101,7 +151,8 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   child: HHEditText(
                                     hint: "Email",
                                     obscureText: false,
-                                    controller: cpasswordController,
+                                    enabled: false,
+                                    controller: email,
                                     error: widget.error,
                                     errorText:
                                     'Please enter a valid email address',
@@ -113,7 +164,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   child: HHEditText(
                                     hint: "Phone Number",
                                     obscureText: false,
-                                    controller: passwordController,
+                                    controller: number,
                                     error: widget.error,
                                     errorText:
                                     'Please enter a phone number',
@@ -124,90 +175,75 @@ class _CreateAccountState extends State<EditProfilePage> {
                                   child: HHEditText(
                                     hint: "Address",
                                     obscureText: false,
-                                    controller: cpasswordController,
+                                    controller: address,
                                     error: widget.error,
                                     errorText:
                                     'Please enter a address',
                                   ),
                                 ),
-                                 Container(
-                                  width: 290,
-                                  // margin: EdgeInsets.only(top: 5),
-                                  padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      border: Border.all(color: Color(0xffE9E7E7)),
-                                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                                  child: DropdownButtonHideUnderline(
-                                    child: new DropdownButton<String>(
-                                    value: stateDropdown,
-                                    isExpanded: true,
-                                    icon: Icon(Icons.arrow_drop_down),
-                                    iconEnabledColor: Color(0xffC5C4C4),
-                                    iconSize: 38,
-                                    elevation: 16,
-                                    style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                    items: <String>['Select State', 'Chandigarh', 'Haryana', 'Punjab'].map((String value) {
-                                      return new DropdownMenuItem<String>(
+                                // Container(
+                                //   width: 290,
+                                //   margin: EdgeInsets.only(top: 10),
+                                //   padding: const EdgeInsets.only(left: 20.0,right: 10.0),
+                                //   decoration: BoxDecoration(
+                                //     shape: BoxShape.rectangle,
+                                //     border: Border.all(color: Color(0xffE9E7E7)),
+                                //     borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                                //   child: DropdownButtonHideUnderline (
+                                //     child: new DropdownButton<String>(
+                                //       isExpanded: true,
+                                //       value: countryDropdown,
+                                //       icon: Icon(Icons.arrow_drop_down),
+                                //       iconEnabledColor: Color(0xffC5C4C4),
+                                //       iconSize: 38,
+                                //       elevation: 16,
+                                //       style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                //       items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
+                                //         return new DropdownMenuItem<String>(
+                                //           value: value,
+                                //           child: new Text(value),
+                                //         );
+                                //       }).toList(),
+                                //       onChanged: (String newValue) {
+                                //         setState(() {
+                                //           countryDropdown = newValue;
+                                //         });
+                                //       },
+                                //     ),
+                                //   )
+                                // ),
+
+                                // Container(
+                                //   width: 290,
+                                //   // margin: EdgeInsets.only(top: 5),
+                                //   padding: const EdgeInsets.only(left: 20.0,right: 10.0,),
+                                //   decoration: BoxDecoration(
+                                //       shape: BoxShape.rectangle,
+                                //       border: Border.all(color: Color(0xffE9E7E7)),
+                                //       borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                                //   child: DropdownButtonHideUnderline(
+                                //     child: new DropdownButton<String>(
+                                //     value: stateDropdown,
+                                //     isExpanded: true,
+                                //     icon: Icon(Icons.arrow_drop_down),
+                                //     iconEnabledColor: Color(0xffC5C4C4),
+                                //     iconSize: 38,
+                                //     elevation: 16,
+                                //     style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                //     items: <String>['Select Province', 'Chandigarh', 'Haryana', 'Punjab'].map((String value) {
+                                //       return new DropdownMenuItem<String>(
                                         
-                                        value: value,
-                                        child: new Text(value),
-                                      );
-                                    }).toList(),
-                                    onChanged: (String newValue) {
-                                      setState(() {
-                                        stateDropdown = newValue;
-                                      });
-                                    },
-                                  )) 
-                                  // child: HHEditText(
-                                  //   hint: "Select State",
-                                  //   obscureText: false,
-                                  //   controller: cpasswordController,
-                                  //   error: widget.error,
-                                  //   errorText:
-                                  //   'Please select a state',
-                                  // ),
-                                ),
-                                Container(
-                                  width: 290,
-                                  margin: EdgeInsets.only(top: 10),
-                                  padding: const EdgeInsets.only(left: 20.0,right: 10.0),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    border: Border.all(color: Color(0xffE9E7E7)),
-                                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                                  child: DropdownButtonHideUnderline (
-                                    child: new DropdownButton<String>(
-                                      isExpanded: true,
-                                      value: countryDropdown,
-                                      icon: Icon(Icons.arrow_drop_down),
-                                      iconEnabledColor: Color(0xffC5C4C4),
-                                      iconSize: 38,
-                                      elevation: 16,
-                                      style: TextStyle(color: Color(0xff707070), fontFamily: "ProximaNova"),
-                                      items: <String>['Select Country', 'India', 'Canada', 'USA'].map((String value) {
-                                        return new DropdownMenuItem<String>(
-                                          value: value,
-                                          child: new Text(value),
-                                        );
-                                      }).toList(),
-                                      onChanged: (String newValue) {
-                                        setState(() {
-                                          countryDropdown = newValue;
-                                        });
-                                      },
-                                    ),
-                                  )
-                                  // HHEditText(
-                                  //   hint: "Country",
-                                  //   obscureText: false,
-                                  //   controller: cpasswordController,
-                                  //   error: widget.error,
-                                  //   errorText:
-                                  //   'Please select a country',
-                                  // ),
-                                ),
+                                //         value: value,
+                                //         child: new Text(value),
+                                //       );
+                                //     }).toList(),
+                                //     onChanged: (String newValue) {
+                                //       setState(() {
+                                //         stateDropdown = newValue;
+                                //       });
+                                //     },
+                                //   )) 
+                                // ),
 
                                 Align(
                                   alignment: Alignment.bottomCenter,
@@ -218,6 +254,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                       title: "Save",
                                       type: 4,
                                       onClick: () {
+                                        updateProfile();
                                       },
                                     ),
                                   ),
@@ -240,4 +277,10 @@ class _CreateAccountState extends State<EditProfilePage> {
           // This trailing comma makes auto-formatting nicer for build methods.
         ));
   }
+}
+
+class ProfileArguments {
+  final Result data;
+
+  ProfileArguments(this.data);
 }

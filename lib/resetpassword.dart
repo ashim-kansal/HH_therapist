@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   static const String RouteName = '/reset_password';
@@ -28,6 +32,18 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     super.dispose();
     passwordController.dispose();
     cpasswordController.dispose();
+  }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
   }
 
   void resetPwdHandler(){
@@ -61,14 +77,41 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       return;
     }
 
-     setState(() {
-        widget.pwderror = false;
-        widget.cpwderror = false;
-      });
+    setState(() {
+      widget.pwderror = false;
+      widget.cpwderror = false;
+    });
 
-    Navigator.pop(context);
-    Navigator.pushNamed(context, LoginPage.RouteName);
-                                    
+    //show circular bar
+    buildShowDialog(context);
+    //API call
+    APIService apiService = new APIService();
+    apiService.resetPwdAPIHandler(password, cPassword).then((value) => {
+      //  showToast(value.responseMsg),
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+          showToast(value.responseMsg),
+      }),
+
+      if(value.responseCode == 200){
+        Navigator.pop(context),
+        Navigator.pushNamed(context, LoginPage.RouteName),
+      }
+    });
+    // _resetPwdAPIHandler(password, cPassword);                                
+  }
+
+  //API call
+  // ignore: missing_return
+
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override

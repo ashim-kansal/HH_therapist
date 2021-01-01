@@ -1,11 +1,15 @@
-import 'dart:developer';
-
-import 'package:flutter/gestures.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
+import 'package:toast/toast.dart';
+
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   static const String RouteName = '/login';
@@ -20,36 +24,51 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  @override
+  void initState() {
+    super.initState(); 
+  }
+
   var emailerror = false;
   var pwderror = false;
-  var securepwd = true;
+  bool securepwd = true;
+  bool isChecked = true;
+  bool isApiCallProcess = false;
+
+  String token = "";
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // void dispose() {
-    
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //   super.dispose();
-  // }
 
   void showPwd(){
-    print("action");
+    // print("action");
     setState(() {
       securepwd = !securepwd;
     });
   }
 
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child:CircularProgressIndicator(),
+          );
+      });
+  }
+
   void loginHandler() {
-  
+
+
     String email = emailController.text;
     String password = passwordController.text;
 
     var emailRegex = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-
+    var pwdRegex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$');
 
     if(email.trim().length == 0 && password.trim().length == 0){
       setState(() {
@@ -79,21 +98,61 @@ class _LoginPageState extends State<LoginPage> {
       emailerror = false;
       pwderror = false;
     });
-    Navigator.pop(context);
-    Navigator.pushNamed(context, Dashboard.RouteName);
+
+    APIService apiService = new APIService();
+    buildShowDialog(context);
+
+    apiService.loginAPIHandler(email, password).then(
+      (value) => {
+        Navigator.of(context).pop(),
+        Timer(Duration(seconds: 1),
+        ()=> {
+          showToast(value.responseMsg),
+        }),
+        
+        print(value.responseCode),
+        // ignore: unrelated_type_equality_checks
+        if (value.responseCode == 200) {
+          SetStringToSP("token", value.token),
+
+          Timer(Duration(seconds: 2),
+            ()=>{
+                  Navigator.pop(context),
+                  Navigator.pushNamed(context, Dashboard.RouteName)
+            }
+          ),
+        }
+      });
+    // loginModel(email, password);
+   
   }
 
-  // void checkIfValidate(email, password){
-  //   var flag = true;
+  //API call 
 
-   
-  // }
+  // ignore: missing_return
+  
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+
+  void checkToken () async {
+    var token = await GetStringToSP("token");
+    print("objTo");
+    print(token);
+  }
 
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-
+// Container(
+//                                       child: Center(child: CircularProgressIndicator(),),
+//                                     );
       body:
       Container(
           margin: EdgeInsets.fromLTRB(20, 40, 20, 20),
@@ -172,9 +231,10 @@ class _LoginPageState extends State<LoginPage> {
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: pwderror,
-                                errorText: 'Please enter a valid password',
+                                errorText: 'Password containes be alpha-numeric with 1 Small, Capital and Special character',
                                 showeye: true,
                                 onClickEye: () {
+                                  print("Count was selected.");
                                   setState(() {
                                     securepwd = !securepwd;
                                   });
@@ -186,9 +246,10 @@ class _LoginPageState extends State<LoginPage> {
                               child: HHButton(title: "Login", type: 4, isEnable: true, 
                               onClick: (){
                                 loginHandler();
-                                // 
+                               
                               },),
                             ),
+                         
                           ]),
                         ),
                       ],
@@ -203,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                   Navigator.pushNamed(context, ForgotPasswordPage.RouteName);
                 },
                 child: Container(
@@ -214,9 +275,6 @@ class _LoginPageState extends State<LoginPage> {
 
                 ),
               ),
-
-              SizedBox(height: 15),
-
 
             ],
           )),

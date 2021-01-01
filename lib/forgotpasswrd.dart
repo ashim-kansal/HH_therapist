@@ -1,6 +1,16 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
+import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:toast/toast.dart';
+
+import 'package:http/http.dart' as http;
 
 class ForgotPasswordPage extends StatefulWidget {
   static const String RouteName = '/forgot_password';
@@ -39,10 +49,49 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
     setState(() {
       widget.error = false;
     });
+    
+    //show circular bar
+    buildShowDialog(context);
+    // APi call
+    APIService apiService = new APIService();
 
-    Navigator.pop(context);
-    Navigator.pushNamed(context, OtpPage.RouteName);
+    apiService.forgotPwdApiHanlder(email).then((value) => {
+       Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+         
+          showToast(value.responseMsg),
+      }),
+
+      if(value.responseCode == 200){
+        SetStringToSP("userID", value.userid),
+        Navigator.pop(context),
+        Navigator.pushNamed(context, OtpPage.RouteName)
+      }
+    });
+    // _forgotPwd(email);
   }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
+  }
+
+  //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+
 
   @override
   Widget build(BuildContext context) {

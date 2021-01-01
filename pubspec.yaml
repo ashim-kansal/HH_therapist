@@ -25,6 +25,16 @@ dependencies:
   flutter_slidable:
   flutter:
     sdk: flutter
+  flutter_bloc: ^3.0.0
+  toast: ^0.1.5
+  http: ^0.12.0+4
+  meta: ^1.1.6
+  intl: ^0.16.0
+  equatable: ^1.0.0
+  dson: 
+  shared_preferences: ^0.5.12
+  image_picker: ^0.6.7+17
+  simple_moment: ^1.0.7
 
 
 

@@ -1,8 +1,16 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
 
 class OtpPage extends StatefulWidget {
   static const String RouteName = '/otp';
@@ -21,10 +29,11 @@ class _OtpState extends State<OtpPage> {
   TextEditingController controller2 = new TextEditingController();
   TextEditingController controller3 = new TextEditingController();
   TextEditingController controller4 = new TextEditingController();
-  TextEditingController controller5 = new TextEditingController();
-  TextEditingController controller6 = new TextEditingController();
 
   TextEditingController currController = new TextEditingController();
+
+  Timer _timer;
+  int _start = 30;
 
   FocusNode firstinput;
   FocusNode secondinput;
@@ -32,8 +41,8 @@ class _OtpState extends State<OtpPage> {
   FocusNode fourthinput;
 
   @override
+
   void initState() {
-    // TODO: implement initState
     super.initState();
     currController = controller1;
 
@@ -41,30 +50,69 @@ class _OtpState extends State<OtpPage> {
     secondinput = FocusNode();
     thirdinput = FocusNode();
     fourthinput = FocusNode();
+    
+    startTimer();
   }
 
-
+   void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
   @override
-  void dispose() {
-    super.dispose();
-    controller1.dispose();
-    controller2.dispose();
-    controller3.dispose();
-    controller4.dispose();
-    controller5.dispose();
-    controller6.dispose();
+    void dispose() {
+      super.dispose();
+       _timer.cancel();
+      controller1.dispose();
+      controller2.dispose();
+      controller3.dispose();
+      controller4.dispose();
 
-    firstinput.dispose();
-    secondinput.dispose();
-    thirdinput.dispose();
-    fourthinput.dispose();
-  }
+      firstinput.dispose();
+      secondinput.dispose();
+      thirdinput.dispose();
+      fourthinput.dispose();
+    }
 
+
+    //API call
+
+   _resendOtp () async {
+      APIService apiService = new APIService();
+
+      apiService.resendOTPAPIHandler().then((value) => {
+        showToast(value.responseMsg),
+        if(value.responseCode == 200){
+          startTimer()
+        }
+      });
+   }
+
+    //show Toast
+    showToast(String message){
+      Toast.show(message, 
+      context, 
+      duration: Toast.LENGTH_LONG, 
+      gravity:  Toast.BOTTOM);
+    }
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
 
-     void focusToField(val, type) {
+    void focusToField(val, type) {
 
       switch (type) {
         case "first":
@@ -96,8 +144,6 @@ class _OtpState extends State<OtpPage> {
       }
     }
 
-    final _formKey = GlobalKey<FormState>();
-
     List<Widget> widgetList = [
 
       Padding(
@@ -113,17 +159,19 @@ class _OtpState extends State<OtpPage> {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(1),
               ],
-              onChanged: (val) => focusToField(val, "first"),
               keyboardType: TextInputType.number,
+              onChanged: (val) => focusToField(val, "first"),
               decoration: InputDecoration(
-              border: InputBorder.none),
+                border: InputBorder.none),
               enabled: true,
-              focusNode: firstinput,
               controller: controller1,
+              focusNode: firstinput,
               autofocus: true,
+              // maxLength: 1,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 24.0, color: Colors.black),
-            )),
+              style: TextStyle(fontSize: 18.0, color: Colors.black),
+            )
+            ),
       ),
       Padding(
         padding: const EdgeInsets.only(right: 10),
@@ -139,40 +187,16 @@ class _OtpState extends State<OtpPage> {
               LengthLimitingTextInputFormatter(1),
             ],
             onChanged: (val) => focusToField(val, "second"),
-            focusNode: secondinput,
             decoration: InputDecoration(
-              border: InputBorder.none),
+            border: InputBorder.none),
             controller: controller2,
-            autofocus: false,
+            // autofocus: false,
+            focusNode: secondinput,
             enabled: true,
+            // maxLength: 1,
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
-          ),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: new Container(
-          alignment: Alignment.center,
-          decoration: new BoxDecoration(
-              color: Colors.white,
-              border: new Border.all(
-                  width: 1.0, color: Color.fromRGBO(0, 0, 0, 0.1)),
-              borderRadius: new BorderRadius.circular(4.0)),
-          child: new TextField(
-            inputFormatters: [
-              LengthLimitingTextInputFormatter(1),
-            ],decoration: InputDecoration(
-              border: InputBorder.none),
-            keyboardType: TextInputType.number,
-            onChanged: (val) => focusToField(val, "third"),
-            controller: controller3,
-            focusNode: thirdinput,
-            textAlign: TextAlign.center,
-            autofocus: false,
-            enabled: true,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       ),
@@ -189,154 +213,238 @@ class _OtpState extends State<OtpPage> {
             inputFormatters: [
               LengthLimitingTextInputFormatter(1),
             ],
-            onChanged: (val) => focusToField(val, "fourth"),
+            onChanged: (val) => focusToField(val, "third"),
+            decoration: InputDecoration(
+              border: InputBorder.none),
             keyboardType: TextInputType.number,
+            controller: controller3,
+            textAlign: TextAlign.center,
+            autofocus: false,
+            focusNode: thirdinput,
+            enabled: true,
+            // maxLength: 1,
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(right: 5),
+        child: new Container(
+          alignment: Alignment.center,
+          decoration: new BoxDecoration(
+              color: Colors.white,
+              border: new Border.all(
+                  width: 1.0, color: Color.fromRGBO(0, 0, 0, 0.1)),
+              borderRadius: new BorderRadius.circular(4.0)),
+          child: new TextField(
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(1),
+            ],
+            onChanged: (val) => focusToField(val, "fourth"),
             decoration: InputDecoration(
                 border: InputBorder.none),
             textAlign: TextAlign.center,
             controller: controller4,
-            focusNode: fourthinput,
             autofocus: false,
+            focusNode: fourthinput,
             enabled: true,
-            style: TextStyle(fontSize: 24.0, color: Colors.black),
+            // maxLength: 1,
+            style: TextStyle(fontSize: 18.0, color: Colors.black),
           ),
         ),
       )
     ];
 
-    void otpVerifyHandler() {
 
-      if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
-        showDialog(
-          context: context,
-          builder: (BuildContext dialogContext) {
-            return DialogWithSingleButton(
-              title: "Alert",
-              content: "Please enter the valid OTP.",
-            );
-          },
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
         );
-        return;
-      }
+    });
+  }
 
-      Navigator.pop(context);
-      Navigator.pushNamed(context, ResetPasswordPage.RouteName);
-    
+  void otpVerifyHandler() {
+    if(controller1.text.trim().length == 0 || controller2.text.trim().length == 0 || controller3.text.trim().length == 0 || controller4.text.trim().length == 0){
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return DialogWithSingleButton(
+            title: "Alert",
+            content: "Please enter the valid OTP.",
+          );
+        },
+      );
+      return;
     }
+    String otp = controller1.text+controller2.text+controller3.text+controller4.text;
+    
+    //show circular bar
+    buildShowDialog(context);
+    // _otpAPIHandler(otp);
+    APIService apiService = new APIService();
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('OTP Verification', style: TextStyle(color: Colors.white)),
-          centerTitle: true,
-          iconTheme: IconThemeData(
-            color: Colors.white, //change your color here
-          ),
-          backgroundColor: Theme.of(context).accentColor,
-          elevation: 0,
-        ),
-        body: Material(
-          color: Theme.of(context).accentColor,
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(20, 80, 20, 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  color: Colors.white),
-              child: Column(
-                children: [
-                  Material(
-                    child: ClipPath(
-                      // color: Colors.white,
-                      // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      clipper: ShapeBorderClipper(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+    apiService.otpAPIHandler(otp).then((value) => {
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+        ()=> {
+          
+          showToast(value.responseMsg),
+      }),
+      
+      if(value.responseCode == 200){
+        Timer(Duration(seconds: 2),
+          ()=>{
+          Navigator.pop(context),
+            Navigator.pushNamed(context, ResetPasswordPage.RouteName),
+        })
+      }
+    });
+  }
 
-                      child: Container(
+    
+
+    return MyWidget(
+      title: 'OTP Verification',
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Material(
+              child: ClipPath(
+                // color: Colors.white,
+                // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                clipper: ShapeBorderClipper(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+
+                child: Container(
+
+                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                              child: Image.asset('assets/images/ic_otp.png', height: 100,width: 60,),
-                            ),
-                           Padding(
-                              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                              child: Text(
-                                'Please enter you registered email address. We will help you retrieve your password.',
-                                style: TextStyle(color: Color(0xff8d8d8d)),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Padding(
-                                padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                                child: Column(
+                        child: Image.asset('assets/images/ic_otp.png', height: 100,width: 60,),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                        child: Text(
+                          'Please enter you registered email address. We will help you retrieve your password.',
+                          style: TextStyle(color: Color(0xff8d8d8d)),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                          child: Column(
+                            children: <Widget>[
+                              Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                        children: <Widget>[
-                                          GridView.count(
-                                            crossAxisCount: 4,
-                                            // mainAxisSpacing: 10.0,
-                                            shrinkWrap: true,
-                                            primary: false,
-                                            scrollDirection: Axis.vertical,
-                                            children:
-                                              List<Container>.generate(4,
-                                                (int index) => 
+                                    GridView.count(
+                                        crossAxisCount: 4,
+                                        // mainAxisSpacing: 10.0,
+                                        shrinkWrap: true,
+                                        primary: false,
+                                        scrollDirection: Axis.vertical,
+                                        children:
+                                        List<Container>.generate(4,
+                                                (int index) =>
                                                 Container(
                                                     child: widgetList[
-                                                        index]) 
-                                                        )),
-                                        ])
-                                  ],
-                                )),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Resend code in: 00:48'),
-                                  RaisedButton(
-                                      
-                                      child: Icon(Icons.arrow_right_alt_rounded,
-                                        color: HH_Colors.color_white,
-                                        size: 28,
-                                      ),
-                                    
-                                      onPressed: (){
-                                        otpVerifyHandler();
-                                      },
-                                      shape: CircleBorder()
-                                  )
-                                ],
-                              ),
+                                                    index])
+                                        )),
+                                  ])
+                            ],
+                          )),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Resend code in: $_start'),
+                            RaisedButton(
+
+                                child: Icon(Icons.arrow_right_alt_rounded,
+                                  color: HH_Colors.color_white,
+                                  size: 28,
+                                ),
+
+                                onPressed: (){
+                                  otpVerifyHandler();
+                                  // Navigator.pop(context);
+                                  // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                                },
+                                shape: CircleBorder()
                             )
                           ],
                         ),
                       ),
-                    ),
-                    elevation: 8.0,
-                    shadowColor: Colors.black38,
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderOnForeground: true,
-                  ),
-                ],
+                      Container(
+                        child: _start == 00.00 ? (
 
-              )
+                          Container(
+                            margin: EdgeInsets.only(top: 10, right: 40, left: 40),
+                            padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                            decoration: BoxDecoration(
+                                // shape: BoxShape.rectangle,
+                                border: Border.all(color: HH_Colors.borderGrey),
+                                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                            child: Center(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: '',
+                                  style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                  children: <TextSpan>[
+                                    TextSpan(text: 'Resend OTP', 
+                                      style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova"),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => {
+                                          _resendOtp()
+                                        }),
+                                  ],
+                                ),
+                              )
+                            )
+                          )
+
+                          // Container(
+                          //   margin: EdgeInsets.only(top: 20),
+                          //   child: Row(
+                          //     mainAxisSize: MainAxisSize.max,
+                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //     children: [
+                          //       HHButton(title: "Resend OTP", type: 4, onClick: () {
+                          //         _resendOtp();
+                          //       },)
+                          //     ],
+                          //   ),
+                          // )
+                        ): null
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              elevation: 8.0,
+              shadowColor: Colors.black38,
+              borderRadius: BorderRadius.circular(8.0),
+              borderOnForeground: true,
             ),
-          ) 
-          // backgroundColor: Colors.white,
-          // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+          ],
+
+
+        ),
+      ) ,
+    );
   }
 
   void inputTextToField(String str) {
