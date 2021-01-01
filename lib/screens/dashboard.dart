@@ -88,17 +88,17 @@ class DashboardState extends State<Dashboard> {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 20, width: 20,),
+                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
                 title: Text('Dashboard'),
 
   ),
               BottomNavigationBarItem(
-                icon: Image.asset('assets/images/ic_chat.png', height: 20, width: 20, color: tabIndex == 1?HH_Colors.accentColor: HH_Colors.grey_707070,),
+                icon: Image.asset('assets/images/ic_chat.png', height: 25, width: 25, color: tabIndex == 1?HH_Colors.accentColor: HH_Colors.grey_707070,),
                 title: Text('My Chat'),
 
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 2?'assets/images/ic_settings_select.png':'assets/images/ic_settings.png' , height: 20, width: 20,),
+                icon: Image.asset(tabIndex == 2?'assets/images/ic_settings_select.png':'assets/images/ic_settings.png' , height: 25, width: 25,),
                 title: Text('Settings'),
               )
             ]
