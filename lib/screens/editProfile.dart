@@ -104,7 +104,8 @@ class _CreateAccountState extends State<EditProfilePage> {
                       child: Container(
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                         color: Colors.white,
-                        child: Column(
+                        child: SingleChildScrollView(
+                          child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
 
@@ -264,6 +265,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                             ),
                           ],
                         ),
+                      ),
                       ),
                     ),
                     // elevation: 8.0,

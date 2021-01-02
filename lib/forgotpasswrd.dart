@@ -118,74 +118,79 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                     topLeft: Radius.circular(30.0),
                   ),
                   color: Colors.white),
-              child: Column(
-                children: [
-                  Material(
-                    child: ClipPath(
-                      // color: Colors.white,
-                      // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                      clipper: ShapeBorderClipper(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+                  child: ListView(
+                    children: [ Column(
+                    children: [
+                      Material(
+                        child: ClipPath(
+                          // color: Colors.white,
+                          // padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                          clipper: ShapeBorderClipper(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20))),
 
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(20, 0,20,20),
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              child: Image.asset('assets/images/ic_lock.png', height: 118,width: 75,),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                              child: Text(
-                                'Please enter you registered email address. We will help you retrieve your password.',
-                                style: TextStyle(color: Color(0xff8d8d8d)),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Form(
-                              key: _formKey,
-                              child: Column(children: <Widget>[
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(20, 0,20,20),
+                            color: Colors.white,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
-                                  child: HHEditText(
-                                    hint: "Enter Email",
-                                    obscureText: false,
-                                    controller: emailController,
-                                    error: widget.error,
-                                    errorText:
-                                        'Please enter a valid email address',
-                                  ),
+                                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                  child: Image.asset('assets/images/ic_lock.png', height: 118,width: 75,),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
-                                  child: HHButton(
-                                    title: "Proceed",
-                                    isEnable: true,
-                                    type: 4,
-                                    onClick: () {
-                                      forgotPasswordHandler();
-                                    },
+                                  padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                                  child: Text(
+                                    'Please enter you registered email address. We will help you retrieve your password.',
+                                    style: TextStyle(color: Color(0xff8d8d8d)),
+                                    textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ]),
+                                Form(
+                                  key: _formKey,
+                                  child: Column(children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
+                                      child: HHEditText(
+                                        hint: "Enter Email",
+                                        obscureText: false,
+                                        controller: emailController,
+                                        error: widget.error,
+                                        errorText:
+                                            'Please enter a valid email address',
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
+                                      child: HHButton(
+                                        title: "Proceed",
+                                        isEnable: true,
+                                        type: 4,
+                                        onClick: () {
+                                          forgotPasswordHandler();
+                                        },
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
+                        elevation: 8.0,
+                        shadowColor: Colors.black38,
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderOnForeground: true,
                       ),
-                    ),
-                    elevation: 8.0,
-                    shadowColor: Colors.black38,
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderOnForeground: true,
-                  ),
+                    ],
+                  )
                 ],
-              )),
+              )
+            ),
           // backgroundColor: Colors.white,
           // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+        )
+      );
   }
 }
