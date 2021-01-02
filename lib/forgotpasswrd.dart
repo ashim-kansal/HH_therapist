@@ -119,8 +119,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                   ),
                   color: Colors.white),
                   child: ListView(
-                    children: [
-                      Column(
+                    children: [ Column(
                     children: [
                       Material(
                         child: ClipPath(
