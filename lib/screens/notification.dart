@@ -1,12 +1,14 @@
+import 'dart:async';
 import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/NotificationList.dart';
 import 'package:flutter_app/utils/colors.dart';
-import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
-import 'package:flutter_app/widgets/message.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:intl/intl.dart';
+import 'package:simple_moment/simple_moment.dart';
+import 'package:toast/toast.dart';
 
 class NotificationPage extends StatefulWidget {
   static const String RouteName = '/notification';
@@ -15,7 +17,8 @@ class NotificationPage extends StatefulWidget {
   String title;
 
   @override
-  _NotificationState createState() => new _NotificationState();
+  State<StatefulWidget> createState() =>_NotificationState();
+  // _NotificationState createState() => new _NotificationState();
 }
 
 class _NotificationState extends State<NotificationPage> {
@@ -23,6 +26,64 @@ class _NotificationState extends State<NotificationPage> {
   // Create a text controller. We will use it to retrieve the current value
   // of the TextField!
   final _textController = TextEditingController();
+
+  Future<NotificationListing> notificationFuture;
+  List<Result> list;
+
+  @override
+  void initState() {
+    super.initState();
+    notificationFuture = getNotificationList();
+  }
+
+  @override
+  void dispose() {
+    // Every listener should be canceled, the same should be done with this stream.
+    // Clean up the controller when the Widget is disposed
+    _textController.dispose();
+    super.dispose();
+  }
+
+  //delete notification
+  void deleteNotification (String notificationId) {
+    print(notificationId);
+
+    InAppAPIServices inAppAPIServices = new InAppAPIServices();
+    buildShowDialog(context);
+
+    inAppAPIServices.deleteNotification(notificationId).then((value) => {
+      Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+      ()=> {
+        showToast(value.responseMsg),
+      }),
+      
+      if(value.responseCode == 200){
+        notificationFuture = getNotificationList(),
+      }
+    });
+  }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Center(
+          child:CircularProgressIndicator(),
+        );
+    });
+  }
+
+    //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,52 +104,40 @@ class _NotificationState extends State<NotificationPage> {
             width: double.infinity,
             height: double.infinity,
             color: Colors.white,
-            child: Column(children: [
-               NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-               NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-    ),
-              SizedBox(height: 1),
-              NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-              ),
-              SizedBox(height: 1),
-              NotificationList(title:
-                  "Your Order No. #YUUNB01 is accepted by the Aurvedic Pharmacy.",
-                    subtitle: "Now"
-              ),
+            child: FutureBuilder<NotificationListing>(
+              future: notificationFuture,
+              builder: (builder, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if(snapshot.hasError){
+                    return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                  }
+                  return ListView.separated(itemBuilder: (context, index) {
+                    var _date = snapshot.data.result[index].createdAt;
+                    Moment createdDt = Moment.parse('$_date');
+                    return Column(children: [
+                      NotificationList(title:
+                          snapshot.data.result[index].title,
+                          subtitle: createdDt.format("dd MMM, yyyy"),
+                          onDelete: () {
+                            deleteNotification(snapshot.data.result[index].id);
 
-            ],)
+                            // snapshot.data.result.indexWhere((element) => element.id == snapshot.data.result[index].id);
+                          },
+                      ),
+                      
+                    ],);
+                  }, 
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 1);
+                  },
+                  itemCount: snapshot.data.result.length);
+                }else {
+                  return Container(
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+              },
+              )
             ));
-  }
-
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // Every listener should be canceled, the same should be done with this stream.
-    // Clean up the controller when the Widget is disposed
-    _textController.dispose();
-    super.dispose();
   }
 }

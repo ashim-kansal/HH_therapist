@@ -246,13 +246,8 @@ class HHEditTextState extends State<HHEditText> {
           border: normalOutlineInputBorder(),
           suffixIcon: widget.showeye??false ?
               IconButton(
-                icon: Icon(Icons.remove_red_eye, size: 20, color: widget.obscureText?? false ? Color(0xffCBCBCB) : HH_Colors.accentColor),
-                onPressed: (){
-                  // widget.obscureText = !widget.obscureText;
-                  // print(widget.obscureText);
-                  widget.onClickEye();
-                  }
-                ,
+                icon: Icon( widget.obscureText?? false ? Icons.visibility_off : Icons.visibility, size: 20, color: Color(0xffCBCBCB)),
+                onPressed: () => widget.onClickEye(),
               )
               // const Icon(
                 
@@ -367,6 +362,8 @@ class DrinkingDiaryCell extends StatelessWidget{
 class NotificationList extends StatelessWidget {
   final String title;
   final String subtitle;
+  // final String notifcationId;
+  final VoidCallback onDelete;
   
   
   NotificationList({
@@ -374,6 +371,9 @@ class NotificationList extends StatelessWidget {
     this.title,
     @required
     this.subtitle,
+    // this.notifcationId,
+    @required
+    this.onDelete
   });
 
   @override
@@ -418,10 +418,11 @@ class NotificationList extends StatelessWidget {
               // height: MediaQuery.of(context).size.width / 4,
               // margin: EdgeInsets.only(bottom: 5),
               child: new IconSlideAction(
-
                 color: Colors.red,
                 icon: Icons.delete,
-                // onTap: () => _showSnackBar('Delete'),
+                onTap: () => {
+                  onDelete()
+                },
               ),
             )
           ],

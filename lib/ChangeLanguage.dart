@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/goals.dart';
+import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -111,7 +112,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                           onClick: () async {
                             SetStringToSP("language", dropdownValue);
                             Navigator.pop(context);
-                            Navigator.pushNamed(context, MyGoals.RouteName);
+                            Navigator.pushNamed(context, LoginPage.RouteName);
                           }),
                         ))),
               ],
