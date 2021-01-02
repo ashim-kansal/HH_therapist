@@ -17,11 +17,12 @@ class SessionPage extends StatefulWidget{
 
   //cancel session
   void cancelSessionHandler(String id) {
-    InAppAPIServices inAppAPIServices = new InAppAPIServices();
+    print(id);
+    // InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-    inAppAPIServices.cancelSession(id).then((value) => {
+    // inAppAPIServices.cancelSession(id).then((value) => {
       
-    });
+    // });
   }
 }
 

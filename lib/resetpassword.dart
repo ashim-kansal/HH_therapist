@@ -95,8 +95,13 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
       }),
 
       if(value.responseCode == 200){
-        Navigator.pop(context),
-        Navigator.pushNamed(context, LoginPage.RouteName),
+
+        Timer(Duration(seconds: 2),
+          ()=> {
+            Navigator.pop(context),
+            Navigator.pushNamed(context, LoginPage.RouteName),
+        }),
+       
       }
     });
     // _resetPwdAPIHandler(password, cPassword);                                

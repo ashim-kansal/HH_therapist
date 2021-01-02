@@ -1,9 +1,11 @@
 
 import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
+import 'package:flutter_app/model/NotificationList.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -97,6 +99,34 @@ Future<QuestionarieList> getdrinkingDairyDetails() async {
   return questionarieListFromJson(response.body);
 }
 
+
+// fetch drinkingDairy_details
+Future<NotificationListing> getNotificationList() async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"/api/v1/therapist/notificationList";
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token??HHString.token
+      },);
+  return notificationListFromJson(response.body);
+}
+
+
+// fetch drinkingDairy_details
+Future<MyClientList> getMyClientList() async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"/api/v1/therapist/myClient_List";
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token??HHString.token
+      },);
+  return myClientListFromJson(response.body);
+}
+
 class InAppAPIServices {
   // submit journal
   Future<CommonResponse> submitJournal(params) async {
@@ -135,4 +165,44 @@ class InAppAPIServices {
         throw Exception('Failed to load data!');
       }
   }
+
+  //get notification list
+   Future<CommonResponse> deleteNotification(String id) async {
+    var token = await GetStringToSP("token");
+    final url = HHString.baseURL +"/api/v1/therapist/deleteNotification?notificationId="+id;
+    final response = await http.delete(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token?? HHString.token
+        }
+      );
+    print(response.body);
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(json.decode(response.body));
+    }else {
+      throw Exception("Failed to delete notification");
+    }
+  }
+
+  //submit query 
+  Future<CommonResponse> submitQuery(String msg) async {
+    var token = await GetStringToSP("token");
+    final url = HHString.baseURL +"/api/v1/therapist/query";
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token?? HHString.token
+        },
+        body: jsonEncode({
+          "query": msg})
+      );
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(json.decode(response.body));
+    }else {
+      throw Exception("Failed to delete notification");
+    }
+  }
 }
+
+
+
