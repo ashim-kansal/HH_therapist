@@ -61,7 +61,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case JournalPage.RouteName:
       return MaterialPageRoute(builder: (context) => JournalPage());
     case EditProfilePage.RouteName:
-      return MaterialPageRoute(builder: (context) => EditProfilePage());
+      final ProfileArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => EditProfilePage(data: args.data));
+      // return MaterialPageRoute(builder: (context) => EditProfilePage());
     case ProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => ProfilePage());
     case ReviewPage.RouteName:
@@ -82,7 +84,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case SessionDetails.RouteName:
       return MaterialPageRoute(builder: (context) => SessionDetails());
     case NotesPage.RouteName:
-      return MaterialPageRoute(builder: (context) => NotesPage());
+      final NotesArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => NotesPage(patientId: args.data));
     case AssessmentFormPage.RouteName:
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));

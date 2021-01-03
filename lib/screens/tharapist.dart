@@ -47,6 +47,7 @@ class _TherapistState extends State<TherapistPage> {
                   name: snapshot.data.result.myPatient[index].firstName+" "+snapshot.data.result.myPatient[index].lastName,
                   role: "Recovery Coach",
                   showBook: false,
+                  patientid: snapshot.data.result.myPatient[index].id,
                   onClick: () {
                     Navigator.pushNamed(context, BookSessionPage.RouteName);
                   },

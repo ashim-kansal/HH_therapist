@@ -8,9 +8,10 @@ class TharapistCell extends StatelessWidget {
   var name = "";
   var role = "";
   var showBook = false;
+  var patientid= "";
   final VoidCallback onClick;
 
-  TharapistCell({@required this.name, @required this.role, this.showBook, this.onClick});
+  TharapistCell({@required this.name, @required this.role, this.showBook, this.onClick, this.patientid});
 
 
   @override
@@ -63,7 +64,7 @@ class TharapistCell extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, NotesPage.RouteName);
+                  Navigator.pushNamed(context, NotesPage.RouteName, arguments: NotesArguments(patientid));
                 },
                 child: Image.asset('assets/images/ic_file.png',
                     width: 25.0, height: 25.0),
@@ -88,9 +89,12 @@ class TharapistCell extends StatelessWidget {
 class ChatUserCell extends StatelessWidget {
   var name = "";
   var online = false;
+  var message = "";
+  var profile = "";
+  var time = "";
   final VoidCallback onClick;
 
-  ChatUserCell({@required this.name, @required this.online, this.onClick});
+  ChatUserCell({@required this.name, @required this.online, this.onClick, this.message,this.profile, this.time});
 
 
   @override
@@ -100,7 +104,7 @@ class ChatUserCell extends StatelessWidget {
           onTap: (){
             onClick();
           },
-          child:       Container(
+          child:Container(
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               border: Border.all(color: HH_Colors.color_D9D9D9),
@@ -114,11 +118,20 @@ class ChatUserCell extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Image.asset(
-                      'assets/images/ic_avatar.png',
-                      height: 50,
-                      width: 50,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(30.0),
+                      child: Image.network(
+                        profile,
+                        height: 50,
+                        width: 50,
+                      ),
                     ),
+                    
+                    // Image.asset(
+                    //   'assets/images/ic_avatar.png',
+                    //   height: 50,
+                    //   width: 50,
+                    // ),
                     SizedBox(
                       width: 8,
                     ),
@@ -129,7 +142,7 @@ class ChatUserCell extends StatelessWidget {
                           Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
                         ]),
                         Row(children: [
-                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
+                          Text(message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
                         ]),
                       ],
                     ) ,
@@ -139,7 +152,7 @@ class ChatUserCell extends StatelessWidget {
                   height: 50,
                   child: Align(
                     alignment: Alignment.topRight,
-                  child: Text('7:30 PM',textAlign: TextAlign.start ,style: TextStyle(color: HH_Colors.accentColor, fontSize: 11),),
+                  child: Text(time, textAlign: TextAlign.start ,style: TextStyle(color: HH_Colors.accentColor, fontSize: 11),),
                   )
                 )
               ],

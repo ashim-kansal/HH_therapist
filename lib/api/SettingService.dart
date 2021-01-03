@@ -15,7 +15,7 @@ class SettingAPIService {
 
     var token = await GetStringToSP("token");
     var userId = await GetStringToSP("userId");
-    final url = HHString.baseURL +"/api/v1/therapist/feedback";
+    final url = HHString.baseURL +"therapist/feedback";
     
     final response = await http.post(url, 
     headers: {
@@ -38,7 +38,7 @@ class SettingAPIService {
 
   // forgot password 
   Future<FeedbackResponseModel> changePassword(String oldPassword, String newPassword, String confirmPassword) async {
-    final url = HHString.baseURL +"/api/v1/therapist/changePassword";
+    final url = HHString.baseURL +"therapist/changePassword";
     var token = await GetStringToSP("token");
     final response = await http.put(url, 
     headers: {
@@ -68,7 +68,7 @@ class SettingAPIService {
   Future<UserProfile> updateNotificationStatus(bool value) async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/setNotification";
+    final url = HHString.baseURL +"therapist/setNotification";
     
     final response = await http.put(url, 
     headers: {
@@ -92,7 +92,7 @@ class SettingAPIService {
   Future<UserProfile> changeLanguage(String value) async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/setNotification";
+    final url = HHString.baseURL +"therapist/setNotification";
     
     final response = await http.put(url, 
     headers: {
@@ -115,7 +115,7 @@ class SettingAPIService {
   Future<FeedbackResponseModel> updateProfile(String imagebase64) async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/uploadImage";
+    final url = HHString.baseURL +"therapist/uploadImage";
     
     final response = await http.post(url, 
     headers: {
