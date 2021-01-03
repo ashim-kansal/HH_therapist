@@ -28,6 +28,7 @@ Future<LibraryList> getLibraryList() async {
 
 Future<UpcomingSession> upcomingSessions() async {
   var token = await GetStringToSP("token");
+  print(token);
   final url = HHString.baseURL +"/api/v1/therapist/upcomingSessionList";
   final response = await http.get(url,
       headers: {

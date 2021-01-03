@@ -87,8 +87,8 @@ class Result {
     List<dynamic> resultLibrary;
     String sessionStatus;
     String id;
-    String patientId;
-    TherapistId therapistId;
+    PatientId patientId;
+    String therapistId;
     String startTime;
     String endTime;
     String programName;
@@ -103,8 +103,8 @@ class Result {
         resultLibrary: List<dynamic>.from(json["library"].map((x) => x)),
         sessionStatus: json["session_Status"],
         id: json["_id"],
-        patientId: json["patientId"],
-        therapistId: TherapistId.fromJson(json["therapistId"]),
+        patientId: PatientId.fromJson(json["patientId"]),
+        therapistId: json["therapistId"],
         startTime: json["startTime"],
         endTime: json["endTime"],
         programName: json["programName"],
@@ -120,8 +120,8 @@ class Result {
         "library": List<dynamic>.from(resultLibrary.map((x) => x)),
         "session_Status": sessionStatus,
         "_id": id,
-        "patientId": patientId,
-        "therapistId": therapistId.toJson(),
+        "patientId": patientId.toJson(),
+        "therapistId": therapistId,
         "startTime": startTime,
         "endTime": endTime,
         "programName": programName,
@@ -132,24 +132,28 @@ class Result {
     };
 }
 
-class TherapistId {
-    TherapistId({
+class PatientId {
+    PatientId({
+        this.profilePic,
         this.id,
         this.firstName,
         this.lastName,
     });
 
+    String profilePic;
     String id;
     String firstName;
     String lastName;
 
-    factory TherapistId.fromJson(Map<String, dynamic> json) => TherapistId(
+    factory PatientId.fromJson(Map<String, dynamic> json) => PatientId(
+        profilePic: json["profilePic"],
         id: json["_id"],
         firstName: json["firstName"],
         lastName: json["lastName"],
     );
 
     Map<String, dynamic> toJson() => {
+        "profilePic": profilePic,
         "_id": id,
         "firstName": firstName,
         "lastName": lastName,

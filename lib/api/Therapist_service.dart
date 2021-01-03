@@ -50,11 +50,11 @@ Future<GetBookingSlotsResponse> getSlotsForBooking(String id) async {
 
 }
 
-Future<GetBookingResponse> bookSession(String id) async {
+Future<GetBookingResponse> bookSession(String id, String sessionId) async {
   var token = await GetStringToSP("token");
 
   final response = await http.post(url+"/bookSession",
-      body: jsonEncode(<String, String>{"slotId":id}),
+      body: jsonEncode(<String, String>{"slotId":id, "sessionId":sessionId, }),
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         'token' : token

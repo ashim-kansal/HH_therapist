@@ -11,10 +11,12 @@ class SessionCard extends StatelessWidget {
   var completed = false;
   var drname = "";
   var sdate = "";
+  var id = "";
+  var therapistId = "";
   final VoidCallback onClick;
 
   SessionCard(
-      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name, @required this.role, @required this.id, @required this.therapistId, this.completed, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class SessionCard extends StatelessWidget {
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
                     HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
-                      Navigator.pushNamed(context, BookSessionPage.RouteName);
+                      Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, name, role, "", id));
                     },)
                   ],
                 ),
@@ -181,6 +183,8 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
 
 class UpcomingSessionItem extends StatelessWidget {
   var name = "";
+  var id = "";
+  var therapistId = "";
   var role = "";
   var completed = false;
   var drname = "";
@@ -189,7 +193,7 @@ class UpcomingSessionItem extends StatelessWidget {
   final VoidCallback onClickCancel;
 
   UpcomingSessionItem(
-      {@required this.name, @required this.role, this.completed, this.onClick, this.drname, this.sdate, this.onClickCancel});
+      {@required this.name,@required this.id, @required this.role, this.completed, this.onClick, this.drname, this.therapistId, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +228,6 @@ class UpcomingSessionItem extends StatelessWidget {
                         children: [
                           Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
                           Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
-
                         ],
                       )
                       :
@@ -260,7 +263,7 @@ class UpcomingSessionItem extends StatelessWidget {
                         onClickCancel();
                       },
                       onClickReSchedule: (){
-                        Navigator.pushNamed(context, BookSessionPage.RouteName);
+                        Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, drname, role, "", id));
                       },)
                     ],
                   )
@@ -271,4 +274,13 @@ class UpcomingSessionItem extends StatelessWidget {
 
             )));
   }
+}
+class SessionArguments {
+  final String id;
+  final String name;
+  final String type;
+  final String profilePic;
+  final String sessionId;
+
+  SessionArguments(this.id,this.name, this.type, this.profilePic, this.sessionId);
 }

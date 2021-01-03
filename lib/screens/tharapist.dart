@@ -45,6 +45,7 @@ class _TherapistState extends State<TherapistPage> {
               itemBuilder: (context, index) {
                 return TharapistCell(
                   name: snapshot.data.result.myPatient[index].firstName+" "+snapshot.data.result.myPatient[index].lastName,
+                  image: snapshot.data.result.myPatient[index].profilePic,
                   role: "Recovery Coach",
                   showBook: false,
                   onClick: () {

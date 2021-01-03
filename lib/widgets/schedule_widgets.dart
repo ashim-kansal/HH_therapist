@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 
 class GridViewWidget extends StatelessWidget{
 
@@ -33,7 +35,10 @@ class GridViewWidget extends StatelessWidget{
 
 
 class SessionDateWidget extends StatefulWidget{
-  var list = [];
+  List<Result> list;
+  final ValueChanged<int> onSelectDate;
+
+  SessionDateWidget({Key key,@required this.list, this.onSelectDate});
 
 
   @override
@@ -43,19 +48,13 @@ class SessionDateWidget extends StatefulWidget{
 
 class SessionDateWidgetState extends State<SessionDateWidget>{
 
-  void populateData() {
-    for (int i = 0; i < 10; i++)
-      widget.list.add(ListItem<String>("$i Nov\nMon"));
-
-    widget.list[0].isSelected = true;
-  }
-
   @override
   void initState() {
     super.initState();
-    widget.list??List();
-
-    populateData();
+    // widget.list??List();
+    if(widget.list.length > 0)
+      widget.list[0].isSelected = true;
+    // populateData();
   }
 
   @override
@@ -71,12 +70,12 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
               color: widget.list[index].isSelected ? HH_Colors.primaryColor : Colors.white,
 
             ),
-            padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Center(
               child: Text(
-                widget.list[index].data,
+                DateFormat('d MMM\nEEE').format(widget.list[index].scheduleDate),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: widget.list[index].isSelected? Colors.white : HH_Colors.grey_707070),
+                style: TextStyle(color: widget.list[index].isSelected? Colors.white : HH_Colors.grey_707070),
               ),),
           ),
           onTap: (){
@@ -94,6 +93,7 @@ class SessionDateWidgetState extends State<SessionDateWidget>{
   }
 
   void setItemSelected(int index) {
+    widget.onSelectDate(index);
     setState(() {
       for (int i = 0; i < widget.list.length; i++){
         if(index == i) {

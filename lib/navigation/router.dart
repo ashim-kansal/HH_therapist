@@ -28,6 +28,7 @@ import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
+import 'package:flutter_app/widgets/sessionWidgets.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -51,7 +52,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => TherapistPage());
     case BookSessionPage.RouteName:
-      return MaterialPageRoute(builder: (context) => BookSessionPage());
+      final SessionArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => BookSessionPage(id: args.id, name: args.name, image: args.profilePic, role: args.type, sessionId: args.sessionId,));
     case MyAssessmentPage.RouteName:
       return MaterialPageRoute(builder: (context) => MyAssessmentPage());
     case SessionPage.RouteName:

@@ -89,8 +89,10 @@ class HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   var _date = snapshot.data.result[index].date;
                   Moment createdDt = Moment.parse('$_date');
-                  return SessionCard(name: snapshot.data.result[index].programName, 
-                    drname: snapshot.data.result[index].therapistId.firstName+" "+snapshot.data.result[index].therapistId.lastName,
+                  return SessionCard(name: snapshot.data.result[index].programName,
+                    id: snapshot.data.result[index].id,
+                    therapistId: snapshot.data.result[index].therapistId,
+                    drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                     completed: index%2 == 0, onClick: (){
                       Navigator.pushNamed(context, SessionPage.RouteName);
