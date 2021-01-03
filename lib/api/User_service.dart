@@ -14,7 +14,7 @@ class UserAPIServices {
   Future<UserProfile> getProfile() async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/myProfile";
+    final url = HHString.baseURL +"therapist/myProfile";
     
     final response = await http.get(url, 
     headers: {
@@ -33,7 +33,7 @@ class UserAPIServices {
 
   // forgot password 
   Future<FeedbackResponseModel> changePassword(String oldPassword, String newPassword, String confirmPassword) async {
-    final url = HHString.baseURL +"/api/v1/therapist/changePassword";
+    final url = HHString.baseURL +"therapist/changePassword";
     var token = await GetStringToSP("token");
     final response = await http.put(url, 
     headers: {
@@ -61,7 +61,7 @@ class UserAPIServices {
   Future<FeedbackResponseModel> updateProfile(String imagebase64) async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/uploadImage";
+    final url = HHString.baseURL +"therapist/uploadImage";
     
     final response = await http.post(url, 
     headers: {
@@ -84,7 +84,7 @@ class UserAPIServices {
   Future<UserProfile> updateProfileDetails(String fname, String lname, String phone, String address) async {
 
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/updateProfile";
+    final url = HHString.baseURL +"therapist/updateProfile";
     
     final response = await http.put(url, 
     headers: {

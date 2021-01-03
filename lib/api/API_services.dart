@@ -1,12 +1,14 @@
 
 import 'dart:io';
 import 'package:flutter_app/common/SharedPreferences.dart';
+import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/NotificationList.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
+import 'package:flutter_app/model/PatientNotesList.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
@@ -16,7 +18,7 @@ import 'dart:convert';
 
 Future<LibraryList> getLibraryList() async {
   var token = await GetStringToSP("token");
-  final url = HHString.baseURL +"/api/v1/therapist/library_list";
+  final url = HHString.baseURL +"therapist/library_list";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -28,8 +30,7 @@ Future<LibraryList> getLibraryList() async {
 
 Future<UpcomingSession> upcomingSessions() async {
   var token = await GetStringToSP("token");
-  print(token);
-  final url = HHString.baseURL +"/api/v1/therapist/upcomingSessionList";
+  final url = HHString.baseURL +"therapist/upcomingSessionList";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -41,7 +42,7 @@ Future<UpcomingSession> upcomingSessions() async {
 
 Future<UpcomingSession> completedSessoins() async {
   var token = await GetStringToSP("token");
-  final url = HHString.baseURL +"/api/v1/therapist/completedSessionList";
+  final url = HHString.baseURL +"therapist/completedSessionList";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -53,7 +54,7 @@ Future<UpcomingSession> completedSessoins() async {
 
 Future<JournalingList> getJournalingList() async {
   var token = await GetStringToSP("token");
-  final url = HHString.baseURL +"/api/v1/therapist/journalQuestion_list";
+  final url = HHString.baseURL +"therapist/journalQuestion_list";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -65,7 +66,7 @@ Future<JournalingList> getJournalingList() async {
 // fetch old journal 
 Future<OldJournalingList> getOldJournalingList() async {
   var token = await GetStringToSP("token");
-  final url = HHString.baseURL +"/api/v1/therapist/old_journalList";
+  final url = HHString.baseURL +"therapist/old_journalList";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -79,7 +80,7 @@ Future<QuestionarieList> getQuestionaire(programId) async {
   var token = await GetStringToSP("token");
 
   var pid = "5fd9d4e69a512f3059c0f272";
-  final url = HHString.baseURL +"/api/v1/therapist/getQuestionnaire?programId="+pid;
+  final url = HHString.baseURL +"therapist/getQuestionnaire?programId="+pid;
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -91,7 +92,7 @@ Future<QuestionarieList> getQuestionaire(programId) async {
 Future<QuestionarieList> getdrinkingDairyDetails() async {
   var token = await GetStringToSP("token");
 
-  final url = HHString.baseURL +"/api/v1/therapist/drinkingDairy_details";
+  final url = HHString.baseURL +"therapist/drinkingDairy_details";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -105,7 +106,7 @@ Future<QuestionarieList> getdrinkingDairyDetails() async {
 Future<NotificationListing> getNotificationList() async {
   var token = await GetStringToSP("token");
 
-  final url = HHString.baseURL +"/api/v1/therapist/notificationList";
+  final url = HHString.baseURL +"therapist/notificationList";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -119,7 +120,7 @@ Future<NotificationListing> getNotificationList() async {
 Future<MyClientList> getMyClientList() async {
   var token = await GetStringToSP("token");
 
-  final url = HHString.baseURL +"/api/v1/therapist/myClient_List";
+  final url = HHString.baseURL +"therapist/myClient_List";
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -128,11 +129,38 @@ Future<MyClientList> getMyClientList() async {
   return myClientListFromJson(response.body);
 }
 
+// fetch notes listing
+Future<PatientNotesList> getPatientNotes(id) async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"therapist/client_notes_list?patientId="+id;
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token??HHString.token
+      },);
+  return patientNotesListFromJson(response.body);
+}
+
+// fetch chat listing
+Future<ChatList> getChatList() async {
+  var token = await GetStringToSP("token");
+
+  final url = HHString.baseURL +"chat/chatHistory";
+  final response = await http.post(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token??HHString.token
+      },);
+  return chatListFromJson(response.body);
+}
+
+
 class InAppAPIServices {
   // submit journal
   Future<CommonResponse> submitJournal(params) async {
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/fill_journal";
+    final url = HHString.baseURL +"therapist/fill_journal";
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -151,7 +179,7 @@ class InAppAPIServices {
   //cancel session 
   Future<CommonResponse> cancelSession(sessionID) async {
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/cancelSession";
+    final url = HHString.baseURL +"therapist/cancelSession";
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -170,7 +198,7 @@ class InAppAPIServices {
   //get notification list
    Future<CommonResponse> deleteNotification(String id) async {
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/deleteNotification?notificationId="+id;
+    final url = HHString.baseURL +"therapist/deleteNotification?notificationId="+id;
     final response = await http.delete(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -188,7 +216,7 @@ class InAppAPIServices {
   //submit query 
   Future<CommonResponse> submitQuery(String msg) async {
     var token = await GetStringToSP("token");
-    final url = HHString.baseURL +"/api/v1/therapist/query";
+    final url = HHString.baseURL +"therapist/query";
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -203,6 +231,26 @@ class InAppAPIServices {
       throw Exception("Failed to delete notification");
     }
   }
+
+  Future<CommonResponse> addNote(String note, String patientId) async {
+    var token = await GetStringToSP("token");
+    final url = HHString.baseURL +"therapist/addNotes";
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token?? HHString.token
+        },
+        body: jsonEncode({
+          "patientId": patientId,
+          "note": note})
+      );
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(json.decode(response.body));
+    }else {
+      throw Exception("Failed to add note");
+    }
+  }
+
 }
 
 

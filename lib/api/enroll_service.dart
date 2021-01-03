@@ -15,7 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
   Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput) async {
-    final url = HHString.baseURL +"/api/v1/therapist/login";
+    final url = HHString.baseURL +"therapist/login";
     
     final response = await http.post(url, 
     headers: {"Content-Type": "application/json"},
@@ -39,7 +39,7 @@ class APIService {
 
   // forgot password 
   Future<ForgotPasswordModel> forgotPwdApiHanlder(String emailInput) async {
-    final url = HHString.baseURL +"/api/v1/therapist/forgotPassword";
+    final url = HHString.baseURL +"therapist/forgotPassword";
     
     final response = await http.post(url, 
     headers: {"Content-Type": "application/json"},
@@ -63,7 +63,7 @@ class APIService {
   Future<ForgotPasswordModel> resendOTPAPIHandler() async {
 
     String userID = await GetStringToSP("userID");
-    final url = HHString.baseURL +"/api/v1/therapist/resendOtp";
+    final url = HHString.baseURL +"therapist/resendOtp";
     
     final response = await http.post(url, 
     headers: {"Content-Type": "application/json"},
@@ -88,7 +88,7 @@ class APIService {
 
       var userid = await GetStringToSP("userId");
 
-      final url = HHString.baseURL +"/api/v1/therapist/verifyOtp";
+      final url = HHString.baseURL +"therapist/verifyOtp";
       
       final response = await http.post(url, 
       headers: {"Content-Type": "application/json"},
@@ -119,7 +119,7 @@ class APIService {
         };
         print(params);
 
-      final url = HHString.baseURL +"/api/v1/therapist/resetPassword";
+      final url = HHString.baseURL +"therapist/resetPassword";
         
       final response = await http.put(url, 
         headers: {"Content-Type": "application/json"},
@@ -142,7 +142,7 @@ class APIService {
 
  Future<CountryList> getAllCountry() async {
 
-    final url = HHString.baseURL +"/api/v1/user/countryCodeList";
+    final url = HHString.baseURL +"user/countryCodeList";
     final response = await http.get(url,
         headers: {
           "Content-Type": 'application/json',
@@ -154,8 +154,8 @@ class APIService {
 
    Future<StateList> getAllStates(countryname) async {
 
-    final url = HHString.baseURL +"/api/v1/user/countryState_List?name="+countryname;
-    // final url = HHString.baseURL +"/api/v1/therapist/countryState_List";
+    final url = HHString.baseURL +"user/countryState_List?name="+countryname;
+    // final url = HHString.baseURL +"therapist/countryState_List";
     final response = await http.get(url,
         headers: {
           "Content-Type": 'application/json',

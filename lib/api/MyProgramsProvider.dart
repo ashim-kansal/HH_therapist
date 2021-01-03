@@ -11,7 +11,7 @@ import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-  String url = HHString.baseURL+"/api/v1/user";
+  String url = HHString.baseURL+"user";
 
   Future<GetProgramsResponse> getAllPrograms() async {
     var token = await GetStringToSP("token");

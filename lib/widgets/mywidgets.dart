@@ -505,12 +505,16 @@ class AssesmentItem extends StatelessWidget {
 class DialogWithField extends StatelessWidget {
   final String title;
   final VoidCallback onClick;
+  final TextEditingController controller;
+  final bool noteErr;
   // final List<Widget> actions;
   
   
   DialogWithField({
     this.title,
-    this.onClick
+    this.onClick,
+    this.controller,
+    this.noteErr
     // this.content,
     // this.actions = const [],
   });
@@ -541,6 +545,9 @@ class DialogWithField extends StatelessWidget {
                 height: 10,),
               HHEditText(
                 minLines: 4,
+                controller: controller,
+                error: noteErr,
+                errorText: "Please enter note.",
               ),
               
               SizedBox(

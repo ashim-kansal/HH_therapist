@@ -8,7 +8,7 @@ import 'package:flutter_app/model/GetTherapistsResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 
-String url = HHString.baseURL+"/api/v1/user";
+String url = HHString.baseURL+"user";
 
 Future<GetTherapistsResponse> getAllTherapists() async {
   

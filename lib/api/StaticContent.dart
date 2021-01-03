@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<StaticContent> getStaticContent(type) async {
 
-  final url = HHString.baseURL +"/api/v1/static/ViewStaticContent?Type="+type;
+  final url = HHString.baseURL +"static/ViewStaticContent?Type="+type;
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',

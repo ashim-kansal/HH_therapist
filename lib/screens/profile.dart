@@ -123,7 +123,7 @@ class _CreateAccountState extends State<ProfilePage> {
                   Material(
                     child: ClipPath(
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                         color: Colors.white,
                         child: SingleChildScrollView(
                           child:  Column(
@@ -320,14 +320,14 @@ class _CreateAccountState extends State<ProfilePage> {
                             Align(
                               alignment: Alignment.bottomCenter,
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
+                                padding: EdgeInsets.fromLTRB(5, 30, 5, 5),
                                 child: HHButton(
                                   isEnable: true,
                                   title: "Edit",
                                   type: 4,
                                   onClick: () {
                                     Navigator.pushNamed(context, EditProfilePage.RouteName,
-                                    //  arguments: ProfileArguments(userData)
+                                     arguments: ProfileArguments(userData)
                                      );
                                   },
                                 ),

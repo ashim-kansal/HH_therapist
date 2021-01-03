@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/otp.dart';
@@ -105,6 +106,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                         color: Colors.white,
                         child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
                           child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -249,7 +251,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Padding(
-                                    padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
+                                    padding: EdgeInsets.fromLTRB(5, 30, 5, 10),
                                     child: HHButton(
                                       isEnable: true,
                                       title: "Save",
