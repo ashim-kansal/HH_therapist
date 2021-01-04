@@ -111,6 +111,36 @@ class SettingAPIService {
     }
   }
 
+  Future<Map<String, dynamic>> uploadImageFile({File file})async{
+    ///MultiPart request
+    var token = await GetStringToSP("token");
+    final url = HHString.baseURL +"therapist/uploadImage";
+
+    var request = http.MultipartRequest(
+      'POST', Uri.parse(url),
+    );
+    Map<String,String> headers={
+      "token":token,
+      "Content-type": "multipart/form-data"
+    };
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        file.readAsBytes().asStream(),
+        file.lengthSync(),
+        filename: file.path.split("/").last,
+        // contentType: MediaType('image','jpeg'),
+      ),
+    );
+    request.headers.addAll(headers);
+    print("request: "+request.toString());
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+    Map<String, dynamic> data = json.decode(response.body);
+    print(response.body);
+    return data;
+  }
+
 
   Future<FeedbackResponseModel> updateProfile(String imagebase64) async {
 

@@ -36,7 +36,6 @@ class SplashState extends State<Splash>{
   void initState() {
     getToken();
     super.initState();
-
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
       (MethodCall methodcall) async {
