@@ -8,6 +8,7 @@ import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/NotificationList.dart';
 import 'package:flutter_app/model/OldJournalingLisrModel.dart';
+import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/PatientNotesList.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
@@ -143,7 +144,7 @@ Future<PatientNotesList> getPatientNotes(id) async {
 }
 
 // fetch chat listing
-Future<ChatList> getChatList() async {
+Future<ChatList> getChatList(chatId) async {
   var token = await GetStringToSP("token");
 
   final url = HHString.baseURL +"chat/chatHistory";
@@ -151,7 +152,10 @@ Future<ChatList> getChatList() async {
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token??HHString.token
-      },);
+      },
+      body:  jsonEncode({
+      "chatId": chatId??""})
+      );
   return chatListFromJson(response.body);
 }
 
@@ -249,6 +253,32 @@ class InAppAPIServices {
     }else {
       throw Exception("Failed to add note");
     }
+  }
+
+  // fetch patient assesments list
+  Future<PatientAssesmentList> getPatientAssesments(patientId) async {
+    var token = await GetStringToSP("token");
+
+    final url = HHString.baseURL +"patient_assessmentList?patientId="+patientId;
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token??HHString.token
+        },);
+    return patientAssesmentListFromJson(response.body);
+  }
+
+   // fetch patient journal list
+  Future<PatientAssesmentList> getPatientJournal(patientId) async {
+    var token = await GetStringToSP("token");
+
+    final url = HHString.baseURL +"patient_journals_List?patientId="+patientId;
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token??HHString.token
+        },);
+    return patientAssesmentListFromJson(response.body);
   }
 
 }

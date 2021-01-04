@@ -2,14 +2,19 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/ChatList.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
+import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
   static const String RouteName = '/chat';
 
-  ChatPage({Key key, this.title}) : super(key: key);
+  String chatId;
+  ChatPage({Key key, this.title, this.chatId}) : super(key: key);
   String title;
 
   @override
@@ -17,11 +22,18 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final List<Message> _messages = <Message>[];
+  // final List<Message> _messages = <Message>[];
 
+  Future messagesList;
   // Create a text controller. We will use it to retrieve the current value
   // of the TextField!
   final _textController = TextEditingController();
+
+   @override
+  void initState() {
+    super.initState();
+    messagesList = getChatList(widget.chatId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +50,32 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  new Flexible(
-                    child: new ListView.builder(
-                      padding: new EdgeInsets.all(8.0),
-                      reverse: true,
-                      itemBuilder: (_, int index) => _messages[index],
-                      itemCount: _messages.length,
-                    ),
+                  FutureBuilder<ChatList>(
+                    future: messagesList,
+                    builder: (context, snapshot){
+                      if(snapshot.connectionState == ConnectionState.done){
+                        if(snapshot.hasError){
+                          return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                        }
+                        var item = snapshot.data.result;
+                        return  new Flexible(
+                          child: new ListView.builder(
+                            padding: new EdgeInsets.all(8.0),
+                            reverse: true,
+                            itemBuilder: (context, int index) {
+                              return null;
+                            },
+                            itemCount: item[0].message.length,
+                          ),
+                        );
+                      }else {
+                        return Container(
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                    },
                   ),
+                 
                   new Divider(height: 1.0),
                   new Container(
                       decoration:
@@ -113,21 +143,18 @@ class _ChatPageState extends State<ChatPage> {
       //     backgroundColor: Colors.blue);
     } else {
       _textController.clear();
-      Message message = new Message(
-        msg: msg,
-        direction: messageDirection,
-        dateTime: date,
-      );
-      setState(() {
-        _messages.insert(0, message);
-      });
+      // Message message = new Message(
+      //   msg: msg,
+      //   direction: messageDirection,
+      //   dateTime: date,
+      // );
+      // setState(() {
+      //   _messages.insert(0, message);
+      // });
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
+ 
 
   @override
   void dispose() {
@@ -136,4 +163,10 @@ class _ChatPageState extends State<ChatPage> {
     _textController.dispose();
     super.dispose();
   }
+}
+
+class ChatArguments {
+  final String chatId;
+
+  ChatArguments(this.chatId);
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 
@@ -189,11 +190,12 @@ class UpcomingSessionItem extends StatelessWidget {
   var completed = false;
   var drname = "";
   var sdate = "";
+  var patientId = "";
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
 
   UpcomingSessionItem(
-      {@required this.name,@required this.id, @required this.role, this.completed, this.onClick, this.drname, this.therapistId, this.sdate, this.onClickCancel});
+      {@required this.name,@required this.id, @required this.role, this.completed, this.onClick, this.drname, this.therapistId, this.sdate, this.onClickCancel, this.patientId});
 
   @override
   Widget build(BuildContext context) {
@@ -207,20 +209,25 @@ class UpcomingSessionItem extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
               child:
-              Row(
+              Row(           
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
-                      ]),
-                      Row(children: [
-                        Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                      ]),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, SessionDetails.RouteName,arguments: SessionDetailsArguments(id, patientId));
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(children: [
+                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
+                        ]),
+                        Row(children: [
+                          Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                        ]),
+                      ],
+                    ),
                   ),
 
                   completed?
@@ -270,9 +277,9 @@ class UpcomingSessionItem extends StatelessWidget {
                 ],
 
               ),
-
-
-            )));
+            )
+          )
+        );
   }
 }
 class SessionArguments {

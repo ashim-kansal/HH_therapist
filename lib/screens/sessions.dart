@@ -101,6 +101,7 @@ class SessionPageState extends State<SessionPage>{
                 drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                 sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
+                patientId: snapshot.data.result[index].patientId.id,
                 onClickCancel: () {
                   widget.cancelSessionHandler(snapshot.data.result[index].id);
                 },);
@@ -138,6 +139,7 @@ class SessionPageState extends State<SessionPage>{
               therapistId: snapshot.data.result[index].therapistId,
               drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
               sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+              patientId: snapshot.data.result[index].patientId.id,
               role: '', onClick: (){}, completed: !isSwitched,);
           },
               separatorBuilder: (context, index) {

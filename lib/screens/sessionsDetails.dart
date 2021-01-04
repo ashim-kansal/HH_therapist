@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/sessions.dart';
-import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/widgets/sessionWidgets.dart';
 
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
   final assessments = ['abc', 'def', 'ghi' ];
+
+  String sessionId;
+  String patientId;
+
+  SessionDetails({Key key, this.sessionId, this.patientId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>SessionPageState();
@@ -20,6 +24,18 @@ class SessionPageState extends State<SessionDetails>{
   bool isAssesments = false;
   bool isDiary = false;
   bool isJournling = false;
+
+  Future assesmentList;
+  Future journalList;
+
+  @override
+  void initState() {
+    super.initState();
+    InAppAPIServices inAppAPIServices = new InAppAPIServices();
+
+    assesmentList= inAppAPIServices.getPatientAssesments(widget.patientId);
+    journalList= inAppAPIServices.getPatientJournal(widget.patientId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +65,31 @@ class SessionPageState extends State<SessionDetails>{
                       Container(
                         color: HH_Colors.color_FBF4F4,
                         height: MediaQuery.of(context).size.height / 3.7,
-                        child: Column(children: [
-                          Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
-                          child: AssesmentItem(title: "Michigan Alcohol Test", value: "17/20", subTitle: "Total Obtained Marks")),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                          child: AssesmentItem(title: "Michigan Alcohol Test", value: "17/20", subTitle: "Total Obtained Marks")),
-                          Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                          child: AssesmentItem(title: "Michigan Alcohol Test", value: "17/20", subTitle: "Total Obtained Marks")),
-                        ],),
+                        child: FutureBuilder<PatientAssesmentList>( 
+                          future: assesmentList,
+                          builder: (context,snapshot){
+                            if(snapshot.connectionState == ConnectionState.done){
+                              if(snapshot.hasError){
+                                return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                              }
+                              var item = snapshot.data.result;
+                              return ListView.builder(
+                                  itemBuilder: (context, index) {
+                                  return Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                                    child: AssesmentItem(title: item[index].title, 
+                                    value: item[index].correctMarks, 
+                                    subTitle: "Total Obtained Marks"));
+                                      },
+                                    itemCount: item.length,
+                                );
+                            }else {
+                              return Container(
+                                child: Center(child: CircularProgressIndicator()),
+                              );
+                            }
+                          }
+                        ) 
+                       
                       ) : Container()
                   ],),
                 ),
@@ -131,45 +164,65 @@ class SessionPageState extends State<SessionDetails>{
                               color: Color(0xffEDEDF8),
                               borderRadius: BorderRadius.circular(8.0)
                             ),
-                          child: Column(children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
-                                color: Color(0xffCBCEFC),
-                              ),
-                              child: Row(children: <Widget>[
-                                Expanded(
-                                  child: Stack(children: [ 
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child:  HHTextView(color: HH_Colors.color_white,
-                                      title: "14/11/2020",
-                                      size: 16),
-                                    ),
+                          child: 
+                          FutureBuilder<PatientAssesmentList>( 
+                                future: journalList,
+                                builder: (context,snapshot){
+                                  if(snapshot.connectionState == ConnectionState.done){
+                                    if(snapshot.hasError){
+                                      return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                                    }
+                                    var item = snapshot.data.result;
+                                    return ListView.builder(
+                                        itemBuilder: (context, index) {
+                                          return Column(children: [
+                                                  Container(
+                                                    padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
+                                                      color: Color(0xffCBCEFC),
+                                                    ),
+                                                    child: Row(children: <Widget>[
+                                                      Expanded(
+                                                        child: Stack(children: [ 
+                                                          Padding(
+                                                            padding: EdgeInsets.only(top: 15),
+                                                            child:  HHTextView(color: HH_Colors.color_white,
+                                                            title: "14/11/2020",
+                                                            size: 16),
+                                                          ),
 
-                                    Positioned(child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: IconButton(icon: Icon(
-                                        Icons.keyboard_arrow_right_outlined,
-                                        size: 32,
-                                        color: HH_Colors.color_white,
-                                      ), onPressed: () {  },),
-                                    ))
+                                                          Positioned(child: Align(
+                                                            alignment: Alignment.bottomRight,
+                                                            child: IconButton(icon: Icon(
+                                                              Icons.keyboard_arrow_right_outlined,
+                                                              size: 32,
+                                                              color: HH_Colors.color_white,
+                                                            ), onPressed: () {  },),
+                                                          ))
 
-                                  ],)
-                                )
-                                
-                              ],)
-                            ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(8, 5, 8, 10),
-                              child: HHTextView(
-                                title: "Lorem Ipsum is simply dummy text of the the printing and typesetting industry.",
-                                size: 16,
-                                color: HH_Colors.color_707070,),
-                            )
-                          ],),
+                                                        ],)
+                                                      )],
+                                                    )
+                                                  ),
+                                                  Container(
+                                                    padding: EdgeInsets.fromLTRB(8, 5, 8, 10),
+                                                    child: HHTextView(
+                                                      title: "Lorem Ipsum is simply dummy text of the the printing and typesetting industry.",
+                                                      size: 16,
+                                                      color: HH_Colors.color_707070,),
+                                                  )
+                                                ],);
+                                        },
+                                        itemCount: item.length,
+                                      );
+                                  }else {
+                                    return Container(
+                                      child: Center(child: CircularProgressIndicator()),
+                                    );
+                                  }
+                                }
+                              )
                         ),
                       ) : Container()
                   ],),
@@ -228,3 +281,9 @@ class SessionPageState extends State<SessionDetails>{
   }
 }
 
+class SessionDetailsArguments {
+  final String data;
+  final String patientId;
+
+  SessionDetailsArguments(this.data, this.patientId);
+}
