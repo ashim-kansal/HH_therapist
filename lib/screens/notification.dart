@@ -109,7 +109,11 @@ class _NotificationState extends State<NotificationPage> {
               builder: (builder, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if(snapshot.hasError){
-                    return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                    return Container(
+                      child: Center(
+                        child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                      ),
+                    );
                   }
                   return ListView.separated(itemBuilder: (context, index) {
                     var _date = snapshot.data.result[index].createdAt;

@@ -7,14 +7,17 @@ import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message.dart';
+import 'package:flutter_app/widgets/message_widget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class ChatPage extends StatefulWidget {
   static const String RouteName = '/chat';
 
   String chatId;
-  ChatPage({Key key, this.title, this.chatId}) : super(key: key);
+  String senderId;
+  ChatPage({Key key, this.title, this.chatId, this.senderId}) : super(key: key);
   String title;
 
   @override
@@ -32,7 +35,11 @@ class _ChatPageState extends State<ChatPage> {
    @override
   void initState() {
     super.initState();
-    messagesList = getChatList(widget.chatId);
+    messagesList = getChat();
+  }
+
+  getChat() async{
+    return await getChatList(widget.chatId);
   }
 
   @override
@@ -50,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  FutureBuilder<ChatList>(
+                  FutureBuilder(
                     future: messagesList,
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
@@ -63,7 +70,15 @@ class _ChatPageState extends State<ChatPage> {
                             padding: new EdgeInsets.all(8.0),
                             reverse: true,
                             itemBuilder: (context, int index) {
-                              return null;
+                              // return ListView.builder(itemBuilder: (context, qindex){
+                                var _date = item[0].message[index].createdAt;
+                                Moment createdDt = Moment.parse('$_date');
+                                return MessageWidget(
+                                  msg: item[0].message[index].message,
+                                  direction: item[0].senderId.id == widget.senderId ? "left" : "right",
+                                  dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
+                                );
+                              // });
                             },
                             itemCount: item[0].message.length,
                           ),
@@ -93,7 +108,8 @@ class _ChatPageState extends State<ChatPage> {
                                   child: new TextField(
                                     controller: _textController,
                                     decoration: new InputDecoration.collapsed(
-                                        hintText: "Enter message"),
+                                        hintText: "Enter message"
+                                    ),
                                   ),
                                 ),
 
@@ -133,8 +149,9 @@ class _ChatPageState extends State<ChatPage> {
             )));
   }
 
-  void _sendMsg(String msg, String messageDirection, String date) {
-    if (msg.length == 0) {
+  void _sendMsg( String msg, String messageDirection, String date) {
+    if (msg.trim().length == 0) {
+      return;
       // Fluttertoast.showToast(
       //     msg: "Please Enter Message",
       //     toastLength: Toast.LENGTH_SHORT,
@@ -142,18 +159,29 @@ class _ChatPageState extends State<ChatPage> {
       //     timeInSecForIos: 1,
       //     backgroundColor: Colors.blue);
     } else {
-      _textController.clear();
-      // Message message = new Message(
-      //   msg: msg,
-      //   direction: messageDirection,
-      //   dateTime: date,
-      // );
-      // setState(() {
-      //   _messages.insert(0, message);
-      // });
+      
+      MessageWidget messageWidget = new MessageWidget(
+        msg: msg,
+        direction: messageDirection,
+        dateTime: date,
+      );
+
+      InAppAPIServices inAppAPIServices = new InAppAPIServices();
+
+      inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
+        if(value.responseCode == 200){
+          _textController.clear(),
+          messagesList = getChat()
+          //  setState(() {
+          //   // messageWidget.insert(0, messageWidget);
+          // })
+        }
+      });
+     
     }
   }
 
+  
  
 
   @override
@@ -167,6 +195,7 @@ class _ChatPageState extends State<ChatPage> {
 
 class ChatArguments {
   final String chatId;
+  final String senderId;
 
-  ChatArguments(this.chatId);
+  ChatArguments(this.chatId, this.senderId);
 }
