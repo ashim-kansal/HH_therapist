@@ -3,6 +3,7 @@ import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 
@@ -42,7 +43,9 @@ class SessionCard extends StatelessWidget {
                   children: [
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                    HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
+                    HHOptionButton(onClickCancel: (){
+                      
+                    }, onClickReSchedule: (){
                       Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, name, role, "", id));
                     },)
                   ],
@@ -79,7 +82,7 @@ class SessionCard extends StatelessWidget {
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
-                              // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                              Navigator.pushNamed(context, VideoCallPage.RouteName);
                             },
                           shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                         )),

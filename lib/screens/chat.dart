@@ -28,6 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   // final List<Message> _messages = <Message>[];
 
   Future messagesList;
+  String receiverId;
   // Create a text controller. We will use it to retrieve the current value
   // of the TextField!
   final _textController = TextEditingController();
@@ -68,14 +69,15 @@ class _ChatPageState extends State<ChatPage> {
                         return  new Flexible(
                           child: new ListView.builder(
                             padding: new EdgeInsets.all(8.0),
-                            reverse: true,
+                            // reverse: true,
                             itemBuilder: (context, int index) {
+                              receiverId = item[0].senderId.id;
                               // return ListView.builder(itemBuilder: (context, qindex){
                                 var _date = item[0].message[index].createdAt;
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
                                   msg: item[0].message[index].message,
-                                  direction: item[0].senderId.id == widget.senderId ? "left" : "right",
+                                  direction: item[0].message[index].senderId == widget.senderId ? "left" : "right",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                                 );
                               // });
@@ -168,10 +170,11 @@ class _ChatPageState extends State<ChatPage> {
 
       InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-      inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
+      inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
         if(value.responseCode == 200){
           _textController.clear(),
-          messagesList = getChat()
+          messagesList = getChat(),
+          Navigator.pop(context)
           //  setState(() {
           //   // messageWidget.insert(0, messageWidget);
           // })
