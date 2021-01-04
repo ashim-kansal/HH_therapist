@@ -22,6 +22,7 @@ import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/splash.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/screens/profile.dart';
@@ -84,6 +85,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ChatPage.RouteName:
       final ChatArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => ChatPage(chatId: args.chatId,));
+    case VideoCallPage.RouteName:
+      final ChatArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => VideoCallPage());
     case SessionDetails.RouteName:
       final SessionDetailsArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => SessionDetails(sessionId: args.data, patientId: args.patientId,));

@@ -46,7 +46,7 @@ class _TherapistState extends State<TherapistPage> {
                 return TharapistCell(
                   name: snapshot.data.result.myPatient[index].firstName+" "+snapshot.data.result.myPatient[index].lastName,
                   image: snapshot.data.result.myPatient[index].profilePic,
-                  role: "Recovery Coach",
+                  role: "",
                   showBook: false,
                   patientid: snapshot.data.result.myPatient[index].id,
                   onClick: () {
