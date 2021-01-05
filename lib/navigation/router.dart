@@ -85,7 +85,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ChatPage.RouteName:
       final ChatArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => ChatPage(chatId: args.chatId, senderId: args.senderId));
-      return MaterialPageRoute(builder: (context) => ChatPage(chatId: args.chatId,));
     case VideoCallPage.RouteName:
       final ChatArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => VideoCallPage());
