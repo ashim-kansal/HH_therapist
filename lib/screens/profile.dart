@@ -49,6 +49,11 @@ class _CreateAccountState extends State<ProfilePage> {
   void initState() {
     super.initState();
     
+    getprofile();
+  }
+
+  getprofile() {
+    print('getProfile');
     userAPIServices.getProfile().then((value) => {
       print(value.responseMessage),
       if(value.responseCode == 200){
@@ -333,10 +338,16 @@ class _CreateAccountState extends State<ProfilePage> {
                                   title: "Edit",
                                   type: 4,
                                   onClick: () {
-                                    Navigator.pop(context);
-                                    Navigator.pushNamed(context, EditProfilePage.RouteName,
-                                     arguments: ProfileArguments(userData)
-                                     );
+                                    // Navigator.pop(context);
+                                     Navigator.push( context, MaterialPageRoute( builder: (context) => EditProfilePage(data: userData)), )
+                                     .then((value){
+                                       // setState(() {
+                                         getprofile();
+                                       // });
+                                     });
+                                    // Navigator.pushNamed(context, EditProfilePage.RouteName,
+                                    //  arguments: ProfileArguments(userData)
+                                    //  );
                                   },
                                 ),
                               ),

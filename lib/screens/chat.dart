@@ -36,7 +36,11 @@ class _ChatPageState extends State<ChatPage> {
    @override
   void initState() {
     super.initState();
-    // messagesList = getChatList(widget.chatId);
+    messagesList = getChat();
+  }
+
+  getChat() async {
+    return await getChatList(widget.chatId);
   }
 
   @override
@@ -54,8 +58,8 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  FutureBuilder<ChatList>(
-                    future: getChatList(widget.chatId),
+                  FutureBuilder(
+                    future: messagesList,
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
@@ -148,6 +152,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _sendMsg( String msg, String messageDirection, String date) {
+
+    var chatLists;
     if (msg.trim().length == 0) {
       return;
       // Fluttertoast.showToast(
@@ -171,7 +177,9 @@ class _ChatPageState extends State<ChatPage> {
           _textController.clear(),
           // messagesList = getChat(),
           // Navigator.pop(context)
-           setState(() {
+          chatLists = getChat(),
+          setState(() {
+            messagesList = getChat();
           })
         }
       });
@@ -190,9 +198,9 @@ class _ChatPageState extends State<ChatPage> {
     super.dispose();
   }
 
-  getChat() async{
-    return await getChatList(widget.chatId);
-  }
+  // getChat() async{
+  //   return await getChatList(widget.chatId);
+  // }
 
 }
 

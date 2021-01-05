@@ -70,7 +70,7 @@ class _CreateAccountState extends State<EditProfilePage> {
       showToast(value.responseMessage),
       if(value.responseCode == 200){
         Navigator.pop(context),
-        Navigator.pushNamed(context, ProfilePage.RouteName)
+        // Navigator.pushNamed(context, ProfilePage.RouteName)
       }
     });
   }
@@ -256,7 +256,7 @@ class _CreateAccountState extends State<EditProfilePage> {
   }
   Future<bool> _onBackPressed() {
     Navigator.pop(context);
-    Navigator.pushNamed(context, ProfilePage.RouteName);
+    // Navigator.pushNamed(context, ProfilePage.RouteName);
   }
 
   Future imagePicker () async {
