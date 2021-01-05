@@ -156,6 +156,7 @@ Future<ChatList> getChatList(chatId) async {
       body:  jsonEncode({
       "chatId": chatId??""})
       );
+      print(response.body);
   return chatListFromJson(response.body);
 }
 
@@ -281,6 +282,26 @@ class InAppAPIServices {
     return patientAssesmentListFromJson(response.body);
   }
 
+  Future<CommonResponse> sendMessage(receiverId, msg) async {
+    var token = await GetStringToSP("token");
+
+    final url = HHString.baseURL +"chat/chatAPI";
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token??HHString.token
+        },
+        body: jsonEncode({
+          "receiverId": receiverId,
+          "message": msg
+        }));
+
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(jsonDecode(response.body));
+    }else {
+      throw Exception("Failed to add note");
+    }
+  }
 }
 
 

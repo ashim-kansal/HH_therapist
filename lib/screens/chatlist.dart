@@ -31,40 +31,46 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ChatList>(
-      future: getChatList(null),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if(snapshot.hasError){
-            return HHTextView(title: "No new messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
-          }
-          return ListView.separated(
-            itemCount: snapshot.data.result.length,
-            itemBuilder: (context, index) {
-              var item = snapshot.data.result[index];
-              var _date = item.message[item.message.length - 1].createdAt;
-              Moment createdDt = Moment.parse('$_date');
-              return ChatUserCell(
-                name: item.senderId.firstName+" "+item.senderId.lastName,
-                message: item.message[item.message.length - 1].message,
-                profile: item.senderId.profilePic,
-                time: createdDt.format("hh:mm a"),
-                online: true,
-                onClick: () {
-                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id, ''));
-                },
+    return Container(
+      child: FutureBuilder<ChatList>(
+        future: getChatList(null),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if(snapshot.hasError){
+              return Container(
+                child: Center(
+                  child: HHTextView(title: "No new messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                ),
               );
-            },
-            separatorBuilder: (context, index) {
-              return Divider();
-            },
-          );
-        }else {
-          return Container(
-            child: Center(child: CircularProgressIndicator()),
-          );
-        }
-      },
+            }
+            return ListView.separated(
+              itemCount: snapshot.data.result.length,
+              itemBuilder: (context, index) {
+                var item = snapshot.data.result[index];
+                var _date = item.message[item.message.length - 1].createdAt;
+                Moment createdDt = Moment.parse('$_date');
+                return ChatUserCell(
+                  name: item.senderId.firstName+" "+item.senderId.lastName,
+                  message: item.message[item.message.length - 1].message,
+                  profile: item.senderId.profilePic,
+                  time: createdDt.format("hh:mm a"),
+                  online: true,
+                  onClick: () {
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id, item.senderId.id));
+                  },
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider();
+              },
+            );
+          }else {
+            return Container(
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+        },
+      ),
     );
   }
 }
