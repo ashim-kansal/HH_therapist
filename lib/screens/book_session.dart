@@ -62,7 +62,7 @@ class BookSessionState extends State<BookSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Schedule', child: Column(
+    return MyWidget(title: 'Re-Schedule', child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TharapistCell(name: widget.name, role: widget.role,
@@ -122,31 +122,32 @@ class BookSessionState extends State<BookSessionPage>{
                   child: Center(child: CircularProgressIndicator(),),
                 );
             }),
-        HHTextView(
-          color: HH_Colors.color_707070,
-          title: "Session Type",
-          size: 16,
-        ),
+        // HHTextView(
+        //   color: HH_Colors.color_707070,
+        //   title: "Session Type",
+        //   size: 16,
+        // ),
         SizedBox(
           height: 10,
         ),
-        HHEditText(
-          minLines: 1,
-          controller: widget.sessionTextController,
-        ),HHTextView(
-          color: HH_Colors.color_707070,
-          title: "Notes",
-          size: 16,
-        ),
-        SizedBox(
-          height: 10,
-        ),
-        HHEditText(
-          minLines: 3,
-          controller: widget.noteTextController,
-        ),
+        // HHEditText(
+        //   minLines: 1,
+        //   controller: widget.sessionTextController,
+        // ),
+        // HHTextView(
+        //   color: HH_Colors.color_707070,
+        //   title: "Notes",
+        //   size: 16,
+        // ),
+        // SizedBox(
+        //   height: 10,
+        // ),
+        // HHEditText(
+        //   minLines: 3,
+        //   controller: widget.noteTextController,
+        // ),
         Container(
-            child: HHButton(title: 'Save', type: 4, isEnable: true,onClick: (){
+            child: HHButton(title: 'Update', type: 4, isEnable: true,onClick: (){
               // Navigator.pushNamed(context, SessionPage.RouteName);
               bookSession();
             },)

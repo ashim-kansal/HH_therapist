@@ -32,7 +32,7 @@ class _ChatPageState extends State<ChatPage> {
    @override
   void initState() {
     super.initState();
-    messagesList = getChatList(widget.chatId);
+    // messagesList = getChatList(widget.chatId);
   }
 
   @override
@@ -51,7 +51,7 @@ class _ChatPageState extends State<ChatPage> {
                 children: <Widget>[
                   //Chat list
                   FutureBuilder<ChatList>(
-                    future: messagesList,
+                    future: getChatList(widget.chatId),
                     builder: (context, snapshot){
                       if(snapshot.connectionState == ConnectionState.done){
                         if(snapshot.hasError){
@@ -167,6 +167,7 @@ class _ChatPageState extends State<ChatPage> {
 
 class ChatArguments {
   final String chatId;
+  final String senderId;
 
-  ChatArguments(this.chatId);
+  ChatArguments(this.chatId, this.senderId);
 }

@@ -154,35 +154,35 @@ class _CreateAccountState extends State<ProfilePage> {
                                           ),
                                         )
                                     ),
-                                    Container(
-                                      margin: EdgeInsets.only(left: 155),
-                                      child: Container(
-                                        width: 35,
-                                        height:35,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [//background color of box
-                                            BoxShadow(
-                                              color: HH_Colors.color_F2EEEE,
-                                              blurRadius: 65.0, // soften the shadow
-                                              spreadRadius: 1.0, //extend the shadow
-                                              offset: Offset(
-                                                15.0, // Move to right 10  horizontally
-                                                15.0, // Move to bottom 10 Vertically
-                                              ),
-                                            )
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.camera_alt,
-                                            size: 20,
-                                          ), onPressed: () {
-                                            imagePicker();
-                                          },
-                                        ),
-                                      ),
-                                    )
+                                    // Container(
+                                    //   margin: EdgeInsets.only(left: 155),
+                                    //   child: Container(
+                                    //     width: 35,
+                                    //     height:35,
+                                    //     decoration: BoxDecoration(
+                                    //       boxShadow: [//background color of box
+                                    //         BoxShadow(
+                                    //           color: HH_Colors.color_F2EEEE,
+                                    //           blurRadius: 65.0, // soften the shadow
+                                    //           spreadRadius: 1.0, //extend the shadow
+                                    //           offset: Offset(
+                                    //             15.0, // Move to right 10  horizontally
+                                    //             15.0, // Move to bottom 10 Vertically
+                                    //           ),
+                                    //         )
+                                    //       ],
+                                    //       color: Colors.white,
+                                    //       borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                                    //     child: IconButton(
+                                    //       icon: Icon(
+                                    //         Icons.camera_alt,
+                                    //         size: 20,
+                                    //       ), onPressed: () {
+                                    //         imagePicker();
+                                    //       },
+                                    //     ),
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                             ),
@@ -289,39 +289,39 @@ class _CreateAccountState extends State<ProfilePage> {
                                     )
                                   ],)
                                 ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  margin: const EdgeInsets.all(10.0),
-                                  padding: const EdgeInsets.all(3.0),
-                                  decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(
-                                      color: HH_Colors.borderGrey,
-                                      width: 0.5
-                                    ))
-                                  ),
-                                  child: Column(children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                      child: HHTextView(
-                                        title: "Address",
-                                        size: 18,
-                                        textweight: FontWeight.w500,
-                                        color: Color(0xff777CEA)
-                                      ),
-                                    ),
-                                   Container(
-                                     padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                     alignment: Alignment.topLeft,
-                                     child:  HHTextView(
-                                      title: address,
-                                      size: 16,
-                                      color: HH_Colors.grey_585858,
-                                      textweight: FontWeight.w400,
-                                    ),
-                                   )
-                                  ],)
-                                ),
+                                // Container(
+                                //   alignment: Alignment.topLeft,
+                                //   margin: const EdgeInsets.all(10.0),
+                                //   padding: const EdgeInsets.all(3.0),
+                                //   decoration: BoxDecoration(
+                                //     border: Border(bottom: BorderSide(
+                                //       color: HH_Colors.borderGrey,
+                                //       width: 0.5
+                                //     ))
+                                //   ),
+                                //   child: Column(children: [
+                                //     Container(
+                                //       alignment: Alignment.topLeft,
+                                //       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                //       child: HHTextView(
+                                //         title: "Address",
+                                //         size: 18,
+                                //         textweight: FontWeight.w500,
+                                //         color: Color(0xff777CEA)
+                                //       ),
+                                //     ),
+                                //    Container(
+                                //      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                //      alignment: Alignment.topLeft,
+                                //      child:  HHTextView(
+                                //       title: address,
+                                //       size: 16,
+                                //       color: HH_Colors.grey_585858,
+                                //       textweight: FontWeight.w400,
+                                //     ),
+                                //    )
+                                //   ],)
+                                // ),
                               ],)
                             ),
                             Align(
@@ -333,6 +333,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                   title: "Edit",
                                   type: 4,
                                   onClick: () {
+                                    Navigator.pop(context);
                                     Navigator.pushNamed(context, EditProfilePage.RouteName,
                                      arguments: ProfileArguments(userData)
                                      );

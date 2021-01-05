@@ -34,9 +34,6 @@ class NotesPageState extends State<NotesPage> {
   @override
   void initState() {
     super.initState();
-
-    notesList = getPatientNotes(widget.patientId);
-
     widget.mList ?? List();
     widget.count ?? 0;
   }
@@ -62,11 +59,12 @@ class NotesPageState extends State<NotesPage> {
       showToast(value.responseMsg),
       if(value.responseCode == 200){
         Navigator.pop(context),
-        notesList = getPatientNotes(widget.patientId),
-        Timer(Duration(seconds: 3),
-        ()=> {
-          Navigator.pop(context),
-        }),
+        setState((){}),
+        // notesList = getPatientNotes(widget.patientId),
+        // Timer(Duration(seconds: 3),
+        // ()=> {
+        //   Navigator.pop(context),
+        // }),
         
       }
     });
@@ -126,7 +124,7 @@ class NotesPageState extends State<NotesPage> {
                     ])),
             Expanded(
                 child: FutureBuilder<PatientNotesList>(
-                  future: notesList,
+                  future: getPatientNotes(widget.patientId),
                   builder: (context,snapshot){
                     if(snapshot.connectionState == ConnectionState.done){
                       if(snapshot.hasError){

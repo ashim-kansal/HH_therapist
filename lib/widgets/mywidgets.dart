@@ -724,6 +724,78 @@ class CustomDialog extends StatelessWidget {
   }
 }
 
+class CancelDialog extends StatelessWidget {
+
+  final VoidCallback onYesPress;
+  final VoidCallback onDenyPress;
+
+
+  CancelDialog({
+    this.onYesPress,
+    this.onDenyPress,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          constraints: BoxConstraints(
+              minHeight: 150, minWidth: double.infinity, maxHeight: 170),
+          // height: 150,
+          // width: 200,
+          child: Padding(
+            padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    child: Column(
+                      children: [
+                        HHTextView(title: "Cancel Session", size: 22, color: HH_Colors.color_3D3D3D, textweight: FontWeight.w600),
+                        SizedBox(height: 5),
+                        HHTextView(title: "Are you sure you want\n to cancel your session ?", size: 16, color: HH_Colors.color_707070, alignment: TextAlign.center, textweight: FontWeight.w400)
+                      ],
+                    )
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(top: BorderSide(color: HH_Colors.borderGrey, width: 0.5))
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                            onTap: () => {
+                              onDenyPress(),
+                            },
+                            child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: InkWell(
+                          onTap: () => {
+                            onYesPress()
+                          },
+                          child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+    );
+  }
+}
+
+
 class DialogWithButtons extends StatelessWidget {
   final String title;
   final String content;

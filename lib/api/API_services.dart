@@ -80,8 +80,7 @@ Future<OldJournalingList> getOldJournalingList() async {
 Future<QuestionarieList> getQuestionaire(programId) async {
   var token = await GetStringToSP("token");
 
-  var pid = "5fd9d4e69a512f3059c0f272";
-  final url = HHString.baseURL +"therapist/getQuestionnaire?programId="+pid;
+  final url = HHString.baseURL +"therapist/getQuestionnaire?programId="+programId;
   final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -127,6 +126,7 @@ Future<MyClientList> getMyClientList() async {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token??HHString.token
       },);
+  print(response.body);
   return myClientListFromJson(response.body);
 }
 

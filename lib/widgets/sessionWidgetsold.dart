@@ -9,9 +9,10 @@ class SessionCard extends StatelessWidget {
   var role = "";
   var completed = false;
   final VoidCallback onClick;
+  final VoidCallback onClickCancel;
 
   SessionCard(
-      {@required this.name, @required this.role, this.completed, this.onClick});
+      {@required this.name, @required this.role, this.completed, this.onClick, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {

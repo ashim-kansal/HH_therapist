@@ -50,10 +50,10 @@ class HomePageState extends State<HomePage> {
                 HHHomeButton(title: 'My Clients', type: 2, onClick: (){
                   Navigator.pushNamed(context, TherapistPage.RouteName);
                 },),
-                SizedBox(height: 15),
-                HHHomeButton(title: 'Review & Reply', type: 2, onClick: (){
-                  Navigator.pushNamed(context, ReviewPage.RouteName);
-                },),
+                // SizedBox(height: 15),
+                // HHHomeButton(title: 'Review & Reply', type: 2, onClick: (){
+                //   Navigator.pushNamed(context, ReviewPage.RouteName);
+                // },),
               ],
             ),
           ),
@@ -91,11 +91,17 @@ class HomePageState extends State<HomePage> {
                   Moment createdDt = Moment.parse('$_date');
                   return SessionCard(name: snapshot.data.result[index].programName,
                     id: snapshot.data.result[index].id,
+                    data: snapshot.data.result[index],
                     therapistId: snapshot.data.result[index].therapistId,
                     drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                     completed: index%2 == 0, onClick: (){
                       Navigator.pushNamed(context, SessionPage.RouteName);
+                    },
+                    onClickCancel: (){
+                    setState(() {
+
+                    });
                     },
                   );
                 },

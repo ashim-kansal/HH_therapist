@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/api/Therapist_service.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/popup_window.dart';
 
 class SessionCard extends StatelessWidget {
   var name = "";
   var role = "";
+  Result data;
   var completed = false;
   var drname = "";
   var sdate = "";
   var id = "";
   var therapistId = "";
   final VoidCallback onClick;
+  final VoidCallback onClickCancel;
 
   SessionCard(
-      {@required this.name, @required this.role, @required this.id, @required this.therapistId, this.completed, this.onClick, this.drname, this.sdate});
+      {@required this.name, @required this.role, @required this.data, @required this.id, @required this.therapistId, this.completed, this.onClickCancel, this.onClick, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +48,35 @@ class SessionCard extends StatelessWidget {
                   children: [
                     Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
                     // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                    HHOptionButton(onClickCancel: (){}, onClickReSchedule: (){
+                    HHOptionButton(onClickCancel: (){
+                      showDialog(context: context,
+                        builder: (BuildContext dialogContext) {
+                          return CancelDialog(
+                              onYesPress: ()async {
+                                cancelSession(id).then(
+                                        (value) => {
+
+                                      print(value.responseCode),
+                                      if (value.responseCode == 200) {
+                                        Navigator.pop(context),
+                                        onClickCancel()
+                                        // Navigator.pushNamed(context, Dashboard.RouteName)
+                                      }
+                                    });
+                                // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                              },
+                              onDenyPress: (){
+                                Navigator.pop(context);
+                              }
+                          );
+                        },
+                      );
+                    }, onClickReSchedule: (){
                       Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, name, role, "", id));
                     },)
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 5,),
                 Row(
                     children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
                     ]),
@@ -66,7 +94,7 @@ class SessionCard extends StatelessWidget {
                         child: Icon(Icons.chat
                           , color: HH_Colors.primaryColor, size: 18,),
                         onPressed: (){
-                          // Navigator.pushNamed(context, ResetPasswordPage.RouteName);
+                          Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
                         },
                         shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
                       ),
@@ -268,7 +296,24 @@ class UpcomingSessionItem extends StatelessWidget {
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){
-                        onClickCancel();
+                        CancelDialog(
+                            onYesPress: ()async {
+                              cancelSession(id).then(
+                                      (value) => {
+
+                                    print(value.responseCode),
+                                    if (value.responseCode == 200) {
+                                      Navigator.pop(context),
+                                      onClickCancel()
+                                      // Navigator.pushNamed(context, Dashboard.RouteName)
+                                    }
+                                  });
+                              // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                            },
+                            onDenyPress: (){
+                              Navigator.pop(context);
+                            }
+                        );
                       },
                       onClickReSchedule: (){
                         Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, drname, role, "", id));

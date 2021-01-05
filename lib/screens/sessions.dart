@@ -15,15 +15,7 @@ class SessionPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() =>SessionPageState();
 
-  //cancel session
-  void cancelSessionHandler(String id) {
-    print(id);
-    // InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-    // inAppAPIServices.cancelSession(id).then((value) => {
-      
-    // });
-  }
 }
 
 class SessionPageState extends State<SessionPage>{
@@ -103,7 +95,9 @@ class SessionPageState extends State<SessionPage>{
                 role: '', onClick: (){}, completed: !isSwitched,
                 patientId: snapshot.data.result[index].patientId.id,
                 onClickCancel: () {
-                  widget.cancelSessionHandler(snapshot.data.result[index].id);
+                  setState(() {
+
+                  });
                 },);
             },
                 separatorBuilder: (context, index) {

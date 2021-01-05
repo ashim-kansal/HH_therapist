@@ -81,7 +81,7 @@ class UserAPIServices {
   }
 
   // update Profile 
-  Future<UserProfile> updateProfileDetails(String fname, String lname, String phone, String address) async {
+  Future<UserProfile> updateProfileDetails(String fname, String lname, String phone, String address, String image) async {
 
     var token = await GetStringToSP("token");
     final url = HHString.baseURL +"therapist/updateProfile";
@@ -94,6 +94,7 @@ class UserAPIServices {
         "firstName": fname,
         "lastName": lname,
         "mobileNumber": phone,
+        "profilePic": image,
         "address": address
       })
     );

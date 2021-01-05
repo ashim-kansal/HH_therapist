@@ -51,7 +51,7 @@ class _ChatListPageState extends State<ChatListPage> {
                 time: createdDt.format("hh:mm a"),
                 online: true,
                 onClick: () {
-                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id));
+                  Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id, ''));
                 },
               );
             },
