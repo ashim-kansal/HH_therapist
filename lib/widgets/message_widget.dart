@@ -32,18 +32,18 @@ class _MessageWidgetState extends State<MessageWidget> {
               new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Stack(
-                    children: <Widget>[
+                  // new Stack(
+                  //   children: <Widget>[
                       //for left corner
 
                      new Container(
                         margin: EdgeInsets.only(left: 6.0),
                         decoration: new BoxDecoration(
-                          color: Color(0x2b2b2b2e),
-                          border: new Border.all(
-                              color: Color(0x2b2b2b2e),
-                              width: .25,
-                              style: BorderStyle.solid),
+                          color: Color(0x4545455c),
+                          // border: new Border.all(
+                          //     color: Color(0x4545455c),
+                          //     width: .25,
+                          //     style: BorderStyle.solid),
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(15.0),
                             topLeft: Radius.circular(15.0),
@@ -63,18 +63,18 @@ class _MessageWidgetState extends State<MessageWidget> {
                         ),
                         width: 180.0,
                       ),
-                    ],
-                  ),
+                    // ],
+                  // ),
 
                   //date time
                   new Container(
                     margin: EdgeInsets.only(left: 6.0),
                     decoration: new BoxDecoration(
-                      color: Color(0x2b2b2b2e),
-                      border: new Border.all(
-                          color: Color(0x2b2b2b2e),
-                          width: .25,
-                          style: BorderStyle.solid),
+                      color: Color(0x4545455c),
+                      // border: new Border.all(
+                      //     color: Color(0x4545455c),
+                      //     width: .25,
+                      //     style: BorderStyle.solid),
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(0.0),
                         topLeft: Radius.circular(0.0),

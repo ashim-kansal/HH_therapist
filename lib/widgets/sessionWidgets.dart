@@ -276,7 +276,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
-                            Navigator.pushNamed(context, ChatPage.RouteName);
+                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(patientId, therapistId));
                           },
                           shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
 

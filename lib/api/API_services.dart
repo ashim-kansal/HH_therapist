@@ -146,7 +146,7 @@ Future<PatientNotesList> getPatientNotes(id) async {
 // fetch chat listing
 Future<ChatList> getChatList(chatId) async {
   var token = await GetStringToSP("token");
-
+print(token);
   final url = HHString.baseURL +"chat/chatHistory";
   final response = await http.post(url,
       headers: {

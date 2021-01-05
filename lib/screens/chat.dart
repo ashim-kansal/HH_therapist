@@ -169,11 +169,10 @@ class _ChatPageState extends State<ChatPage> {
       inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
         if(value.responseCode == 200){
           _textController.clear(),
-          messagesList = getChat(),
-          Navigator.pop(context)
-          //  setState(() {
-          //   // messageWidget.insert(0, messageWidget);
-          // })
+          // messagesList = getChat(),
+          // Navigator.pop(context)
+           setState(() {
+          })
         }
       });
 
@@ -190,6 +189,11 @@ class _ChatPageState extends State<ChatPage> {
     _textController.dispose();
     super.dispose();
   }
+
+  getChat() async{
+    return await getChatList(widget.chatId);
+  }
+
 }
 
 class ChatArguments {
