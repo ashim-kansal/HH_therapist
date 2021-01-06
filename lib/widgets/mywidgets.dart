@@ -596,12 +596,14 @@ OutlineInputBorder errorOutlineInputBorder() {
 class CustomAlertDialog extends StatelessWidget {
   final String title;
   final String content;
+  final VoidCallback onClick;
   final List<Widget> actions;
 
 
   CustomAlertDialog({
     this.title,
     this.content,
+    this.onClick,
     this.actions = const [],
   });
 
@@ -640,8 +642,13 @@ class CustomAlertDialog extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.topRight,
-                child:  Image.asset("assets/images/ic_close_red.png", height: 30, width: 30,)
-
+                child:  InkWell(
+                    onTap: (){
+                      Navigator.pop(context);
+                      onClick();
+                    },
+                    child:Image.asset("assets/images/ic_close_red.png", height: 30, width: 30,)
+                )
               )
 
             ],

@@ -4,6 +4,7 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/model/CommonModel.dart';
+import 'package:flutter_app/model/GetTokenResponse.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/NotificationList.dart';
@@ -160,6 +161,23 @@ print(token);
   return chatListFromJson(response.body);
 }
 
+Future<GetTokenResponse> getTwilioToken(roomName, identity) async {
+  var token = await GetStringToSP("token");
+  print(token);
+  final url = HHString.baseURL +"/api/v1/video/tokenGenerate";
+
+  final response = await http.post(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      },
+      body: jsonEncode({
+        "user": identity,
+        "room": roomName
+      }));
+
+  return getTokenResponseFromJson(response.body);
+}
 
 class InAppAPIServices {
   // submit journal

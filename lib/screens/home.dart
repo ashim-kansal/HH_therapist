@@ -8,6 +8,7 @@ import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
@@ -83,6 +84,7 @@ class HomePageState extends State<HomePage> {
               if(snapshot.hasError){
                 return HHTextView(title: "No Upcoming Sessions", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
               }
+
               return ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data.result.length,
@@ -90,14 +92,15 @@ class HomePageState extends State<HomePage> {
                   var _date = snapshot.data.result[index].date;
                   Moment createdDt = Moment.parse('$_date');
                   return SessionCard(name: snapshot.data.result[index].programName,
-                    id: snapshot.data.result[index].id,
                     data: snapshot.data.result[index],
-                    therapistId: snapshot.data.result[index].therapistId,
                     drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                     completed: index%2 == 0, onClick: (){
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
+                      onClickVideo:(){
+                          getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].patientId.id);
+                      },
                     onClickCancel: (){
                     setState(() {
 
@@ -121,4 +124,31 @@ class HomePageState extends State<HomePage> {
     )
     );
   }
+
+  void getToken(therapistId, patientId) {
+    String roomName = 'room_'+therapistId+'_'+patientId;
+    getTwilioToken(roomName, therapistId).then(
+            (value) => {
+
+          print(value.responseCode),
+
+          if (value.responseCode == 200) {
+            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt)),
+          }
+        });
+
+
+  }
+
 }
+
+
+class VideoPageArgument{
+
+  String token;
+  String roomName;
+  String identity;
+
+  VideoPageArgument(this.identity, this.roomName, this.token);
+}
+

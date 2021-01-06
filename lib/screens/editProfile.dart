@@ -91,7 +91,9 @@ class _CreateAccountState extends State<EditProfilePage> {
         child: MyWidget(
       title: 'Edit Profile',
         child: Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+            height: MediaQuery.of(context).size.height,
+
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(30.0),

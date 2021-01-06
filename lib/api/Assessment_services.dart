@@ -8,7 +8,7 @@ import 'package:flutter_app/model/SubmitAssessmentResponse.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
 
-String url = HHString.baseURL+"user";
+String url = HHString.baseURL+"therapist";
 
 Future<GetAssessmentResponse> getAllAssessments() async {
 
@@ -23,19 +23,17 @@ Future<GetAssessmentResponse> getAllAssessments() async {
 
 }
 
-
-
-Future<SubmitAssessmentResponse> submitAssessments(result) async {
+Future<SubmitAssessmentResponse> getAssessments(clientId) async {
   var token = await GetStringToSP("token");
-  print(json.encode(result));
+  print(url);
 
-  final response = await http.post(url+"/submit_AssessmentForm",
+  final response = await http.get(url+"/viewPatient_questionnaire?userId="+clientId,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         'token' : token
-      },
-    body:json.encode(result)
+      }
   );
+  print(clientId);
   print(response.body);
   return submitAssessmentResponseFromJson(response.body);
 

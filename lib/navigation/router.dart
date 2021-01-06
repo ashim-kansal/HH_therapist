@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
-import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/Notes.dart';
-import 'package:flutter_app/screens/aboutus.dart';
-import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/change_password.dart';
@@ -15,20 +12,21 @@ import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/drinking_diary.dart';
+import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/screens/feedback.dart';
+import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
+import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/screens/editProfile.dart';
-import 'package:flutter_app/screens/profile.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/screens/notification.dart';
-import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -50,14 +48,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Dashboard.RouteName:
       return MaterialPageRoute(builder: (context) => Dashboard());
     case TherapistPage.RouteName:
-      final ScreenArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => TherapistPage());
     case BookSessionPage.RouteName:
       final SessionArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => BookSessionPage(id: args.id, name: args.name, image: args.profilePic, role: args.type, sessionId: args.sessionId,));
-    case MyAssessmentPage.RouteName:
-      return MaterialPageRoute(builder: (context) => MyAssessmentPage());
-    case SessionPage.RouteName:
+   case SessionPage.RouteName:
       return MaterialPageRoute(builder: (context) => SessionPage());
     case ChatListPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatListPage());
@@ -86,8 +81,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final ChatArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => ChatPage(chatId: args.chatId, senderId: args.senderId));
     case VideoCallPage.RouteName:
-      final ChatArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => VideoCallPage());
+      final VideoPageArgument args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity,));
     case SessionDetails.RouteName:
       final SessionDetailsArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => SessionDetails(sessionId: args.data, patientId: args.patientId,));
@@ -95,11 +90,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       final NotesArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => NotesPage(patientId: args.data));
     case AssessmentFormPage.RouteName:
-      final ScreenArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => AssessmentFormPage(title: args.title, enable: args.completed?true:false,));
-    case AboutUs.RouteName:
-      final ScreenArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => AboutUs(title: args.title));
+      final AssessmentArguments args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => AssessmentFormPage(id: args.id));
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }
