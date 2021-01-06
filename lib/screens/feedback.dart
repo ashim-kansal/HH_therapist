@@ -59,6 +59,9 @@ class FeedbackPageState extends State<FeedbackPage> {
           builder: (BuildContext dialogContext) {
             return CustomAlertDialog(
               title: "We appreciate your feedback. Our team will have a look at it shortly.",
+                onClick: (){
+                  Navigator.pop(context);
+                }
             );
           },
         ),
@@ -98,6 +101,8 @@ class FeedbackPageState extends State<FeedbackPage> {
                   color: HH_Colors.color_707070,
                   title: "Please share your thoughts with us",
                   size: 16,
+                    textweight:FontWeight.w600
+
                 ),
                 SizedBox(
                   height: 10,

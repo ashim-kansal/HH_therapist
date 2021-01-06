@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/assessment.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/home.dart';
-import 'package:flutter_app/screens/library.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/settings.dart';
-import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 
 class Dashboard extends StatefulWidget {

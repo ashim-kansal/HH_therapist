@@ -72,7 +72,7 @@ class TharapistCell extends StatelessWidget {
               SizedBox(width: 10,),
               GestureDetector(
                 onTap: () {
-                    Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: ScreenArguments('Michigan alcohol Test', false));
+                    Navigator.pushNamed(context, AssessmentFormPage.RouteName, arguments: AssessmentArguments(patientid));
                 },
                 child: Image.asset('assets/images/ic_unknown.png',
                     width: 25.0, height: 25.0),

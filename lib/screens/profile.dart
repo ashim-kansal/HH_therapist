@@ -123,6 +123,7 @@ class _CreateAccountState extends State<ProfilePage> {
         body: Material(
           color: Theme.of(context).accentColor,
           child: Container(
+            height: MediaQuery.of(context).size.height,
               padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(

@@ -4,6 +4,7 @@ import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -13,115 +14,153 @@ import 'package:flutter_app/widgets/popup_window.dart';
 class SessionCard extends StatelessWidget {
   var name = "";
   var role = "";
-  Result data;
   var completed = false;
   var drname = "";
   var sdate = "";
-  var id = "";
-  var therapistId = "";
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
+  final VoidCallback onClickVideo;
+  Result data;
 
   SessionCard(
-      {@required this.name, @required this.role, @required this.data, @required this.id, @required this.therapistId, this.completed, this.onClickCancel, this.onClick, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 260,
+        width: MediaQuery.of(context).size.width*(2/3),
         child: Card(
-        elevation: 5,
             color: HH_Colors.color_F2EEEE,
             shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: InkWell(
-          onTap: (){
-            onClick();
-          },
-          child:  Container(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child:Column(
-              children: [
-                Row(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            child: InkWell(
+              onTap: (){
+                onClick();
+              },
+              child:  Container(
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child:Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                    // Image.asset('assets/images/ic_option_menu.png', width: 20, height: 20,)
-                    HHOptionButton(onClickCancel: (){
-                      showDialog(context: context,
-                        builder: (BuildContext dialogContext) {
-                          return CancelDialog(
-                              onYesPress: ()async {
-                                cancelSession(id).then(
-                                        (value) => {
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                        HHOptionButton(onClickCancel: (){
+                          showDialog(context: context,
+                            builder: (BuildContext dialogContext) {
+                              return CancelDialog(
+                                  onYesPress: ()async {
+                                    cancelSession(data.id).then(
+                                            (value) => {
 
-                                      print(value.responseCode),
-                                      if (value.responseCode == 200) {
-                                        Navigator.pop(context),
-                                        onClickCancel()
-                                        // Navigator.pushNamed(context, Dashboard.RouteName)
-                                      }
-                                    });
-                                // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                              },
-                              onDenyPress: (){
-                                Navigator.pop(context);
-                              }
+                                          print(value.responseCode),
+                                          if (value.responseCode == 200) {
+                                            Navigator.pop(context),
+                                            showToast(context, value.responseMessage),
+
+                                            onClickCancel()
+                                            // Navigator.pushNamed(context, Dashboard.RouteName)
+                                          }
+                                        });
+                                    // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                  },
+                                  onDenyPress: (){
+                                    Navigator.pop(context);
+                                  }
+                              );
+                            },
                           );
-                        },
-                      );
-                    }, onClickReSchedule: (){
-                      Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, name, role, "", id));
-                    },)
-                  ],
-                ),
-                SizedBox(height: 5,),
-                Row(
-                    children: [Text(name ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858)),
-                    ]),
-                Row(
-                    children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
-                    ]),
-                Row(
-                  children: [
-                    ButtonTheme(
-                      height: 35,
-                      minWidth: 35,
-                      child: RaisedButton(
+                        }, onClickReSchedule: (){
+                          Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                        },)
+                      ],
+                    ),
+                    // SizedBox(height: 5,),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        data.patientId.profilePic == ""?
+                        Image.asset(
+                          'assets/images/ic_avatar.png',
+                          height: 18,
+                          width: 18,
+                        ) : CircleAvatar(
+                          backgroundImage: NetworkImage(data.patientId.profilePic),
+                          radius: 18,
+                          // Image.network(profileImage,
+                          // height: 50,
+                          // width: 50,),
+                        ),
+                        SizedBox(width: 10,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
 
-                        color: Colors.white,
-                        child: Icon(Icons.chat
-                          , color: HH_Colors.primaryColor, size: 18,),
-                        onPressed: (){
-                          Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
-                        },
-                        shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                      ),
+                            Row(
+                                children: [
+
+                                  Text(name ,textAlign:TextAlign.start,
+                                      overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                                ]),
+                            Row(
+                                children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
+                                ]),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+
+                                ButtonTheme(
+                                  height: 40,
+                                  minWidth: 35,
+                                  child: RaisedButton(
+                                    color: Colors.white,
+                                    child: Icon(Icons.chat
+                                      , color: HH_Colors.primaryColor, size: 18,),
+                                    onPressed: (){
+                                      print('receiverId  : '+data.patientId.id);
+                                      Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
+                                    },
+                                    shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                                  ),
+                                ),
+
+                                ButtonTheme(
+                                    height: 40,
+                                    minWidth: 40,
+                                    child: RaisedButton(
+                                      color: Colors.white,
+                                      child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                                      onPressed: (){
+                                        onClickVideo();
+                                      },
+                                      shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                                    )),
+
+                              ],
+                            )
+
+                          ],
+                        )
+                      ],
                     ),
 
-                    ButtonTheme(
-                        height: 35,
-                        minWidth: 35,
-                        child: RaisedButton(
 
-                            color: Colors.white,
-                            child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                            onPressed: (){
-                              Navigator.pushNamed(context, VideoCallPage.RouteName);
-                            },
-                          shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
-                        )),
+
 
                   ],
-                )
-
-              ],
-            ),
-          ),
-        )
+                ),
+              ),
+            )
         ));
   }
+
+
+
+
 }
 
 class AssessmentQuestionCell extends StatelessWidget {
@@ -213,18 +252,17 @@ class _MyStatefulWidgetState extends State<MySingleChoiceQuesWidget> {
 
 class UpcomingSessionItem extends StatelessWidget {
   var name = "";
-  var id = "";
-  var therapistId = "";
   var role = "";
   var completed = false;
   var drname = "";
   var sdate = "";
-  var patientId = "";
+  Result data;
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
 
+
   UpcomingSessionItem(
-      {@required this.name,@required this.id, @required this.role, this.completed, this.onClick, this.drname, this.therapistId, this.sdate, this.onClickCancel, this.patientId});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -238,34 +276,54 @@ class UpcomingSessionItem extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
               child:
-              Row(           
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SessionDetails.RouteName,arguments: SessionDetailsArguments(id, patientId));
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(children: [
-                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858),),
-                        ]),
-                        Row(children: [
-                          Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                        ]),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      data.patientId.profilePic == ""?
+                      Image.asset(
+                        'assets/images/ic_avatar.png',
+                        height: 18,
+                        width: 18,
+                      ) : CircleAvatar(
+                        backgroundImage: NetworkImage(data.patientId.profilePic),
+                        radius: 18,
+                      ),
+
+                      SizedBox(width: 10,),
+
+                      Column(
+                        children: [
+                          Row(children: [
+                            Text(
+                              name,
+
+                              overflow: TextOverflow.ellipsis,
+                              style: new TextStyle(
+                                  fontSize: 16.0,
+                                  color: HH_Colors.grey_585858,
+                                  fontWeight: FontWeight.w600
+                              ),
+                            )
+
+                          ]),
+                          Row(children: [
+                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                          ]),
+                        ],
+                      )
+                    ],
                   ),
 
                   completed?
-                      Row(
-                        children: [
-                          Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
-                          Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
-                        ],
-                      )
+                  Row(
+                    children: [
+                      Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
+                      Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
+
+                    ],
+                  )
                       :
                   Row(
                     children: [
@@ -276,7 +334,7 @@ class UpcomingSessionItem extends StatelessWidget {
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
-                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(patientId, therapistId));
+                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
                           },
                           shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
 
@@ -288,44 +346,48 @@ class UpcomingSessionItem extends StatelessWidget {
                           minWidth: 35,
                           child: RaisedButton(
 
-                              color: Colors.white,
-                              child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                              onPressed: (){
-                                Navigator.pushNamed(context, ReviewPage.RouteName);
-                              },
+                            color: Colors.white,
+                            child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                            onPressed: (){
+                              Navigator.pushNamed(context, ReviewPage.RouteName);
+                            },
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){
-                        CancelDialog(
-                            onYesPress: ()async {
-                              cancelSession(id).then(
-                                      (value) => {
+                        showDialog(context: context,
+                          builder: (BuildContext dialogContext) {
+                            return CancelDialog(
+                                onYesPress: ()async {
+                                  cancelSession(data.id).then(
+                                          (value) => {
 
-                                    print(value.responseCode),
-                                    if (value.responseCode == 200) {
-                                      Navigator.pop(context),
-                                      onClickCancel()
-                                      // Navigator.pushNamed(context, Dashboard.RouteName)
-                                    }
-                                  });
-                              // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                            },
-                            onDenyPress: (){
-                              Navigator.pop(context);
-                            }
+                                        print(value.responseCode),
+                                        if (value.responseCode == 200) {
+                                          Navigator.pop(context),
+                                          showToast(context, value.responseMessage),
+                                          onClickCancel()
+                                          // Navigator.pushNamed(context, Dashboard.RouteName)
+                                        }
+                                      });
+                                  // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                },
+                                onDenyPress: (){
+                                  Navigator.pop(context);
+                                }
+                            );
+                          },
                         );
-                      },
-                      onClickReSchedule: (){
-                        Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: SessionArguments(therapistId, drname, role, "", id));
+                      }, onClickReSchedule: (){
+                        Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
                       },)
                     ],
                   )
                 ],
 
               ),
-            )
-          )
-        );
+
+
+            )));
   }
 }
 class SessionArguments {

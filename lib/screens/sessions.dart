@@ -88,12 +88,10 @@ class SessionPageState extends State<SessionPage>{
               Moment createdDt = Moment.parse('$_date');
               return UpcomingSessionItem(
                 name: snapshot.data.result[index].programName, 
-                id: snapshot.data.result[index].id,
-                therapistId: snapshot.data.result[index].therapistId,
+                data: snapshot.data.result[index],
                 drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                 sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
-                patientId: snapshot.data.result[index].patientId.id,
                 onClickCancel: () {
                   setState(() {
 
@@ -129,11 +127,9 @@ class SessionPageState extends State<SessionPage>{
             Moment createdDt = Moment.parse('$_date');
             return UpcomingSessionItem(
               name: snapshot.data.result[index].programName,
-              id: snapshot.data.result[index].id,
-              therapistId: snapshot.data.result[index].therapistId,
+              data: snapshot.data.result[index],
               drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
               sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
-              patientId: snapshot.data.result[index].patientId.id,
               role: '', onClick: (){}, completed: !isSwitched,);
           },
               separatorBuilder: (context, index) {
