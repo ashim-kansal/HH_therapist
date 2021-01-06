@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCQVnc-fzO-gdCAGVi5b4QRFfYRIJC_6R0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>930358040441</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.HatH.therapist</string>
+	<key>PROJECT_ID</key>
+	<string>healathome-41a42</string>
+	<key>STORAGE_BUCKET</key>
+	<string>healathome-41a42.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:930358040441:ios:7bc05a103b65e3dec4c1a8</string>
+	<key>DATABASE_URL</key>
+	<string>https://healathome-41a42-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

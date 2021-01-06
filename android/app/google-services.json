@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "930358040441",
+    "firebase_url": "https://healathome-41a42-default-rtdb.firebaseio.com",
+    "project_id": "healathome-41a42",
+    "storage_bucket": "healathome-41a42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930358040441:android:c34bc2a5f3e00a1cc4c1a8",
+        "android_client_info": {
+          "package_name": "com.HatH.patient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdoQ0YMuMLovtV1ATDGkA68Hva29oBeUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.HatH.therapist"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930358040441:android:001115a17b409628c4c1a8",
+        "android_client_info": {
+          "package_name": "com.HatH.therapist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdoQ0YMuMLovtV1ATDGkA68Hva29oBeUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.HatH.therapist"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
