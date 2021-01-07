@@ -279,7 +279,7 @@ class InAppAPIServices {
   Future<PatientAssesmentList> getPatientAssesments(patientId) async {
     var token = await GetStringToSP("token");
 
-    final url = HHString.baseURL +"patient_assessmentList?patientId="+patientId;
+    final url = HHString.baseURL +"therapist/patient_assessmentList?patientId="+patientId;
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
@@ -291,8 +291,8 @@ class InAppAPIServices {
   Future<GetDrinkingDiaryList> getDrinkingDiaryList(patientId) async {
     var token = await GetStringToSP("token");
 
-    final url = HHString.baseURL +"patient_assessmentList?patientId="+patientId;
-    final response = await http.post(url,
+    final url = HHString.baseURL +"therapist/drinkingDairy_details?userId="+patientId;
+    final response = await http.get(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           "token": token??HHString.token
@@ -304,7 +304,7 @@ class InAppAPIServices {
   Future<PatientAssesmentList> getPatientJournal(patientId) async {
     var token = await GetStringToSP("token");
 
-    final url = HHString.baseURL +"patient_journals_List?patientId="+patientId;
+    final url = HHString.baseURL +"therapist/patient_journals_List?patientId="+patientId;
     final response = await http.post(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
