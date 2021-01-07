@@ -7,6 +7,7 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Splash extends StatefulWidget{
 
@@ -22,6 +23,15 @@ class SplashState extends State<Splash>{
   String nameKey = "_key_name";
   String token;
 
+  String _message = '';
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  _register() {
+    _firebaseMessaging.getToken().then((fcmtoken) => print(fcmtoken));
+  }
+
+
   getToken() async{
     var userToken = await GetStringToSP("token");
 
@@ -35,6 +45,11 @@ class SplashState extends State<Splash>{
   @override
   void initState() {
     getToken();
+    
+    _register();
+
+    getMessage();
+
     super.initState();
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
@@ -49,7 +64,22 @@ class SplashState extends State<Splash>{
     checkIfUserLoggedIn();
   }
 
-  void checkIfUserLoggedIn () async {
+
+  void getMessage(){
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+      print('on message $message');
+      setState(() => _message = message["notification"]["title"]);
+    }, onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+      setState(() => _message = message["notification"]["title"]);
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+      setState(() => _message = message["notification"]["title"]);
+    });
+  }
+
+  void checkIfUserLoggedIn() async {
   
      Timer(Duration(seconds: 4),
       ()=>{

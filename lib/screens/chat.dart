@@ -95,57 +95,46 @@ class _ChatPageState extends State<ChatPage> {
                  
                   new Divider(height: 1.0),
                   new Container(
-                      decoration:
-                      new BoxDecoration(color: Theme.of(context).cardColor),
-                      child: new IconTheme(
-                          data: new IconThemeData(
-                              color: Theme.of(context).accentColor),
-                          child: new Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 2.0),
-                            child: new Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                //left send button
-                                new Flexible(
-                                  child: new TextField(
-                                    controller: _textController,
-                                    decoration: new InputDecoration.collapsed(
-                                        hintText: "Enter message"
+                    
+                      decoration: new BoxDecoration(color: Theme.of(context).cardColor),
+                      child: 
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child:  new IconTheme(
+                              data: new IconThemeData(color: Theme.of(context).accentColor),
+                              child: new Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 2.0),
+                                child: new Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    //left send button
+                                    new Flexible(
+                                      child: new TextField(
+                                        controller: _textController,
+                                        decoration: new InputDecoration.collapsed(
+                                            hintText: "Enter message"
+                                        ),
+                                      ),
                                     ),
-                                  ),
+
+                                    new Container(
+                                      child: new IconButton(
+                                          icon: Image.asset(
+                                              "assets/images/ic_chat_send.png"),
+                                          onPressed: () => _sendMsg(
+                                              _textController.text,
+                                              'right',
+                                              formattedDate)),
+                                    ),
+                                  ],
                                 ),
-
-                                new Container(
-
-                                  child: new IconButton(
-                                      icon: Image.asset(
-                                          "assets/images/ic_chat_send.png"),
-                                      onPressed: () => _sendMsg(
-                                          _textController.text,
-                                          'right',
-                                          formattedDate)),
-                                ),
-
-                                //Enter Text message here
-
-                                //right send button
-
-                                // new Container(
-                                //   margin:
-                                //   new EdgeInsets.symmetric(horizontal: 2.0),
-                                //   width: 48.0,
-                                //   height: 48.0,
-                                //   child: new IconButton(
-                                //       icon: Image.asset(
-                                //           "assets/images/send_out.png"),
-                                //       onPressed: () => _sendMsg(
-                                //           _textController.text,
-                                //           'right',
-                                //           formattedDate)),
-                                // ),
-                              ],
+                              )
                             ),
-                          ))),
+                            ),
+                          ),
+                        
+                      ),
                 ],
               ),
             )));
