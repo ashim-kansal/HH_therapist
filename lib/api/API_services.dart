@@ -4,6 +4,7 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/model/CommonModel.dart';
+import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
 import 'package:flutter_app/model/GetTokenResponse.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
@@ -285,6 +286,18 @@ class InAppAPIServices {
           "token": token??HHString.token
         },);
     return patientAssesmentListFromJson(response.body);
+  }
+
+  Future<GetDrinkingDiaryList> getDrinkingDiaryList(patientId) async {
+    var token = await GetStringToSP("token");
+
+    final url = HHString.baseURL +"patient_assessmentList?patientId="+patientId;
+    final response = await http.post(url,
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+          "token": token??HHString.token
+        },);
+    return getDrinkingDiaryListFromJson(response.body);
   }
 
    // fetch patient journal list

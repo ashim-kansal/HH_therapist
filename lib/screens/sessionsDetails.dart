@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
+import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
@@ -24,9 +26,13 @@ class SessionPageState extends State<SessionDetails>{
   bool isAssesments = false;
   bool isDiary = false;
   bool isJournling = false;
+  List<Diary.Result> graphData;
+  String label = '';
 
   Future assesmentList;
   Future journalList;
+  Future drinkingDiaryList;
+  int pos = 0;
 
   @override
   void initState() {
@@ -35,6 +41,7 @@ class SessionPageState extends State<SessionDetails>{
 
     assesmentList= inAppAPIServices.getPatientAssesments(widget.patientId);
     journalList= inAppAPIServices.getPatientJournal(widget.patientId);
+    drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
   }
 
   @override
@@ -105,45 +112,69 @@ class SessionPageState extends State<SessionDetails>{
                       Container(
                         color: HH_Colors.color_FBF4F4,
                         // height: MediaQuery.of(context).size.height / 3.7,
-                        child: Column( children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 10, left: 10, top: 10),
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: HH_Colors.primaryColor,
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0))
-                            ),
-                            padding: EdgeInsets.all(6),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(width: 10,),
-                                Icon(Icons.arrow_back_ios_rounded, color: Colors.white,),
-                                Text('20th Oct to 14th Nov', style: TextStyle(color: Colors.white),),
-                                Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
-                                SizedBox(width: 10,),
-                              ],
-                            ),
-                          ),
-                           Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
-                            child: DrinkingDiaryDateWidget()),
-                          SizedBox(height: 10,),
-                          Card(
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              height: MediaQuery.of(context).size.height/3,
-                              child: SimpleLineChart.withSampleData(),
-                            )
+                        child:
+                          FutureBuilder<Diary.GetDrinkingDiaryList>(
+                          future: drinkingDiaryList,
+                          builder: (context,snapshot){
+                            if(snapshot.connectionState == ConnectionState.done){
+                              if(snapshot.hasError){
+                                return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                              }
+                              graphData = getGraphData(snapshot.data.result, pos);
+                              label = getLabel(graphData);
 
-                          ),
-                        ]
-                        )
-                      ) : Container()
+                              // var item = snapshot.data.result;
+                              return Column( children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 10, left: 10, top: 10),
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                      color: HH_Colors.primaryColor,
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(5.0), topRight: Radius.circular(5.0))
+                                  ),
+                                  padding: EdgeInsets.all(6),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(width: 10,),
+                                      Icon(Icons.arrow_back_ios_rounded, color: Colors.white,),
+                                      Text('20th Oct to 14th Nov', style: TextStyle(color: Colors.white),),
+                                      Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
+                                      SizedBox(width: 10,),
+                                    ],
+                                  ),
+                                ),
+                                Container(height:50, margin: EdgeInsets.only(right: 10, left: 10),
+                                    child: DrinkingDiaryDateWidget(list: snapshot.data.result, onClickItem:(position){
+                                      setState(() {
+                                        pos = position;
+                                      });
+                                    })),
+                                SizedBox(height: 10,),
+                                Card(
+                                    elevation: 10,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      height: MediaQuery.of(context).size.height/3,
+                                      child: SimpleLineChart.withData(graphData),
+                                    )
+
+                                ),
+                              ]
+                              ) ;
+                            }else {
+                              return Container(
+                                child: Center(child: CircularProgressIndicator()),
+                              );
+                            }
+                          }
+                      )
+
+                ) : Container()
                   ],),
                 ),
                 SizedBox(height: 15),
@@ -278,6 +309,32 @@ class SessionPageState extends State<SessionDetails>{
       ),)
     ),
     );
+  }
+  List<Diary.Result> getGraphData(List<Diary.Result> result, int pos) {
+    List<Diary.Result> mList = new List();
+    if(result.length > pos){
+      if(result.length > pos+7){
+        mList.addAll(result.getRange(pos, pos+7));
+      }else{
+        mList.addAll(result.getRange(pos, result.length-1));
+      }
+    }
+    return mList;
+  }
+
+  String getLabel(List<Diary.Result> graphData) {
+    if(graphData.length > 0) {
+      String start = getDateLabel(graphData[0].date);
+      String end = getDateLabel(graphData[graphData.length - 1].date);
+      return end+" to "+start;
+    }
+
+    return  '';
+  }
+  String getDateLabel(mdate){
+    Moment date = Moment.parse(mdate.toString());
+    return date.format("dd MMM");
+
   }
 }
 

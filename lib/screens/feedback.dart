@@ -99,7 +99,7 @@ class FeedbackPageState extends State<FeedbackPage> {
               child: Column(children: [
                 HHTextView(
                   color: HH_Colors.color_707070,
-                  title: "Please share your thoughts with us",
+                  title: "Please use this form to connect us",
                   size: 16,
                     textweight:FontWeight.w600
 

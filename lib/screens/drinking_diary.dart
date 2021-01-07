@@ -70,7 +70,7 @@ class DrinkingDiaryPageState extends State<DrinkingDiaryPage>{
               child:             Container(
                 padding: EdgeInsets.all(10),
                 height: MediaQuery.of(context).size.height/3,
-                child: SimpleLineChart.withSampleData(),
+                child: SimpleLineChart.withData(null),
               )
 
             ),

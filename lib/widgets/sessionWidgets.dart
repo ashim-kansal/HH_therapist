@@ -102,11 +102,11 @@ class SessionCard extends StatelessWidget {
                             Row(
                                 children: [
 
-                                  Text(name ,textAlign:TextAlign.start,
-                                      overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                                  Text('Dr. '+drname ,textAlign:TextAlign.start,
+                                      overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
                             Row(
-                                children: [Text('Dr. '+drname ,textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070)),
+                                children: [Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -297,11 +297,11 @@ class UpcomingSessionItem extends StatelessWidget {
                         children: [
                           Row(children: [
                             Text(
-                              name,
+                              drname,
 
                               overflow: TextOverflow.ellipsis,
                               style: new TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 18.0,
                                   color: HH_Colors.grey_585858,
                                   fontWeight: FontWeight.w600
                               ),
@@ -309,7 +309,7 @@ class UpcomingSessionItem extends StatelessWidget {
 
                           ]),
                           Row(children: [
-                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
                           ]),
                         ],
                       )
