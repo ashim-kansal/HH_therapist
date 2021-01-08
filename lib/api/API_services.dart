@@ -149,6 +149,8 @@ Future<PatientNotesList> getPatientNotes(id) async {
 Future<ChatList> getChatList(chatId) async {
   var token = await GetStringToSP("token");
 print(token);
+print(chatId);
+
   final url = HHString.baseURL +"chat/chatHistory";
   final response = await http.post(url,
       headers: {
@@ -156,7 +158,7 @@ print(token);
         "token": token??HHString.token
       },
       body:  jsonEncode({
-      "chatId": chatId??""})
+      "receiverId": chatId??""})
       );
       print(response.body);
   return chatListFromJson(response.body);

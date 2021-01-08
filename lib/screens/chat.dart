@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async {
-    return await getChatList(widget.chatId);
+    return await getChatList(widget.senderId);
   }
 
   @override
