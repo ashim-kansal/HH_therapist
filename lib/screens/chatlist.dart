@@ -33,7 +33,7 @@ class _ChatListPageState extends State<ChatListPage> {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<ChatList>(
-        future: getChatList(null),
+        future: getChatList(null, null),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if(snapshot.hasError){
@@ -56,7 +56,7 @@ class _ChatListPageState extends State<ChatListPage> {
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
-                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.id, item.senderId.id));
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.senderId.id, item.receiverId.id));
                   },
                 );
               },

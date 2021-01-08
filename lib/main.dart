@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_app/app_localization.dart';
 
 import 'widgets/mywidgets.dart';
@@ -29,8 +29,8 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
         onGenerateRoute: router.generateRoute,
         initialRoute: Splash.RouteName,
         localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+          // GlobalMaterialLocalizations.delegate,
+          // GlobalWidgetsLocalizations.delegate,
           _localeOverrideDelegate
         ],
 

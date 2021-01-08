@@ -28,7 +28,10 @@ class SplashState extends State<Splash>{
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   _register() {
-    _firebaseMessaging.getToken().then((fcmtoken) => print(fcmtoken));
+    _firebaseMessaging.getToken().then((fcmtoken) => {
+      SetStringToSP("deviceToken", fcmtoken),
+      print(fcmtoken)
+    });
   }
 
 

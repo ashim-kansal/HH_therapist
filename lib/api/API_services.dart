@@ -146,7 +146,7 @@ Future<PatientNotesList> getPatientNotes(id) async {
 }
 
 // fetch chat listing
-Future<ChatList> getChatList(chatId) async {
+Future<ChatList> getChatList(chatId, senderid) async {
   var token = await GetStringToSP("token");
 print(token);
 print(chatId);
@@ -158,7 +158,10 @@ print(chatId);
         "token": token??HHString.token
       },
       body:  jsonEncode({
-      "receiverId": chatId??""})
+      // "chatId": chatId??"",
+      "chatId": "",
+      "receiverId": senderid??""
+      })
       );
       print(response.body);
   return chatListFromJson(response.body);
@@ -325,6 +328,8 @@ class InAppAPIServices {
           "receiverId": receiverId,
           "message": msg
         }));
+
+      print(response.body);
 
     if(response.statusCode == 200){
       return CommonResponse.fromJson(jsonDecode(response.body));
