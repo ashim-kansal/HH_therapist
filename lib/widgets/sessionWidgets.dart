@@ -40,46 +40,23 @@ class SessionCard extends StatelessWidget {
               },
               child:  Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10,),
+
                         Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                        HHOptionButton(onClickCancel: (){
-                          showDialog(context: context,
-                            builder: (BuildContext dialogContext) {
-                              return CancelDialog(
-                                  onYesPress: ()async {
-                                    cancelSession(data.id).then(
-                                            (value) => {
+                      SizedBox(height: 15,),
 
-                                          print(value.responseCode),
-                                          if (value.responseCode == 200) {
-                                            Navigator.pop(context),
-                                            showToast(context, value.responseMessage),
-
-                                            onClickCancel()
-                                            // Navigator.pushNamed(context, Dashboard.RouteName)
-                                          }
-                                        });
-                                    // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                                  },
-                                  onDenyPress: (){
-                                    Navigator.pop(context);
-                                  }
-                              );
-                            },
-                          );
-                        }, onClickReSchedule: (){
-                          Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
-                        },)
-                      ],
-                    ),
-                    // SizedBox(height: 5,),
+                      // SizedBox(height: 5,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         data.patientId.profilePic == ""?
                         Image.asset(
@@ -153,6 +130,35 @@ class SessionCard extends StatelessWidget {
 
                   ],
                 ),
+                  HHOptionButton(onClickCancel: (){
+                    showDialog(context: context,
+                      builder: (BuildContext dialogContext) {
+                        return CancelDialog(
+                            onYesPress: ()async {
+                              cancelSession(data.id).then(
+                                      (value) => {
+
+                                    print(value.responseCode),
+                                    if (value.responseCode == 200) {
+                                      Navigator.pop(context),
+                                      showToast(context, value.responseMessage),
+
+                                      onClickCancel()
+                                      // Navigator.pushNamed(context, Dashboard.RouteName)
+                                    }
+                                  });
+                              // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                            },
+                            onDenyPress: (){
+                              Navigator.pop(context);
+                            }
+                        );
+                      },
+                    );
+                  }, onClickReSchedule: (){
+                    Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                  },)
+                ]),
               ),
             )
         ));
