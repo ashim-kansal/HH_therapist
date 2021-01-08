@@ -102,11 +102,11 @@ class SessionCard extends StatelessWidget {
                             Row(
                                 children: [
 
-                                  Text('Dr. '+drname ,textAlign:TextAlign.start,
+                                  Text(drname ,textAlign:TextAlign.start,
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
                             Row(
-                                children: [Text('THERAPIST' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                                children: [Text('' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
