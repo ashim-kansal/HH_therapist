@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async {
-    return await getChatList(widget.chatId);
+    return await getChatList(widget.chatId, widget.senderId);
   }
 
   @override
@@ -66,10 +66,10 @@ class _ChatPageState extends State<ChatPage> {
                           return  Center(child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
                         }
                         var item = snapshot.data.result;
-                        return  new Flexible(
+                        return new Flexible(
                           child: new ListView.builder(
                             padding: new EdgeInsets.all(8.0),
-                            // reverse: true,
+                            reverse: true,
                             itemBuilder: (context, int index) {
                               receiverId = item[0].senderId.id;
                               // return ListView.builder(itemBuilder: (context, qindex){
@@ -77,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                               Moment createdDt = Moment.parse('$_date');
                               return MessageWidget(
                                 msg: item[0].message[index].message,
-                                direction: item[0].message[index].senderId == widget.senderId ? "left" : "right",
+                                direction: item[0].message[index].senderId != widget.senderId ? "left" : "right",
                                 dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                               );
                               // });
@@ -145,38 +145,36 @@ class _ChatPageState extends State<ChatPage> {
     var chatLists;
     if (msg.trim().length == 0) {
       return;
-      // Fluttertoast.showToast(
-      //     msg: "Please Enter Message",
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.BOTTOM,
-      //     timeInSecForIos: 1,
-      //     backgroundColor: Colors.blue);
-    } else {
+    } 
 
-      MessageWidget messageWidget = new MessageWidget(
-        msg: msg,
-        direction: messageDirection,
-        dateTime: date,
-      );
+    MessageWidget messageWidget = new MessageWidget(
+      msg: msg,
+      direction: messageDirection,
+      dateTime: date,
+    );
 
-      InAppAPIServices inAppAPIServices = new InAppAPIServices();
+    InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-      inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
-        if(value.responseCode == 200){
-          _textController.clear(),
-          // messagesList = getChat(),
-          // Navigator.pop(context)
-          chatLists = getChat(),
-          setState(() {
-            messagesList = getChat();
-          })
-        }
-      });
+    inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
 
-    }
+      print(receiverId),
+      print(msg),
+      if(value.responseCode == 200){
+        _textController.clear(),
+        // messagesList = getChat(),
+        // Navigator.pop(context)
+        // chatLists = getChat(),
+        // setState(() {
+        //   messagesList = getChata();
+        // })
+      }
+    });
   }
 
 
+  getChata() async {
+    return await getChatList(null, widget.senderId);
+  }
 
 
   @override
