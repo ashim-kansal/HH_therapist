@@ -69,10 +69,9 @@ class _ChatPageState extends State<ChatPage> {
                         return new Flexible(
                           child: new ListView.builder(
                             padding: new EdgeInsets.all(8.0),
-                            reverse: true,
+                            // reverse: true,
                             itemBuilder: (context, int index) {
                               receiverId = item[0].senderId.id;
-                              // return ListView.builder(itemBuilder: (context, qindex){
                               var _date = item[0].message[index].createdAt;
                               Moment createdDt = Moment.parse('$_date');
                               return MessageWidget(
@@ -80,7 +79,6 @@ class _ChatPageState extends State<ChatPage> {
                                 direction: item[0].message[index].senderId != widget.senderId ? "left" : "right",
                                 dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                               );
-                              // });
                             },
                             itemCount: item[0].message.length,
                           ),
@@ -162,7 +160,7 @@ class _ChatPageState extends State<ChatPage> {
       if(value.responseCode == 200){
         _textController.clear(),
         // messagesList = getChat(),
-        // Navigator.pop(context)
+        Navigator.pop(context),
         // chatLists = getChat(),
         // setState(() {
         //   messagesList = getChata();
