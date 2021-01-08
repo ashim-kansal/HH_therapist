@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/AppLocalizations.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
-import 'package:flutter_localizations/flutter_localizations.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'widgets/mywidgets.dart';
 
@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: [
           // ... app-specific localization delegate[s] here
           AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
+          // GlobalMaterialLocalizations.delegate,
+          // GlobalWidgetsLocalizations.delegate,
+          // GlobalCupertinoLocalizations.delegate,
         ],
 
         supportedLocales: [

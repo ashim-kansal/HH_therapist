@@ -14,7 +14,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput) async {
+  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String deviceToken) async {
     final url = HHString.baseURL +"therapist/login";
     
     final response = await http.post(url, 
@@ -22,7 +22,7 @@ class APIService {
       body: jsonEncode(<String, String>{
         "email": emailInput,
         "password": passwordInput,
-        "deviceToken": "test"
+        "deviceToken": deviceToken
       })
     );
     

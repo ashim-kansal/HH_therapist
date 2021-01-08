@@ -25,8 +25,8 @@ dependencies:
   flutter_slidable:
   flutter:
     sdk: flutter
-  flutter_localizations: # Add this line
-    sdk: flutter
+  # flutter_localizations: # Add this line
+  #   sdk: flutter
 
   firebase_core: ^0.5.3
   firebase_messaging: ^7.0.3
