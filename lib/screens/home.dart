@@ -132,7 +132,7 @@ class HomePageState extends State<HomePage> {
 
           print(value.responseCode),
 
-          if (value.responseCode == 200) {
+          if (value.responseCode == "200") {
             Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt)),
           }
         });

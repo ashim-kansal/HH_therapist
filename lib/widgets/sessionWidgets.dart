@@ -106,7 +106,7 @@ class SessionCard extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
                             Row(
-                                children: [Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070)),
+                                children: [Text('THERAPIST' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +116,7 @@ class SessionCard extends StatelessWidget {
                                 ButtonTheme(
                                   height: 40,
                                   minWidth: 35,
-                                  child: RaisedButton(
+                                  child: FlatButton(
                                     color: Colors.white,
                                     child: Icon(Icons.chat
                                       , color: HH_Colors.primaryColor, size: 18,),
@@ -124,20 +124,20 @@ class SessionCard extends StatelessWidget {
                                       print('receiverId  : '+data.patientId.id);
                                       Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
                                     },
-                                    shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                                    shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                                   ),
                                 ),
 
                                 ButtonTheme(
                                     height: 40,
                                     minWidth: 40,
-                                    child: RaisedButton(
+                                    child: FlatButton(
                                       color: Colors.white,
                                       child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                                       onPressed: (){
                                         onClickVideo();
                                       },
-                                      shape: CircleBorder(                            side: BorderSide(color: HH_Colors.primaryColor)),
+                                      shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                                     )),
 
                               ],
@@ -330,13 +330,13 @@ class UpcomingSessionItem extends StatelessWidget {
                       ButtonTheme(
                         height: 35,
                         minWidth: 35,
-                        child: RaisedButton(
+                        child: FlatButton(
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id, data.therapistId));
                           },
-                          shape: CircleBorder( side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                          shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
 
                         ),
                       ),
@@ -344,14 +344,14 @@ class UpcomingSessionItem extends StatelessWidget {
                       ButtonTheme(
                           height: 35,
                           minWidth: 35,
-                          child: RaisedButton(
+                          child: FlatButton(
 
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
                               Navigator.pushNamed(context, ReviewPage.RouteName);
                             },
-                            shape: CircleBorder(side: BorderSide(color: HH_Colors.primaryColor, width: 1)),
+                            shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                           )),
                       HHOptionButton(onClickCancel: (){
                         showDialog(context: context,
