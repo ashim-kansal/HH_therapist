@@ -95,11 +95,7 @@ class _ChatPageState extends State<ChatPage> {
                   new Container(
                     
                       decoration: new BoxDecoration(color: Theme.of(context).cardColor),
-                      child: 
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child:  new IconTheme(
+                      child: new IconTheme(
                               data: new IconThemeData(color: Theme.of(context).accentColor),
                               child: new Container(
                                 margin: const EdgeInsets.symmetric(horizontal: 2.0),
@@ -129,8 +125,6 @@ class _ChatPageState extends State<ChatPage> {
                                 ),
                               )
                             ),
-                            ),
-                          ),
                         
                       ),
                 ],
