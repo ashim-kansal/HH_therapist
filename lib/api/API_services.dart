@@ -165,18 +165,15 @@ print(token);
 Future<GetTokenResponse> getTwilioToken(roomName, identity) async {
   var token = await GetStringToSP("token");
   print(token);
-  final url = HHString.baseURL +"/api/v1/video/tokenGenerate";
-
-  final response = await http.post(url,
+  final url = HHString.baseURL +"/video/tokenGenerate?user="+identity+"&room="+roomName;
+  print(roomName);
+  print(identity);
+  final response = await http.get(url,
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
         "token": token
-      },
-      body: jsonEncode({
-        "user": identity,
-        "room": roomName
-      }));
-
+      });
+print(response.body);
   return getTokenResponseFromJson(response.body);
 }
 

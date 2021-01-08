@@ -1,0 +1,19 @@
+{
+  "@@locale": "es",
+  "@@last_modified": "2021-01-08T07:07:11.879537",
+    "Hey World": "Hey World",
+    "@Hey World": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "abc": "abc",
+    "@abc": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "Heal@Home Programs": "Heal@Home Programs",
+    "@Heal@Home Programs": {
+      "type": "text",
+      "placeholders": {}
+    }
+  }

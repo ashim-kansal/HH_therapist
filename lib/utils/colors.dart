@@ -5,8 +5,10 @@ class HH_Colors{
   static const grey_707070 =  Color(0xFF707070);
   static const grey_585858 =  Color(0xFF585858);
   static const grey_F2F2F2 =  Color(0xFFF2F2F2);
+  static const grey_cccccc =  Color(0xFFCCCCCC);
   static const green_3DDB8C = Color(0xFF3DDB8C);
   static const grey_35444D =  Color(0xFF35444D);
+  static const color_EEDDDD =  Color(0xFFEEDDDD);
   static const grey_3d3d3d =  Color(0xFF3D3D3D);
   static const primaryColor= Color(0xffff8a73);
   static const color_CBCEFC= Color(0xffCBCEFC);

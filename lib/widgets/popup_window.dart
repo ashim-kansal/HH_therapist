@@ -44,17 +44,17 @@ class HHOptionButton extends StatelessWidget{
     return
       Container(
           padding: const EdgeInsets.all(0.0),
-          width: 20,
+          width: 25,
           height: 40,
           //   height: 35,// you can adjust the width as you need
           child: PopupMenuButton<String>(
               offset: Offset(40,40),
+              icon: Icon(Icons.more_vert, color: HH_Colors.grey_cccccc,),
 
               onSelected: (String value) {
                 print("You selected $value");
               },
               // captureInheritedThemes: false,
-              icon: Image.asset('assets/images/dot.png', height: 60,),
               itemBuilder: (BuildContext context) {
                 return [
                   new PopupMenuWidget(
