@@ -193,6 +193,8 @@ class HHEditText extends StatefulWidget {
   var enabled = true;
   // var controller = null;
   var inputType = TextInputType.text;
+  final ValueChanged<String> onSelectAnswer;
+  var textarea = false;
 
   
   HHEditText(
@@ -205,7 +207,9 @@ class HHEditText extends StatefulWidget {
       this.inputType,
       this.controller,
       this.onClickEye,
+      this.textarea,
       this.enabled,
+      this.onSelectAnswer,
       this.showeye})
       : super(key: key);
 
@@ -234,6 +238,9 @@ class HHEditTextState extends State<HHEditText> {
       controller: widget.controller,
       minLines: widget.minLines?? 1,
       maxLines: widget.minLines?? 1,
+      onChanged: (text) {
+        if (widget.onSelectAnswer != null) widget.onSelectAnswer(text);
+      },
       decoration: InputDecoration(
         counterText: '',
           hintStyle: TextStyle(fontFamily: "ProximaNova", fontSize: 15, color: Color(0xff707070)),
