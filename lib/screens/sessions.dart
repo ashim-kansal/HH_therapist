@@ -80,16 +80,6 @@ class SessionPageState extends State<SessionPage>{
   }
   onSearchTextChanged(String text) async {
     searchText = text;
-    // if (text.isEmpty) {
-    //   setState(() {searchText = "";});
-    //   return;
-    // }
-
-    // .forEach((userDetail) {
-    //   if (userDetail.firstName.contains(text) || userDetail.lastName.contains(text))
-    //     _searchResult.add(userDetail);
-    // });
-
     setState(() {});
   }
 
