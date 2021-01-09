@@ -58,48 +58,44 @@ class _ChatPageState extends State<ChatPage> {
               child: new Column(
                 children: <Widget>[
                   //Chat list
-                  Expanded(child: FutureBuilder(
-                    future: messagesList,
-                    builder: (context, snapshot){
-                      if(snapshot.connectionState == ConnectionState.done){
-                        if(snapshot.hasError){
-                          return  Center(child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
+                  FutureBuilder(
+                      future: messagesList,
+                      builder: (context, snapshot){
+                        if(snapshot.connectionState == ConnectionState.done){
+                          if(snapshot.hasError){
+                            return  Center(child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
+                          }
+                          var item = snapshot.data.result;
+                          return new Flexible(
+                            child: new ListView.builder(
+                              padding: new EdgeInsets.all(8.0),
+                              // reverse: true,
+                              itemBuilder: (context, int index) {
+                                receiverId = item[0].senderId.id;
+                                var _date = item[0].message[index].createdAt;
+                                Moment createdDt = Moment.parse('$_date');
+                                return MessageWidget(
+                                  msg: item[0].message[index].message,
+                                  direction: item[0].message[index].senderId != widget.senderId ? "left" : "right",
+                                  dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
+                                );
+                              },
+                              itemCount: item[0].message.length,
+                            ),
+                          );
+                        }else {
+                          return Container(
+                            child: Center(child: CircularProgressIndicator()),
+                          );
                         }
-                        var item = snapshot.data.result;
-                        return new Flexible(
-                          child: new ListView.builder(
-                            padding: new EdgeInsets.all(8.0),
-                            // reverse: true,
-                            itemBuilder: (context, int index) {
-                              receiverId = item[0].senderId.id;
-                              var _date = item[0].message[index].createdAt;
-                              Moment createdDt = Moment.parse('$_date');
-                              return MessageWidget(
-                                msg: item[0].message[index].message,
-                                direction: item[0].message[index].senderId != widget.senderId ? "left" : "right",
-                                dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
-                              );
-                            },
-                            itemCount: item[0].message.length,
-                          ),
-                        );
-                      }else {
-                        return Container(
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      }
-                    },
-                  )),
+                      },
+                    ),
                  
                   new Divider(height: 1.0),
                   new Container(
                     
                       decoration: new BoxDecoration(color: Theme.of(context).cardColor),
-                      child: 
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child:  new IconTheme(
+                      child: new IconTheme(
                               data: new IconThemeData(color: Theme.of(context).accentColor),
                               child: new Container(
                                 margin: const EdgeInsets.symmetric(horizontal: 2.0),
@@ -129,8 +125,6 @@ class _ChatPageState extends State<ChatPage> {
                                 ),
                               )
                             ),
-                            ),
-                          ),
                         
                       ),
                 ],
@@ -160,11 +154,11 @@ class _ChatPageState extends State<ChatPage> {
       if(value.responseCode == 200){
         _textController.clear(),
         // messagesList = getChat(),
-        Navigator.pop(context),
+        // Navigator.pop(context),
         // chatLists = getChat(),
-        // setState(() {
-        //   messagesList = getChata();
-        // })
+        setState(() {
+          messagesList = getChata();
+        })
       }
     });
   }

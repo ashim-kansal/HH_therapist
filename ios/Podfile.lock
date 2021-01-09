@@ -93,6 +93,7 @@ PODS:
     - Flutter
     - TwilioVideo (~> 3.7)
   - TwilioVideo (3.8.0)
+  - TwilioVoice (6.1.0)
   - wakelock (0.0.1):
     - Flutter
 
@@ -114,6 +115,8 @@ DEPENDENCIES:
   - "shared_preferences_windows (from `Pods/.symlinks/plugins/shared_preferences_windows-0.0.1+3/ios`)"
   - twilio_programmable_video
   - "twilio_programmable_video (from `Pods/.symlinks/plugins/twilio_programmable_video-0.6.3+1/ios`)"
+  - TwilioVideo (~> 3.7)
+  - TwilioVoice (~> 6.1.0)
   - "wakelock (from `Pods/.symlinks/plugins/wakelock-0.1.4+2/ios`)"
 
 SPEC REPOS:
@@ -131,6 +134,7 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - TwilioVideo
+    - TwilioVoice
 
 EXTERNAL SOURCES:
   firebase_core:
@@ -201,8 +205,9 @@ SPEC CHECKSUMS:
   shared_preferences_windows: 36b76d6f54e76ead957e60b49e2f124b4cd3e6ae
   twilio_programmable_video: 2403026c377fe03dab878f74ad62e1ba8012f198
   TwilioVideo: c13a51ceca375e91620eb7578d2573c90cf53b46
+  TwilioVoice: 1e83d3417edbd6f0487ebe0dcc5d9cd9184a0d64
   wakelock: 0d4a70faf8950410735e3f61fb15d517c8a6efc4
 
-PODFILE CHECKSUM: 2022aa61031b9ae1f1eb7836c3044adc4bd16043
+PODFILE CHECKSUM: be271d2c1b7ef82dd23449a6cf11eb16b2b885ac
 
 COCOAPODS: 1.10.0

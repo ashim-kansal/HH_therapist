@@ -50,10 +50,12 @@ class APIService {
     
     var res = json.decode(response.body);
 
+    print(res);
+
     if(response.statusCode == 200){
-      if(res["responseCode"] == 200){
+      // if(res["responseCode"] == 200){
         return ForgotPasswordModel.fromJson(json.decode(response.body));
-      }
+      // }
     }else {
       throw Exception('Failed to load data!');
     }

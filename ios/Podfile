@@ -39,6 +39,8 @@ target 'Runner' do
 
   $FirebaseSDKVersion = '6.33.0'
   pod 'Firebase/Messaging'
+  pod 'TwilioVoice', '~> 6.1.0'
+  pod 'TwilioVideo', '~> 3.7'
 
   pod 'FirebaseFirestore', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '6.26.0'
 
