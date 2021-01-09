@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/twilio/conference/conference_button_bar.dart';
 import 'package:flutter_app/twilio/conference/conference_room.dart';
-import 'package:flutter_app/twilio/conference/draggable_publisher.dart';
 import 'package:flutter_app/twilio/conference/participant_widget.dart';
 import 'package:flutter_app/twilio/debug.dart';
 import 'package:flutter_app/twilio/widget/noise_box.dart';
 import 'package:flutter_app/twilio/widget/platform_alert_dialog.dart';
 import 'package:wakelock/wakelock.dart';
+
+import 'draggable_publisher.dart';
 
 
 class VideoCallPage extends StatefulWidget {
@@ -19,7 +20,7 @@ class VideoCallPage extends StatefulWidget {
   String token='';
   String identity='';
 
-  VideoCallPage({Key key, this.token, this.identity, this.roomName}) : super(key: key);
+  VideoCallPage({this.token, this.identity, this.roomName});
 
   @override
   _ConferencePageState createState() => _ConferencePageState();
@@ -35,8 +36,8 @@ class _ConferencePageState extends State<VideoCallPage> {
   void initState() {
     super.initState();
     // widget.roomName = "abc";
-    // widget.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyLTE2MDk3ODg0NjIiLCJpc3MiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyIiwic3ViIjoiQUMxODA1YTNlYzQ0ZGNiZmQyZGEyYjRhYzkzMWEzNjdiMyIsImV4cCI6MTYwOTc5MjA2MiwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidGhlcmFwaXN0IiwidmlkZW8iOnsicm9vbSI6ImFiYyJ9fX0.RC-YZt72gYf1QaJvVAQL6PZtyVw7YxiI_0P3qAiVQk4";
-    // widget.identity = "therapist";
+    // widget.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIn0.eyJqdGkiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyLTE2MDk3ODc5NDUiLCJpc3MiOiJTS2Q2ODNhYzhkNDk1ZDY4MjZhYjZlYWEwMmM4ZTBiNDkyIiwic3ViIjoiQUMxODA1YTNlYzQ0ZGNiZmQyZGEyYjRhYzkzMWEzNjdiMyIsImV4cCI6MTYwOTc5MTU0NSwiZ3JhbnRzIjp7ImlkZW50aXR5IjoidXNlciIsInZpZGVvIjp7InJvb20iOiJhYmMifX19.dOBZ9j6Kffw4G7e46kuanhg0jtCJOciokcIOnXIQY2o";
+    // widget.identity = "user";
     _lockInPortrait();
     _connectToRoom();
     _wakeLock(true);
@@ -130,8 +131,6 @@ class _ConferencePageState extends State<VideoCallPage> {
               onHangup: _onHangup,
               onSwitchCamera: _conferenceRoom.switchCamera,
               toggleFlashlight: _conferenceRoom.toggleFlashlight,
-              onPersonAdd: _onPersonAdd,
-              onPersonRemove: _onPersonRemove,
               onHeight: _onHeightBar,
               onShow: _onShowBar,
               onHide: _onHideBar,
@@ -272,13 +271,13 @@ class _ConferencePageState extends State<VideoCallPage> {
   }
 
   void _buildLayoutInGrid(
-    BuildContext context,
-    Size size,
-    List<Widget> children, {
-    bool removeLocalBeforeChunking = false,
-    bool moveLastOfEachRowToNextRow = false,
-    int columns = 2,
-  }) {
+      BuildContext context,
+      Size size,
+      List<Widget> children, {
+        bool removeLocalBeforeChunking = false,
+        bool moveLastOfEachRowToNextRow = false,
+        int columns = 2,
+      }) {
     final participants = _conferenceRoom.participants;
     ParticipantWidget localParticipant;
     if (removeLocalBeforeChunking) {

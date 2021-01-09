@@ -117,9 +117,9 @@ class _ConferenceButtonBarState extends State<ConferenceButtonBar> with AfterLay
     super.initState();
     _timer = startTimeout();
     _subscriptions.add(widget.flashState.listen((event) => setState(() {
-          hasFlash = event['hasFlash'];
-          flashEnabled = event['flashEnabled'];
-        })));
+      hasFlash = event['hasFlash'];
+      flashEnabled = event['flashEnabled'];
+    })));
   }
 
   @override
@@ -242,12 +242,6 @@ class _ConferenceButtonBarState extends State<ConferenceButtonBar> with AfterLay
             child: const Icon(Icons.switch_camera, color: Colors.white),
             key: Key('switch-camera-button'),
             onPressed: () => _onPressed(widget.onSwitchCamera),
-          ),
-          CircleButton(
-            child: const Icon(Icons.person_add, color: Colors.white),
-            key: Key('add-person-button'),
-            onPressed: () => _onPressed(widget.onPersonAdd),
-            onLongPress: () => _onPressed(widget.onPersonRemove),
           ),
           if (hasFlash)
             CircleButton(

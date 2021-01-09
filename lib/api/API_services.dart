@@ -13,6 +13,7 @@ import 'package:flutter_app/model/OldJournalingLisrModel.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/PatientNotesList.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
+import 'package:flutter_app/model/ReviewResponse.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
@@ -181,6 +182,30 @@ Future<GetTokenResponse> getTwilioToken(roomName, identity) async {
 print(response.body);
   return getTokenResponseFromJson(response.body);
 }
+Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
+  var token = await GetStringToSP("token");
+  print(token);
+  print(sessionId);
+  print(comments);
+  final url = HHString.baseURL +"therapist/feedback";
+  print(url);
+  final response = await http.post(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      },
+      body:  jsonEncode({
+        "sessionId": sessionId,
+        "feedback": comments,
+        "rating": 1,
+      })
+  );
+
+  print(response.body);
+  return reviewResponseFromJson(response.body);
+}
+
+
 
 class InAppAPIServices {
   // submit journal
