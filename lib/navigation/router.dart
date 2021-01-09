@@ -11,11 +11,9 @@ import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/dashboard.dart';
-import 'package:flutter_app/screens/drinking_diary.dart';
 import 'package:flutter_app/screens/editProfile.dart';
 import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/home.dart';
-import 'package:flutter_app/screens/journal.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/notification.dart';
 import 'package:flutter_app/screens/profile.dart';
@@ -43,8 +41,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => OtpPage());
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
-    case DrinkingDiaryPage.RouteName:
-      return MaterialPageRoute(builder: (context) => DrinkingDiaryPage());
     case Dashboard.RouteName:
       return MaterialPageRoute(builder: (context) => Dashboard());
     case TherapistPage.RouteName:
@@ -56,8 +52,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SessionPage());
     case ChatListPage.RouteName:
       return MaterialPageRoute(builder: (context) => ChatListPage());
-    case JournalPage.RouteName:
-      return MaterialPageRoute(builder: (context) => JournalPage());
     case EditProfilePage.RouteName:
       final ProfileArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => EditProfilePage(data: args.data));

@@ -1,13 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
-import 'package:flutter_app/goals.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/screens/notification.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';

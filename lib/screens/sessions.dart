@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -20,6 +22,7 @@ class SessionPage extends StatefulWidget{
 
 class SessionPageState extends State<SessionPage>{
   bool isSwitched = true;
+  String searchText = "";
 
   //show Toast
   showToast(String message){
@@ -37,7 +40,10 @@ class SessionPageState extends State<SessionPage>{
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Card(
-            child: TextField(decoration: InputDecoration(
+            child: TextField(
+              onChanged: onSearchTextChanged,
+
+              decoration: InputDecoration(
               hintText: 'Search',
               contentPadding: EdgeInsets.all(10),
 
@@ -72,6 +78,20 @@ class SessionPageState extends State<SessionPage>{
     ),
     );
   }
+  onSearchTextChanged(String text) async {
+    searchText = text;
+    // if (text.isEmpty) {
+    //   setState(() {searchText = "";});
+    //   return;
+    // }
+
+    // .forEach((userDetail) {
+    //   if (userDetail.firstName.contains(text) || userDetail.lastName.contains(text))
+    //     _searchResult.add(userDetail);
+    // });
+
+    setState(() {});
+  }
 
   Widget getUpcomingList(){
     return FutureBuilder<UpcomingSession>(
@@ -79,19 +99,38 @@ class SessionPageState extends State<SessionPage>{
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+              return HHTextView(title: "No Record Found",
+                size: 18,
+                color: HH_Colors.purpleColor,
+                textweight: FontWeight.w600,);
+            }
+            List<Result> mList = snapshot.data.result;
+            List<Result> searchList = List();
+
+            if (searchText.length == 0){
+              searchList.clear();
+              searchList.addAll(mList);
+            }else {
+              searchList.clear();
+              for (Result res in mList) {
+                if (res.patientId.firstName.toLowerCase().contains(searchText.toLowerCase()))
+                  searchList.add(res);
+              }
             }
             return ListView.separated(
-              itemCount: snapshot.data.result.length,
+              itemCount: searchList.length,
               itemBuilder: (context, index){
-              var _date = snapshot.data.result[index].createdAt;
+              var _date = searchList[index].createdAt;
               Moment createdDt = Moment.parse('$_date');
               return UpcomingSessionItem(
-                name: snapshot.data.result[index].programName, 
-                data: snapshot.data.result[index],
-                drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
-                sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
+                name: searchList[index].programName,
+                data: searchList[index],
+                drname: searchList[index].patientId.firstName+" "+searchList[index].patientId.lastName,
+                sdate: createdDt.format("dd MMM, yyyy")+' '+searchList[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
+                  onClickVideo: (){
+                    getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].id);
+                  },
                 onClickCancel: () {
                   setState(() {
 
@@ -120,15 +159,28 @@ class SessionPageState extends State<SessionPage>{
           if (snapshot.hasError) {
             return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
           }
+          List<Result> mList = snapshot.data.result;
+          List<Result> searchList = List();
+
+          if (searchText.length == 0){
+            searchList.clear();
+            searchList.addAll(mList);
+          }else {
+            searchList.clear();
+            for (Result res in mList) {
+              if (res.patientId.firstName.toLowerCase().contains(searchText.toLowerCase()))
+                searchList.add(res);
+            }
+          }
           return ListView.separated(
-            itemCount: snapshot.data.result.length,
+            itemCount: searchList.length,
             itemBuilder: (context, index){
-            var _date = snapshot.data.result[index].createdAt;
+            var _date = searchList[index].createdAt;
             Moment createdDt = Moment.parse('$_date');
             return UpcomingSessionItem(
-              name: snapshot.data.result[index].programName,
-              data: snapshot.data.result[index],
-              drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
+              name: searchList[index].programName,
+              data: searchList[index],
+              drname: searchList[index].patientId.firstName+" "+searchList[index].patientId.lastName,
               sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
               role: '', onClick: (){}, completed: !isSwitched,);
           },
@@ -142,6 +194,21 @@ class SessionPageState extends State<SessionPage>{
             child: Center(child: CircularProgressIndicator(),),
           );
       });
+  }
+
+  void getToken(therapistId, sessionId) {
+    String roomName = 'room_'+sessionId;
+    getTwilioToken(roomName, therapistId).then(
+            (value) => {
+
+          print(value.responseCode),
+
+          if (value.responseCode == "200") {
+            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt)),
+          }
+        });
+
+
   }
 
 }

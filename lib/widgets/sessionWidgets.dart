@@ -265,10 +265,11 @@ class UpcomingSessionItem extends StatelessWidget {
   Result data;
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
+  final VoidCallback onClickVideo;
 
 
   UpcomingSessionItem(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.drname, this.sdate, this.onClickCancel});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClickVideo, this.onClick, this.drname, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -355,7 +356,8 @@ class UpcomingSessionItem extends StatelessWidget {
                             color: Colors.white,
                             child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
                             onPressed: (){
-                              Navigator.pushNamed(context, ReviewPage.RouteName);
+                              // Navigator.pushNamed(context, ReviewPage.RouteName);
+                              onClickVideo();
                             },
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                           )),
