@@ -437,8 +437,10 @@ class AddFileCard extends StatelessWidget {
   var title;
   double size;
   var color;
+  var filename;
+  final VoidCallback selectDoc;
 
-  AddFileCard({@required this.title, @required this.size, @required this.color});
+  AddFileCard({@required this.title, @required this.size, this.color, this.selectDoc, this.filename});
 
   @override
   Widget build(BuildContext context) {
@@ -450,10 +452,16 @@ class AddFileCard extends StatelessWidget {
       ),
       child: Container(
         padding: EdgeInsets.fromLTRB(15, 5, 14, 8),
-        child: Center(child:  Column(children: [
-          Image.asset('assets/images/fileadd.png', height: 80 ,width: 50,),
-          Text(title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 14))
-        ],)
+        child: Center(child: new GestureDetector(
+          onTap: (){
+            selectDoc();
+          },
+          child:  Column(children: [
+            Image.asset('assets/images/fileadd.png', height: 80 ,width: 50,),
+            Text(filename??title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 14))
+          ],
+        ),
+        )
        ),
       ),
     );

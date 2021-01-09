@@ -280,46 +280,51 @@ class UpcomingSessionItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15.0),
             ),
             child: Container(
-              padding: EdgeInsets.fromLTRB(18, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(10, 10, 1, 10),
               child:
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      data.patientId.profilePic == ""?
-                      Image.asset(
-                        'assets/images/ic_avatar.png',
-                        height: 18,
-                        width: 18,
-                      ) : CircleAvatar(
-                        backgroundImage: NetworkImage(data.patientId.profilePic),
-                        radius: 18,
-                      ),
+                  new GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data.id, data.patientId.id));
+                    },
+                    child: Row(
+                      children: [
+                        data.patientId.profilePic == ""?
+                        Image.asset(
+                          'assets/images/ic_avatar.png',
+                          height: 18,
+                          width: 18,
+                        ) : CircleAvatar(
+                          backgroundImage: NetworkImage(data.patientId.profilePic),
+                          radius: 18,
+                        ),
 
-                      SizedBox(width: 10,),
+                        SizedBox(width: 10,),
 
-                      Column(
-                        children: [
-                          Row(children: [
-                            Text(
-                              drname,
+                        Column(
+                          children: [
+                            Row(children: [
+                              Text(
+                                drname,
 
-                              overflow: TextOverflow.ellipsis,
-                              style: new TextStyle(
-                                  fontSize: 18.0,
-                                  color: HH_Colors.grey_585858,
-                                  fontWeight: FontWeight.w600
-                              ),
-                            )
+                                overflow: TextOverflow.ellipsis,
+                                style: new TextStyle(
+                                    fontSize: 18.0,
+                                    color: HH_Colors.grey_585858,
+                                    fontWeight: FontWeight.w600
+                                ),
+                              )
 
-                          ]),
-                          Row(children: [
-                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
-                          ]),
-                        ],
-                      )
-                    ],
+                            ]),
+                            Row(children: [
+                              Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
+                            ]),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
 
                   completed?
@@ -335,7 +340,7 @@ class UpcomingSessionItem extends StatelessWidget {
                     children: [
                       ButtonTheme(
                         height: 35,
-                        minWidth: 35,
+                        minWidth: 25,
                         child: FlatButton(
                           color: Colors.white,
                           child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
@@ -349,7 +354,7 @@ class UpcomingSessionItem extends StatelessWidget {
 
                       ButtonTheme(
                           height: 35,
-                          minWidth: 35,
+                          minWidth: 25,
                           child: FlatButton(
 
                             color: Colors.white,
@@ -358,7 +363,8 @@ class UpcomingSessionItem extends StatelessWidget {
                               Navigator.pushNamed(context, ReviewPage.RouteName);
                             },
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
-                          )),
+                          )
+                        ),
                       HHOptionButton(onClickCancel: (){
                         showDialog(context: context,
                           builder: (BuildContext dialogContext) {

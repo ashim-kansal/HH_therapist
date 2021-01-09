@@ -285,7 +285,12 @@ class InAppAPIServices {
           HttpHeaders.contentTypeHeader: 'application/json',
           "token": token??HHString.token
         },);
-    return patientAssesmentListFromJson(response.body);
+    if(response.statusCode == 200){
+      return patientAssesmentListFromJson(response.body);
+    }else {
+      throw Exception("Failed to add note");
+    }
+    
   }
 
   Future<GetDrinkingDiaryList> getDrinkingDiaryList(patientId) async {
@@ -310,7 +315,12 @@ class InAppAPIServices {
           HttpHeaders.contentTypeHeader: 'application/json',
           "token": token??HHString.token
         },);
-    return patientAssesmentListFromJson(response.body);
+    if(response.statusCode == 200){
+      return patientAssesmentListFromJson(response.body);
+    }else {
+      throw Exception("Failed to add note");
+    }
+    
   }
 
   Future<CommonResponse> sendMessage(receiverId, msg) async {
@@ -327,6 +337,40 @@ class InAppAPIServices {
         body: jsonEncode({
           "receiverId": receiverId,
           "message": msg
+        }));
+
+      print(response.body);
+
+    if(response.statusCode == 200){
+      return CommonResponse.fromJson(jsonDecode(response.body));
+    }else {
+      throw Exception("Failed to add note");
+    }
+  }
+
+  // add presription / handout
+  Future<CommonResponse> addPrescription(sessionId, prescription, library, note) async {
+   
+    var token = await GetStringToSP("token");
+    print(
+      jsonEncode({
+          "sessionId": sessionId,
+          "prescription": prescription??"",
+          "library": library??"",
+          "note": note??""
+        })
+    );
+    final url = HHString.baseURL +"therapist/addPrescription_handout";
+    final response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "token": token??HHString.token},
+        
+        body: jsonEncode({
+          "sessionId": sessionId,
+          "prescription": prescription??"",
+          "library": library??"",
+          "note": note??""
         }));
 
       print(response.body);
