@@ -137,7 +137,7 @@ class _ChatPageState extends State<ChatPage> {
     var chatLists;
     if (msg.trim().length == 0) {
       return;
-    } 
+    }
 
     MessageWidget messageWidget = new MessageWidget(
       msg: msg,

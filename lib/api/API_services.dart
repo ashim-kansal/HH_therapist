@@ -149,6 +149,8 @@ Future<PatientNotesList> getPatientNotes(id) async {
 Future<ChatList> getChatList(chatId, senderid) async {
   var token = await GetStringToSP("token");
 print(token);
+print(chatId);
+
   final url = HHString.baseURL +"chat/chatHistory";
   final response = await http.post(url,
       headers: {
@@ -324,8 +326,6 @@ class InAppAPIServices {
   }
 
   Future<CommonResponse> sendMessage(receiverId, msg) async {
-    print(receiverId);
-    print(msg);
     var token = await GetStringToSP("token");
 
     final url = HHString.baseURL +"chat/chatAPI";

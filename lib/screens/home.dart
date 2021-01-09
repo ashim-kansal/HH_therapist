@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
-import 'package:flutter_app/screens/drinking_diary.dart';
-import 'package:flutter_app/screens/journal.dart';
-import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
@@ -99,7 +96,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
                       onClickVideo:(){
-                          getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].patientId.id);
+                          getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].id);
                       },
                     onClickCancel: (){
                     setState(() {
@@ -125,17 +122,15 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  void getToken(therapistId, patientId) {
-    String roomName = 'room_'+therapistId+'_'+patientId;
+  void getToken(therapistId, sessionId) {
+    String roomName = 'room_'+sessionId;
     getTwilioToken(roomName, therapistId).then(
             (value) => {
-
-          print(value.responseCode),
-
-          if (value.responseCode == "200") {
-            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt)),
-          }
-        });
+              if (value.responseCode == "200") {
+                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt)),
+              }
+            }
+    );
 
 
   }
