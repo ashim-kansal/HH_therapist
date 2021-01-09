@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/Assessment_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/SubmitAssessmentResponse.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -29,7 +30,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
   @override
   Widget build(BuildContext context) {
     return MyWidget(
-        title: 'Questionaire',
+        title: AppLocalizations.of(context).Questionaire,
         child: Container(
           padding: EdgeInsets.all(10),
           child: FutureBuilder<SubmitAssessmentResponse>(
@@ -37,7 +38,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
-                    return Center(child: Text('No Data Found'),);
+                    return Center(child: Text(AppLocalizations.of(context).not_data_found),);
                   }
 
                   return Column(
@@ -45,7 +46,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Questionaire',
+                        AppLocalizations.of(context).Questionaire,
                         style: TextStyle(
                             fontSize: 22,
                             color: HH_Colors.accentColor,

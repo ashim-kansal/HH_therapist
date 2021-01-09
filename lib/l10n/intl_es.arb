@@ -1,19 +1,608 @@
 {
-  "@@locale": "es",
-  "@@last_modified": "2021-01-08T07:07:11.879537",
-    "Hey World": "Hey World",
-    "@Hey World": {
-      "type": "text",
-      "placeholders": {}
-    },
-    "abc": "abc",
-    "@abc": {
-      "type": "text",
-      "placeholders": {}
-    },
-    "Heal@Home Programs": "Heal@Home Programs",
-    "@Heal@Home Programs": {
-      "type": "text",
-      "placeholders": {}
-    }
+  "@@last_modified": "2021-01-08T06:52:37.130942",
+  "Next": "Próxima",
+  "@Next": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Done": "Hecho",
+  "@Done": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Choose your goal": "Elige tu meta",
+  "@Choose your goal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Video Session": "Sesión de video",
+  "@Video Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Welcome back": "dar una buena acogida",
+  "@Welcome back": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Login": "El Login",
+  "@Login": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter Password": "Introducir la contraseña",
+  "@Enter Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "La contraseña debe ser alfanumérica con 1 carácter pequeño, mayúscula y especial",
+  "@Password containes be alpha-numeric with 1 Small, Capital and Special character": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid email address": "Por favor, introduce una dirección de correo electrónico válida",
+  "@Please enter a valid email address": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Login into your existing account": "Inicie sesión en su cuenta existente",
+  "@Login into your existing account": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Forgot Password?": "Forgot Password?",
+  "@Forgot Password?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Terms of Service ": "Términos de servicio ",
+  "@Terms of Service ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "By continuing, you agree to our ": "Al continuar, acepta nuestras ",
+  "@By continuing, you agree to our ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Do you have an account ": "Tiene usted una cuenta ",
+  "@Do you have an account ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Sign Up": "Regístrate",
+  "@Sign Up": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a new password": "Ingrese una nueva contraseña",
+  "@Please enter a new password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter your new password below.": "Ingrese su nueva contraseña abajo.",
+  "@Enter your new password below.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter New Password": "Introduzca nueva contraseña",
+  "@Enter New Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Daily drinking diary to track your progress": "Diario de consumo diario para realizar un seguimiento de su progreso",
+  "@Daily drinking diary to track your progress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Join your therapist directly from your phone": "Únase a su terapeuta directamente desde su teléfono",
+  "@Join your therapist directly from your phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "To help you understand your triggers": "Para ayudarlo a comprender sus factores desencadenantes",
+  "@To help you understand your triggers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a valid confirm password": "Ingrese una contraseña de confirmación válida",
+  "@Please enter a valid confirm password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter the valid OTP": "Ingrese la OTP válida",
+  "@Please enter the valid OTP": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Reset": "Reiniciar",
+  "@Reset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Alert": "Alerta",
+  "@Alert": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Passwords do not matched.": "Passwords do not matched.",
+  "@Passwords do not matched.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Hey World": "Hey espan",
+  "@Hey World": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "abc": "essss",
+  "@abc": {
+    "type": "esss",
+    "placeholders": {}
+  },
+  "Heal@Home Programs": "Heal@Home Programas",
+  "@Heal@Home Programs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter you registered email address. We will help you retrieve your password.": "Digite su email address registrado en nuestro sistema. Lo ayudaremos a obtener el password.",
+  "@Please enter you registered email address. We will help you retrieve your password.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "@Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Alcohol Management Program": "Programa de Manejo del Consumo de Alcohol",
+  "@Alcohol Management Program": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "6 MONTH PROGRAM": "Programa de 6 meses",
+  "@6 MONTH PROGRAM": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Program": "Programa",
+  "@Program": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Proceed": "Procedimiento",
+  "@Proceed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Settings": "Inicialización",
+  "@Settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter Email": "Digite su email",
+  "@Enter Email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Select Language": "Seleccionar el Idioma",
+  "@Select Language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Change Password": "Cambiar el Password",
+  "@Change Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Forgot Password": "Olvido el Password",
+  "@Forgot Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Reset Password": "Resetear el Password",
+  "@Reset Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Change Language": "Cambiar el Idiom",
+  "@Change Language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Email already exist!": "Email digitado ya existe!",
+  "@Email already exist!": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "We found an account with this email, do you want to login?": "ya existe una cuenta con este email, desea connectarse?",
+  "@We found an account with this email, do you want to login?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry?": "Lorem Ipsum is simply dummy text of the printing and typesetting industry?",
+  "@Lorem Ipsum is simply dummy text of the printing and typesetting industry?": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Feedback": "Retroalimentacion",
+  "@Feedback": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ABOUT_US": "Nuestra Informacion",
+  "@ABOUT_US": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Error": "Error",
+  "@Error": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Submit": "Enviar",
+  "@Submit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "save": "Salvar",
+  "@save": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Chat": "Conversacion",
+  "@Chat": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "My Chats": "Mis conversaciones",
+  "@My Chats": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Dashboard": "Consola",
+  "@Dashboard": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No New Messages": "Ningun mensaje nuevo",
+  "@No New Messages": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Not Found": "No se encontro",
+  "@Not Found": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No Data Found": "No se encontraron datos",
+  "@No Data Found": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "My Programs": "Mis programas",
+  "@My Programs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please share your thoughts with us": "Por favor comparta sus ideas con nosotros",
+  "@Please share your thoughts with us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please use this form to connect us ": "Por favor digite su retroalimentacion",
+  "@Please use this form to connect us ": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a feedback": "Por favor digite su retroalimentacion ",
+  "@Please enter a feedback": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter your review": "Por favor digite sus commentarios",
+  "@Please enter your review": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No Record Found": "No se encontraron registros",
+  "@No Record Found": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Schedule": "Programado",
+  "@Schedule": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Upcoming": "Proximos",
+  "@Upcoming": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Completed": "Terminado",
+  "@Completed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Send": "Enviar",
+  "@Send": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "No Upcoming Sessions": "No tiene sesiones programadas",
+  "@No Upcoming Sessions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "View All": "Ver todos",
+  "@View All": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Drinking Diary": "Record de bebida",
+  "@Drinking Diary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Daily Journaling": "Registro Diario",
+  "@Daily Journaling": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "My Session": "Mis sessiones",
+  "@My Session": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Upcoming Sessions": "Proximas sesiones",
+  "@Upcoming Sessions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Search Nearest Pharmacies": "Buscar droguerias cercanas",
+  "@Search Nearest Pharmacies": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Open": "Abierto",
+  "@Open": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Cancel": "Cancelar",
+  "@Cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Notification": "Notificacion",
+  "@Notification": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Notifications": "Notificaciones",
+  "@Notifications": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Upgrade Now": "Actualizar ahora",
+  "@Upgrade Now": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Journaling": "Digite un registro",
+  "@Journaling": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "New Journal": "Nuevo registro",
+  "@New Journal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Old Journal": "Previos registros",
+  "@Old Journal": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Support": "Soporte",
+  "@Support": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Home": "Hogar",
+  "@Home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Library": "Libreria",
+  "@Library": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Assessment": "Evaluacion",
+  "@Assessment": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Therapists": "Terapista",
+  "@Therapists": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Address": "Direccion",
+  "@Address": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "First Name": "Nombre",
+  "@First Name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Last Name": "Apellido",
+  "@Last Name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Name": "Nombre Completo",
+  "@Name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Edit": "Editar",
+  "@Edit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Submit & Proceed": "Enviar",
+  "@Submit & Proceed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Phone Number": "Numero Telefonico",
+  "@Phone Number": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Email": "Email",
+  "@Email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Update": "Actualizar",
+  "@Update": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Share Your Reviews": "Comparte revisiones",
+  "@Share Your Reviews": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Questionaire": "Cuestionario",
+  "@Questionaire": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Profile": "Perfil",
+  "@Profile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "FAQ's": "Preguntas Frecuentes",
+  "@FAQ's": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Edit Profile": "Editar el Perfil",
+  "@Edit Profile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Contact Us": "Contactenos",
+  "@Contact Us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "More Information": "Informacion Adicional",
+  "@More Information": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "About Us": "Quienes Somos",
+  "@About Us": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Terms & Conditions": "Terminos y Condiciones",
+  "@Terms & Conditions": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Privacy Policy": "Politicas de privacidad",
+  "@Privacy Policy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Log Out": "Desconectarse",
+  "@Log Out": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Terms & Condition": "términos y políticas comerciales",
+  "@Terms & Condition": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "My Therapists": "Mis terapistas",
+  "@My Therapists": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "OTP Verification": "Verificacion OTP",
+  "@OTP Verification": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Resend code in:": "Re-enviar codigo:",
+  "@Resend code in:": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Therapist": "Terapista",
+  "@Therapist": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Resend OTP": "Re-enviar OT",
+  "@Resend OTP": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Get Started": "Comenzar",
+  "@Get Started": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Physician": "Médico",
+  "@Physician": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Case manager": "Administrador del caso",
+  "@Case manager": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Re-Schedule": "Cambiar cita",
+  "@Re-Schedule": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Old Password": "Password Anterior",
+  "@Old Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "New Password": "Nuevo Password",
+  "@New Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Confirm Password": "Comfirme le password",
+  "@Confirm Password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Enter message": "Digite el mensaje",
+  "@Enter message": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "Please enter a confirm password": "Confirme el password",
+  "@Please enter a confirm password": {
+    "type": "text",
+    "placeholders": {}
   }
+}

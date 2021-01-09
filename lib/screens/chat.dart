@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -49,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
 
     return new MyWidget(
-      title: 'Chat',
+      title: AppLocalizations.of(context).chat,
         child: new Container(
             width: double.infinity,
             height: double.infinity,
@@ -63,7 +64,7 @@ class _ChatPageState extends State<ChatPage> {
                       builder: (context, snapshot){
                         if(snapshot.connectionState == ConnectionState.done){
                           if(snapshot.hasError){
-                            return  Center(child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
+                            return  Center(child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
                           }
                           var item = snapshot.data.result;
                           return new Flexible(
@@ -107,7 +108,7 @@ class _ChatPageState extends State<ChatPage> {
                                       child: new TextField(
                                         controller: _textController,
                                         decoration: new InputDecoration.collapsed(
-                                            hintText: "Enter message"
+                                            hintText: AppLocalizations.of(context).enter_msg
                                         ),
                                       ),
                                     ),

@@ -38,7 +38,7 @@ class ReviewState extends State<ReviewPage> {
     final _formKey = GlobalKey<FormState>();
     return new MyWidget(
         // title: AppLocalizations.of(context).share_reviews,
-        title: 'Shave Review',
+        title: AppLocalizations.of(context).share_reviews,
         child: new Container(
           child: new Column(
             children: <Widget>[
@@ -87,7 +87,7 @@ class ReviewState extends State<ReviewPage> {
                               hint: "",
                               controller: reviewController,
                               error: widget.error,
-                              errorText:'Please enter Review',
+                              errorText:AppLocalizations.of(context).please_enter_review,
                               textarea: true,
                               minLines: 4,
                               onSelectAnswer:  (text){
@@ -108,7 +108,7 @@ class ReviewState extends State<ReviewPage> {
                   padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                   child: HHButton(
                     isEnable: true,
-                    title: 'submit',
+                    title: AppLocalizations.of(context).submit,
                     type: 4,
                     onClick: () {
                       submitReview(widget.data.id, comments);

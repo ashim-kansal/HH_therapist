@@ -4,6 +4,7 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/NotificationList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -90,7 +91,7 @@ class _NotificationState extends State<NotificationPage> {
 
     return new Scaffold(
         appBar: AppBar(
-          title: Text("Notification", style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).Notification, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -111,7 +112,7 @@ class _NotificationState extends State<NotificationPage> {
                   if(snapshot.hasError){
                     return Container(
                       child: Center(
-                        child: HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                        child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                       ),
                     );
                   }

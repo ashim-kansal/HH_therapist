@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/feedback.dart';
@@ -79,7 +80,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Image.asset('assets/images/ic_change_language.png', height: 20, width: 20, color: HH_Colors.color_949494,),
                 SizedBox(width: 10,),
-                Text('Change Language', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text(AppLocalizations.of(context).change_language, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(
@@ -100,7 +101,7 @@ class SettingsPageState extends State<SettingsPage>{
                 children: [
                   Image.asset('assets/images/ic_password.png',height: 20, width: 20, color: HH_Colors.color_949494),
                   SizedBox(width: 10,),
-                  Text('Change Password', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                  Text(AppLocalizations.of(context).change_password, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
                 ],
               ),
               Container(
@@ -120,7 +121,7 @@ class SettingsPageState extends State<SettingsPage>{
               children: [
                 Icon(Icons.notifications_on_outlined, size: 20, color: HH_Colors.color_949494,),
                 SizedBox(width: 10,),
-                Text('Notifications', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+                Text(AppLocalizations.of(context).Notifications, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
               ],
             ),
             Container(
@@ -187,7 +188,7 @@ class SettingsPageState extends State<SettingsPage>{
           children: [
             Image.asset('assets/images/ic_logout.png',height: 20, width: 20, color: HH_Colors.color_949494),
             SizedBox(width: 10,),
-            Text('Logout', style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
+            Text(AppLocalizations.of(context).logout, style: TextStyle(fontSize: 18, color: HH_Colors.grey_707070, fontFamily: "ProximaNova")),
           ],
         ) ,
 

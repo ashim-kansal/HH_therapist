@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/PatientNotesList.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -128,7 +129,7 @@ class NotesPageState extends State<NotesPage> {
                   builder: (context,snapshot){
                     if(snapshot.connectionState == ConnectionState.done){
                       if(snapshot.hasError){
-                        return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                        return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                       }
                       return ListView.builder(
                         itemBuilder: (context, index) {

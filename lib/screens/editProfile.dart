@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -89,7 +90,7 @@ class _CreateAccountState extends State<EditProfilePage> {
     return WillPopScope(
         onWillPop: _onBackPressed,
         child: MyWidget(
-      title: 'Edit Profile',
+      title: AppLocalizations.of(context).edit_profile,
         child: Container(
             height: MediaQuery.of(context).size.height,
 
@@ -167,7 +168,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 25, 5, 10),
                                   child: HHEditText(
-                                    hint: "First Name",
+                                    hint: AppLocalizations.of(context).fname,
                                     obscureText: false,
                                     controller: fname,
                                     error: widget.error,
@@ -178,7 +179,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Last Name",
+                                    hint: AppLocalizations.of(context).lname,
                                     obscureText: false,
                                     controller: lname,
                                     error: widget.error,
@@ -189,20 +190,20 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Email",
+                                    hint: AppLocalizations.of(context).email,
                                     obscureText: false,
                                     enabled: false,
                                     controller: email,
                                     error: widget.error,
                                     errorText:
-                                    'Please enter a valid email address',
+                                    AppLocalizations.of(context).enter_valid_email,
                                   ),
                                 ),
 
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Phone Number",
+                                    hint: AppLocalizations.of(context).phone_number,
                                     obscureText: false,
                                     controller: number,
                                     error: widget.error,
@@ -229,7 +230,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                                     child: HHButton(
                                       isEnable: true,
-                                      title: "Save",
+                                      title: AppLocalizations.of(context).save,
                                       type: 4,
                                       onClick: () {
                                         updateProfile();

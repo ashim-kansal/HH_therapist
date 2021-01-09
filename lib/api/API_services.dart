@@ -197,7 +197,6 @@ Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
       body:  jsonEncode({
         "sessionId": sessionId,
         "feedback": comments,
-        "rating": 1,
       })
   );
 

@@ -16,13 +16,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class APIService {
   Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String deviceToken) async {
     final url = HHString.baseURL +"therapist/login";
-    
+    String lang = await GetStringToSP("language");
+
     final response = await http.post(url, 
     headers: {"Content-Type": "application/json"},
       body: jsonEncode(<String, String>{
         "email": emailInput,
         "password": passwordInput,
-        "deviceToken": deviceToken
+        "deviceToken": deviceToken,
+        "appLanguage":lang
       })
     );
     

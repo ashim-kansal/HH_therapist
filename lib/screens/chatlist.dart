@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/screens/chat.dart';
@@ -10,14 +11,6 @@ import 'package:simple_moment/simple_moment.dart';
 
 class ChatListPage extends StatefulWidget {
   static const String RouteName = '/chat_users';
-  final users = [
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-    'abcd',
-  ];
 
   ChatListPage({Key key, this.title}) : super(key: key);
 
@@ -39,7 +32,7 @@ class _ChatListPageState extends State<ChatListPage> {
             if(snapshot.hasError){
               return Container(
                 child: Center(
-                  child: HHTextView(title: "No new messages", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                  child: HHTextView(title: AppLocalizations.of(context).no_msg, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
                 ),
               );
             }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -99,7 +100,7 @@ class FeedbackPageState extends State<FeedbackPage> {
               child: Column(children: [
                 HHTextView(
                   color: HH_Colors.color_707070,
-                  title: "Please use this form to connect us",
+                  title: AppLocalizations.of(context).please_contact_us,
                   size: 16,
                     textweight:FontWeight.w600
 
@@ -114,7 +115,7 @@ class FeedbackPageState extends State<FeedbackPage> {
                   errorText: 'Please enter your thoughts.',
                 ),
               ])),
-          HHButton(title: "Send", type: 4, onClick: (){
+          HHButton(title: AppLocalizations.of(context).send, type: 4, onClick: (){
             submitHandler();
           },)
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/api/Therapist_service.dart' as service;
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
 import 'package:flutter_app/screens/dashboard.dart';
@@ -62,7 +63,7 @@ class BookSessionState extends State<BookSessionPage>{
 
   @override
   Widget build(BuildContext context){
-    return MyWidget(title: 'Re-Schedule', child: Column(
+    return MyWidget(title: AppLocalizations.of(context).reschedule, child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TharapistCell(name: widget.name, role: widget.role,
@@ -72,7 +73,7 @@ class BookSessionState extends State<BookSessionPage>{
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return Center(child: Text("Not Found"),);
+                  return Center(child: Text(AppLocalizations.of(context).not_data_found),);
                 }
 
                 SchedulerBinding.instance.addPostFrameCallback((_){
@@ -147,7 +148,7 @@ class BookSessionState extends State<BookSessionPage>{
         //   controller: widget.noteTextController,
         // ),
         Container(
-            child: HHButton(title: 'Update', type: 4, isEnable: true,onClick: (){
+            child: HHButton(title: AppLocalizations.of(context).Update, type: 4, isEnable: true,onClick: (){
               // Navigator.pushNamed(context, SessionPage.RouteName);
               bookSession();
             },)

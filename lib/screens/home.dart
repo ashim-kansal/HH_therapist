@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
@@ -14,7 +15,6 @@ import 'package:simple_moment/simple_moment.dart';
 
 class HomePage extends StatefulWidget {
   static const String RouteName = '/home';
-  final assessments = ['abc', 'def', 'ghi' ];
 
 
   @override
@@ -42,7 +42,7 @@ class HomePageState extends State<HomePage> {
             padding: EdgeInsets.fromLTRB(20, 40,20,40),
             child: Column(
               children: [
-                HHHomeButton(title: 'My Sessions', type: 2, onClick: (){
+                HHHomeButton(title: AppLocalizations.of(context).mysession, type: 2, onClick: (){
                   Navigator.pushNamed(context, SessionPage.RouteName);
                 },),
                 SizedBox(height: 15),
@@ -80,7 +80,7 @@ class HomePageState extends State<HomePage> {
             builder: (builder, snapshot){
             if (snapshot.connectionState == ConnectionState.done) {
               if(snapshot.hasError){
-                return HHTextView(title: "No Upcoming Sessions", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                return HHTextView(title: AppLocalizations.of(context).no_up_sessions, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
               }
 
               return ListView.separated(

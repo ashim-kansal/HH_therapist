@@ -10,7 +10,6 @@ import 'package:simple_moment/simple_moment.dart';
 
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
-  final assessments = ['abc', 'def', 'ghi' ];
 
   String sessionId;
   String patientId;
