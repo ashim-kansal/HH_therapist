@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 
 
 class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
-  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('es', 'ES'));
+  AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', ''));
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -35,9 +35,9 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
         ],
 
         supportedLocales: [
-          const Locale('en', 'US'), // English, no country code
-          const Locale('fr', 'FR'), // Arabic, no country code
-          const Locale('es', 'ES'), // Arabic, no country code
+          const Locale('en', ''), // English, no country code
+          const Locale('fr', ''), // Arabic, no country code
+          const Locale('es', ''), // Arabic, no country code
           // ... other locales the app supports
         ],
         onUnknownRoute: (settings) => MaterialPageRoute(

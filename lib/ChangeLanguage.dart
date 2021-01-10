@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/app_localization.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
@@ -101,11 +102,16 @@ class SelectLanguageState extends State<StatefulWidget> {
                         width: 340,
                         padding: EdgeInsets.all(20.0),
                         child: Center(
-                          child: HHButton(title: "Get Started", 
+                          child: HHButton(title: AppLocalizations.of(context).get_started,
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
                             SetStringToSP("language", dropdownValue);
+                            String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
+                            print(lang);
+                            setState(() {
+                              AppLocalizations.load(Locale(lang, ''));
+                            });
                             Navigator.pop(context);
                             Navigator.pushNamed(context, LoginPage.RouteName);
                           }),
