@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -47,7 +48,7 @@ class SelectLanguageState extends State<StatefulWidget> {
                               color: Colors.white,
                               child: Column(children: [
                                 Text(
-                                  "Select Language",
+                                  AppLocalizations.of(context).select_language,
                                   style: TextStyle(color: Color(0xff949494), fontSize: 16,
                                     fontFamily:"ProximaNova"
                                     ),
@@ -106,12 +107,12 @@ class SelectLanguageState extends State<StatefulWidget> {
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
-                            SetStringToSP("language", dropdownValue);
                             String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
-                            print(lang);
                             setState(() {
                               AppLocalizations.load(Locale(lang, ''));
                             });
+                            SetStringToSP("language", lang.toUpperCase());
+
                             Navigator.pop(context);
                             Navigator.pushNamed(context, LoginPage.RouteName);
                           }),

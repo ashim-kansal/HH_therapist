@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/screens/book_session.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -19,13 +20,13 @@ class TherapistPage extends StatefulWidget {
 class _TherapistState extends State<TherapistPage> {
   @override
   Widget build(BuildContext context) {
-    return MyWidget( title: 'My Clients',
+    return MyWidget( title: AppLocalizations.of(context).mychat,
       child: FutureBuilder<MyClientList>(
         future: getMyClientList(),
         builder: (context, snapshot){
           if (snapshot.connectionState == ConnectionState.done) {
             if(snapshot.hasError){
-              return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+              return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
             }
 
           return ListView.separated(

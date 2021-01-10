@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:http/http.dart' as http;
@@ -124,7 +125,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reset Password', style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).reset_password, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -167,7 +168,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                             Padding(
                               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Text(
-                                'Enter your new password below.',
+                                  AppLocalizations.of(context).enter_new_pass_below,
                                 style: TextStyle(color: Color(0xff8d8d8d)),
                                 textAlign: TextAlign.center,
                               ),
@@ -178,12 +179,12 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
                                   child: HHEditText(
-                                    hint: "Enter New Password",
+                                    hint: AppLocalizations.of(context).enter_new_pass,
                                     obscureText: securePwd,
                                     controller: passwordController,
                                     error: widget.pwderror,
                                     errorText:
-                                    'Please enter a new password',
+                                    AppLocalizations.of(context).pls_enter_new_pass,
                                     showeye: true,
                                     onClickEye: () {
                                       setState(() {
@@ -195,12 +196,12 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Confirm Password",
+                                    hint: AppLocalizations.of(context).confirm_password,
                                     obscureText: secureCPwd,
                                     controller: cpasswordController,
                                     error: widget.cpwderror,
                                     errorText:
-                                    'Please enter a valid confirm password',
+                                    AppLocalizations.of(context).valid_confirm_pass,
                                     showeye: true,
                                     onClickEye: () {
                                       setState(() {
@@ -213,7 +214,7 @@ class _ResetPasswordState extends State<ResetPasswordPage> {
                                   padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                   child: HHButton(
                                     isEnable: true,
-                                    title: "Reset",
+                                    title: AppLocalizations.of(context).reset,
                                     type: 2,
                                     onClick: () {
                                       resetPwdHandler();

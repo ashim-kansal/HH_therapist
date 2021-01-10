@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -274,8 +275,8 @@ class _OtpState extends State<OtpPage> {
         context: context,
         builder: (BuildContext dialogContext) {
           return DialogWithSingleButton(
-            title: "Alert",
-            content: "Please enter the valid OTP.",
+            title: AppLocalizations.of(context).alert,
+            content: AppLocalizations.of(context).valid_otp_msg,
           );
         },
       );

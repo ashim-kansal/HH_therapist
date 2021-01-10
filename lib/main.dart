@@ -3,6 +3,7 @@ import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_app/app_localization.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import 'widgets/mywidgets.dart';
 
@@ -22,8 +23,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
   AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', ''));
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting();
+
     return MaterialApp(
         title: 'Flutter Demo',
         onGenerateRoute: router.generateRoute,

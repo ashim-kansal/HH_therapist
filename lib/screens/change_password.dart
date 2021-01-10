@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
@@ -28,7 +29,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
   bool secureNew = true;
   bool secureConfirm = true;
 
-  void passwordHandler() {
+  void passwordHandler(BuildContext context) {
 
     String oldpwd = oldPasswordController.text;
     String newpassword = newPasswordController.text;
@@ -74,7 +75,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
 
     if(confpassword != newpassword){
       setState(() {
-        confPasswordErrorMsg = "Please enter a confirm password."; 
+        confPasswordErrorMsg = AppLocalizations.of(context).confPasswordErrorMsg;
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
@@ -82,7 +83,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
     }
 
     setState(() {
-        confPasswordErrorMsg = "Passwords do not matched."; 
+        confPasswordErrorMsg = AppLocalizations.of(context).password_donotmatch;
         errorOld = false;
         errorNew = false;
         errorConfirm = true;    
@@ -121,7 +122,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
             Column(
               children: [
                 HHEditText(
-                    hint: "Old Password",
+                    hint: AppLocalizations.of(context).old_password,
                     obscureText: secureOld,
                     controller: oldPasswordController,
                     error: errorOld,
@@ -136,7 +137,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: "New Password",
+                    hint: AppLocalizations.of(context).new_password,
                     obscureText: secureNew,
                     controller: newPasswordController,
                     error: errorNew,
@@ -151,7 +152,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: "Confirm Password",
+                    hint: AppLocalizations.of(context).change_password,
                     obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,
@@ -166,8 +167,8 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 )
               ],
             ),
-            HHButton(title: 'Save', type: 4, isEnable: true,
-            onClick: (){ passwordHandler();},)
+            HHButton(title: AppLocalizations.of(context).save, type: 4, isEnable: true,
+            onClick: (){ passwordHandler(context);},)
           ],
         ),
       )

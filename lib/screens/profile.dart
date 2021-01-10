@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/screens/editProfile.dart';
@@ -110,7 +111,7 @@ class _CreateAccountState extends State<ProfilePage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Profile', style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).Profile, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -160,35 +161,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                           ),
                                         )
                                     ),
-                                    // Container(
-                                    //   margin: EdgeInsets.only(left: 155),
-                                    //   child: Container(
-                                    //     width: 35,
-                                    //     height:35,
-                                    //     decoration: BoxDecoration(
-                                    //       boxShadow: [//background color of box
-                                    //         BoxShadow(
-                                    //           color: HH_Colors.color_F2EEEE,
-                                    //           blurRadius: 65.0, // soften the shadow
-                                    //           spreadRadius: 1.0, //extend the shadow
-                                    //           offset: Offset(
-                                    //             15.0, // Move to right 10  horizontally
-                                    //             15.0, // Move to bottom 10 Vertically
-                                    //           ),
-                                    //         )
-                                    //       ],
-                                    //       color: Colors.white,
-                                    //       borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                                    //     child: IconButton(
-                                    //       icon: Icon(
-                                    //         Icons.camera_alt,
-                                    //         size: 20,
-                                    //       ), onPressed: () {
-                                    //         imagePicker();
-                                    //       },
-                                    //     ),
-                                    //   ),
-                                    // )
+
                                   ],
                                 ),
                             ),
@@ -211,7 +184,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       alignment: Alignment.topLeft,
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: HHTextView(
-                                        title: "Name",
+                                        title: AppLocalizations.of(context).name,
                                         size: 18,
                                         textweight: FontWeight.w500,
                                         color: Color(0xff777CEA)
@@ -244,7 +217,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       alignment: Alignment.topLeft,
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: HHTextView(
-                                        title: "Email",
+                                        title: AppLocalizations.of(context).email,
                                         size: 18,
                                         textweight: FontWeight.w500,
                                         color: Color(0xff777CEA)
@@ -277,7 +250,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       alignment: Alignment.topLeft,
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                                       child: HHTextView(
-                                        title: "Phone",
+                                        title: AppLocalizations.of(context).phone_number,
                                         size: 18,
                                         textweight: FontWeight.w500,
                                         color: Color(0xff777CEA)
@@ -336,7 +309,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                 padding: EdgeInsets.fromLTRB(5, 30, 5, 5),
                                 child: HHButton(
                                   isEnable: true,
-                                  title: "Edit",
+                                  title: AppLocalizations.of(context).edit,
                                   type: 4,
                                   onClick: () {
                                     // Navigator.pop(context);

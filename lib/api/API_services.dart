@@ -41,6 +41,8 @@ Future<UpcomingSession> upcomingSessions() async {
         "token": token??HHString.token
       },);
   print(response.body);
+  print('hhhhhhhhhhhhhhhhhhhhhhhhhh'+upcomingSessionFromJson(response.body).result.length.toString());
+
   return upcomingSessionFromJson(response.body);
 }
 
@@ -147,10 +149,14 @@ Future<PatientNotesList> getPatientNotes(id) async {
 }
 
 // fetch chat listing
-Future<ChatList> getChatList(chatId, senderid) async {
+Future<ChatList> getChatList(senderid) async {
   var token = await GetStringToSP("token");
 print(token);
-print(chatId);
+print(jsonEncode({
+  // "chatId": chatId??"",
+  "chatId": "",
+  "receiverId": senderid??""
+}));
 
   final url = HHString.baseURL +"chat/chatHistory";
   final response = await http.post(url,
@@ -197,7 +203,6 @@ Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
       body:  jsonEncode({
         "sessionId": sessionId,
         "feedback": comments,
-        "rating": 1,
       })
   );
 
@@ -352,7 +357,7 @@ class InAppAPIServices {
 
   Future<CommonResponse> sendMessage(receiverId, msg) async {
     var token = await GetStringToSP("token");
-
+  print('sssss'+  receiverId);
     final url = HHString.baseURL +"chat/chatAPI";
     final response = await http.post(url,
         headers: {

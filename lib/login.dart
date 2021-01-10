@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/screens/dashboard.dart';
@@ -193,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                             child: Text(
-                              'Welcome back',
+                              AppLocalizations.of(context).Welcome_back,
                               style: TextStyle(
                                   fontSize: 22,
                                   color: Color(0xff5c5c5c),
@@ -206,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(20, 5, 0, 0),
                             child: Text(
-                              'Login into your existing account',
+                              AppLocalizations.of(context).login_to_existing,
                               style: TextStyle(color: Color(0xff8d8d8d), fontSize: 15, fontFamily: "ProximaNova"),
                             ),
                           )
@@ -218,21 +219,21 @@ class _LoginPageState extends State<LoginPage> {
                               padding: EdgeInsets.fromLTRB(15, 20, 15, 10),
                               child: 
                               HHEditText(
-                                hint: "Enter Email",
+                                hint: AppLocalizations.of(context).enter_email,
                                 controller: emailController,
                                 error: emailerror,
-                                errorText: 'Please enter a valid email address',
+                                errorText: AppLocalizations.of(context).enter_valid_email,
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
                               child: 
                               HHEditText(
-                                hint: "Enter Password",
+                                hint: AppLocalizations.of(context).enter_password,
                                 obscureText: securepwd,
                                 controller: passwordController,
                                 error: pwderror,
-                                errorText: 'Password containes be alpha-numeric with 1 Small, Capital and Special character',
+                                errorText: AppLocalizations.of(context).pass_validation_msg,
                                 showeye: true,
                                 onClickEye: () {
                                   print("Count was selected.");
@@ -244,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Padding(
                               padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
-                              child: HHButton(title: "Login", type: 4, isEnable: true, 
+                              child: HHButton(title: AppLocalizations.of(context).login, type: 4, isEnable: true,
                               onClick: (){
                                 loginHandler();
                                
@@ -270,7 +271,7 @@ class _LoginPageState extends State<LoginPage> {
                 },
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                  child: Text('Forgot Password?', textAlign: TextAlign.center,
+                  child: Text(AppLocalizations.of(context).forgot_password_, textAlign: TextAlign.center,
 
                       style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontFamily: "ProximaNova")),
 

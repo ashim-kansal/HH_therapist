@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/AuthModel.dart';
 import 'package:flutter_app/otp.dart';
@@ -98,7 +99,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text('Forgot Password', style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).forgot_password, style: TextStyle(color: Colors.white)),
           centerTitle: true,
             iconTheme: IconThemeData(
               color: Colors.white, //change your color here
@@ -142,7 +143,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
                                   child: Text(
-                                    'Please enter you registered email address. We will help you retrieve your password.',
+                                    AppLocalizations.of(context).pls_enter_reg_email,
                                     style: TextStyle(color: Color(0xff8d8d8d)),
                                     textAlign: TextAlign.center,
                                   ),
@@ -153,18 +154,18 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(5, 20, 5, 10),
                                       child: HHEditText(
-                                        hint: "Enter Email",
+                                        hint: AppLocalizations.of(context).enter_email,
                                         obscureText: false,
                                         controller: emailController,
                                         error: widget.error,
                                         errorText:
-                                            'Please enter a valid email address',
+                                        AppLocalizations.of(context).enter_valid_email,
                                       ),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(5, 15, 5, 15),
                                       child: HHButton(
-                                        title: "Proceed",
+                                        title: AppLocalizations.of(context).proceed,
                                         isEnable: true,
                                         type: 4,
                                         onClick: () {

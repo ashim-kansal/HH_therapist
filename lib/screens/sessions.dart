@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/review.dart';
@@ -35,7 +36,7 @@ class SessionPageState extends State<SessionPage>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'My Sessions', child: Container(
+    return MyWidget(title: AppLocalizations.of(context).mysession, child: Container(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,12 +55,12 @@ class SessionPageState extends State<SessionPage>{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Flexible(child: HHButton(title: 'Upcoming ',textSize: 18.0, type: 3, isEnable: isSwitched, onClick: (){
+              Flexible(child: HHButton(title: AppLocalizations.of(context).Upcoming,textSize: 18.0, type: 3, isEnable: isSwitched, onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });
               },), flex: 1,),
-              Flexible(child: HHButton(title: 'Completed ',textSize: 18.0, type: 3, isEnable: !isSwitched,onClick: (){
+              Flexible(child: HHButton(title: AppLocalizations.of(context).Completed,textSize: 18.0, type: 3, isEnable: !isSwitched,onClick: (){
                 setState(() {
                   isSwitched = !isSwitched;
                 });
@@ -90,11 +91,13 @@ class SessionPageState extends State<SessionPage>{
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              return HHTextView(title: "No Record Found",
+              return HHTextView(title: AppLocalizations.of(context).no_record_found,
                 size: 18,
                 color: HH_Colors.purpleColor,
                 textweight: FontWeight.w600,);
             }
+            print('hhhhhhhhhhhhhhhhhhhhhhhhhh'+snapshot.data.result.length.toString());
+
             List<Result> mList = snapshot.data.result;
             List<Result> searchList = List();
 
@@ -108,6 +111,7 @@ class SessionPageState extends State<SessionPage>{
                   searchList.add(res);
               }
             }
+            print(searchList.length.toString());
             return ListView.separated(
               itemCount: searchList.length,
               itemBuilder: (context, index){
@@ -148,7 +152,7 @@ class SessionPageState extends State<SessionPage>{
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+            return HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
           }
           List<Result> mList = snapshot.data.result;
           List<Result> searchList = List();

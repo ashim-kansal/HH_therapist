@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/SettingService.dart';
 import 'package:flutter_app/api/User_service.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UserProfileModel.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -42,6 +43,7 @@ class _CreateAccountState extends State<EditProfilePage> {
   TextEditingController address = TextEditingController();
   TextEditingController number = TextEditingController();
   TextEditingController email = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -59,6 +61,7 @@ class _CreateAccountState extends State<EditProfilePage> {
     address.text = widget.data.address;
     email.text = widget.data.email;
     profileImage = widget.data.profilePic;
+
   }
 
 
@@ -85,11 +88,10 @@ class _CreateAccountState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return WillPopScope(
         onWillPop: _onBackPressed,
         child: MyWidget(
-      title: 'Edit Profile',
+      title: AppLocalizations.of(context).edit_profile,
         child: Container(
             height: MediaQuery.of(context).size.height,
 
@@ -167,7 +169,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 25, 5, 10),
                                   child: HHEditText(
-                                    hint: "First Name",
+                                    hint: AppLocalizations.of(context).fname,
                                     obscureText: false,
                                     controller: fname,
                                     error: widget.error,
@@ -178,7 +180,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Last Name",
+                                    hint: AppLocalizations.of(context).lname,
                                     obscureText: false,
                                     controller: lname,
                                     error: widget.error,
@@ -189,20 +191,20 @@ class _CreateAccountState extends State<EditProfilePage> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Email",
+                                    hint: AppLocalizations.of(context).email,
                                     obscureText: false,
                                     enabled: false,
                                     controller: email,
                                     error: widget.error,
                                     errorText:
-                                    'Please enter a valid email address',
+                                    AppLocalizations.of(context).enter_valid_email,
                                   ),
                                 ),
 
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
                                   child: HHEditText(
-                                    hint: "Phone Number",
+                                    hint: AppLocalizations.of(context).phone_number,
                                     obscureText: false,
                                     controller: number,
                                     error: widget.error,
@@ -210,18 +212,6 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     'Please enter a phone number',
                                   ),
                                 ),
-                                // Padding(
-                                //   padding: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                                //   child: HHEditText(
-                                //     hint: "Address",
-                                //     obscureText: false,
-                                //     controller: address,
-                                //     error: widget.error,
-                                //     errorText:
-                                //     'Please enter a address',
-                                //   ),
-                                // ),
-
 
                                 Align(
                                   alignment: Alignment.bottomCenter,
@@ -229,7 +219,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     padding: EdgeInsets.fromLTRB(5, 50, 5, 15),
                                     child: HHButton(
                                       isEnable: true,
-                                      title: "Save",
+                                      title: AppLocalizations.of(context).save,
                                       type: 4,
                                       onClick: () {
                                         updateProfile();
@@ -237,22 +227,15 @@ class _CreateAccountState extends State<EditProfilePage> {
                                     ),
                                   ),
                                 )
-
                               ]),
                             ),
                           ],
                         ),
                       ),
                     ),
-                    // elevation: 8.0,
-                    // shadowColor: Colors.black38,
-                    // borderRadius: BorderRadius.circular(8.0),
-                    // borderOnForeground: true,
                   ),
                 ],
               ),)),
-          // backgroundColor: Colors.white,
-          // This trailing comma makes auto-formatting nicer for build methods.
         )
       );
   }
@@ -265,23 +248,14 @@ class _CreateAccountState extends State<EditProfilePage> {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
     setState(() {
       if (pickedFile != null) {
-        // print(pickedFile.path);
         _image = File(pickedFile.path);
-        // final bytes = _image.readAsBytesSync();
-        // String base64 = base64Encode(bytes);
-        //
-        // print(base64);
-
         SettingAPIService settingAPIService = new SettingAPIService();
         settingAPIService.uploadImageFile(file:_image).then((value) => {
           print(value),
-          // if(value == 200){
           setState(() {
             if(value['result'] != null && value['result']['image'] != null)
               profileImage = value['result']['image'];
-
           })
-          // }
         });
       } else {
         print('No image selected.');

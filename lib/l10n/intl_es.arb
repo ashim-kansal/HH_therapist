@@ -1,126 +1,226 @@
 {
   "@@last_modified": "2021-01-08T06:52:37.130942",
+<<<<<<< HEAD
   "Next": "Next",
+=======
+  "Next": "Próxima",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Next": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Done": "Done",
+=======
+  "Done": "Hecho",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Done": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Choose your goal": "Choose your goal",
+=======
+  "Choose your goal": "Elige tu meta",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Choose your goal": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Video Session": "Video Session",
+=======
+  "Video Session": "Sesión de video",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Video Session": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Welcome back": "Welcome back",
+=======
+  "Welcome back": "dar una buena acogida",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Welcome back": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Login": "Login",
+=======
+  "Login": "El Login",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Login": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Enter Password": "Enter Password",
+=======
+  "Enter Password": "Introducir la contraseña",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter Password": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Password containes be alpha-numeric with 1 Small, Capital and Special character",
+=======
+  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "La contraseña debe ser alfanumérica con 1 carácter pequeño, mayúscula y especial",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Password containes be alpha-numeric with 1 Small, Capital and Special character": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Please enter a valid email address": "Please enter a valid email address",
+=======
+  "Please enter a valid email address": "Por favor, introduce una dirección de correo electrónico válida",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a valid email address": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Login into your existing account": "Login into your existing account",
+=======
+  "Login into your existing account": "Inicie sesión en su cuenta existente",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Login into your existing account": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Forgot Password?": "Forgot Password?",
+=======
+  "Forgot Password?": "Olvido el Password?",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Forgot Password?": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Terms of Service ": "Terms of Service ",
+=======
+  "Terms of Service ": "Términos de servicio ",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Terms of Service ": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "By continuing, you agree to our ": "By continuing, you agree to our ",
+=======
+  "By continuing, you agree to our ": "Al continuar, acepta nuestras ",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@By continuing, you agree to our ": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Do you have an account ": "Do you have an account ",
+=======
+  "Do you have an account ": "Tiene usted una cuenta ",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Do you have an account ": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Sign Up": "Sign Up",
+=======
+  "Sign Up": "Regístrate",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Sign Up": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Please enter a new password": "Please enter a new password",
+=======
+  "Please enter a new password": "Ingrese una nueva contraseña",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a new password": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Enter your new password below.": "Enter your new password below.",
+=======
+  "Enter your new password below.": "Ingrese su nueva contraseña abajo.",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter your new password below.": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Enter New Password": "Enter New Password",
+=======
+  "Enter New Password": "Introduzca nueva contraseña",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter New Password": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Daily drinking diary to track your progress": "Daily drinking diary to track your progress",
+=======
+  "Daily drinking diary to track your progress": "Diario de consumo diario para realizar un seguimiento de su progreso",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Daily drinking diary to track your progress": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Join your therapist directly from your phone": "Join your therapist directly from your phone",
+=======
+  "Join your therapist directly from your phone": "Únase a su terapeuta directamente desde su teléfono",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Join your therapist directly from your phone": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "To help you understand your triggers": "To help you understand your triggers",
+=======
+  "To help you understand your triggers": "Para ayudarlo a comprender sus factores desencadenantes",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@To help you understand your triggers": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Please enter a valid confirm password": "Please enter a valid confirm password",
+=======
+  "Please enter a valid confirm password": "Ingrese una contraseña de confirmación válida",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a valid confirm password": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Please enter the valid OTP": "Please enter the valid OTP",
+=======
+  "Please enter the valid OTP": "Ingrese la OTP válida",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter the valid OTP": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Reset": "Reset",
+=======
+  "Reset": "Reiniciar",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Reset": {
     "type": "text",
     "placeholders": {}
   },
+<<<<<<< HEAD
   "Alert": "Alert",
+=======
+  "Alert": "Alerta",
+>>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Alert": {
     "type": "text",
     "placeholders": {}

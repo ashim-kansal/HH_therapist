@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/notification.dart';
@@ -38,7 +39,9 @@ class DashboardState extends State<Dashboard> {
 
       Scaffold(
         appBar: AppBar(
-          title: Text(title, style: TextStyle(color: Colors.white)),
+          title: Text( tabIndex == 0? AppLocalizations.of(context).dashboard
+              : tabIndex == 1 ?AppLocalizations.of(context).mychat
+              : AppLocalizations.of(context).settings, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -79,24 +82,24 @@ class DashboardState extends State<Dashboard> {
             onTap: (int index) {
               setState(() {
                 tabIndex = index;
-                title = listNames[tabIndex];
+                // title = listNames[tabIndex];
               });
             },
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
                   icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
-                title: Text('Dashboard'),
+                title: Text(AppLocalizations.of(context).dashboard),
 
   ),
               BottomNavigationBarItem(
                 icon: Image.asset('assets/images/ic_chat.png', height: 25, width: 25, color: tabIndex == 1?HH_Colors.accentColor: HH_Colors.grey_707070,),
-                title: Text('My Chat'),
+                title: Text(AppLocalizations.of(context).mychat),
 
               ),
               BottomNavigationBarItem(
                 icon: Image.asset(tabIndex == 2?'assets/images/ic_settings_select.png':'assets/images/ic_settings.png' , height: 25, width: 25,),
-                title: Text('Settings'),
+                title: Text(AppLocalizations.of(context).settings),
               )
             ]
         ),
