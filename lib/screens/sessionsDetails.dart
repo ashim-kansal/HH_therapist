@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
@@ -7,6 +10,7 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:toast/toast.dart';
 
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
@@ -27,11 +31,16 @@ class SessionPageState extends State<SessionDetails>{
   bool isJournling = false;
   List<Diary.Result> graphData;
   String label = '';
-
+  String prescriptionPath;
+  String prescriptionName;
+  String handoutPath;
+  String handoutName;
   Future assesmentList;
   Future journalList;
   Future drinkingDiaryList;
   int pos = 0;
+
+  TextEditingController noteController = TextEditingController();
 
   @override
   void initState() {
@@ -41,6 +50,73 @@ class SessionPageState extends State<SessionDetails>{
     assesmentList= inAppAPIServices.getPatientAssesments(widget.patientId);
     journalList= inAppAPIServices.getPatientJournal(widget.patientId);
     drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
+  }
+
+  void uploadDoc(type) async{
+
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowMultiple: false,
+          allowedExtensions: ['jpg', 'pdf', 'doc'],
+        );
+
+    switch (type) {
+      case "prescription":
+        print(result.files.single.path);
+        setState(() {
+          prescriptionPath = result.files.single.path;
+          prescriptionName = result.files.single.name;
+        });
+        break;
+      case "handout":
+        print(result.files.single.path);
+        setState(() {
+          handoutPath = result.files.single.path;
+          handoutName = result.files.single.name;
+        });
+        break;
+      default:
+    }
+  }
+
+   // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child:CircularProgressIndicator(),
+          );
+      });
+  }
+
+  void onSubmit() async {
+
+    if(prescriptionPath == "" && handoutPath == "" && noteController.text.trim() == ""){
+      return;
+    }
+
+    InAppAPIServices inAppAPIServices = new InAppAPIServices();
+    buildShowDialog(context);
+    inAppAPIServices.addPrescription(widget.sessionId, prescriptionPath, handoutPath, noteController.text).then((value) => {
+       Navigator.of(context).pop(),
+      Timer(Duration(seconds: 1),
+      ()=> {
+        showToast(value.responseMsg)
+      }),
+      if(value.responseCode == 200){
+        noteController.clear()
+      }
+    });
+  }
+
+   //show Toast
+  showToast(String message){
+    Toast.show(message, 
+    context, 
+    duration: Toast.LENGTH_LONG, 
+    gravity:  Toast.BOTTOM);
   }
 
   @override
@@ -68,32 +144,35 @@ class SessionPageState extends State<SessionDetails>{
                       });
                     }, bColor: HH_Colors.orange_FF8A73, arrowContainerColor: HH_Colors.light_FBB7A9),
                     isAssesments == true ?
-                      Container(
-                        color: HH_Colors.color_FBF4F4,
-                        height: MediaQuery.of(context).size.height / 3.7,
-                        child: FutureBuilder<PatientAssesmentList>( 
-                          future: assesmentList,
-                          builder: (context,snapshot){
-                            if(snapshot.connectionState == ConnectionState.done){
-                              if(snapshot.hasError){
-                                return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
-                              }
-                              var item = snapshot.data.result;
-                              return ListView.builder(
-                                  itemBuilder: (context, index) {
-                                  return Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
-                                    child: AssesmentItem(title: item[index].title, 
-                                    value: item[index].correctMarks, 
-                                    subTitle: "Total Obtained Marks"));
-                                      },
-                                    itemCount: item.length,
+                      LimitedBox(
+                        maxHeight: MediaQuery.of(context).size.height / 3.7,
+                        child: Container(
+                          color: HH_Colors.color_FBF4F4,
+                          margin: EdgeInsets.only(top: 10),
+                          child: FutureBuilder<PatientAssesmentList>( 
+                            future: assesmentList,
+                            builder: (context,snapshot){
+                              if(snapshot.connectionState == ConnectionState.done){
+                                if(snapshot.hasError){
+                                  return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                                }
+                                var item = snapshot.data.result;
+                                return ListView.builder(
+                                    itemBuilder: (context, index) {
+                                    return Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
+                                      child: AssesmentItem(title: item[index].title, 
+                                      value: item[index].correctMarks, 
+                                      subTitle: "Total Obtained Marks"));
+                                        },
+                                      itemCount: item.length,
+                                  );
+                              }else {
+                                return Container(
+                                  child: Center(child: CircularProgressIndicator()),
                                 );
-                            }else {
-                              return Container(
-                                child: Center(child: CircularProgressIndicator()),
-                              );
+                              }
                             }
-                          }
+                          ),
                         ) 
                        
                       ) : Container()
@@ -276,8 +355,15 @@ class SessionPageState extends State<SessionDetails>{
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            AddFileCard(title: "Add Prescription", size: 22, color: HH_Colors),
-            AddFileCard(title: "Add Prescription", size: 22, color: HH_Colors),
+            AddFileCard(title: "Add Prescription", size: 22, 
+              selectDoc: (){
+                uploadDoc("prescription");
+              },
+              filename:prescriptionName
+            ),
+            AddFileCard(title: "Add Handout", size: 22, selectDoc: (){
+              uploadDoc("handout");
+            }, filename:handoutName)
           ],)
         ),
         
@@ -299,7 +385,8 @@ class SessionPageState extends State<SessionDetails>{
                 title: "Submit",
                 type: 4,
                 onClick: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    onSubmit();
                 },
               ),
             ),

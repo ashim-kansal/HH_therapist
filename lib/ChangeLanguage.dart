@@ -4,6 +4,7 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/app_localization.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
