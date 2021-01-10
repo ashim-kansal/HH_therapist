@@ -39,8 +39,8 @@ class DashboardState extends State<Dashboard> {
 
       Scaffold(
         appBar: AppBar(
-          title: Text( tabIndex == 0?? AppLocalizations.of(context).dashboard
-              ? tabIndex == 1 ?? AppLocalizations.of(context).mychat
+          title: Text( tabIndex == 0? AppLocalizations.of(context).dashboard
+              : tabIndex == 1 ?AppLocalizations.of(context).mychat
               : AppLocalizations.of(context).settings, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(

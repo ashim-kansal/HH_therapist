@@ -161,35 +161,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                           ),
                                         )
                                     ),
-                                    // Container(
-                                    //   margin: EdgeInsets.only(left: 155),
-                                    //   child: Container(
-                                    //     width: 35,
-                                    //     height:35,
-                                    //     decoration: BoxDecoration(
-                                    //       boxShadow: [//background color of box
-                                    //         BoxShadow(
-                                    //           color: HH_Colors.color_F2EEEE,
-                                    //           blurRadius: 65.0, // soften the shadow
-                                    //           spreadRadius: 1.0, //extend the shadow
-                                    //           offset: Offset(
-                                    //             15.0, // Move to right 10  horizontally
-                                    //             15.0, // Move to bottom 10 Vertically
-                                    //           ),
-                                    //         )
-                                    //       ],
-                                    //       color: Colors.white,
-                                    //       borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                                    //     child: IconButton(
-                                    //       icon: Icon(
-                                    //         Icons.camera_alt,
-                                    //         size: 20,
-                                    //       ), onPressed: () {
-                                    //         imagePicker();
-                                    //       },
-                                    //     ),
-                                    //   ),
-                                    // )
+
                                   ],
                                 ),
                             ),

@@ -96,6 +96,8 @@ class SessionPageState extends State<SessionPage>{
                 color: HH_Colors.purpleColor,
                 textweight: FontWeight.w600,);
             }
+            print('hhhhhhhhhhhhhhhhhhhhhhhhhh'+snapshot.data.result.length.toString());
+
             List<Result> mList = snapshot.data.result;
             List<Result> searchList = List();
 
@@ -109,6 +111,7 @@ class SessionPageState extends State<SessionPage>{
                   searchList.add(res);
               }
             }
+            print(searchList.length.toString());
             return ListView.separated(
               itemCount: searchList.length,
               itemBuilder: (context, index){

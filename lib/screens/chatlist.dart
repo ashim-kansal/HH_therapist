@@ -8,6 +8,8 @@ import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/tharapist_cell.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class ChatListPage extends StatefulWidget {
   static const String RouteName = '/chat_users';
@@ -22,12 +24,14 @@ class ChatListPage extends StatefulWidget {
 }
 
 class _ChatListPageState extends State<ChatListPage> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<ChatList>(
-        future: getChatList(null, null),
+        future: getChatList(null),
         builder: (context, snapshot) {
+          initializeDateFormatting();
           if (snapshot.connectionState == ConnectionState.done) {
             if(snapshot.hasError){
               return Container(
@@ -49,13 +53,14 @@ class _ChatListPageState extends State<ChatListPage> {
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
-                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.senderId.id, item.receiverId.id));
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.senderId.id));
                   },
                 );
               },
               separatorBuilder: (context, index) {
                 return Divider();
               },
+
             );
           }else {
             return Container(

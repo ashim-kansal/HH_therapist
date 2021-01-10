@@ -7,7 +7,6 @@ import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
-import 'package:flutter_app/widgets/message.dart';
 import 'package:flutter_app/widgets/message_widget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:intl/intl.dart';
@@ -16,9 +15,8 @@ import 'package:simple_moment/simple_moment.dart';
 class ChatPage extends StatefulWidget {
   static const String RouteName = '/chat';
 
-  String chatId;
   String senderId;
-  ChatPage({Key key, this.title, this.chatId, this.senderId}) : super(key: key);
+  ChatPage({Key key, this.title, this.senderId}) : super(key: key);
   String title;
 
   @override
@@ -27,8 +25,10 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   // final List<Message> _messages = <Message>[];
+  ScrollController _scrollController = new ScrollController();
 
   Future messagesList;
+  List<Result> mList = new List();
   String receiverId;
   // Create a text controller. We will use it to retrieve the current value
   // of the TextField!
@@ -41,7 +41,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async {
-    return await getChatList(widget.chatId, widget.senderId);
+    return await getChatList(widget.senderId);
+
   }
 
   @override
@@ -66,22 +67,23 @@ class _ChatPageState extends State<ChatPage> {
                           if(snapshot.hasError){
                             return  Center(child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
                           }
-                          var item = snapshot.data.result;
+                          // mList.clear();
+                          mList = snapshot.data.result;
                           return new Flexible(
                             child: new ListView.builder(
                               padding: new EdgeInsets.all(8.0),
-                              // reverse: true,
+                              controller: _scrollController,
                               itemBuilder: (context, int index) {
-                                receiverId = item[0].senderId.id;
-                                var _date = item[0].message[index].createdAt;
+                                receiverId = mList[0].senderId.id;
+                                var _date = mList[0].message[index].createdAt;
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
-                                  msg: item[0].message[index].message,
-                                  direction: item[0].message[index].senderId != widget.senderId ? "left" : "right",
+                                  msg: mList[0].message[index].message,
+                                  direction: mList[0].message[index].senderId != widget.senderId ? "left" : "right",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                                 );
                               },
-                              itemCount: item[0].message.length,
+                              itemCount: mList[0].message.length,
                             ),
                           );
                         }else {
@@ -148,7 +150,7 @@ class _ChatPageState extends State<ChatPage> {
 
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
 
-    inAppAPIServices.sendMessage(receiverId, msg).then((value) => {
+    inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
 
       print(receiverId),
       print(msg),
@@ -157,16 +159,15 @@ class _ChatPageState extends State<ChatPage> {
         // messagesList = getChat(),
         // Navigator.pop(context),
         // chatLists = getChat(),
-        setState(() {
-          messagesList = getChata();
-        })
+        _scrollController.jumpTo(_scrollController.position.maxScrollExtent),
+
       }
     });
   }
 
 
   getChata() async {
-    return await getChatList(null, widget.senderId);
+    return await getChatList(widget.senderId);
   }
 
 
@@ -185,8 +186,7 @@ class _ChatPageState extends State<ChatPage> {
 }
 
 class ChatArguments {
-  final String chatId;
   final String senderId;
 
-  ChatArguments(this.chatId, this.senderId);
+  ChatArguments(this.senderId);
 }

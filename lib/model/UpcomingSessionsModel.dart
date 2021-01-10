@@ -67,8 +67,8 @@ class PaginationData {
 class Result {
     Result({
         this.date,
-        this.prescription,
-        this.resultLibrary,
+        // this.prescription,
+        // this.resultLibrary,
         this.sessionStatus,
         this.id,
         this.patientId,
@@ -83,8 +83,8 @@ class Result {
     });
 
     DateTime date;
-    List<dynamic> prescription;
-    List<dynamic> resultLibrary;
+    // List<dynamic> prescription;
+    // List<dynamic> resultLibrary;
     String sessionStatus;
     String id;
     PatientId patientId;
@@ -99,8 +99,8 @@ class Result {
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         date: DateTime.parse(json["date"]),
-        prescription: List<dynamic>.from(json["prescription"].map((x) => x)),
-        resultLibrary: List<dynamic>.from(json["library"].map((x) => x)),
+        // prescription: List<dynamic>.from(json["prescription"].map((x) => x)),
+        // resultLibrary: List<dynamic>.from(json["library"].map((x) => x)),
         sessionStatus: json["session_Status"],
         id: json["_id"],
         patientId: PatientId.fromJson(json["patientId"]),
@@ -116,8 +116,8 @@ class Result {
 
     Map<String, dynamic> toJson() => {
         "date": date.toIso8601String(),
-        "prescription": List<dynamic>.from(prescription.map((x) => x)),
-        "library": List<dynamic>.from(resultLibrary.map((x) => x)),
+        // "prescription": List<dynamic>.from(prescription.map((x) => x)),
+        // "library": List<dynamic>.from(resultLibrary.map((x) => x)),
         "session_Status": sessionStatus,
         "_id": id,
         "patientId": patientId.toJson(),
