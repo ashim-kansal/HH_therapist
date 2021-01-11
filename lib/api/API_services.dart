@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ClientListing.dart';
@@ -357,7 +358,7 @@ class InAppAPIServices {
 
   Future<CommonResponse> sendMessage(receiverId, msg) async {
     var token = await GetStringToSP("token");
-  print('sssss'+  receiverId);
+    print('sssss'+  receiverId);
     final url = HHString.baseURL +"chat/chatAPI";
     final response = await http.post(url,
         headers: {
@@ -379,31 +380,73 @@ class InAppAPIServices {
   }
 
   // add presription / handout
-  Future<CommonResponse> addPrescription(sessionId, prescription, library, note) async {
+  Future<CommonResponse> addPrescription({sessionId, File prescription, File library, note}) async {
    
     var token = await GetStringToSP("token");
-    print(
-      jsonEncode({
-          "sessionId": sessionId,
-          "prescription": prescription??"",
-          "library": library??"",
-          "note": note??""
-        })
-    );
-    final url = HHString.baseURL +"therapist/addPrescription_handout";
-    final response = await http.post(url,
-        headers: {
-          "Content-Type": "application/json",
-          "token": token??HHString.token},
-        
-        body: jsonEncode({
-          "sessionId": sessionId,
-          "prescription": prescription??"",
-          "library": library??"",
-          "note": note??""
-        }));
 
-      print(response.body);
+    final url = HHString.baseURL +"therapist/addPrescription_handout";
+    
+    // print(
+    //   jsonEncode({
+    //      "sessionId": sessionId,
+    //       "prescription": prescription??"",
+    //       "library": library??"",
+    //       "note": note??""
+    //     })
+    // );
+    var request = http.MultipartRequest(
+      'POST', Uri.parse(url),
+    );
+    Map<String,String> headers={
+      "token": token??HHString.token,
+      "session_id": sessionId,
+      "Content-type": "multipart/form-data"
+    };
+
+    if(prescription != null){
+      request.files.add(
+        http.MultipartFile(
+          'prescription',
+          prescription.readAsBytes().asStream(),
+          prescription.lengthSync(),
+          filename: prescription.path.split("/").last,
+        ),
+      );
+    }
+    
+    if(library != null){
+      request.files.add(
+        http.MultipartFile(
+          'library',
+          library.readAsBytes().asStream(),
+          library.lengthSync(),
+          filename: library.path.split("/").last,
+        ),
+      );
+    }
+    
+    request.fields["note"] = note??"";
+    request.headers.addAll(headers);
+    print("request-1: "+request.toString());
+    var res = await request.send();
+    print(res);
+    var response = await http.Response.fromStream(res);
+    Map<String, dynamic> data = json.decode(response.body);
+    print(response.body);
+
+    // final response = await http.post(url,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "token": token??HHString.token,
+    //       "sessionId": sessionId},
+        
+    //     body: jsonEncode({
+    //       "prescription": prescription??"",
+    //       "library": library??"",
+    //       "note": note??""
+    //     }));
+
+    //   print(response.body);
 
     if(response.statusCode == 200){
       return CommonResponse.fromJson(jsonDecode(response.body));
