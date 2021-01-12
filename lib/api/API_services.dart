@@ -1,6 +1,5 @@
 
 import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/model/ChatList.dart';
 import 'package:flutter_app/model/ClientListing.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/PatientNotesList.dart';
 import 'package:flutter_app/model/QuestionarieModel.dart';
 import 'package:flutter_app/model/ReviewResponse.dart';
+import 'package:flutter_app/model/SendMessageResponse.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/utils/allstrings.dart';
 import 'package:http/http.dart' as http;
@@ -356,7 +356,7 @@ class InAppAPIServices {
     
   }
 
-  Future<CommonResponse> sendMessage(receiverId, msg) async {
+  Future<SendMessageResponse> sendMessage(receiverId, msg) async {
     var token = await GetStringToSP("token");
     print('sssss'+  receiverId);
     final url = HHString.baseURL +"chat/chatAPI";
@@ -372,15 +372,11 @@ class InAppAPIServices {
 
       print(response.body);
 
-    if(response.statusCode == 200){
-      return CommonResponse.fromJson(jsonDecode(response.body));
-    }else {
-      throw Exception("Failed to add note");
-    }
+      return sendMessageResponseFromJson(response.body);
   }
 
   // add presription / handout
-  Future<CommonResponse> addPrescription({sessionId, File prescription, File library, note}) async {
+  Future<CommonResponse> addPrescription(String sessionId, File prescription, File library,String note) async {
    
     var token = await GetStringToSP("token");
 

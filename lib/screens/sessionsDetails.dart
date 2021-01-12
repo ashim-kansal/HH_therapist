@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
@@ -42,8 +42,8 @@ class SessionPageState extends State<SessionDetails>{
   Future drinkingDiaryList;
   int pos = 0;
 
-  PlatformFile prescription;
-  PlatformFile handOut;
+  // PlatformFile prescription;
+  // PlatformFile handOut;
 
   File pFile;
   File hFile;
@@ -60,34 +60,34 @@ class SessionPageState extends State<SessionDetails>{
     drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
   }
 
-  void uploadDoc(type) async{
-
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-          type: FileType.custom,
-          allowMultiple: false,
-          allowedExtensions: ['jpg', 'pdf', 'doc'],
-        );
-
-    switch (type) {
-      case "prescription":
-        print(result.files.single.path);
-        setState(() {
-          pFile = File(result.files.single.path);
-          prescriptionPath = result.files.single.path;
-          prescriptionName = result.files.single.name;
-        });
-        break;
-      case "handout":
-        print(result.files.single.path);
-        setState(() {
-          hFile = File(result.files.single.path);
-          handoutPath = result.files.single.path;
-          handoutName = result.files.single.name;
-        });
-        break;
-      default:
-    }
-  }
+  // void uploadDoc(type) async{
+  //
+  //   FilePickerResult result = await FilePicker.platform.pickFiles(
+  //         type: FileType.custom,
+  //         allowMultiple: false,
+  //         allowedExtensions: ['jpg', 'pdf', 'doc'],
+  //       );
+  //
+  //   switch (type) {
+  //     case "prescription":
+  //       print(result.files.single.path);
+  //       setState(() {
+  //         pFile = File(result.files.single.path);
+  //         prescriptionPath = result.files.single.path;
+  //         prescriptionName = result.files.single.name;
+  //       });
+  //       break;
+  //     case "handout":
+  //       print(result.files.single.path);
+  //       setState(() {
+  //         hFile = File(result.files.single.path);
+  //         handoutPath = result.files.single.path;
+  //         handoutName = result.files.single.name;
+  //       });
+  //       break;
+  //     default:
+  //   }
+  // }
 
    // show circular 
   buildShowDialog(BuildContext context) {
@@ -109,7 +109,7 @@ class SessionPageState extends State<SessionDetails>{
     var noteText = noteController.text;
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
     buildShowDialog(context);
-    inAppAPIServices.addPrescription(widget.session.id, prescriptionPath, handoutPath, noteController.text).then((value) => {
+    inAppAPIServices.addPrescription(widget.session.id.toString(), pFile, hFile, noteController.text.toString()).then((value) => {
        Navigator.of(context).pop(),
       Timer(Duration(seconds: 1),
       ()=> {
@@ -375,12 +375,12 @@ class SessionPageState extends State<SessionDetails>{
             children: [
             AddFileCard(title: "Add Prescription", size: 22, 
               selectDoc: (){
-                uploadDoc("prescription");
+                // uploadDoc("prescription");
               },
               filename:prescriptionName
             ),
             AddFileCard(title: "Add Handout", size: 22, selectDoc: (){
-              uploadDoc("handout");
+              // uploadDoc("handout");
             }, filename:handoutName)
           ],)
         ),

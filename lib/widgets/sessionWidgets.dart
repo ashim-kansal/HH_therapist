@@ -96,7 +96,7 @@ class SessionCard extends StatelessWidget {
                                   child: FlatButton(
                                     color: Colors.white,
                                     child: Icon(Icons.chat
-                                      , color: HH_Colors.primaryColor, size: 18,),
+                                      , color: HH_Colors.accentColor, size: 18,),
                                     onPressed: (){
                                       print('receiverId  : '+data.patientId.id);
                                       Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id));
@@ -344,7 +344,7 @@ class UpcomingSessionItem extends StatelessWidget {
                         minWidth: 25,
                         child: FlatButton(
                           color: Colors.white,
-                          child: Icon(Icons.chat, color: HH_Colors.primaryColor, size: 18,),
+                          child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
                           onPressed: (){
                             Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id));
                           },
