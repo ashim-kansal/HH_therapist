@@ -15,7 +15,7 @@ class HHString{
   static const String logout_msg = "Are you sure you want to log out of the app ?";
   static const String note = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
-  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZWIxMzllYzEzMzIzN2ZmNGFkMWU4NyIsImlhdCI6MTYxMDIwNTk2MCwiZXhwIjoxNjEwMjkyMzYwfQ.pDO_LzRRQ_L4N67xhQsICXIPBXa9qeOFhfPEH3P2HUM";
+  static const String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZWIxMzllYzEzMzIzN2ZmNGFkMWU4NyIsImlhdCI6MTYxMDI1ODczMywiZXhwIjoxNjEwMzQ1MTMzfQ.hyLVKIq6QUsfqpBTnbvh0PM8Nu-Epf8f7tmLTLFv-Vo";
 
   static const String uid = "5fd9c6aa9a512f3059c0f271";
 }

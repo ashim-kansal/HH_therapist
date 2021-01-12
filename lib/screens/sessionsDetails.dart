@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class SessionPageState extends State<SessionDetails>{
   bool isJournling = false;
   List<Diary.Result> graphData;
   String label = '';
-  String prescriptionPath;
+  var prescriptionPath;
   String prescriptionName;
   String handoutPath;
   String handoutName;
@@ -40,6 +41,12 @@ class SessionPageState extends State<SessionDetails>{
   Future journalList;
   Future drinkingDiaryList;
   int pos = 0;
+
+  PlatformFile prescription;
+  PlatformFile handOut;
+
+  File pFile;
+  File hFile;
 
   TextEditingController noteController = TextEditingController();
 
@@ -65,6 +72,7 @@ class SessionPageState extends State<SessionDetails>{
       case "prescription":
         print(result.files.single.path);
         setState(() {
+          pFile = File(result.files.single.path);
           prescriptionPath = result.files.single.path;
           prescriptionName = result.files.single.name;
         });
@@ -72,6 +80,7 @@ class SessionPageState extends State<SessionDetails>{
       case "handout":
         print(result.files.single.path);
         setState(() {
+          hFile = File(result.files.single.path);
           handoutPath = result.files.single.path;
           handoutName = result.files.single.name;
         });
@@ -93,11 +102,11 @@ class SessionPageState extends State<SessionDetails>{
   }
 
   void onSubmit() async {
-
-    if(prescriptionPath == "" && handoutPath == "" && noteController.text.trim() == ""){
+    if(prescriptionPath == null && handoutPath == null && noteController.text.trim() == ""){
       return;
     }
 
+    var noteText = noteController.text;
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
     buildShowDialog(context);
     inAppAPIServices.addPrescription(widget.session.id, prescriptionPath, handoutPath, noteController.text).then((value) => {
@@ -107,7 +116,15 @@ class SessionPageState extends State<SessionDetails>{
         showToast(value.responseMsg)
       }),
       if(value.responseCode == 200){
-        noteController.clear()
+        noteController.clear(),
+         setState(() {
+          hFile = null;
+          handoutPath = null;
+          handoutName = null;
+          pFile = null;
+          prescriptionPath = null;
+          prescriptionName = null;
+        }),
       }
     });
   }
@@ -374,7 +391,8 @@ class SessionPageState extends State<SessionDetails>{
           child: HHEditText(
             hint: "Write Notes",
             minLines: 4,
-          ),  
+            controller: noteController,
+          ),
         ),
 
           Align(
