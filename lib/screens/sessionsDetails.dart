@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
+import 'package:flutter_app/model/UpcomingSessionsModel.dart' as SessionModal;
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
@@ -16,10 +17,10 @@ import 'package:toast/toast.dart';
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
 
-  String sessionId;
+  SessionModal.Result session;
   String patientId;
 
-  SessionDetails({Key key, this.sessionId, this.patientId}) : super(key: key);
+  SessionDetails({Key key, this.session, this.patientId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>SessionPageState();
@@ -41,8 +42,8 @@ class SessionPageState extends State<SessionDetails>{
   Future drinkingDiaryList;
   int pos = 0;
 
-  PlatformFile prescription;
-  PlatformFile handOut;
+  // PlatformFile prescription;
+  // PlatformFile handOut;
 
   File pFile;
   File hFile;
@@ -59,34 +60,34 @@ class SessionPageState extends State<SessionDetails>{
     drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
   }
 
-  void uploadDoc(type) async{
-
-    FilePickerResult result = await FilePicker.platform.pickFiles(
-          type: FileType.custom,
-          allowMultiple: false,
-          allowedExtensions: ['jpg', 'pdf', 'doc'],
-        );
-
-    switch (type) {
-      case "prescription":
-        print(result.files.single.path);
-        setState(() {
-          pFile = File(result.files.single.path);
-          prescriptionPath = result.files.single.path;
-          prescriptionName = result.files.single.name;
-        });
-        break;
-      case "handout":
-        print(result.files.single.path);
-        setState(() {
-          hFile = File(result.files.single.path);
-          handoutPath = result.files.single.path;
-          handoutName = result.files.single.name;
-        });
-        break;
-      default:
-    }
-  }
+  // void uploadDoc(type) async{
+  //
+  //   FilePickerResult result = await FilePicker.platform.pickFiles(
+  //         type: FileType.custom,
+  //         allowMultiple: false,
+  //         allowedExtensions: ['jpg', 'pdf', 'doc'],
+  //       );
+  //
+  //   switch (type) {
+  //     case "prescription":
+  //       print(result.files.single.path);
+  //       setState(() {
+  //         pFile = File(result.files.single.path);
+  //         prescriptionPath = result.files.single.path;
+  //         prescriptionName = result.files.single.name;
+  //       });
+  //       break;
+  //     case "handout":
+  //       print(result.files.single.path);
+  //       setState(() {
+  //         hFile = File(result.files.single.path);
+  //         handoutPath = result.files.single.path;
+  //         handoutName = result.files.single.name;
+  //       });
+  //       break;
+  //     default:
+  //   }
+  // }
 
    // show circular 
   buildShowDialog(BuildContext context) {
@@ -108,7 +109,7 @@ class SessionPageState extends State<SessionDetails>{
     var noteText = noteController.text;
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
     buildShowDialog(context);
-    inAppAPIServices.addPrescription(sessionId:widget.sessionId, prescription:pFile, library:hFile, note:noteText).then((value) => {
+    inAppAPIServices.addPrescription(widget.session.id.toString(), pFile, hFile, noteController.text.toString()).then((value) => {
        Navigator.of(context).pop(),
       Timer(Duration(seconds: 1),
       ()=> {
@@ -138,7 +139,7 @@ class SessionPageState extends State<SessionDetails>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'Session Details', child: Container(
+    return MyWidget(title: widget.session.patientId.firstName+' '+widget.session.patientId.firstName, child: Container(
       child: SingleChildScrollView(
         child: 
         Column(
@@ -374,12 +375,12 @@ class SessionPageState extends State<SessionDetails>{
             children: [
             AddFileCard(title: "Add Prescription", size: 22, 
               selectDoc: (){
-                uploadDoc("prescription");
+                // uploadDoc("prescription");
               },
               filename:prescriptionName
             ),
             AddFileCard(title: "Add Handout", size: 22, selectDoc: (){
-              uploadDoc("handout");
+              // uploadDoc("handout");
             }, filename:handoutName)
           ],)
         ),
@@ -391,7 +392,7 @@ class SessionPageState extends State<SessionDetails>{
             hint: "Write Notes",
             minLines: 4,
             controller: noteController,
-          ),  
+          ),
         ),
 
           Align(
@@ -443,7 +444,7 @@ class SessionPageState extends State<SessionDetails>{
 }
 
 class SessionDetailsArguments {
-  final String data;
+  final SessionModal.Result data;
   final String patientId;
 
   SessionDetailsArguments(this.data, this.patientId);

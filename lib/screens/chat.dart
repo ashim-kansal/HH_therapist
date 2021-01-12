@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/ChatList.dart';
-import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/utils/Utils.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/message_widget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -25,13 +25,12 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   // final List<Message> _messages = <Message>[];
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
+  List<Message> message;
+  Result _user;
 
   Future messagesList;
-  List<Result> mList = new List();
   String receiverId;
-  // Create a text controller. We will use it to retrieve the current value
-  // of the TextField!
   final _textController = TextEditingController();
 
    @override
@@ -41,14 +40,26 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   getChat() async {
-    return await getChatList(widget.senderId);
+    return await getChatList(widget.senderId).then((value) => {
+      if(value.responseCode == 200){
+        setState((){
+          _user = value.result.length > 0 ? value.result[0] : null;
+          message = value.result[0].message;
+        })
+      }
+    });
 
   }
-
+  _scrollToEnd() async {
+    if(_scrollController.hasClients)
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+  }
   @override
   Widget build(BuildContext context) {
     DateTime time = DateTime.now();
     String formattedDate = DateFormat('yyyy-MM-dd hh:mm').format(time);
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToEnd());
 
     return new MyWidget(
       title: AppLocalizations.of(context).chat,
@@ -59,40 +70,23 @@ class _ChatPageState extends State<ChatPage> {
             child: new Container(
               child: new Column(
                 children: <Widget>[
-                  //Chat list
-                  FutureBuilder(
-                      future: messagesList,
-                      builder: (context, snapshot){
-                        if(snapshot.connectionState == ConnectionState.done){
-                          if(snapshot.hasError){
-                            return  Center(child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),);
-                          }
-                          // mList.clear();
-                          mList = snapshot.data.result;
-                          return new Flexible(
-                            child: new ListView.builder(
+                          new Flexible(
+                            child:(message??List()).length > 0 ? new ListView.builder(
                               padding: new EdgeInsets.all(8.0),
                               controller: _scrollController,
                               itemBuilder: (context, int index) {
-                                receiverId = mList[0].senderId.id;
-                                var _date = mList[0].message[index].createdAt;
+                                receiverId = _user.senderId.id;
+                                var _date = message[index].createdAt;
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
-                                  msg: mList[0].message[index].message,
-                                  direction: mList[0].message[index].senderId != widget.senderId ? "left" : "right",
+                                  msg: message[index].message,
+                                  direction: message[index].senderId != widget.senderId ? "left" : "right",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                                 );
                               },
-                              itemCount: mList[0].message.length,
-                            ),
-                          );
-                        }else {
-                          return Container(
-                            child: Center(child: CircularProgressIndicator()),
-                          );
-                        }
-                      },
-                    ),
+                              itemCount: (message??List()).length,
+                            ) : Center(child: Text(AppLocalizations.of(context).no_msg),),
+                          ),
                  
                   new Divider(height: 1.0),
                   new Container(
@@ -119,7 +113,7 @@ class _ChatPageState extends State<ChatPage> {
                                       child: new IconButton(
                                           icon: Image.asset(
                                               "assets/images/ic_chat_send.png"),
-                                          onPressed: () => _sendMsg(
+                                          onPressed: () => _sendMsg(context,
                                               _textController.text,
                                               'right',
                                               formattedDate)),
@@ -135,10 +129,12 @@ class _ChatPageState extends State<ChatPage> {
             )));
   }
 
-  void _sendMsg( String msg, String messageDirection, String date) {
+  void _sendMsg(BuildContext context, String msg, String messageDirection, String date) {
 
-    var chatLists;
     if (msg.trim().length == 0) {
+
+      showToast(context,
+          "Please Enter Message");
       return;
     }
 
@@ -159,7 +155,12 @@ class _ChatPageState extends State<ChatPage> {
         // messagesList = getChat(),
         // Navigator.pop(context),
         // chatLists = getChat(),
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent),
+        setState(() {
+          message = value.result.message;
+          _user = value.result;
+          // messageWidget.insert(0, messageWidget);
+        }),
+        _scrollToEnd()
 
       }
     });

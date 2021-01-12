@@ -81,7 +81,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity,));
     case SessionDetails.RouteName:
       final SessionDetailsArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => SessionDetails(sessionId: args.data, patientId: args.patientId,));
+      return MaterialPageRoute(builder: (context) => SessionDetails(session: args.data, patientId: args.patientId,));
     case NotesPage.RouteName:
       final NotesArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => NotesPage(patientId: args.data));
