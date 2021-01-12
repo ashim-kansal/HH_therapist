@@ -83,7 +83,7 @@ class SessionCard extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
                             Row(
-                                children: [Text('' ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                                children: [Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,7 +288,7 @@ class UpcomingSessionItem extends StatelessWidget {
                 children: [
                   new GestureDetector(
                     onTap: (){
-                      Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data.id, data.patientId.id));
+                      Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data, data.patientId.id));
                     },
                     child: Row(
                       children: [

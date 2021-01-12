@@ -278,6 +278,41 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
+              SizedBox(height: 15,),
+              Container(
+                child: Center(
+                  child : Row(
+                      children: <Widget>[
+                        Checkbox(
+                          checkColor: Colors.white,
+                          activeColor: HH_Colors.purpleColor,
+                          value: isChecked,
+                          onChanged: (bool value) {
+                            setState(() {
+                              isChecked = !isChecked;
+                            });
+                          },
+                        ),
+                        Flexible(
+                            child: Center(child:
+                            RichText(
+                              text: TextSpan(
+                                text: AppLocalizations.of(context).agree_desc,
+                                style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
+                                children: <TextSpan>[
+                                  TextSpan(text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                                  TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14, fontFamily: "ProximaNova")),
+                                  TextSpan(text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                                ],
+                              ),
+                            )
+                              ,) ),
+                      ]
+                  ),
+                ),
+              ),
+
+
             ],
           )),
       backgroundColor: Colors.white,

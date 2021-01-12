@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
+import 'package:flutter_app/model/UpcomingSessionsModel.dart' as SessionModal;
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
@@ -15,10 +16,10 @@ import 'package:toast/toast.dart';
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
 
-  String sessionId;
+  SessionModal.Result session;
   String patientId;
 
-  SessionDetails({Key key, this.sessionId, this.patientId}) : super(key: key);
+  SessionDetails({Key key, this.session, this.patientId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>SessionPageState();
@@ -99,7 +100,7 @@ class SessionPageState extends State<SessionDetails>{
 
     InAppAPIServices inAppAPIServices = new InAppAPIServices();
     buildShowDialog(context);
-    inAppAPIServices.addPrescription(widget.sessionId, prescriptionPath, handoutPath, noteController.text).then((value) => {
+    inAppAPIServices.addPrescription(widget.session.id, prescriptionPath, handoutPath, noteController.text).then((value) => {
        Navigator.of(context).pop(),
       Timer(Duration(seconds: 1),
       ()=> {
@@ -121,7 +122,7 @@ class SessionPageState extends State<SessionDetails>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: 'Session Details', child: Container(
+    return MyWidget(title: widget.session.patientId.firstName+' '+widget.session.patientId.firstName, child: Container(
       child: SingleChildScrollView(
         child: 
         Column(
@@ -425,7 +426,7 @@ class SessionPageState extends State<SessionDetails>{
 }
 
 class SessionDetailsArguments {
-  final String data;
+  final SessionModal.Result data;
   final String patientId;
 
   SessionDetailsArguments(this.data, this.patientId);

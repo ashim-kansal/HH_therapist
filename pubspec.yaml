@@ -28,7 +28,7 @@ dependencies:
   flutter_localizations: # Add this line
     sdk: flutter
   
-  intl_translation: ^0.17.0
+  intl_translation: ^0.17.0-nullsafety.2
 
   firebase_core: ^0.5.3
   firebase_messaging: ^7.0.3
@@ -41,7 +41,7 @@ dependencies:
   shared_preferences: ^0.5.12
   image_picker: ^0.6.7+17
   simple_moment: ^1.0.7
-  file_picker: ^2.1.5+1
+  file_picker: ^2.1.5
   # stripe_payment: ^1.0.9
 
 
@@ -55,8 +55,8 @@ dependencies:
   wakelock: ^0.1.4
   # intl_translation: ^0.17.1
 
-dependency_overrides:
-  intl: 0.17.0-nullsafety.2
+#dependency_overrides:
+#  intl: 0.17.0-nullsafety.2
   
 dev_dependencies:
   flutter_test:
