@@ -30,7 +30,7 @@ class _ChatPageState extends State<ChatPage> {
   Result _user;
 
   Future messagesList;
-  String receiverId;
+  // String receiverId;
   final _textController = TextEditingController();
 
    @override
@@ -43,7 +43,7 @@ class _ChatPageState extends State<ChatPage> {
     return await getChatList(widget.senderId).then((value) => {
       if(value.responseCode == 200){
         setState((){
-          _user = value.result.length > 0 ? value.result[0] : null;
+          // _user = value.result.length > 0 ? value.result[0] : null;
           message = value.result[0].message;
         })
       }
@@ -75,7 +75,7 @@ class _ChatPageState extends State<ChatPage> {
                               padding: new EdgeInsets.all(8.0),
                               controller: _scrollController,
                               itemBuilder: (context, int index) {
-                                receiverId = _user.senderId.id;
+                                // receiverId = _user.senderId.id;
                                 var _date = message[index].createdAt;
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
@@ -148,7 +148,7 @@ class _ChatPageState extends State<ChatPage> {
 
     inAppAPIServices.sendMessage(widget.senderId, msg).then((value) => {
 
-      print(receiverId),
+      // print(receiverId),
       print(msg),
       if(value.responseCode == 200){
         _textController.clear(),
@@ -157,7 +157,7 @@ class _ChatPageState extends State<ChatPage> {
         // chatLists = getChat(),
         setState(() {
           message = value.result.message;
-          _user = value.result;
+          // _user = value.result;
           // messageWidget.insert(0, messageWidget);
         }),
         _scrollToEnd()
