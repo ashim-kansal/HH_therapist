@@ -84,7 +84,10 @@ class SessionCard extends StatelessWidget {
                                 ]),
                             Row(
                                 children: [
-                                  Expanded(child: Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),)
+                                  Container(
+                                    child: Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                                  ),
+                                  // Expanded(child: )
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
