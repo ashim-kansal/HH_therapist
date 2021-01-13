@@ -89,7 +89,8 @@ class SessionPageState extends State<SessionDetails>{
   //   }
   // }
 
-   // show circular 
+   // show circular
+
   buildShowDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -375,12 +376,12 @@ class SessionPageState extends State<SessionDetails>{
             children: [
             AddFileCard(title: "Add Prescription", size: 22, 
               selectDoc: (){
-                // uploadDoc("prescription");
+                uploadDoc("prescription");
               },
               filename:prescriptionName
             ),
             AddFileCard(title: "Add Handout", size: 22, selectDoc: (){
-              // uploadDoc("handout");
+              uploadDoc("handout");
             }, filename:handoutName)
           ],)
         ),

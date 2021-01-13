@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
     initializeDateFormatting();
 
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'HH Therapist',
         onGenerateRoute: router.generateRoute,
         initialRoute: Splash.RouteName,
         localizationsDelegates: [
