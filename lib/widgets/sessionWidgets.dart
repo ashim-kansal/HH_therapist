@@ -40,25 +40,55 @@ class SessionCard extends StatelessWidget {
               },
               child:  Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child:Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10,),
-
+                child:  Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 5,),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
                         Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
-                      SizedBox(height: 15,),
+                        Spacer(),
+                        HHOptionButton(onClickCancel: (){
+                          showDialog(context: context,
+                            builder: (BuildContext dialogContext) {
+                              return CancelDialog(
+                                  onYesPress: ()async {
+                                    cancelSession(data.id).then(
+                                            (value) => {
 
-                      // SizedBox(height: 5,),
+                                          print(value.responseCode),
+                                          if (value.responseCode == 200) {
+                                            Navigator.pop(context),
+                                            showToast(context, value.responseMessage),
+
+                                            onClickCancel()
+                                            // Navigator.pushNamed(context, Dashboard.RouteName)
+                                          }
+                                        });
+                                    // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                  },
+                                  onDenyPress: (){
+                                    Navigator.pop(context);
+                                  }
+                              );
+                            },
+                          );
+                        }, onClickReSchedule: (){
+                          Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                        },)
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+
+                    // SizedBox(height: 5,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        data.patientId.profilePic == ""?
+                        Flexible(flex: 3, fit: FlexFit.loose,child: data.patientId.profilePic == ""?
                         Image.asset(
                           'assets/images/ic_avatar.png',
                           height: 18,
@@ -66,29 +96,21 @@ class SessionCard extends StatelessWidget {
                         ) : CircleAvatar(
                           backgroundImage: NetworkImage(data.patientId.profilePic),
                           radius: 18,
-                          // Image.network(profileImage,
-                          // height: 50,
-                          // width: 50,),
-                        ),
+                        )),
                         SizedBox(width: 10,),
-                        Column(
+                        Flexible(flex:7, fit: FlexFit.loose,
+                            child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Row(
                                 children: [
-
                                   Text(drname ,textAlign:TextAlign.start,
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
-                            Row(
-                                children: [
-                                  Container(
-                                    child: Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
-                                  ),
-                                  // Expanded(child: )
-                                ]),
+
+                            Text(data.programName ,textAlign:TextAlign.start,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070))
+                            ,
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -125,7 +147,7 @@ class SessionCard extends StatelessWidget {
                             )
 
                           ],
-                        )
+                        ))
                       ],
                     ),
 
@@ -134,35 +156,125 @@ class SessionCard extends StatelessWidget {
 
                   ],
                 ),
-                  HHOptionButton(onClickCancel: (){
-                    showDialog(context: context,
-                      builder: (BuildContext dialogContext) {
-                        return CancelDialog(
-                            onYesPress: ()async {
-                              cancelSession(data.id).then(
-                                      (value) => {
-
-                                    print(value.responseCode),
-                                    if (value.responseCode == 200) {
-                                      Navigator.pop(context),
-                                      showToast(context, value.responseMessage),
-
-                                      onClickCancel()
-                                      // Navigator.pushNamed(context, Dashboard.RouteName)
-                                    }
-                                  });
-                              // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                            },
-                            onDenyPress: (){
-                              Navigator.pop(context);
-                            }
-                        );
-                      },
-                    );
-                  }, onClickReSchedule: (){
-                    Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
-                  },)
-                ]),
+                // child:Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children:[
+                //   Column(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       SizedBox(height: 10,),
+                //
+                //         Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                //       SizedBox(height: 15,),
+                //
+                //       // SizedBox(height: 5,),
+                //     Row(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       mainAxisSize: MainAxisSize.min,
+                //       children: [
+                //         Flexible(flex: 3, fit: FlexFit.loose,child: data.patientId.profilePic == ""?
+                //         Image.asset(
+                //           'assets/images/ic_avatar.png',
+                //           height: 18,
+                //           width: 18,
+                //         ) : CircleAvatar(
+                //           backgroundImage: NetworkImage(data.patientId.profilePic),
+                //           radius: 18,
+                //         )),
+                //         SizedBox(width: 10,),
+                //         Flexible(flex:7, fit: FlexFit.loose,child: Column(
+                //           mainAxisAlignment: MainAxisAlignment.start,
+                //           crossAxisAlignment: CrossAxisAlignment.start,
+                //           children: [
+                //
+                //             Row(
+                //                 children: [
+                //
+                //                   Text(drname ,textAlign:TextAlign.start,
+                //                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
+                //                 ]),
+                //
+                //                   // Flexible(flex :1,child:
+                //                   Text(data.programName ,maxLines:2,textAlign:TextAlign.start,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070))
+                //                     // ,)
+                //                 ,
+                //             Row(
+                //               crossAxisAlignment: CrossAxisAlignment.start,
+                //               mainAxisAlignment: MainAxisAlignment.start,
+                //               children: [
+                //
+                //                 ButtonTheme(
+                //                   height: 40,
+                //                   minWidth: 35,
+                //                   child: FlatButton(
+                //                     color: Colors.white,
+                //                     child: Icon(Icons.chat
+                //                       , color: HH_Colors.accentColor, size: 18,),
+                //                     onPressed: (){
+                //                       print('receiverId  : '+data.patientId.id);
+                //                       Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id));
+                //                     },
+                //                     shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                //                   ),
+                //                 ),
+                //
+                //                 ButtonTheme(
+                //                     height: 40,
+                //                     minWidth: 40,
+                //                     child: FlatButton(
+                //                       color: Colors.white,
+                //                       child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                //                       onPressed: (){
+                //                         onClickVideo();
+                //                       },
+                //                       shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                //                     )),
+                //
+                //               ],
+                //             )
+                //
+                //           ],
+                //         ))
+                //       ],
+                //     ),
+                //
+                //
+                //
+                //
+                //   ],
+                // ),
+                  // HHOptionButton(onClickCancel: (){
+                  //   showDialog(context: context,
+                  //     builder: (BuildContext dialogContext) {
+                  //       return CancelDialog(
+                  //           onYesPress: ()async {
+                  //             cancelSession(data.id).then(
+                  //                     (value) => {
+                  //
+                  //                   print(value.responseCode),
+                  //                   if (value.responseCode == 200) {
+                  //                     Navigator.pop(context),
+                  //                     showToast(context, value.responseMessage),
+                  //
+                  //                     onClickCancel()
+                  //                     // Navigator.pushNamed(context, Dashboard.RouteName)
+                  //                   }
+                  //                 });
+                  //             // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                  //           },
+                  //           onDenyPress: (){
+                  //             Navigator.pop(context);
+                  //           }
+                  //       );
+                  //     },
+                  //   );
+                  // }, onClickReSchedule: (){
+                  //   Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                  // },)
+                // ]),
               ),
             )
         ));
