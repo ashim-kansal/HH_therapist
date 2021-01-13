@@ -60,34 +60,47 @@ class SessionPageState extends State<SessionDetails>{
     drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
   }
 
-  // void uploadDoc(type) async{
-  //
-  //   FilePickerResult result = await FilePicker.platform.pickFiles(
-  //         type: FileType.custom,
-  //         allowMultiple: false,
-  //         allowedExtensions: ['jpg', 'pdf', 'doc'],
-  //       );
-  //
-  //   switch (type) {
-  //     case "prescription":
-  //       print(result.files.single.path);
-  //       setState(() {
-  //         pFile = File(result.files.single.path);
-  //         prescriptionPath = result.files.single.path;
-  //         prescriptionName = result.files.single.name;
-  //       });
-  //       break;
-  //     case "handout":
-  //       print(result.files.single.path);
-  //       setState(() {
-  //         hFile = File(result.files.single.path);
-  //         handoutPath = result.files.single.path;
-  //         handoutName = result.files.single.name;
-  //       });
-  //       break;
-  //     default:
-  //   }
-  // }
+  _pickDocument() async {
+      String result = '';
+      try {
+        result = await FlutterDocumentPicker.openDocument();
+        print(result);
+      } catch (e) {
+        print(e);
+        result = 'Error: $e';
+      } finally {
+      }
+      return result;
+    }
+  void uploadDoc(type) async{
+
+    String result = _pickDocument();
+    // FilePickerResult result = await FilePicker.platform.pickFiles(
+    //       type: FileType.custom,
+    //       allowMultiple: false,
+    //       allowedExtensions: ['jpg', 'pdf', 'doc'],
+    //     );
+
+    switch (type) {
+      case "prescription":
+        // print(result.files.single.path);
+        setState(() {
+          pFile = File(result);
+          prescriptionPath = result;
+          prescriptionName = result.split('/').last;
+        });
+        break;
+      case "handout":
+        // print(result.files.single.path);
+        setState(() {
+          hFile = File(result);
+          handoutPath = result;
+          handoutName = result.split('/').last;
+        });
+        break;
+      default:
+    }
+  }
 
    // show circular
 
