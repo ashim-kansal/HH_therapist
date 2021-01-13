@@ -458,6 +458,7 @@ class AddFileCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: Container(
+        width: MediaQuery.of(context).size.width / 2.8,
         padding: EdgeInsets.fromLTRB(15, 5, 14, 8),
         child: Center(child: new GestureDetector(
           onTap: (){
@@ -465,7 +466,7 @@ class AddFileCard extends StatelessWidget {
           },
           child:  Column(children: [
             Image.asset('assets/images/fileadd.png', height: 80 ,width: 50,),
-            Text(filename??title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 14))
+            Text(filename??title, style: TextStyle(color: HH_Colors.purpleColor, fontSize: 13))
           ],
         ),
         )

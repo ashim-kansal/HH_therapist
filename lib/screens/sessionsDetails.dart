@@ -13,6 +13,8 @@ import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
+
 
 class SessionDetails extends StatefulWidget{
   static const String RouteName = '/sessionsDetails';
@@ -60,47 +62,82 @@ class SessionPageState extends State<SessionDetails>{
     drinkingDiaryList= inAppAPIServices.getDrinkingDiaryList(widget.patientId);
   }
 
-  _pickDocument() async {
+  _pickDocument(type) async {
       String result = '';
       try {
         result = await FlutterDocumentPicker.openDocument();
         print(result);
+        
+        switch (type) {
+          case "prescription":
+            print({
+                pFile = File(result),
+                prescriptionPath = result,
+                prescriptionName = result.split('/').last,
+              });
+            // print(result.files.single.path);
+            setState(() {
+              pFile = File(result);
+              prescriptionPath = result;
+              prescriptionName = result.split('/').last;
+            });
+            break;
+          case "handout":
+            // print(result.files.single.path);
+            setState(() {
+              hFile = File(result);
+              handoutPath = result;
+              handoutName = result.split('/').last;
+            });
+            break;
+          default:
+        }
       } catch (e) {
         print(e);
         result = 'Error: $e';
       } finally {
+      
       }
       return result;
     }
-  void uploadDoc(type) async{
 
-    String result = _pickDocument();
-    // FilePickerResult result = await FilePicker.platform.pickFiles(
-    //       type: FileType.custom,
-    //       allowMultiple: false,
-    //       allowedExtensions: ['jpg', 'pdf', 'doc'],
-    //     );
+    
+  // void uploadDoc(type) async{
 
-    switch (type) {
-      case "prescription":
-        // print(result.files.single.path);
-        setState(() {
-          pFile = File(result);
-          prescriptionPath = result;
-          prescriptionName = result.split('/').last;
-        });
-        break;
-      case "handout":
-        // print(result.files.single.path);
-        setState(() {
-          hFile = File(result);
-          handoutPath = result;
-          handoutName = result.split('/').last;
-        });
-        break;
-      default:
-    }
-  }
+  //   String result = _pickDocument(type);
+  //   // FilePickerResult result = await FilePicker.platform.pickFiles(
+  //   //       type: FileType.custom,
+  //   //       allowMultiple: false,
+  //   //       allowedExtensions: ['jpg', 'pdf', 'doc'],
+  //   //     );
+
+  //   switch (type) {
+  //     case "prescription":
+  //       print(
+  //         {
+  //         pFile = File(result),
+  //         prescriptionPath = result,
+  //         prescriptionName = result.split('/').last,
+  //       }
+  //       );
+  //       // print(result.files.single.path);
+  //       setState(() {
+  //         pFile = File(result);
+  //         prescriptionPath = result;
+  //         prescriptionName = result.split('/').last;
+  //       });
+  //       break;
+  //     case "handout":
+  //       // print(result.files.single.path);
+  //       setState(() {
+  //         hFile = File(result);
+  //         handoutPath = result;
+  //         handoutName = result.split('/').last;
+  //       });
+  //       break;
+  //     default:
+  //   }
+  // }
 
    // show circular
 
@@ -389,12 +426,12 @@ class SessionPageState extends State<SessionDetails>{
             children: [
             AddFileCard(title: "Add Prescription", size: 22, 
               selectDoc: (){
-                uploadDoc("prescription");
+                _pickDocument("prescription");
               },
               filename:prescriptionName
             ),
             AddFileCard(title: "Add Handout", size: 22, selectDoc: (){
-              uploadDoc("handout");
+              _pickDocument("handout");
             }, filename:handoutName)
           ],)
         ),
