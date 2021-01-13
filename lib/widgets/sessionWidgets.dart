@@ -83,7 +83,8 @@ class SessionCard extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
                             Row(
-                                children: [Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),
+                                children: [
+                                  Expanded(child: Text(data.programName ,textAlign:TextAlign.start,style: TextStyle(fontSize: 14, color: HH_Colors.grey_707070)),)
                                 ]),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,

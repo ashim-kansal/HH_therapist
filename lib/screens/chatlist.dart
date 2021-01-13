@@ -47,7 +47,7 @@ class _ChatListPageState extends State<ChatListPage> {
                 var _date = item.message[item.message.length - 1].createdAt;
                 Moment createdDt = Moment.parse('$_date');
                 return ChatUserCell(
-                  name: item.senderId.firstName+" "+item.senderId.lastName,
+                  name: item.receiverId.firstName+" "+item.receiverId.lastName,
                   message: item.message[item.message.length - 1].message,
                   profile: item.senderId.profilePic,
                   time: createdDt.format("hh:mm a"),
