@@ -80,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
                                   msg: message[index].message,
-                                  direction: message[index].senderId != widget.senderId ? "left" : "right",
+                                  direction: message[index].senderId == widget.senderId ? "left" : "right",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
                                 );
                               },
