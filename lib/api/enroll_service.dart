@@ -14,7 +14,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APIService {
-  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String deviceToken) async {
+  Future<LoginResponseModel> loginAPIHandler(String emailInput, String passwordInput, String fcmtoken, String voipToken) async {
     final url = HHString.baseURL +"therapist/login";
     String lang = await GetStringToSP("language");
 
@@ -23,8 +23,9 @@ class APIService {
       body: jsonEncode(<String, String>{
         "email": emailInput,
         "password": passwordInput,
-        "deviceToken": deviceToken,
-        "appLanguage":lang
+        "deviceToken": fcmtoken??"",
+        "appLanguage":lang,
+        "voipToken": voipToken??""
       })
     );
     
