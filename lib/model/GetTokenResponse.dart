@@ -22,12 +22,12 @@ class GetTokenResponse {
   factory GetTokenResponse.fromJson(Map<String, dynamic> json) => GetTokenResponse(
     responseCode: json["responseCode"],
     responseMessage: json["responseMessage"],
-    jwt: json["jwt"],
+    jwt: json["AccessToken"],
   );
 
   Map<String, dynamic> toJson() => {
     "responseCode": responseCode,
     "responseMessage": responseMessage,
-    "jwt": jwt,
+    "AccessToken": jwt,
   };
 }
