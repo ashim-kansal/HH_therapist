@@ -175,10 +175,12 @@ print(jsonEncode({
   return chatListFromJson(response.body);
 }
 
-Future<GetTokenResponse> getTwilioToken(roomName, identity) async {
+Future<GetTokenResponse> getTwilioToken(roomName, identity, recId) async {
   var token = await GetStringToSP("token");
   print(token);
-  final url = HHString.baseURL +"/video/tokenGenerate?user="+identity+"&room="+roomName;
+  print("rec  "+recId);
+  print("pat  "+identity);
+  final url = HHString.baseURL +"/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+recId;
   print(roomName);
   print(identity);
   final response = await http.get(url,

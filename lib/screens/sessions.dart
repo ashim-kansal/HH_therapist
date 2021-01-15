@@ -193,7 +193,7 @@ class SessionPageState extends State<SessionPage>{
 
   void getToken(therapistId, sessionId, result) {
     String roomName = 'room_'+sessionId;
-    getTwilioToken(roomName, therapistId).then(
+    getTwilioToken(roomName, therapistId,result.patientId.id).then(
             (value) => {
 
           print(value.responseCode),
