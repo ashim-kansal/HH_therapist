@@ -60,8 +60,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ProfilePage.RouteName:
       return MaterialPageRoute(builder: (context) => ProfilePage());
     case ReviewPage.RouteName:
-      final Result result = settings.arguments;
-      return MaterialPageRoute(builder: (context) => ReviewPage(data:result));
+      final ReviewPageArgument result = settings.arguments;
+      return MaterialPageRoute(builder: (context) => ReviewPage(id:result.id, programName: result.name,));
     case SettingsPage.RouteName:
       return MaterialPageRoute(builder: (context) => SettingsPage());
     case FeedbackPage.RouteName:
