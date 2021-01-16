@@ -34,11 +34,11 @@ class _CreateAccountState extends State<ProfilePage> {
   File _image;
   final picker = ImagePicker();
 
-  String name = "";
-  String email = "";
-  String phone = "";
-  String address = "";
-  String profilepic = "";
+  String name;
+  String email;
+  String phone;
+  String address;
+  String profilepic;
 
   Result userData;
 
@@ -194,7 +194,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       alignment: Alignment.topLeft,
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                                       child:HHTextView(
-                                        title: name,
+                                        title: name??"",
                                         size: 14,
                                         color: HH_Colors.grey_585858,
                                         textweight: FontWeight.w400,
@@ -227,7 +227,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       alignment: Alignment.topLeft,
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                                       child:HHTextView(
-                                        title: email,
+                                        title: email??"",
                                         size: 14,
                                         color: HH_Colors.grey_585858,
                                         textweight: FontWeight.w400,
@@ -260,7 +260,7 @@ class _CreateAccountState extends State<ProfilePage> {
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                                       alignment: Alignment.topLeft,
                                       child:HHTextView(
-                                        title: phone,
+                                        title: phone??"",
                                         size: 14,
                                         color: HH_Colors.grey_585858,
                                         textweight: FontWeight.w400,
