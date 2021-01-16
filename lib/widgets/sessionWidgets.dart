@@ -483,7 +483,10 @@ class UpcomingSessionItem extends StatelessWidget {
                             shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
                           )
                         ),
-                      HHOptionButton(onClickCancel: (){
+
+                      Container(
+                        margin: EdgeInsets.only(right: 10),
+                        child: HHOptionButton(onClickCancel: (){
                         showDialog(context: context,
                           builder: (BuildContext dialogContext) {
                             return CancelDialog(
@@ -509,7 +512,7 @@ class UpcomingSessionItem extends StatelessWidget {
                         );
                       }, onClickReSchedule: (){
                         Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
-                      },)
+                      },),)
                     ],
                   )
                 ],

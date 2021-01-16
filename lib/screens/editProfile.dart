@@ -163,8 +163,8 @@ class _CreateAccountState extends State<EditProfilePage> {
                               ),
                             ),
 
-                            Form(
-                              key: _formKey,
+                            Container(
+                              // key: _formKey,
                               child: Column(children: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(5, 25, 5, 10),

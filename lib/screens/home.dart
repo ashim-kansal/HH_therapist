@@ -128,6 +128,8 @@ class HomePageState extends State<HomePage> {
     getTwilioToken(roomName, therapistId, result.patientId.id, result.programName).then(
             (value) => {
               if (value.responseCode == "200") {
+                print(value.jwt??''),
+
                 Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt))
                     .then((value) => {
                   Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
