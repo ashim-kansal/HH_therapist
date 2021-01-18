@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_app/screens/privacy.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
@@ -34,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
-  bool isChecked = true;
+  bool isChecked = false;
   bool isApiCallProcess = false;
 
   String token = "";
@@ -105,6 +108,11 @@ class _LoginPageState extends State<LoginPage> {
       emailerror = false;
       pwderror = false;
     });
+
+    if(!isChecked){
+      showToast("Please agree with terms & conditions");
+      return;
+    }
 
     APIService apiService = new APIService();
     buildShowDialog(context);
@@ -307,9 +315,17 @@ class _LoginPageState extends State<LoginPage> {
                                 text: AppLocalizations.of(context).agree_desc,
                                 style: TextStyle(fontSize: 14, decoration: TextDecoration.none, color: Color(0xff707070), fontFamily: "ProximaNova"),
                                 children: <TextSpan>[
-                                  TextSpan(text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                                  TextSpan(
+                                    recognizer: TapGestureRecognizer()..onTap = () {
+                                      Navigator.pushNamed(context, TermsPage.RouteName);
+                                    },
+                                text: AppLocalizations.of(context).terms_service, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
                                   TextSpan(text: '& ', style: TextStyle(color: Color(0xff707070), decoration: TextDecoration.none, fontSize: 14, fontFamily: "ProximaNova")),
-                                  TextSpan(text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
+                                  TextSpan(
+                                    recognizer: TapGestureRecognizer()..onTap = () {
+                                      Navigator.pushNamed(context, PrivacyPolicy.RouteName);
+                                    },
+                                    text: AppLocalizations.of(context).privacy, style: TextStyle(color: HH_Colors.blue_5580FF, decoration: TextDecoration.underline, decorationColor: HH_Colors.blue_5580FF, fontSize: 14, fontFamily: "ProximaNova")),
                                 ],
                               ),
                             )

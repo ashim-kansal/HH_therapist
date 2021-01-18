@@ -17,11 +17,13 @@ import 'package:flutter_app/screens/feedback.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/language.dart';
 import 'package:flutter_app/screens/notification.dart';
+import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/screens/settings.dart';
+import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/twilio/conference/conference_page.dart';
@@ -88,6 +90,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AssessmentFormPage.RouteName:
       final AssessmentArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => AssessmentFormPage(id: args.id));
+    case TermsPage.RouteName:
+      return MaterialPageRoute(builder: (context) => TermsPage());
+    case PrivacyPolicy.RouteName:
+      return MaterialPageRoute(builder: (context) => PrivacyPolicy());
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }
