@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/services/navigation_service.dart';
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/navigation/router.dart' as router;
 // import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {  // This widget is the root of your application.
   AppLocalizationDelegate _localeOverrideDelegate = AppLocalizationDelegate(Locale('en', ''));
+  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
   // This widget is the root of your application.
 
   @override
@@ -30,6 +32,7 @@ class _MyAppState extends State<MyApp> {  // This widget is the root of your app
 
     return MaterialApp(
         title: 'HH Therapist',
+        navigatorKey: NavigationService.instance.navigationKey,
         onGenerateRoute: router.generateRoute,
         initialRoute: Splash.RouteName,
         localizationsDelegates: [
