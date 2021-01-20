@@ -346,9 +346,9 @@ class _ConferencePageState extends State<VideoCallPage> {
       backgroundColor: Colors.grey.shade900,
       child: Center(
         child: Container(
-          color: Colors.black54,
+          color: Colors.black,
           width: double.infinity,
-          height: 40,
+          height: MediaQuery.of(context).size.height,
           child: Center(
             child: Text(
               'Calling the Participant...',
