@@ -182,15 +182,28 @@ Future<GetTokenResponse> getTwilioToken(roomName, identity, recId,programName) a
   print("pat  "+identity);
   final url = HHString.baseURL +"/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+recId+"&programName="+programName;
   print(roomName);
-  print(identity);
+  print(url);
   final response = await http.get(url,
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
-        "token": token
-      });
-print(response.body);
-  return getTokenResponseFromJson(response.body);
+    headers: {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      "token": token
+    });
+    
+    print(response.body);
+  if(response.statusCode == 200){
+    
+    return getTokenResponseFromJson(response.body);
+  }else {
+    throw Exception(response.statusCode);
+  }
+  // final response = await http.get(url,
+  //     headers: {
+  //       HttpHeaders.contentTypeHeader: 'application/json',
+  //       "token": token
+  //     });
+  
 }
+
 Future<ReviewResponse> submitSessionReview(sessionId, comments) async {
   var token = await GetStringToSP("token");
   print(token);

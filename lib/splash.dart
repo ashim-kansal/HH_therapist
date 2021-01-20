@@ -10,6 +10,9 @@ import 'package:flutter_app/screens/dashboard.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:callkeep/callkeep.dart';
+import 'package:flutter_app/services/navigation_service.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:uuid/uuid.dart';
 
 final FlutterCallkeep _callKeep = FlutterCallkeep();
@@ -45,7 +48,7 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
   if (!_callKeepInited) {
     _callKeep.setup(<String, dynamic>{
       'ios': {
-        'appName': 'CallKeepDemo',
+        'appName': 'HHTherapist',
       },
       'android': {
         'alertTitle': 'Permissions required',
@@ -62,7 +65,6 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
   _callKeep.displayIncomingCall(callUUID, callerId,
       localizedCallerName: callerNmae, hasVideo: hasVideo);
   _callKeep.backToForeground();
-
   return null;
 }
 
@@ -129,7 +131,7 @@ class SplashState extends State<Splash>{
 
     _callKeep.setup(<String, dynamic>{
       'ios': {
-        'appName': 'CallKeepDemo',
+        'appName': 'HHTherapist',
       },
       'android': {
         'alertTitle': 'Permissions required',
@@ -179,12 +181,18 @@ class SplashState extends State<Splash>{
     final String callUUID = event.callUUID;
     final String number = calls[callUUID].number;
     print('[answerCall] $callUUID, number: $number');
-
-    _callKeep.startCall(event.callUUID, number, number);
-    Timer(const Duration(seconds: 1), () {
-      print('[setCurrentCallActive] $callUUID, number: $number');
-      _callKeep.setCurrentCallActive(callUUID);
-    });
+    _callKeep.backToForeground();
+    _callKeep.endAllCalls();
+    try{
+      navigateH();
+    }catch (err){
+      print('push to new route error ${err.toString()}');
+    }
+    // _callKeep.startCall(event.callUUID, number, number);
+    // Timer(const Duration(seconds: 1), () {
+    //   print('[setCurrentCallActive] $callUUID, number: $number');
+    //   _callKeep.setCurrentCallActive(callUUID);
+    // });
   }
 
   Future<void> endCall(CallKeepPerformEndCallAction event) async {
@@ -309,17 +317,70 @@ class SplashState extends State<Splash>{
     print('[onPushKitToken] token => ${event.token}');
   }
 
+  // void getMessage(){
+  //   _firebaseMessaging.configure(
+  //       onMessage: (Map<String, dynamic> message) async {
+  //     print('on message $message');
+  //     setState(() => _message = message["notification"]["title"]);
+  //   }, onResume: (Map<String, dynamic> message) async {
+  //     print('on resume $message');
+  //     setState(() => _message = message["notification"]["title"]);
+  //   }, onLaunch: (Map<String, dynamic> message) async {
+  //     print('on launch $message');
+  //     setState(() => _message = message["notification"]["title"]);
+  //   });
+  // }
   void getMessage(){
     _firebaseMessaging.configure(
-        onMessage: (Map<String, dynamic> message) async {
-      print('on message $message');
-      setState(() => _message = message["notification"]["title"]);
-    }, onResume: (Map<String, dynamic> message) async {
-      print('on resume $message');
-      setState(() => _message = message["notification"]["title"]);
-    }, onLaunch: (Map<String, dynamic> message) async {
-      print('on launch $message');
-      setState(() => _message = message["notification"]["title"]);
+      onMessage: (Map<String, dynamic> message) async {
+        print('on message $message');
+
+        print(message["type"]);
+        if(message["type"].toString() == "incoming_call"){
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+          await DBProvider.db.newClient(rnd);
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
+        // setState(() => _message = message["notification"]["title"]);
+      }, onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+        if(message["type"].toString() == "incoming_call"){
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+          await DBProvider.db.newClient(rnd);
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
+      }, onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+        if(message["type"].toString() == "incoming_call"){
+          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+          await DBProvider.db.newClient(rnd);
+          Timer(Duration(seconds: 1),
+          ()=>{
+            displayIncomingCall("10086")
+          });
+        }
+        // setState(() => _message = message["notification"]["title"]);
+      }
+    );
+  }
+
+  void navigateH() async {
+    var sessionObj = await GetStringToSP("sMsg");
+    print('object in msg $sessionObj');
+
+    DBProvider.db.getAllClients().then((value) => {
+      print("clientRes11" +value.identity),
+      // print("clientRes" +storageRes.toString()),
+
+      NavigationService.instance.navigateToRoute(MaterialPageRoute(
+        builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
+      )),
     });
   }
 
