@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -317,33 +318,34 @@ class SplashState extends State<Splash>{
     print('[onPushKitToken] token => ${event.token}');
   }
 
-  // void getMessage(){
-  //   _firebaseMessaging.configure(
-  //       onMessage: (Map<String, dynamic> message) async {
-  //     print('on message $message');
-  //     setState(() => _message = message["notification"]["title"]);
-  //   }, onResume: (Map<String, dynamic> message) async {
-  //     print('on resume $message');
-  //     setState(() => _message = message["notification"]["title"]);
-  //   }, onLaunch: (Map<String, dynamic> message) async {
-  //     print('on launch $message');
-  //     setState(() => _message = message["notification"]["title"]);
-  //   });
-  // }
+
   void getMessage(){
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print('on message $message');
+        print('on receive N message $message');
 
-        print(message["type"]);
-        if(message["type"].toString() == "incoming_call"){
-          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
-          await DBProvider.db.newClient(rnd);
-          Timer(Duration(seconds: 1),
-          ()=>{
-            displayIncomingCall("10086")
-          });
+        if(Platform.isAndroid){
+          print(message["data"]["type"]);
+          if(message["data"]["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["programName"], roomname: message["data"]["room"], token: message["data"]["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall("10086")
+                });
+          }
+        }else{
+          print(message["type"]);
+          if(message["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall("10086")
+                });
+          }
         }
+
         // setState(() => _message = message["notification"]["title"]);
       }, onResume: (Map<String, dynamic> message) async {
         print('on resume $message');

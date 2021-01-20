@@ -27,10 +27,12 @@ class VideoCallPage extends StatefulWidget {
 }
 
 class _ConferencePageState extends State<VideoCallPage> {
+  Timer timer;
   final StreamController<bool> _onButtonBarVisibleStreamController = StreamController<bool>.broadcast();
   final StreamController<double> _onButtonBarHeightStreamController = StreamController<double>.broadcast();
   ConferenceRoom _conferenceRoom;
   StreamSubscription _onConferenceRoomException;
+
 
   @override
   void initState() {
@@ -41,6 +43,9 @@ class _ConferencePageState extends State<VideoCallPage> {
     _lockInPortrait();
     _connectToRoom();
     _wakeLock(true);
+    timer = Timer(const Duration(seconds: 30), () {
+        _onHangup();
+    });
   }
 
   void _connectToRoom() async {
@@ -59,6 +64,16 @@ class _ConferencePageState extends State<VideoCallPage> {
             content: err is PlatformException ? err.details : err.toString(),
             defaultActionText: 'OK',
           ).show(context);
+        });
+        _conferenceRoom.onParticipantDisconnected.listen((err) {
+          print('participant disconnected');
+          _onHangup();
+        });
+        _conferenceRoom.onParticipantConnected.listen((err) {
+          print('participant connected');
+          setState(() {
+            timer !=null ? timer.cancel() : null;
+          });
         });
         _conferenceRoom.addListener(_conferenceRoomUpdated);
       });
@@ -252,22 +267,25 @@ class _ConferencePageState extends State<VideoCallPage> {
     if (participants.length == 1) {
       children.add(_buildNoiseBox());
     } else {
-      final remoteParticipant = participants.firstWhere((ParticipantWidget participant) => participant.isRemote, orElse: () => null);
-      if (remoteParticipant != null) {
-        children.add(remoteParticipant);
-      }
+      print(participants.length);
+      participants.forEach((element) {
+          if(!element.isRemote){
+            children.add(DraggablePublisher(
+              key: Key('publisher'),
+              child: element,
+              availableScreenSize: size,
+              onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
+              onButtonBarHeight: _onButtonBarHeightStreamController.stream,
+            ));
+
+          }else{
+            children.add(element);
+          }
+      });
+
     }
 
-    final localParticipant = participants.firstWhere((ParticipantWidget participant) => !participant.isRemote, orElse: () => null);
-    if (localParticipant != null) {
-      children.add(DraggablePublisher(
-        key: Key('publisher'),
-        child: localParticipant,
-        availableScreenSize: size,
-        onButtonBarVisible: _onButtonBarVisibleStreamController.stream,
-        onButtonBarHeight: _onButtonBarHeightStreamController.stream,
-      ));
-    }
+
   }
 
   void _buildLayoutInGrid(
@@ -333,7 +351,7 @@ class _ConferencePageState extends State<VideoCallPage> {
           height: 40,
           child: Center(
             child: Text(
-              'Waiting for another participant to connect to the room...',
+              'Calling the Participant...',
               key: Key('text-wait'),
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white),
