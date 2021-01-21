@@ -175,33 +175,56 @@ print(jsonEncode({
   return chatListFromJson(response.body);
 }
 
-Future<GetTokenResponse> getTwilioToken(roomName, identity, recId,programName) async {
+Future<GetTokenResponse> getTwilioToken(roomName, identity, reciverId,programName) async {
   var token = await GetStringToSP("token");
   print(token);
-  print("rec  "+recId);
-  print("pat  "+identity);
-  final url = HHString.baseURL +"/video/tokenGenerate?user="+identity+"&room="+roomName+"&receiverId="+recId+"&programName="+programName;
   print(roomName);
+  print(identity);
+  print("rc  : "+reciverId);
+  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName;
   print(url);
   final response = await http.get(url,
-    headers: {
-      HttpHeaders.contentTypeHeader: 'application/json',
-      "token": token
-    });
-    
-    print(response.body);
-  if(response.statusCode == 200){
-    
-    return getTokenResponseFromJson(response.body);
-  }else {
-    throw Exception(response.statusCode);
-  }
-  // final response = await http.get(url,
-  //     headers: {
-  //       HttpHeaders.contentTypeHeader: 'application/json',
-  //       "token": token
-  //     });
-  
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
+}
+
+
+Future<GetTokenResponse> createCall(sessionId, reciverId) async {
+  var token = await GetStringToSP("token");
+  print(token);
+  print(sessionId);
+  print("rc  : "+reciverId);
+  final url = HHString.baseURL +"/api/v1/video/createCall?receiverId="+reciverId+"&room=room_"+sessionId+"&sessionId="+sessionId;
+  print(url);
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+        "token": token
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
+}
+
+Future<GetTokenResponse> callConnected(reciverId) async {
+  // var token = await GetStringToSP("token");
+  // print(token);
+  // print(sessionId);
+  print("rc  : "+reciverId);
+  final url = HHString.baseURL +"/api/v1/video/CallConnected?receiverId="+reciverId;
+  print(url);
+  final response = await http.get(url,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      });
+
+  print(response.body);
+  return getTokenResponseFromJson(response.body);
 }
 
 Future<ReviewResponse> submitSessionReview(sessionId, comments) async {

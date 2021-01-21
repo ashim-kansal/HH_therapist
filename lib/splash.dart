@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
@@ -184,11 +186,26 @@ class SplashState extends State<Splash>{
     print('[answerCall] $callUUID, number: $number');
     _callKeep.backToForeground();
     _callKeep.endAllCalls();
-    try{
-      navigateH();
-    }catch (err){
-      print('push to new route error ${err.toString()}');
-    }
+
+
+    DBProvider.db.getAllClients().then((value) => {
+      print("clientRes11" +value.identity),
+      callConnected(value.programname).then((value) => {
+        // if(value.responseCode=='200'){
+        //
+        // }
+      })
+
+      // NavigationService.instance.navigateToRoute(MaterialPageRoute(
+      //   builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
+      // )),
+    });
+    // try{
+    //   navigateH();
+    // }catch (err){
+    //   print('push to new route error ${err.toString()}');
+    // }
+
     // _callKeep.startCall(event.callUUID, number, number);
     // Timer(const Duration(seconds: 1), () {
     //   print('[setCurrentCallActive] $callUUID, number: $number');
@@ -327,7 +344,7 @@ class SplashState extends State<Splash>{
         if(Platform.isAndroid){
           print(message["data"]["type"]);
           if(message["data"]["type"].toString() == "incoming_call"){
-            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["programName"], roomname: message["data"]["room"], token: message["data"]["AccessToken"]);
+            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["senderId"]??"", roomname: message["data"]["room"], token: message["data"]["AccessToken"]??"");
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{

@@ -97,7 +97,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
                       onClickVideo:(){
-                          getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].id, snapshot.data.result[index]);
+                          callParticipent(snapshot.data.result[index].therapistId, snapshot.data.result[index].id, snapshot.data.result[index]);
                       },
                     onClickCancel: (){
                     setState(() {
@@ -130,14 +130,39 @@ class HomePageState extends State<HomePage> {
         if (value.responseCode == "200") {
           print(value.jwt??''),
 
-          Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt))
-              .then((value) => {
-            Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-          }),
+          // Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt))
+          //     .then((value) => {
+          //   Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+          // }),
         }
       }
     );
   }
+
+  void callParticipent(String sessionId, String patientId, Result result) {
+    createCall(sessionId, result.patientId.id).then(
+            (value)=>{
+          print(value.responseMessage),
+          if(value.responseCode == '200'){
+            // _callKeep.setup(<String, dynamic>{
+            //   'ios': {
+            //     'appName': 'HHPatient',
+            //   },
+            //   'android': {
+            //     'alertTitle': 'Permissions required',
+            //     'alertDescription':
+            //     'This application needs to access your phone accounts',
+            //     'cancelButton': 'Cancel',
+            //     'okButton': 'ok',
+            //   },
+            // }),
+
+            // _callKeep.startCall(sessionId, 88008, '88008');
+          }
+        });
+
+  }
+
 
 }
 
