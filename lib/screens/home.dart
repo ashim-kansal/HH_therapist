@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_app/api/API_services.dart';
-import 'package:flutter_app/app_localization.dart';
-import 'package:flutter_app/model/UpcomingSessionsModel.dart';
-import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/screens/sessions.dart';
-import 'package:flutter_app/screens/tharapist.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
-import 'package:flutter_app/utils/colors.dart';
-import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:flutter_app/widgets/sessionWidgets.dart';
+import 'package:com.example.flutter_app.flutter_app/api/API_services.dart';
+import 'package:com.example.flutter_app.flutter_app/app_localization.dart';
+import 'package:com.example.flutter_app.flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:com.example.flutter_app.flutter_app/screens/review.dart';
+import 'package:com.example.flutter_app.flutter_app/screens/sessions.dart';
+import 'package:com.example.flutter_app.flutter_app/screens/tharapist.dart';
+import 'package:com.example.flutter_app.flutter_app/twilio/conference/conference_page.dart';
+import 'package:com.example.flutter_app.flutter_app/utils/colors.dart';
+import 'package:com.example.flutter_app.flutter_app/widgets/mywidgets.dart';
+import 'package:com.example.flutter_app.flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter_app/utils/DBHelper.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
@@ -124,11 +126,9 @@ class SplashState extends State<Splash>{
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
     _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
     _callKeep.on(CallKeepDidPerformDTMFAction(), didPerformDTMFAction);
-    _callKeep.on(
-        CallKeepDidReceiveStartCallAction(), didReceiveStartCallAction);
+    _callKeep.on(CallKeepDidReceiveStartCallAction(), didReceiveStartCallAction);
     _callKeep.on(CallKeepDidToggleHoldAction(), didToggleHoldCallAction);
-    _callKeep.on(
-        CallKeepDidPerformSetMutedCallAction(), didPerformSetMutedCallAction);
+    _callKeep.on(CallKeepDidPerformSetMutedCallAction(), didPerformSetMutedCallAction);
     _callKeep.on(CallKeepPerformEndCallAction(), endCall);
     _callKeep.on(CallKeepPushKitToken(), onPushKitToken);
 
@@ -163,9 +163,14 @@ class SplashState extends State<Splash>{
   }
 
   void removeCall(String callUUID) {
-    setState(() {
-      calls.remove(callUUID);
-    });
+    try {
+      if(mounted)
+      setState(() {
+        calls.remove(callUUID);
+      });
+    }catch(e){
+
+    }
   }
 
   void setCallHeld(String callUUID, bool held) {
@@ -190,31 +195,33 @@ class SplashState extends State<Splash>{
 
     DBProvider.db.getAllClients().then((value) => {
       print("clientRes11" +value.identity),
-      callConnected(value.programname).then((value) => {
-        // if(value.responseCode=='200'){
-        //
-        // }
+      callConnected(value.programname,'Accepted').then((value1) => {
+        if(value1.responseCode=='200'){
+          NavigationService.instance.navigateToRoute(MaterialPageRoute(
+            builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??""),
+          )),
+        }
       })
 
-      // NavigationService.instance.navigateToRoute(MaterialPageRoute(
-      //   builder: (context) => VideoCallPage(identity: value.identity, roomName: value.roomname, token: value.token),
-      // )),
-    });
-    // try{
-    //   navigateH();
-    // }catch (err){
-    //   print('push to new route error ${err.toString()}');
-    // }
 
-    // _callKeep.startCall(event.callUUID, number, number);
-    // Timer(const Duration(seconds: 1), () {
-    //   print('[setCurrentCallActive] $callUUID, number: $number');
-    //   _callKeep.setCurrentCallActive(callUUID);
-    // });
+    });
+
   }
 
   Future<void> endCall(CallKeepPerformEndCallAction event) async {
     print('endCall: ${event.callUUID}');
+    DBProvider.db.getAllClients().then((value) => {
+      print("clientRes11" +value.identity),
+      callConnected(value.programname,'Rejected').then((value1) => {
+        if(value1.responseCode=='200'){
+          // NavigationService.instance.navigateToRoute(MaterialPageRoute(
+          //   builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??"", token: value.token??""),
+          // )),
+        }
+      })
+
+
+    });
     removeCall(event.callUUID);
   }
 
@@ -348,7 +355,7 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086"),
+                  displayIncomingCall(message["data"]["name"]),
                       Timer(Duration(seconds: 30),()=>{
                     _callKeep.endAllCalls()
                     })
@@ -361,7 +368,7 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall("10086"),
+                  displayIncomingCall(message["name"]),
                       Timer(Duration(seconds: 30),()=>{
                         _callKeep.endAllCalls()
                       })
@@ -377,7 +384,7 @@ class SplashState extends State<Splash>{
           await DBProvider.db.newClient(rnd);
           Timer(Duration(seconds: 1),
           ()=>{
-            displayIncomingCall("10086")
+            displayIncomingCall(message["type"]['name'])
           });
         }
       }, onLaunch: (Map<String, dynamic> message) async {
@@ -387,7 +394,7 @@ class SplashState extends State<Splash>{
           await DBProvider.db.newClient(rnd);
           Timer(Duration(seconds: 1),
           ()=>{
-            displayIncomingCall("10086")
+            displayIncomingCall(message["type"]['name'])
           });
         }
         // setState(() => _message = message["notification"]["title"]);
