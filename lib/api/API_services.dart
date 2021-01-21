@@ -154,7 +154,6 @@ Future<ChatList> getChatList(senderid) async {
   var token = await GetStringToSP("token");
 print(token);
 print(jsonEncode({
-  // "chatId": chatId??"",
   "chatId": "",
   "receiverId": senderid??""
 }));
@@ -181,7 +180,7 @@ Future<GetTokenResponse> getTwilioToken(roomName, identity, reciverId,programNam
   print(roomName);
   print(identity);
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/tokenGenerate?user="+identity+"&room="+roomName;
+  final url = HHString.baseURL +"video/tokenGenerate?user="+identity+"&room="+roomName;
   print(url);
   final response = await http.get(url,
       headers: {
@@ -199,7 +198,7 @@ Future<GetTokenResponse> createCall(sessionId, reciverId) async {
   print(token);
   print(sessionId);
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/createCall?receiverId="+reciverId+"&room=room_"+sessionId+"&sessionId="+sessionId;
+  final url = HHString.baseURL +"video/createCall?receiverId="+reciverId+"&room=room_"+sessionId+"&sessionId="+sessionId;
   print(url);
   final response = await http.get(url,
       headers: {
@@ -211,12 +210,9 @@ Future<GetTokenResponse> createCall(sessionId, reciverId) async {
   return getTokenResponseFromJson(response.body);
 }
 
-Future<GetTokenResponse> callConnected(reciverId) async {
-  // var token = await GetStringToSP("token");
-  // print(token);
-  // print(sessionId);
+Future<GetTokenResponse> callConnected(reciverId, status) async {
   print("rc  : "+reciverId);
-  final url = HHString.baseURL +"/api/v1/video/CallConnected?receiverId="+reciverId;
+  final url = HHString.baseURL +"video/CallConnected?receiverId="+reciverId+"&status="+status;
   print(url);
   final response = await http.get(url,
       headers: {
