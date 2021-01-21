@@ -234,7 +234,7 @@ class _ConferenceButtonBarState extends State<ConferenceButtonBar> with AfterLay
                 size: 40,
               ),
             ),
-            color: Colors.red.withAlpha(200),
+            color: Colors.red.withAlpha(900),
             key: Key('hangup-button'),
             onPressed: () => _onPressed(widget.onHangup),
           ),
