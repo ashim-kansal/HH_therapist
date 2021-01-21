@@ -272,6 +272,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  flutter_incall_manager:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: d46c8bb225b8a0f6a75cd220a958f46c3537850b
+      url: "git://github.com/kangshaojun/flutter-incall-manager.git"
+    source: git
+    version: "0.1.0"
   flutter_layout_grid:
     dependency: transitive
     description:

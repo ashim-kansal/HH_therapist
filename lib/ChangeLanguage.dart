@@ -5,6 +5,7 @@ import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/login.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/app_localization.dart';
+import 'package:flutter_incall/flutter_incall.dart';
 
 class SelectLanguage extends StatefulWidget {
   static const String RouteName = '/language';
@@ -107,14 +108,15 @@ class SelectLanguageState extends State<StatefulWidget> {
                           type: 2, 
                           isEnable: true,
                           onClick: () async {
-                            String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
-                            setState(() {
-                              AppLocalizations.load(Locale(lang, ''));
-                            });
-                            SetStringToSP("language", lang.toUpperCase());
+                            IncallManager().startRingback();
+                            // String lang = dropdownValue== 'English' ? "en" : dropdownValue==  'Français' ? 'fr' :'es';
+                            // setState(() {
+                            //   AppLocalizations.load(Locale(lang, ''));
+                            // });
+                            // SetStringToSP("language", lang.toUpperCase());
 
-                            Navigator.pop(context);
-                            Navigator.pushNamed(context, LoginPage.RouteName);
+                            // Navigator.pop(context);
+                            // Navigator.pushNamed(context, LoginPage.RouteName);
                           }),
                         ))),
               ],
