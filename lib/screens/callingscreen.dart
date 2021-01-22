@@ -1,15 +1,14 @@
 
 import 'dart:async';
+import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app_localization.dart';
-import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter_incall_manager/flutter_incall_manager.dart';
+import 'package:uuid/uuid.dart';
 
 
 class Calling extends StatefulWidget {
@@ -25,6 +24,8 @@ class CallingState extends State<StatefulWidget> {
   Timer timer;
   String dropdownValue = 'English';
   String newUUID() => Uuid().v4();
+  BuildContext context;
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   void initState(){
     super.initState();
@@ -32,11 +33,39 @@ class CallingState extends State<StatefulWidget> {
 
     timer = Timer(const Duration(seconds: 30), () {
       incallManager.stopRingtone();
+      Navigator.pop(context, "Rejected");
     });
-  }  
+
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+          print('on receive $message');
+          String type = "";
+          String status = "";
+
+          if(Platform.isAndroid){
+            type = message["data"]["type"];
+            status = message["data"]["status"];
+          }else{
+            type = message["type"];
+            status = message["status"];
+          }
+          if(type == 'call_status') {
+            incallManager.stopRingtone();
+            Navigator.pop(context, status);
+          }
+        }, onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+      // setState(() => _message = message["notification"]["title"]);
+    }
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    this.context = context;
     return Scaffold(
         body: Container(
             color: HH_Colors.color_171717,
@@ -83,6 +112,7 @@ class CallingState extends State<StatefulWidget> {
                         child: new GestureDetector(
                           onTap: () {
                             incallManager.stopRingtone();
+                            Navigator.pop(context, "Rejected");
                           },
                           child: Image.asset('assets/images/redCall.png', height: 80,width: 80,),
                         )

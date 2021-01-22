@@ -1,16 +1,17 @@
+import 'package:flutter_app/screens/review.dart';
+import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:com.example.flutter_app.flutter_app/api/API_services.dart';
-import 'package:com.example.flutter_app.flutter_app/app_localization.dart';
-import 'package:com.example.flutter_app.flutter_app/model/UpcomingSessionsModel.dart';
-import 'package:com.example.flutter_app.flutter_app/screens/review.dart';
-import 'package:com.example.flutter_app.flutter_app/screens/sessions.dart';
-import 'package:com.example.flutter_app.flutter_app/screens/tharapist.dart';
-import 'package:com.example.flutter_app.flutter_app/twilio/conference/conference_page.dart';
-import 'package:com.example.flutter_app.flutter_app/utils/colors.dart';
-import 'package:com.example.flutter_app.flutter_app/widgets/mywidgets.dart';
-import 'package:com.example.flutter_app.flutter_app/widgets/sessionWidgets.dart';
+import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/app_localization.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
+import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/screens/tharapist.dart';
+import 'package:flutter_app/utils/colors.dart';
+import 'package:flutter_app/widgets/mywidgets.dart';
+import 'package:flutter_app/widgets/sessionWidgets.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class HomePage extends StatefulWidget {
@@ -97,7 +98,7 @@ class HomePageState extends State<HomePage> {
                       Navigator.pushNamed(context, SessionPage.RouteName);
                     },
                       onClickVideo:(){
-                          callParticipent(snapshot.data.result[index].therapistId, snapshot.data.result[index].id, snapshot.data.result[index]);
+                          callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId.id, snapshot.data.result[index]);
                       },
                     onClickCancel: (){
                     setState(() {
@@ -144,20 +145,13 @@ class HomePageState extends State<HomePage> {
             (value)=>{
           print(value.responseMessage),
           if(value.responseCode == '200'){
-            // _callKeep.setup(<String, dynamic>{
-            //   'ios': {
-            //     'appName': 'HHPatient',
-            //   },
-            //   'android': {
-            //     'alertTitle': 'Permissions required',
-            //     'alertDescription':
-            //     'This application needs to access your phone accounts',
-            //     'cancelButton': 'Cancel',
-            //     'okButton': 'ok',
-            //   },
-            // }),
-
-            // _callKeep.startCall(sessionId, 88008, '88008');
+            Navigator.pushNamed(context, Calling.RouteName).then((value) {
+              if(value == 'Accepted')
+              Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+                  .then((value) => {
+                Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+              });
+            }),
           }
         });
 

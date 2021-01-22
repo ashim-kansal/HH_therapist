@@ -90,6 +90,7 @@ class Splash extends StatefulWidget{
 
 class SplashState extends State<Splash>{
 
+
   String data = "";
   String nameKey = "_key_name";
   String token;
@@ -123,6 +124,7 @@ class SplashState extends State<Splash>{
   @override
   void initState() {
     super.initState();
+
     _callKeep.on(CallKeepDidDisplayIncomingCall(), didDisplayIncomingCall);
     _callKeep.on(CallKeepPerformAnswerCallAction(), answerCall);
     _callKeep.on(CallKeepDidPerformDTMFAction(), didPerformDTMFAction);
@@ -360,6 +362,7 @@ class SplashState extends State<Splash>{
                     _callKeep.endAllCalls()
                     })
                 });
+          }else if(message["data"]["type"].toString() == "call_status"){
           }
         }else{
           print(message["type"]);
@@ -373,6 +376,7 @@ class SplashState extends State<Splash>{
                         _callKeep.endAllCalls()
                       })
                 });
+          }else if(message["type"].toString() == "call_status"){
           }
         }
 
@@ -446,5 +450,19 @@ class SplashState extends State<Splash>{
     );
   }
 }
+
+
+class CallStatus {
+  CallStatusData status;
+  CallStatus(this.status);
+}
+
+class CallStatusData {
+  String status;
+  CallStatusData(this.status);
+}
+
+
+
 
 

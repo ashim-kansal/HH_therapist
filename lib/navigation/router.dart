@@ -8,6 +8,7 @@ import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/Notes.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
@@ -94,6 +95,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => TermsPage());
     case PrivacyPolicy.RouteName:
       return MaterialPageRoute(builder: (context) => PrivacyPolicy());
+    case Calling.RouteName:
+      return MaterialPageRoute(builder: (context) => Calling());
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
+import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/screens/sessionsDetails.dart';
@@ -124,7 +125,7 @@ class SessionPageState extends State<SessionPage>{
                 sdate: createdDt.format("dd MMM, yyyy")+' '+searchList[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
                   onClickVideo: (){
-                    getToken(snapshot.data.result[index].therapistId, snapshot.data.result[index].id, snapshot.data.result[index]);
+                    callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId.id, snapshot.data.result[index]);
                   },
                 onClickCancel: () {
                   setState(() {
@@ -191,24 +192,23 @@ class SessionPageState extends State<SessionPage>{
       });
   }
 
-  void getToken(therapistId, sessionId, result) {
-    String roomName = 'room_'+sessionId;
-    getTwilioToken(roomName, therapistId,result.patientId.id, result.programName).then(
-            (value) => {
 
-          print(value.responseCode),
-
-          if (value.responseCode == "200") {
-            Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(therapistId, roomName, value.jwt))
-                .then((value) => {
-              Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-
+  void callParticipent(String sessionId, String patientId, Result result) {
+    createCall(sessionId, result.patientId.id).then(
+            (value)=>{
+          print(value.responseMessage),
+          if(value.responseCode == '200'){
+            Navigator.pushNamed(context, Calling.RouteName).then((value) {
+              if(value == 'Accepted')
+                Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
+                    .then((value) => {
+                  Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
+                });
             }),
           }
         });
-
-
   }
+
 
 }
 
