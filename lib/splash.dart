@@ -192,20 +192,20 @@ class SplashState extends State<Splash>{
     final String number = calls[callUUID].number;
     print('[answerCall] $callUUID, number: $number');
     _callKeep.backToForeground();
-    _callKeep.endAllCalls();
-
-
+  
     DBProvider.db.getAllClients().then((value) => {
-      print("clientRes11" +value.identity),
-      callConnected(value.programname,'Accepted').then((value1) => {
+      print("clientRes11 :" +value.identity),
+      print("clientRes1122  " +value.programname),
+
+      _callKeep.endAllCalls(),
+      // callConnected(value.identity, 'Accepted').then((value1) => {
+      callConnected(value.programname, 'Accepted').then((value1) => {
         if(value1.responseCode=='200'){
           NavigationService.instance.navigateToRoute(MaterialPageRoute(
             builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??""),
           )),
         }
       })
-
-
     });
 
   }
@@ -213,14 +213,15 @@ class SplashState extends State<Splash>{
   Future<void> endCall(CallKeepPerformEndCallAction event) async {
     print('endCall: ${event.callUUID}');
     DBProvider.db.getAllClients().then((value) => {
-      print("clientRes11" +value.identity),
-      callConnected(value.programname,'Rejected').then((value1) => {
-        if(value1.responseCode=='200'){
-          // NavigationService.instance.navigateToRoute(MaterialPageRoute(
-          //   builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??"", token: value.token??""),
-          // )),
-        }
-      })
+      print("clientRes11:- " +value.identity),
+      print("clientRes1122:-  " +value.programname),
+      // callConnected(value.programname,'Rejected').then((value1) => {
+      //   if(value1.responseCode=='200'){
+      //     // NavigationService.instance.navigateToRoute(MaterialPageRoute(
+      //     //   builder: (context) => VideoCallPage(identity: value.identity??"", roomName: value.roomname??"", token: value.token??""),
+      //     // )),
+      //   }
+      // })
 
 
     });
@@ -315,6 +316,7 @@ class SplashState extends State<Splash>{
     // });
     print('Display incoming call now');
     final bool hasPhoneAccount = await _callKeep.hasPhoneAccount();
+    print("$hasPhoneAccount :- phone account");
     if (!hasPhoneAccount) {
       await _callKeep.hasDefaultPhoneAccount(context, <String, dynamic>{
         'alertTitle': 'Permissions required',
@@ -346,9 +348,17 @@ class SplashState extends State<Splash>{
 
 
   void getMessage(){
+    int lastMessageId = 0;
+
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('on receive N message $message');
+        // int messageId = int.parse(message['id']);
+
+        // if(messageId == lastMessageId){
+        //   return null;
+        // }
+        // lastMessageId = messageId;
 
         if(Platform.isAndroid){
           print(message["data"]["type"]);
@@ -357,21 +367,21 @@ class SplashState extends State<Splash>{
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall(message["data"]["name"]),
+                  displayIncomingCall(message["data"]["name"]??"HHTherapist"),
                       Timer(Duration(seconds: 30),()=>{
                     _callKeep.endAllCalls()
                     })
                 });
           }else if(message["data"]["type"].toString() == "call_status"){
-          }
+        }
         }else{
           print(message["type"]);
           if(message["type"].toString() == "incoming_call"){
-            Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
+            Client rnd = Client(identity: message["receiverId"], programname: message["senderId"], roomname: message["room"], token: message["AccessToken"]);
             await DBProvider.db.newClient(rnd);
             Timer(Duration(seconds: 1),
                     ()=>{
-                  displayIncomingCall(message["name"]),
+                  displayIncomingCall(message["name"]??"HHTherapist"??"HHTherapist"),
                       Timer(Duration(seconds: 30),()=>{
                         _callKeep.endAllCalls()
                       })
@@ -379,29 +389,69 @@ class SplashState extends State<Splash>{
           }else if(message["type"].toString() == "call_status"){
           }
         }
-
-        // setState(() => _message = message["notification"]["title"]);
-      }, onResume: (Map<String, dynamic> message) async {
+      }, 
+      onResume: (Map<String, dynamic> message) async {
         print('on resume $message');
-        if(message["type"].toString() == "incoming_call"){
-          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
-          await DBProvider.db.newClient(rnd);
-          Timer(Duration(seconds: 1),
-          ()=>{
-            displayIncomingCall(message["type"]['name'])
-          });
+        if(Platform.isAndroid){
+          print(message["data"]["type"]);
+          if(message["data"]["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["senderId"]??"", roomname: message["data"]["room"], token: message["data"]["AccessToken"]??"");
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall(message["data"]["name"]??"HHTherapist"),
+                      Timer(Duration(seconds: 30),()=>{
+                    _callKeep.endAllCalls()
+                    })
+                });
+          }else if(message["data"]["type"].toString() == "call_status"){
+        }
+        }else{
+          print(message["type"]);
+          if(message["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["receiverId"], programname: message["senderId"], roomname: message["room"], token: message["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall(message["name"]??"HHTherapist"),
+                      Timer(Duration(seconds: 30),()=>{
+                        _callKeep.endAllCalls()
+                      })
+                });
+          }else if(message["type"].toString() == "call_status"){
+          }
         }
       }, onLaunch: (Map<String, dynamic> message) async {
         print('on launch $message');
-        if(message["type"].toString() == "incoming_call"){
-          Client rnd = Client(identity: message["receiverId"], programname: message["programName"], roomname: message["room"], token: message["AccessToken"]);
-          await DBProvider.db.newClient(rnd);
-          Timer(Duration(seconds: 1),
-          ()=>{
-            displayIncomingCall(message["type"]['name'])
-          });
+        if(Platform.isAndroid){
+          print(message["data"]["type"]);
+          if(message["data"]["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["data"]["receiverId"], programname: message["data"]["senderId"]??"", roomname: message["data"]["room"], token: message["data"]["AccessToken"]??"");
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall(message["data"]["name"]??"HHTherapist"),
+                      Timer(Duration(seconds: 30),()=>{
+                    _callKeep.endAllCalls()
+                    })
+                });
+          }else if(message["data"]["type"].toString() == "call_status"){
         }
-        // setState(() => _message = message["notification"]["title"]);
+        }else{
+          print(message["type"]);
+          if(message["type"].toString() == "incoming_call"){
+            Client rnd = Client(identity: message["receiverId"], programname: message["senderId"], roomname: message["room"], token: message["AccessToken"]);
+            await DBProvider.db.newClient(rnd);
+            Timer(Duration(seconds: 1),
+                    ()=>{
+                  displayIncomingCall(message["name"]??"HHTherapist"),
+                      Timer(Duration(seconds: 30),()=>{
+                        _callKeep.endAllCalls()
+                      })
+                });
+          }else if(message["type"].toString() == "call_status"){
+          }
+        }
       }
     );
   }

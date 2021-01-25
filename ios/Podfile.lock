@@ -47,6 +47,8 @@ PODS:
   - Flutter (1.22.4)
   - flutter_document_picker (0.0.1):
     - Flutter
+  - flutter_incall_manager (0.0.1):
+    - Flutter
   - flutter_plugin_android_lifecycle (0.0.1):
     - Flutter
   - flutter_voip_push_notification (0.0.1):
@@ -131,6 +133,7 @@ DEPENDENCIES:
   - firebase_messaging (from `Pods/.symlinks/plugins/firebase_messaging-7.0.3/ios`)
   - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `6.26.0`)
   - flutter_document_picker (from `Pods/.symlinks/plugins/flutter_document_picker-4.0.0/ios`)
+  - flutter_incall_manager (from `Pods/.symlinks/plugins/flutter-incall-manager-d46c8bb225b8a0f6a75cd220a958f46c3537850b/ios`)
   - flutter_plugin_android_lifecycle (from `Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios`)
   - flutter_voip_push_notification (from `Pods/.symlinks/plugins/flutter_voip_push_notification-0.0.3/ios`)
   - "image_picker (from `Pods/.symlinks/plugins/image_picker-0.6.7+17/ios`)"
@@ -188,6 +191,8 @@ EXTERNAL SOURCES:
     :tag: 6.26.0
   flutter_document_picker:
     :path: Pods/.symlinks/plugins/flutter_document_picker-4.0.0/ios
+  flutter_incall_manager:
+    :path: Pods/.symlinks/plugins/flutter-incall-manager-d46c8bb225b8a0f6a75cd220a958f46c3537850b/ios
   flutter_plugin_android_lifecycle:
     :path: Pods/.symlinks/plugins/flutter_plugin_android_lifecycle-1.0.11/ios
   flutter_voip_push_notification:
@@ -250,6 +255,7 @@ SPEC CHECKSUMS:
   FirebaseMessaging: 5eca4ef173de76253352511aafef774caa1cba2a
   Flutter: d466195df8a9933b705cb82c53140202e097ec55
   flutter_document_picker: 109ba1c4622e6e62bfced17c22ff544a9a3541f4
+  flutter_incall_manager: 1a6aea8d37fb46d63aaa30ac7ea225e121704eab
   flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
   flutter_voip_push_notification: f28f3ce1c6b835a3fa9e833f37f33dc1291ab888
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

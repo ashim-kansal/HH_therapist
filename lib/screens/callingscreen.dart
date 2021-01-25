@@ -38,27 +38,55 @@ class CallingState extends State<StatefulWidget> {
 
     _firebaseMessaging.configure(
         onMessage: (Map<String, dynamic> message) async {
-          print('on receive $message');
-          String type = "";
-          String status = "";
+          print('on receive on calling $message');
+          String type = Platform.isAndroid ? message["data"]["type"] : message["type"];
+          String status = Platform.isAndroid ? message["data"]["status"] : message["status"];
 
-          if(Platform.isAndroid){
-            type = message["data"]["type"];
-            status = message["data"]["status"];
-          }else{
-            type = message["type"];
-            status = message["status"];
-          }
+          // if(Platform.isAndroid){
+          //   type = message["data"]["type"];
+          //   status = message["data"]["status"];
+          // }else{
+          //   type = message["type"];
+          //   status = message["status"];
+          // }
           if(type == 'call_status') {
             incallManager.stopRingtone();
             Navigator.pop(context, status);
           }
-        }, onResume: (Map<String, dynamic> message) async {
-      print('on resume $message');
-    }, onLaunch: (Map<String, dynamic> message) async {
-      print('on launch $message');
-      // setState(() => _message = message["notification"]["title"]);
-    }
+        }, 
+      onResume: (Map<String, dynamic> message) async {
+        print('on resume $message');
+        String type = Platform.isAndroid ? message["data"]["type"] : message["type"];
+        String status = Platform.isAndroid ? message["data"]["status"] : message["status"];
+
+        // if(Platform.isAndroid){
+        //   type = message["data"]["type"];
+        //   status = message["data"]["status"];
+        // }else{
+        //   type = message["type"];
+        //   status = message["status"];
+        // }
+        if(type == 'call_status') {
+          incallManager.stopRingtone();
+          Navigator.pop(context, status);
+        }
+      }, onLaunch: (Map<String, dynamic> message) async {
+        print('on launch $message');
+        String type = Platform.isAndroid ? message["data"]["type"] : message["type"];
+        String status = Platform.isAndroid ? message["data"]["status"] : message["status"];
+        // if(Platform.isAndroid){
+        //   type = message["data"]["type"];
+        //   status = message["data"]["status"];
+        // }else{
+        //   type = message["type"];
+        //   status = message["status"];
+        // }
+        if(type == 'call_status') {
+          incallManager.stopRingtone();
+          Navigator.pop(context, status);
+        }
+        // setState(() => _message = message["notification"]["title"]);
+      }
     );
   }
 
