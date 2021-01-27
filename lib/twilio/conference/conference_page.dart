@@ -271,7 +271,8 @@ class _ConferencePageState extends State<VideoCallPage> {
   void _buildOverlayLayout(BuildContext context, Size size, List<Widget> children) {
     final participants = _conferenceRoom.participants;
     if (participants.length == 1) {
-      children.add(_buildNoiseBox());
+      //commented by ashish on 27 jan 2021
+      // children.add(_buildNoiseBox());
     } else {
       print(participants.length);
       final localParticipant = participants.firstWhere((ParticipantWidget participant) => !participant.isRemote, orElse: () => null);
