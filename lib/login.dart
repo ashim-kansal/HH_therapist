@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/agora/constants.dart';
 import 'package:flutter_app/api/enroll_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
@@ -120,6 +122,11 @@ class _LoginPageState extends State<LoginPage> {
     _firebaseMessaging.getToken().then((fcmtoken) => {
       apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
         (value) => {
+          FirebaseFirestore.instance
+              .collection(FIRESTORE_USERS)
+              .doc(value.id)
+              .set({"token": fcmtoken}),
+
           Navigator.of(context).pop(),
           Timer(Duration(seconds: 1),
           ()=> {

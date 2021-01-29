@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_app/agora/call_utilities.dart';
+import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/screens/review.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
+// import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
-import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/sessions.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
@@ -141,22 +143,30 @@ class HomePageState extends State<HomePage> {
   }
 
   void callParticipent(String sessionId, String patientId, Result result) {
-    createCall(sessionId, result.patientId.id).then(
-            (value)=>{
-          print(value.responseMessage),
-          if(value.responseCode == '200'){
-            Navigator.pushNamed(context, Calling.RouteName).then((value) {
-              if(value == 'Accepted')
-              Navigator.pushNamed(context, VideoCallPage.RouteName, arguments: VideoPageArgument(patientId, 'room_'+sessionId, ""))
-                  .then((value) => {
-                Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(result.id, result.programName))
-              });
-            }),
-          }
-        });
 
+    Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
+      CallUtils.dial(
+          from: result.therapistId,
+          to: result.patientId.id,
+          context: context,
+          isVideo: true),
+      FirebaseFirestore.instance
+          .collection("users")
+          .document(result.patientId.id)
+          .snapshots()
+          .forEach((element) async {
+        if (element.data() != null) {
+          String deviceId = element.data()["token"];
+
+          FirebaseFirestore.instance.collection("notifications").add({
+            "sendby": result.therapistId,
+            "message": 'VIDEO Calling',
+            "deviceid": deviceId,
+          });
+        }
+      })
+    });
   }
-
 
 }
 

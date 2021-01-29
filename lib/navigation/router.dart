@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
-import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/Notes.dart';
 import 'package:flutter_app/screens/assessment_form.dart';
 import 'package:flutter_app/screens/book_session.dart';
-import 'package:flutter_app/screens/callingscreen.dart';
 import 'package:flutter_app/screens/change_password.dart';
 import 'package:flutter_app/screens/chat.dart';
 import 'package:flutter_app/screens/chatlist.dart';
@@ -27,7 +25,6 @@ import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/splash.dart';
-import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 
@@ -79,9 +76,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ChatPage.RouteName:
       final ChatArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => ChatPage(senderId: args.senderId));
-    case VideoCallPage.RouteName:
-      final VideoPageArgument args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => VideoCallPage(token: args.token,roomName: args.roomName,identity: args.identity,));
     case SessionDetails.RouteName:
       final SessionDetailsArguments args = settings.arguments;
       return MaterialPageRoute(builder: (context) => SessionDetails(session: args.data, patientId: args.patientId,));
@@ -95,8 +89,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => TermsPage());
     case PrivacyPolicy.RouteName:
       return MaterialPageRoute(builder: (context) => PrivacyPolicy());
-    case Calling.RouteName:
-      return MaterialPageRoute(builder: (context) => Calling());
     default:
       return MaterialPageRoute(builder: (context) => UndefinedView(name: settings.name));
   }

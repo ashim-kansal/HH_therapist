@@ -21,6 +21,7 @@ class LoginResponseModel {
     
     return LoginResponseModel(
       token: json.containsKey("result") ? json["result"]["token"]?? "" : "",
+      id: json.containsKey("result") ? json["result"]["_id"]?? "" : "",
       deviceToken: json.containsKey("result") ? json["result"]["deviceToken"]?? "" : "",
       appLanguage: json.containsKey("result") ? json["result"]["appLanguage"]?? "" : "",
       notificationStatus: json.containsKey("result") ? json["result"]["notificationStatus"]?? false : false,
