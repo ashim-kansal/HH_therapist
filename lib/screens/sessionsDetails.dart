@@ -191,7 +191,7 @@ class SessionPageState extends State<SessionDetails>{
 
   @override
   Widget build(BuildContext context) {
-    return MyWidget(title: widget.session.patientId.firstName+' '+widget.session.patientId.firstName, child: Container(
+    return MyWidget(title: widget.session.patientId.firstName+' '+widget.session.patientId.lastName, child: Container(
       child: SingleChildScrollView(
         child: 
         Column(
@@ -336,6 +336,7 @@ class SessionPageState extends State<SessionDetails>{
                     isJournling == true ?
                       Container(
                         color: HH_Colors.color_FBF4F4,
+                        margin: EdgeInsets.only(top: 10),
                         // height: MediaQuery.of(context).size.height / 3.7,
                         padding: EdgeInsets.all(10),
                         child: Container(
@@ -349,7 +350,7 @@ class SessionPageState extends State<SessionDetails>{
                                 builder: (context,snapshot){
                                   if(snapshot.connectionState == ConnectionState.done){
                                     if(snapshot.hasError){
-                                      return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
+                                      return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600);
                                     }
                                     var item = snapshot.data.result;
                                     return ListView.builder(

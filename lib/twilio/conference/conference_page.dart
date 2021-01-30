@@ -272,7 +272,7 @@ class _ConferencePageState extends State<VideoCallPage> {
     final participants = _conferenceRoom.participants;
     if (participants.length == 1) {
       //commented by ashish on 27 jan 2021
-      // children.add(_buildNoiseBox());
+      children.add(_buildNoiseBox());
     } else {
       print(participants.length);
       final localParticipant = participants.firstWhere((ParticipantWidget participant) => !participant.isRemote, orElse: () => null);
