@@ -37,7 +37,11 @@ class DashboardState extends State<Dashboard> {
       SettingsPage()
     ];
     GetStringToSP("token").then((value) =>
-    {id = value});
+    {
+      setState(()=>{
+        id = value
+      })
+    });
 
   }
   @override
