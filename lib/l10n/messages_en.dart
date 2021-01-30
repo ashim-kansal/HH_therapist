@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Proceed" : MessageLookupByLibrary.simpleMessage("Proceed"),
     "Profile" : MessageLookupByLibrary.simpleMessage("Profile"),
     "Program" : MessageLookupByLibrary.simpleMessage("Program"),
-    "Questionaire" : MessageLookupByLibrary.simpleMessage("Questionaire"),
+    "Questionaire" : MessageLookupByLibrary.simpleMessage("Questionnaire"),
     "Re-Schedule" : MessageLookupByLibrary.simpleMessage("Re-Schedule"),
     "Resend OTP" : MessageLookupByLibrary.simpleMessage("Resend OTP"),
     "Resend code in:" : MessageLookupByLibrary.simpleMessage("Resend code in:"),

@@ -408,6 +408,7 @@ class NotificationList extends StatelessWidget {
                     title: this.title,
                     color: HH_Colors.grey_35444D,
                     size: 16,
+                    textweight: FontWeight.w600,
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
@@ -875,7 +876,7 @@ class DialogWithButtons extends StatelessWidget {
                         onTap: () => {
                           onDenyPress(),
                         },
-                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400)),
+                        child: HHTextView(title: "No", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w600)),
                     ),
                     Padding(
                       padding: EdgeInsets.all(10),
@@ -883,7 +884,7 @@ class DialogWithButtons extends StatelessWidget {
                         onTap: () => {
                           onLogoutPress()
                         },
-                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w400),),
+                        child: HHTextView(title: "Yes", size: 18, color: HH_Colors.color_707070, textweight: FontWeight.w600),),
                     )
                   ],
                 ),

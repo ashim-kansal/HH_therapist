@@ -1,5 +1,6 @@
 {
   "@@last_modified": "2021-01-08T06:52:37.130942",
+
   "Next": "Prochaine",
   "@Next": {
     "type": "text",
@@ -30,182 +31,102 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Enter Password": "Enter Password",
-=======
   "Enter Password": "Entrer le mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Password containes be alpha-numeric with 1 Small, Capital and Special character",
-=======
   "Password containes be alpha-numeric with 1 Small, Capital and Special character": "Le mot de passe doit être alphanumérique avec 1 petit, majuscule et caractère spécial",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Password containes be alpha-numeric with 1 Small, Capital and Special character": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter a valid email address": "Please enter a valid email address",
-=======
   "Please enter a valid email address": "S'il vous plaît, mettez une adresse email valide",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a valid email address": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Login into your existing account": "Login into your existing account",
-=======
   "Login into your existing account": "Connectez-vous à votre compte existant",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Login into your existing account": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Forgot Password?": "Forgot Password?",
-=======
   "Forgot Password?": "Mot de passe oublié?",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Forgot Password?": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Terms of Service ": "Terms of Service ",
-=======
   "Terms of Service ": "Conditions d'utilisation ",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Terms of Service ": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "By continuing, you agree to our ": "By continuing, you agree to our ",
-=======
   "By continuing, you agree to our ": "En continuant, vous acceptez notre ",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@By continuing, you agree to our ": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Do you have an account ": "Do you have an account ",
-=======
   "Do you have an account ": "Avez-vous un compte ",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Do you have an account ": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Sign Up": "Sign Up",
-=======
   "Sign Up": "S'inscrire",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Sign Up": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter a new password": "Please enter a new password",
-=======
   "Please enter a new password": "Veuillez saisir un nouveau mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a new password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Enter your new password below.": "Enter your new password below.",
-=======
   "Enter your new password below.": "Entrez votre nouveau mot de passe ci-dessous.",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter your new password below.": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Enter New Password": "Enter New Password",
-=======
   "Enter New Password": "Entrez un nouveau mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter New Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Daily drinking diary to track your progress": "Daily drinking diary to track your progress",
-=======
   "Daily drinking diary to track your progress": "Journal quotidien d'alcool pour suivre vos progrès",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Daily drinking diary to track your progress": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Join your therapist directly from your phone": "Join your therapist directly from your phone",
-=======
   "Join your therapist directly from your phone": "Rejoignez votre thérapeute directement depuis votre téléphone",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Join your therapist directly from your phone": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "To help you understand your triggers": "To help you understand your triggers",
-=======
   "To help you understand your triggers": "Pour vous aider à comprendre vos déclencheurs",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@To help you understand your triggers": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter a valid confirm password": "Please enter a valid confirm password",
-=======
   "Please enter a valid confirm password": "Veuillez saisir un mot de passe de confirmation valide",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a valid confirm password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter the valid OTP": "Please enter the valid OTP",
-=======
   "Please enter the valid OTP": "Veuillez saisir l'OTP valide",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter the valid OTP": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Reset": "Reset",
-=======
   "Reset": "Réinitialiser",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Reset": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Alert": "Alert",
-=======
   "Alert": "Alerte",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Alert": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Passwords do not matched.": "Passwords do not matched.",
-=======
   "Passwords do not matched.": "Les mots de passe ne correspondent pas.",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Passwords do not matched.": {
     "type": "text",
     "placeholders": {}
@@ -215,24 +136,12 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "abc": "frrrr",
-  "@abc": {
-    "type": "frrrrr",
-    "placeholders": {}
-  },
-=======
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "Heal@Home Programs": "Heal@Home Programs",
   "@Heal@Home Programs": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter you registered email address. We will help you retrieve your password.": "Please enter you registered email address. We will help you retrieve your password.",
-=======
   "Please enter you registered email address. We will help you retrieve your password.": "Veuillez inscrire le courriel enregistré, nous vous aiderons a retrouver votre mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter you registered email address. We will help you retrieve your password.": {
     "type": "text",
     "placeholders": {}
@@ -242,56 +151,32 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Alcohol Management Program": "Alcohol Management Program",
-=======
   "Alcohol Management Program": "Programme de gestion de la consummation d’alcool",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Alcohol Management Program": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "6 MONTH PROGRAM": "6 MONTH PROGRAM",
-=======
   "6 MONTH PROGRAM": "Programme de 6 mois",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@6 MONTH PROGRAM": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Program": "Program",
-=======
   "Program": "Programme",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Program": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Proceed": "Proceed",
-=======
   "Proceed": "Poursuivre",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Proceed": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Settings": "Settings",
-=======
   "Settings": "Paramètres",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Settings": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Enter Email": "Enter Email",
-=======
   "Enter Email": "Addresse Courriel",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Enter Email": {
     "type": "text",
     "placeholders": {}
@@ -301,56 +186,32 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Change Password": "Change Password",
-=======
   "Change Password": "Changer le mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Change Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Forgot Password": "Forgot Password",
-=======
   "Forgot Password": "Mot de passe oublié",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Forgot Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Reset Password": "Reset Password",
-=======
   "Reset Password": "Réinitialiser le mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Reset Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Change Language": "Change Language",
-=======
   "Change Language": "Modifier la Langue",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Change Language": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Email already exist!": "Email already exist!",
-=======
   "Email already exist!": "Courriel existe déjà",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Email already exist!": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "We found an account with this email, do you want to login?": "We found an account with this email, do you want to login?",
-=======
   "We found an account with this email, do you want to login?": "Nous avons trouvé un compte avec ce courriel, voulez-vous vous connecter??",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@We found an account with this email, do you want to login?": {
     "type": "text",
     "placeholders": {}
@@ -360,47 +221,27 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Feedback": "Feedback",
-=======
   "Feedback": "Commentaires",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Feedback": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "ABOUT_US": "ABOUT_US",
-=======
   "ABOUT_US": "A Propos",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@ABOUT_US": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Error": "Error",
-=======
   "Error": "Erreur",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Error": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Submit": "Submit",
-=======
   "Submit": "Soumettre",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Submit": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "save": "save",
-=======
   "save": "Sauvegarder",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@save": {
     "type": "text",
     "placeholders": {}
@@ -410,614 +251,342 @@
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "My Chats": "My Chats",
-=======
   "My Chats": "Mes Chats",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@My Chats": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Dashboard": "Dashboard",
-=======
   "Dashboard": "Tableau de Bord",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Dashboard": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "No New Messages": "No New Messages",
-=======
   "No New Messages": "Pas de nouveaux messages",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@No New Messages": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Not Found": "Not Found",
-=======
   "Not Found": "Introuvable",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Not Found": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "No Data Found": "No Data Found",
-=======
   "No Data Found": "Aucune donnée disponible",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@No Data Found": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "My Programs": "My Programs",
-=======
   "My Programs": "Mes programmes",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@My Programs": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please share your thoughts with us": "Please share your thoughts with us",
-=======
   "Please share your thoughts with us": "Veuillez partager vos remarques ",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please share your thoughts with us": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please use this form to connect us ": "Please use this form to connect us ",
-=======
   "Please use this form to connect us ": "Veuillez utiliser ce formulaire pour nous connecter ",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please use this form to connect us ": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter a feedback": "Please enter a feedback",
-=======
   "Please enter a feedback": "Veuillez nous faire part de vos commentaires",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter a feedback": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Please enter your review": "Please enter your review",
-=======
   "Please enter your review": "Veuillez nous faire part de vos commentaires",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Please enter your review": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "No Record Found": "No Record Found",
-=======
   "No Record Found": "Aucun dossier trouvé",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@No Record Found": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Schedule": "Schedule",
-=======
   "Schedule": "Calendrier",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Schedule": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Upcoming": "Upcoming",
-=======
   "Upcoming": "A venir",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Upcoming": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Completed": "Completed",
-=======
   "Completed": "Terminé",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Completed": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Send": "Send",
-=======
   "Send": "Envoyer",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Send": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "No Upcoming Sessions": "No Upcoming Sessions",
-=======
   "No Upcoming Sessions": "Aucune session à venir",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@No Upcoming Sessions": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "View All": "View All",
-=======
   "View All": "Tout voir",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@View All": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Drinking Diary": "Drinking Diary",
-=======
   "Drinking Diary": "Journal de consommation",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Drinking Diary": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Daily Journaling": "Daily Journaling",
-=======
   "Daily Journaling": "Journal quotidien",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Daily Journaling": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "My Session": "My Session",
-=======
   "My Session": "Mes Session",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@My Session": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Upcoming Sessions": "Upcoming Sessions",
-=======
   "Upcoming Sessions": "Sessions à venir",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Upcoming Sessions": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Search Nearest Pharmacies": "Search Nearest Pharmacies",
-=======
   "Search Nearest Pharmacies": "Rechercher la pharmacie la plus proche",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Search Nearest Pharmacies": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Open": "Open",
-=======
   "Open": "Ouvert",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Open": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Cancel": "Cancel",
-=======
   "Cancel": "Annuler",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Cancel": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Notification": "Notification",
-=======
   "Notification": "Alerte",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Notification": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Notifications": "Notifications",
-=======
   "Notifications": "Alertes",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Notifications": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Upgrade Now": "Upgrade Now",
-=======
   "Upgrade Now": "Mettre a jour",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Upgrade Now": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Journaling": "Journaling",
-=======
   "Journaling": "Journal",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Journaling": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "New Journal": "New Journal",
-=======
   "New Journal": "Entrée recente",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@New Journal": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Old Journal": "Old Journal",
-=======
   "Old Journal": "Ancienne Entrée",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Old Journal": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Support": "Support",
-=======
   "Support": "Soutien",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Support": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Home": "Home",
-=======
   "Home": "Accueil",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Home": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Library": "Library",
-=======
   "Library": "Bibliothèque",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Library": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Assessment": "Assessment",
-=======
   "Assessment": "Évaluation",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Assessment": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Therapists": "Therapists",
-=======
   "Therapists": "Thérapeutes",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Therapists": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Address": "Address",
-=======
   "Address": "Addresse",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Address": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "First Name": "First Name",
-=======
   "First Name": "Prénom",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@First Name": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Last Name": "Last Name",
-=======
   "Last Name": "Nom de Famille",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Last Name": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Name": "Name",
-=======
   "Name": "Nom",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Name": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Edit": "Edit",
-=======
   "Edit": "Éditer",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Edit": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Submit & Proceed": "Submit & Proceed",
-=======
   "Submit & Proceed": "Soumettre et proceder",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Submit & Proceed": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Phone Number": "Phone Number",
-=======
   "Phone Number": "Téléphone",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Phone Number": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Email": "Email",
-=======
   "Email": "Courriel",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Email": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Update": "Update",
-=======
   "Update": "Mise a jour",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Update": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Share Your Reviews": "Share Your Reviews",
-=======
   "Share Your Reviews": "Partagerz vos commentaires",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Share Your Reviews": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Questionaire": "Questionaire",
-=======
   "Questionaire": "Questionnaire",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Questionaire": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Profile": "Profile",
-=======
   "Profile": "Profil",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Profile": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "FAQ's": "FAQ's",
-=======
   "FAQ's": "QFA's",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@FAQ's": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Edit Profile": "Edit Profile",
-=======
   "Edit Profile": "Editer le profil",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Edit Profile": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Contact Us": "Contact Us",
-=======
   "Contact Us": "Contactez-nous",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Contact Us": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "More Information": "More Information",
-=======
   "More Information": "Plus d Informations",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@More Information": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "About Us": "About Us",
-=======
   "About Us": "A propos",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@About Us": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Terms & Conditions": "Terms & Conditions",
-=======
   "Terms & Conditions": "Termes et conditions",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Terms & Conditions": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Privacy Policy": "Privacy Policy",
-=======
   "Privacy Policy": "Politique de confidentialité",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Privacy Policy": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Log Out": "Log Out",
-=======
   "Log Out": "Se déconnecter",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Log Out": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Terms & Condition": "Terms & Condition",
-=======
   "Terms & Condition": "Termes et conditions",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Terms & Condition": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "My Therapists": "My Therapists",
-=======
   "My Therapists": "Mes thérapeutes",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@My Therapists": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "OTP Verification": "OTP Verification",
-=======
   "OTP Verification": "OTP vérification",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@OTP Verification": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Resend code in:": "Resend code in:",
-=======
   "Resend code in:": "Renvoyez le code:",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Resend code in:": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Therapist": "Therapist",
-=======
   "Therapist": "Thérapeute",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Therapist": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Resend OTP": "Resend OTP",
-=======
   "Resend OTP": "Renvoyez le OTP",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Resend OTP": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Get Started": "Get Started",
-=======
   "Get Started": "Commencer",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Get Started": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Physician": "Physician",
-=======
   "Physician": "Docteur",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Physician": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Case manager": "Case manager",
-=======
   "Case manager": "Manager de Cas",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Case manager": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Re-Schedule": "Re-Schedule",
-=======
   "Re-Schedule": "Reporter",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Re-Schedule": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Old Password": "Old Password",
-=======
   "Old Password": "ancien mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Old Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "New Password": "New Password",
-=======
   "New Password": "nouveau mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@New Password": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Confirm Password": "Confirm Password",
-=======
   "Confirm Password": "Confirmez le mot de passe",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Confirm Password": {
     "type": "text",
     "placeholders": {}
