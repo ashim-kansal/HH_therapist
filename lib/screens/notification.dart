@@ -112,7 +112,7 @@ class _NotificationState extends State<NotificationPage> {
                   if(snapshot.hasError){
                     return Container(
                       child: Center(
-                        child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,),
+                        child: HHTextView(title: AppLocalizations.of(context).no_record_found, size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w500,),
                       ),
                     );
                   }

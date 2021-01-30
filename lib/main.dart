@@ -5,10 +5,13 @@ import 'package:flutter_app/navigation/router.dart' as router;
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'widgets/mywidgets.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

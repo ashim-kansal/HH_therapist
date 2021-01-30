@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "930358040441",
-    "firebase_url": "https://healathome-41a42-default-rtdb.firebaseio.com",
-    "project_id": "healathome-41a42",
-    "storage_bucket": "healathome-41a42.appspot.com"
+    "project_number": "144961822940",
+    "project_id": "heal8home-ea013",
+    "storage_bucket": "heal8home-ea013.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930358040441:android:c34bc2a5f3e00a1cc4c1a8",
+        "mobilesdk_app_id": "1:144961822940:android:c9ee22220a20ed80219419",
         "android_client_info": {
           "package_name": "com.HatH.patient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+          "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdoQ0YMuMLovtV1ATDGkA68Hva29oBeUo"
+          "current_key": "AIzaSyA67ITyfxetPTBd5Hg20vA-GhlcTl-jEZM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+              "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.HatH.therapist"
-              }
             }
           ]
         }
@@ -44,35 +36,65 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:930358040441:android:001115a17b409628c4c1a8",
+        "mobilesdk_app_id": "1:144961822940:android:a1df839e79b00010219419",
         "android_client_info": {
           "package_name": "com.HatH.therapist"
         }
       },
       "oauth_client": [
         {
-          "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+          "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBdoQ0YMuMLovtV1ATDGkA68Hva29oBeUo"
+          "current_key": "AIzaSyA67ITyfxetPTBd5Hg20vA-GhlcTl-jEZM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "930358040441-4dfi1fgk0ga0bhab30jqbm8ubvio20bs.apps.googleusercontent.com",
+              "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
               "client_type": 3
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144961822940:android:093f73116266256d219419",
+        "android_client_info": {
+          "package_name": "com.salman.agoravideotest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144961822940-5d0vtqr5vn4iolhasugb69pggvof1b0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.salman.agoravideotest",
+            "certificate_hash": "013ca06e4fc42b721924a786d262d53f7402f3fb"
+          }
+        },
+        {
+          "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA67ITyfxetPTBd5Hg20vA-GhlcTl-jEZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id": "930358040441-13cuk15hjkn1cv2k0ijh8527kabge4r4.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.HatH.therapist"
-              }
+              "client_id": "144961822940-gokn9qjecnrp3oc5k67s44pl3hem5uvg.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         }

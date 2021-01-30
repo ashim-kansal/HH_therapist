@@ -10,8 +10,8 @@ import 'package:flutter_app/screens/dashboard.dart';
 
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async{
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
 }
 
 class Splash extends StatefulWidget{
@@ -54,7 +54,7 @@ class SplashState extends State<Splash>{
   @override
   void initState() {
     super.initState();
-    Firebase.initializeApp();
+    // Firebase.initializeApp();
 
     getToken();
     _register();

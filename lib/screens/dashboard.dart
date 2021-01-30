@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/agora/pickup_layout.dart';
 import 'package:flutter_app/app_localization.dart';
+import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/chatlist.dart';
 import 'package:flutter_app/screens/home.dart';
 import 'package:flutter_app/screens/notification.dart';
@@ -18,6 +20,7 @@ class Dashboard extends StatefulWidget {
 class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
   String title = 'Dashboard';
+  String id = '';
 
   List<Widget> listScreens;
   List<String> listNames = [
@@ -33,11 +36,16 @@ class DashboardState extends State<Dashboard> {
       ChatListPage(),
       SettingsPage()
     ];
+    GetStringToSP("token").then((value) =>
+    {id = value});
+
   }
   @override
   Widget build(BuildContext context) =>
-
-      Scaffold(
+      PickupLayout(
+  myId: id,
+  scaffold:
+  Scaffold(
         appBar: AppBar(
           title: Text( tabIndex == 0? AppLocalizations.of(context).dashboard
               : tabIndex == 1 ?AppLocalizations.of(context).mychat
@@ -118,5 +126,5 @@ class DashboardState extends State<Dashboard> {
               child: listScreens[tabIndex]
             )
           ),
-      );
+      ));
 }
