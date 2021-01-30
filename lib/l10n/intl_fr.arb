@@ -1,56 +1,31 @@
 {
   "@@last_modified": "2021-01-08T06:52:37.130942",
-
-<<<<<<< HEAD
-  "Next": "Next",
-=======
   "Next": "Prochaine",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Next": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Done": "Done",
-=======
   "Done": "Terminé",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Done": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Choose your goal": "Choose your goal",
-=======
   "Choose your goal": "Choisissez votre objectif",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Choose your goal": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Video Session": "Video Session",
-=======
   "Video Session": "Session vidéo",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Video Session": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Welcome back": "Welcome back",
-=======
   "Welcome back": "Nous saluons le retour",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Welcome back": {
     "type": "text",
     "placeholders": {}
   },
-<<<<<<< HEAD
-  "Login": "Login",
-=======
   "Login": "Connecter",
->>>>>>> dc61258e809e423e626b83b0590f630da6c7de96
   "@Login": {
     "type": "text",
     "placeholders": {}
