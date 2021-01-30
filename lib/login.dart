@@ -122,10 +122,6 @@ class _LoginPageState extends State<LoginPage> {
     _firebaseMessaging.getToken().then((fcmtoken) => {
       apiService.loginAPIHandler(email, password, fcmtoken, voipToken).then(
         (value) => {
-          FirebaseFirestore.instance
-              .collection(FIRESTORE_USERS)
-              .doc(value.id)
-              .set({"token": fcmtoken}),
 
           Navigator.of(context).pop(),
           Timer(Duration(seconds: 1),
@@ -137,6 +133,11 @@ class _LoginPageState extends State<LoginPage> {
           // ignore: unrelated_type_equality_checks
           if (value.responseCode == 200) {
             SetStringToSP("token", value.token),
+            SetStringToSP("id", value.id),
+            FirebaseFirestore.instance
+                .collection(FIRESTORE_USERS)
+                .doc(value.id)
+                .set({"token": fcmtoken}),
 
             Timer(Duration(seconds: 2),
               ()=>{
