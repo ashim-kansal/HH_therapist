@@ -134,6 +134,7 @@ class _LoginPageState extends State<LoginPage> {
           if (value.responseCode == 200) {
             SetStringToSP("token", value.token),
             SetStringToSP("id", value.id),
+            print(value.id),
             FirebaseFirestore.instance
                 .collection(FIRESTORE_USERS)
                 .doc(value.id)
