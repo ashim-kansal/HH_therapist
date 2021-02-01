@@ -73,6 +73,7 @@ class _CallScreenState extends State<CallScreen> {
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
     await AgoraRtcEngine.setParameters(
         '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await AgoraRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
 
 
@@ -102,9 +103,9 @@ class _CallScreenState extends State<CallScreen> {
 
   /// Create agora sdk instance and initialize
   Future<void> _initAgoraRtcEngine() async {
-    await PermissionHandler().requestPermissions(
-      [PermissionGroup.camera, PermissionGroup.microphone],
-    );
+    // await PermissionHandler().requestPermissions(
+    //   [PermissionGroup.camera, PermissionGroup.microphone],
+    // );
     await AgoraRtcEngine.create(APP_ID);
     await AgoraRtcEngine.enableVideo();
     await AgoraRtcEngine.enableAudio();

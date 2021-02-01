@@ -196,10 +196,8 @@
 #-dontwarn retrofit2.KotlinExtensions
 #-dontwarn retrofit2.KotlinExtensions$*
 #
--keep class tvi.webrtc.** { *; }
--keep class com.twilio.video.** { *; }
--keep class com.twilio.common.** { *; }
--keepattributes InnerClasses
+-keep class io.agora.**{*;}
+
 ## With R8 full mode, it sees no subtypes of Retrofit interfaces since they are created with a Proxy
 ## and replaces all potential values with null. Explicitly keeping the interfaces prevents this.
 #-if interface * { @retrofit2.http.* <methods>; }

@@ -23,37 +23,29 @@ class DashboardState extends State<Dashboard> {
   String id = '';
 
   List<Widget> listScreens;
-  List<String> listNames = [
-    'Dashboard',
-    'Patient Chat',
-    'Settings'
-  ];
+  List<String> listNames = ['Dashboard', 'Patient Chat', 'Settings'];
+
   @override
   void initState() {
     super.initState();
-    listScreens = [
-      HomePage(),
-      ChatListPage(),
-      SettingsPage()
-    ];
-    GetStringToSP("token").then((value) =>
-    {
-      setState(()=>{
-        id = value
-      })
-    });
-
+    listScreens = [HomePage(), ChatListPage(), SettingsPage()];
+    GetStringToSP("id").then((value) => {
+          setState(() => {id = value})
+        });
   }
+
   @override
-  Widget build(BuildContext context) =>
-      PickupLayout(
-  myId: id,
-  scaffold:
-  Scaffold(
+  Widget build(BuildContext context) => PickupLayout(
+      myId: id,
+      scaffold: Scaffold(
         appBar: AppBar(
-          title: Text( tabIndex == 0? AppLocalizations.of(context).dashboard
-              : tabIndex == 1 ?AppLocalizations.of(context).mychat
-              : AppLocalizations.of(context).settings, style: TextStyle(color: Colors.white)),
+          title: Text(
+              tabIndex == 0
+                  ? AppLocalizations.of(context).dashboard
+                  : tabIndex == 1
+                      ? AppLocalizations.of(context).mychat
+                      : AppLocalizations.of(context).settings,
+              style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here
@@ -65,24 +57,23 @@ class DashboardState extends State<Dashboard> {
               child: IconButton(
                 icon: Icon(
                   Icons.people_alt,
-                  color: Colors.white, ),
-                onPressed: () => {
-                  Navigator.pushNamed(context, ProfilePage.RouteName)
-                },
-              )
-          ),
+                  color: Colors.white,
+                ),
+                onPressed: () =>
+                    {Navigator.pushNamed(context, ProfilePage.RouteName)},
+              )),
           actions: [
             Container(
-              margin: EdgeInsets.only(right: 10),
-              child: IconButton( 
-                icon: Icon(
+                margin: EdgeInsets.only(right: 10),
+                child: IconButton(
+                  icon: Icon(
                     Icons.notifications_on_outlined,
-                    color: Colors.white, ),
-                    onPressed: () => {
-                      Navigator.pushNamed(context, NotificationPage.RouteName)
-                    },
-              )
-            )
+                    color: Colors.white,
+                  ),
+                  onPressed: () => {
+                    Navigator.pushNamed(context, NotificationPage.RouteName)
+                  },
+                ))
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -100,35 +91,48 @@ class DashboardState extends State<Dashboard> {
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                  icon: Image.asset(tabIndex == 0? 'assets/images/ic_home_select.png': 'assets/images/ic_home.png', height: 25, width: 25,),
+                icon: Image.asset(
+                  tabIndex == 0
+                      ? 'assets/images/ic_home_select.png'
+                      : 'assets/images/ic_home.png',
+                  height: 25,
+                  width: 25,
+                ),
                 title: Text(AppLocalizations.of(context).dashboard),
-
-  ),
-              BottomNavigationBarItem(
-                icon: Image.asset('assets/images/ic_chat.png', height: 25, width: 25, color: tabIndex == 1?HH_Colors.accentColor: HH_Colors.grey_707070,),
-                title: Text(AppLocalizations.of(context).mychat),
-
               ),
               BottomNavigationBarItem(
-                icon: Image.asset(tabIndex == 2?'assets/images/ic_settings_select.png':'assets/images/ic_settings.png' , height: 25, width: 25,),
+                icon: Image.asset(
+                  'assets/images/ic_chat.png',
+                  height: 25,
+                  width: 25,
+                  color: tabIndex == 1
+                      ? HH_Colors.accentColor
+                      : HH_Colors.grey_707070,
+                ),
+                title: Text(AppLocalizations.of(context).mychat),
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  tabIndex == 2
+                      ? 'assets/images/ic_settings_select.png'
+                      : 'assets/images/ic_settings.png',
+                  height: 25,
+                  width: 25,
+                ),
                 title: Text(AppLocalizations.of(context).settings),
               )
-            ]
-        ),
-
+            ]),
         body: Material(
-          color: Theme.of(context).accentColor,
+            color: Theme.of(context).accentColor,
             child: Container(
-              padding: EdgeInsets.all(20),
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30.0),
-                    topLeft: Radius.circular(30.0),
-                  ),
-                  color: Colors.white),
-              child: listScreens[tabIndex]
-            )
-          ),
+                padding: EdgeInsets.all(20),
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30.0),
+                      topLeft: Radius.circular(30.0),
+                    ),
+                    color: Colors.white),
+                child: listScreens[tabIndex])),
       ));
 }
