@@ -12,15 +12,15 @@ import flutter_voip_push_notification
   ) -> Bool {
     FirebaseApp.configure()
     
-    Messaging.messaging().isAutoInitEnabled = true
+    // Messaging.messaging().isAutoInitEnabled = true
 
 //    if (@available(iOS 10.0, *)) {
 //      [UNUserNotificationCenter currentNotificationCenter].delegate = (id<UNUserNotificationCenterDelegate>) self;
 //    }
     
-    if #available(iOS 10.0, *) {
-      UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-    }
+    // if #available(iOS 10.0, *) {
+    //   UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+    // }
     
     if #available(iOS 10.0, *) {
       // For iOS 10 display notification (sent via APNS)

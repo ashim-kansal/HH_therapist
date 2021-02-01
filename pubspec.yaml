@@ -64,7 +64,7 @@ dependencies:
   permission_handler: ^3.0.0
   cloud_firestore: "0.14.3+1"
   cached_network_image: ^2.4.1
-  agora_rtc_engine: ^1.0.8
+  agora_rtc_engine: ^1.0.15
   flutter_ringtone_player: ^2.0.0
 
 

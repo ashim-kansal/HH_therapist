@@ -36,7 +36,7 @@ class DashboardState extends State<Dashboard> {
       ChatListPage(),
       SettingsPage()
     ];
-    GetStringToSP("token").then((value) =>
+    GetStringToSP("id").then((value) =>
     {
       setState(()=>{
         id = value
@@ -47,9 +47,8 @@ class DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) =>
       PickupLayout(
-  myId: id,
-  scaffold:
-  Scaffold(
+        myId: id,
+        scaffold: Scaffold(
         appBar: AppBar(
           title: Text( tabIndex == 0? AppLocalizations.of(context).dashboard
               : tabIndex == 1 ?AppLocalizations.of(context).mychat
