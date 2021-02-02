@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
+import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 
@@ -69,6 +70,8 @@ class SplashState extends State<Splash>{
         return null;
       },
     );
+
+    Permissions.cameraAndMicrophonePermissionsGranted();
 
     checkIfUserLoggedIn();
   }

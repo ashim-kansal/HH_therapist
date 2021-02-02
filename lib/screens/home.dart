@@ -147,8 +147,14 @@ class HomePageState extends State<HomePage> {
     print("Result pid:- "+ result.patientId.id);
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
+          // from: result.therapistId,
+          // to: result.patientId.id,
           from: result.therapistId,
           to: result.patientId.id,
+          fromName: "",
+          toName: result.patientId.firstName+' '+result.patientId.lastName,
+          image: "",
+          toImage: result.patientId.profilePic,
           context: context,
           isVideo: true),
       FirebaseFirestore.instance
@@ -166,7 +172,7 @@ class HomePageState extends State<HomePage> {
             "deviceid": deviceId,
           });
         }
-      }).asStream()
+      })
     });
   }
 

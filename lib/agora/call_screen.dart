@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/utils/colors.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'agora_configs.dart';
@@ -73,6 +74,7 @@ class _CallScreenState extends State<CallScreen> {
     await AgoraRtcEngine.enableWebSdkInteroperability(true);
     await AgoraRtcEngine.setParameters(
         '''{\"che.video.lowBitRateStreamParameter\":{\"width\":320,\"height\":180,\"frameRate\":15,\"bitRate\":140}}''');
+    await AgoraRtcEngine.setParameters("{\"rtc.log_filter\": 65535}");
     await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
 
 
@@ -102,9 +104,9 @@ class _CallScreenState extends State<CallScreen> {
 
   /// Create agora sdk instance and initialize
   Future<void> _initAgoraRtcEngine() async {
-    await PermissionHandler().requestPermissions(
-      [PermissionGroup.camera, PermissionGroup.microphone],
-    );
+    // await PermissionHandler().requestPermissions(
+    //   [PermissionGroup.camera, PermissionGroup.microphone],
+    // );
     await AgoraRtcEngine.create(APP_ID);
     await AgoraRtcEngine.enableVideo();
     await AgoraRtcEngine.enableAudio();
@@ -270,7 +272,8 @@ class _CallScreenState extends State<CallScreen> {
                       ],
                     ),
                     Spacer(flex: 4,),
-                    Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
+                    Container(child: getImageView(widget.call.callerPic)??"",margin: EdgeInsets.symmetric(horizontal: 40),),
+                    // Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
                     Spacer(flex: 1,),
                     Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),
 
@@ -473,5 +476,20 @@ class _CallScreenState extends State<CallScreen> {
         ),
       ),
     );
+  }
+
+    getImageView(String callerPic) {
+    if(callerPic?.isEmpty) {
+      return Image.asset('assets/doctor_image.png');
+    } else {
+      return CircleAvatar(
+                radius: 55,
+                backgroundColor: HH_Colors.color_F2EEEE,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(widget.call.callerPic) ,
+                  radius: 52,
+                ),
+              );
+    }
   }
 }
