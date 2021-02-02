@@ -20,7 +20,7 @@ class TherapistPage extends StatefulWidget {
 class _TherapistState extends State<TherapistPage> {
   @override
   Widget build(BuildContext context) {
-    return MyWidget( title: AppLocalizations.of(context).mychat,
+    return MyWidget( title: AppLocalizations.of(context).myclients,
       child: FutureBuilder<MyClientList>(
         future: getMyClientList(),
         builder: (context, snapshot){

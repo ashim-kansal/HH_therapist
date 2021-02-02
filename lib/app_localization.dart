@@ -71,6 +71,7 @@ class AppLocalizations {
   String get save => Intl.message("save");
   String get chat => Intl.message("Chat");
   String get mychat => Intl.message("My Chats");
+  String get myclients => Intl.message("My Clients");
   String get dashboard => Intl.message("Dashboard");
   String get no_msg => Intl.message("No New Messages");
   String get not_found => Intl.message("Not Found");

@@ -141,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "We found an account with this email, do you want to login?" : MessageLookupByLibrary.simpleMessage("ya existe una cuenta con este email, desea connectarse?"),
     "Welcome back" : MessageLookupByLibrary.simpleMessage("dar una buena acogida"),
     "abc" : MessageLookupByLibrary.simpleMessage("essss"),
-    "save" : MessageLookupByLibrary.simpleMessage("Salvar")
+    "save" : MessageLookupByLibrary.simpleMessage("Salvar"),
+    "My Clients" : MessageLookupByLibrary.simpleMessage("Mis clientas"),
   };
 }

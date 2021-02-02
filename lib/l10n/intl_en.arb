@@ -1,5 +1,10 @@
 {
   "@@last_modified": "2021-01-08T06:52:37.130942",
+  "My Clients": "My Clients",
+  "@My Clients": {
+    "type": "text",
+    "placeholders": {}
+  },
   "Next": "Next",
   "@Next": {
     "type": "text",

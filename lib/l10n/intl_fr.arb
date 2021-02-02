@@ -6,6 +6,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "My Clients": "Mes Clients",
+  "@My Clients": {
+    "type": "text",
+    "placeholders": {}
+  },
   "Done": "Terminé",
   "@Done": {
     "type": "text",
