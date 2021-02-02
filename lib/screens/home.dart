@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_app/agora/call_utilities.dart';
 import 'package:flutter_app/agora/permissions.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/screens/review.dart';
 // import 'package:flutter_app/twilio/conference/conference_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,12 +26,30 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  
+
+  String name = '';
+  String profileImage = '';
+
   @override
   void initState() {
     super.initState();
+    getProfile();
   }
-  
+
+  void getProfile() {
+
+    UserAPIServices().getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          profileImage = value.result.profilePic;
+        })
+      }
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
