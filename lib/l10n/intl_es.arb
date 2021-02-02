@@ -5,6 +5,11 @@
     "type": "text",
     "placeholders": {}
   },
+  "My Clients": "Mis clientas",
+  "@My Clients": {
+    "type": "text",
+    "placeholders": {}
+  },
   "Done": "Hecho",
   "@Done": {
     "type": "text",

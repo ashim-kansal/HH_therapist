@@ -272,7 +272,7 @@ class _CallScreenState extends State<CallScreen> {
                       ],
                     ),
                     Spacer(flex: 4,),
-                    Container(child: getImageView(widget.call.callerPic)??"",margin: EdgeInsets.symmetric(horizontal: 40),),
+                    Container(child: getImageView(widget.call.receiverPic)??"",margin: EdgeInsets.symmetric(horizontal: 40),),
                     // Container(child: Image.asset('assets/doctor_image.png'),margin: EdgeInsets.symmetric(horizontal: 40),),
                     Spacer(flex: 1,),
                     Text(widget.call.receiverName,style: TextStyle(fontSize: 25,color: Colors.blue),),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,6 +38,28 @@ class SessionPageState extends State<SessionPage>{
     duration: Toast.LENGTH_LONG, 
     gravity:  Toast.BOTTOM);
   }
+
+  String name = '';
+  String profileImage = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getProfile();
+  }
+
+  void getProfile() {
+
+    UserAPIServices().getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          profileImage = value.result.profilePic;
+        })
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -202,10 +225,10 @@ class SessionPageState extends State<SessionPage>{
       CallUtils.dial(
           from: result.therapistId,
           to: result.patientId.id,
-          fromName: "",
+          fromName: name,
           toName: result.patientId.firstName+' '+result.patientId.lastName,
-          image: result.patientId.profilePic,
-          toImage: "",
+          image: profileImage,
+          toImage: result.patientId.profilePic,
           context: context,
           isVideo: true),
       FirebaseFirestore.instance

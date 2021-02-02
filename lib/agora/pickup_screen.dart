@@ -71,7 +71,7 @@ class _PickupScreenState extends State<PickupScreen> {
             ),
             Spacer(flex: 15,),
             Container(child: 
-              getImageView(widget.call.receiverPic)??"",
+              getImageView(widget.call.callerPic)??"",
               margin: EdgeInsets.symmetric(horizontal: 40),),
             Spacer(flex: 8,),
             Text(widget.call.callerName,style: TextStyle(fontSize: 25,color: Colors.blue),),
