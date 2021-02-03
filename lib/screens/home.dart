@@ -175,6 +175,7 @@ class HomePageState extends State<HomePage> {
           image: profileImage,
           toImage: result.patientId.profilePic,
           context: context,
+          callDuration: result.slotDuration,
           isVideo: true,
         sessionid: result.id,
         programName: result.programName

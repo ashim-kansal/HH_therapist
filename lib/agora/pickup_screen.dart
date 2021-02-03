@@ -2,6 +2,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/agora/permissions.dart';
+import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/review.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 
@@ -93,7 +95,9 @@ class _PickupScreenState extends State<PickupScreen> {
                             builder: (context) =>
                                 CallScreen(call: widget.call, myId: widget.myId,),
                           ),
-                        );
+                        ).then((value) =>{
+                            Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(widget.call.sessionid, widget.call.programName))
+                          });
                             // : {};
                       }),
                 ),

@@ -11,7 +11,7 @@ import 'constants.dart';
 
 class CallUtils {
   static final CallMethods callMethods = CallMethods();
-  static dial({String from, String to, context, bool isVideo, String fromName, String toName, String image, String toImage, String sessionid, String programName}) async {
+  static dial({String from, String to, context, bool isVideo, String fromName, String toName, String image, String toImage, String sessionid, String programName, int callDuration}) async {
     Call call = Call(
       callerId: from,
       callerName: fromName,
@@ -22,7 +22,8 @@ class CallUtils {
       isVideo: isVideo,
       channelId: Random().nextInt(1000).toString(),
       sessionid: sessionid,
-      programName: programName
+      programName: programName,
+      callDuration: callDuration
     );
 
     bool callMade = await callMethods.makeCall(call: call);

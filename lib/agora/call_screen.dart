@@ -20,6 +20,7 @@ class CallScreen extends StatefulWidget {
   CallScreen({
     @required this.call,
     @required this.myId,
+
   });
 
   @override
@@ -30,11 +31,11 @@ class _CallScreenState extends State<CallScreen> {
   final CallMethods callMethods = CallMethods();
 
   StreamSubscription callStreamSubscription;
-
+  int time = 0;
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
-
+  Timer _timer;
   // Soundpool pool = Soundpool(streamType: StreamType.notification);
 
   @override
@@ -46,6 +47,7 @@ class _CallScreenState extends State<CallScreen> {
     addPostFrameCallback();
     initializeAgora();
   }
+
   int streamId;
  /* playTone() async {
 
@@ -57,6 +59,28 @@ class _CallScreenState extends State<CallScreen> {
       streamId = await pool.play(soundId);
     }
   }*/
+
+  void startTimer() {
+    print("widget.call.callDuration"+ widget.call.callDuration.toString());
+    const oneSec = const Duration(minutes: 1);
+
+    _timer = new Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (time >= widget.call.callDuration) {
+        // if (time >= (widget.call.callDuration * 60)) {
+          timer.cancel();
+          callMethods.endCall(
+            call: widget.call,
+          );
+        } else {
+          setState(() {
+            time++;
+          });
+        }
+      },
+    );
+  }
 
   Future<void> initializeAgora() async {
     if (APP_ID.isEmpty) {
@@ -142,6 +166,7 @@ class _CallScreenState extends State<CallScreen> {
         if(_users.length>0){
           print("BUBUB"+_users.length.toString());
           AgoraRtcEngine.stopEffect(1);
+          startTimer();
        //   pool.stop(streamId);
 
         }
@@ -267,7 +292,7 @@ class _CallScreenState extends State<CallScreen> {
                     Column(
                       children: [
                         Text("Dialing",style: TextStyle(fontSize: 26,fontWeight: FontWeight.bold,color: Colors.blue),),
-                        Text("00:00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
+                        // Text("00:00",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.blue),)
 
                       ],
                     ),
@@ -291,7 +316,7 @@ class _CallScreenState extends State<CallScreen> {
           children: <Widget>[
             _expandedVideoRow([views[1]]),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.topRight,
               child: Container(
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width / 3,
@@ -427,7 +452,7 @@ class _CallScreenState extends State<CallScreen> {
           RawMaterialButton(
             onPressed: _onToggleMute,
             child: Icon(
-              muted ? Icons.mic : Icons.mic_off,
+              muted ? Icons.mic_off : Icons.mic,
               color: muted ? Colors.white : Colors.blueAccent,
               size: 30.0,
             ),
@@ -446,6 +471,7 @@ class _CallScreenState extends State<CallScreen> {
     // clear users
     //pool.dispose();
     _users.clear();
+    _timer.cancel();
     // destroy sdk
     AgoraRtcEngine.leaveChannel();
     AgoraRtcEngine.destroy();
