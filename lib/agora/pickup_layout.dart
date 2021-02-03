@@ -16,7 +16,7 @@ class PickupLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    print("myId: "+myId);
     return (myId != null)
         ? StreamBuilder<DocumentSnapshot>(
             stream: callMethods.callStream(uid: myId),

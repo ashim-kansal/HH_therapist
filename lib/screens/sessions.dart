@@ -225,10 +225,15 @@ class SessionPageState extends State<SessionPage>{
       CallUtils.dial(
           from: result.therapistId,
           to: result.patientId.id,
+          fromName: name,
+          toName: result.patientId.firstName+' '+result.patientId.lastName,
+          image: profileImage,
+          toImage: result.patientId.profilePic,
           context: context,
           isVideo: true),
       FirebaseFirestore.instance
           .collection("users")
+          // ignore: deprecated_member_use
           .document(result.patientId.id)
           .snapshots()
           .forEach((element) async {

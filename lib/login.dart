@@ -11,6 +11,7 @@ import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/privacy.dart';
 import 'package:flutter_app/screens/terms.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
@@ -133,17 +134,18 @@ class _LoginPageState extends State<LoginPage> {
           // ignore: unrelated_type_equality_checks
           if (value.responseCode == 200) {
             SetStringToSP("token", value.token),
-            SetStringToSP("id", value.id),
-            print(value.id),
+            SetStringToSP("id", value.id??""),
+            // SetStringToSP("userData", {"name": value.})
+            print("userId:- "+value.id??""),
             FirebaseFirestore.instance
                 .collection(FIRESTORE_USERS)
-                .doc(value.id)
+                .doc(value.id??"")
                 .set({"token": fcmtoken}),
 
             Timer(Duration(seconds: 2),
               ()=>{
-                    Navigator.pop(context),
-                    Navigator.pushNamed(context, Dashboard.RouteName)
+                  Navigator.pop(context),
+                  Navigator.pushNamed(context, Dashboard.RouteName, arguments: DashboardArgument(value.id)),
               }
             ),
           }

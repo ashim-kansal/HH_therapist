@@ -162,15 +162,23 @@ class HomePageState extends State<HomePage> {
   }
 
   void callParticipent(String sessionId, String patientId, Result result) {
-
+    print("Result:- "+ result.therapistId);
+    print("Result pid:- "+ result.patientId.id);
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
+          // from: result.therapistId,
+          // to: result.patientId.id,
           from: result.therapistId,
           to: result.patientId.id,
+          fromName: name,
+          toName: result.patientId.firstName+' '+result.patientId.lastName,
+          image: profileImage,
+          toImage: result.patientId.profilePic,
           context: context,
           isVideo: true),
       FirebaseFirestore.instance
           .collection("users")
+          // ignore: deprecated_member_use
           .document(result.patientId.id)
           .snapshots()
           .forEach((element) async {

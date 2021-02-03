@@ -25,6 +25,7 @@ import 'package:flutter_app/screens/settings.dart';
 import 'package:flutter_app/screens/terms.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/splash.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_app/widgets/sessionWidgets.dart';
 
@@ -43,7 +44,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case ResetPasswordPage.RouteName:
       return MaterialPageRoute(builder: (context) => ResetPasswordPage());
     case Dashboard.RouteName:
-      return MaterialPageRoute(builder: (context) => Dashboard());
+      final DashboardArgument args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => Dashboard(userId: args.userId));
     case TherapistPage.RouteName:
       return MaterialPageRoute(builder: (context) => TherapistPage());
     case BookSessionPage.RouteName:

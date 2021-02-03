@@ -13,6 +13,10 @@ import 'package:flutter_app/utils/colors.dart';
 class Dashboard extends StatefulWidget {
   static const String RouteName = '/home';
 
+  String userId;
+
+  Dashboard({Key key, this.userId}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => DashboardState();
 }
@@ -30,13 +34,14 @@ class DashboardState extends State<Dashboard> {
     super.initState();
     listScreens = [HomePage(), ChatListPage(), SettingsPage()];
     GetStringToSP("id").then((value) => {
+      print("stoage value:- "+value),
           setState(() => {id = value})
         });
   }
 
   @override
   Widget build(BuildContext context) => PickupLayout(
-      myId: id,
+      myId: widget.userId??"11",
       scaffold: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -135,4 +140,10 @@ class DashboardState extends State<Dashboard> {
                     color: Colors.white),
                 child: listScreens[tabIndex])),
       ));
+}
+
+class DashboardArgument{
+
+  String userId;
+  DashboardArgument(this.userId);
 }
