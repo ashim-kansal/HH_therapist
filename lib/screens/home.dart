@@ -175,7 +175,10 @@ class HomePageState extends State<HomePage> {
           image: profileImage,
           toImage: result.patientId.profilePic,
           context: context,
-          isVideo: true),
+          isVideo: true,
+        sessionid: result.id,
+        programName: result.programName
+      ),
       FirebaseFirestore.instance
           .collection("users")
           // ignore: deprecated_member_use

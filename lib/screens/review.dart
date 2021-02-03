@@ -59,7 +59,7 @@ class ReviewState extends State<ReviewPage> {
                             alignment: Alignment.topLeft,
                             padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                             child: HHTextView(
-                              title: widget.programName,
+                              title: widget.programName??'',
                               size: 16,
                               color: HH_Colors.accentColor,
                               textweight: FontWeight.w400,

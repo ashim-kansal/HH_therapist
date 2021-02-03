@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/home.dart';
+import 'package:flutter_app/screens/review.dart';
 
 import 'call.dart';
 import 'call_methods.dart';
@@ -9,7 +11,7 @@ import 'constants.dart';
 
 class CallUtils {
   static final CallMethods callMethods = CallMethods();
-  static dial({String from, String to, context, bool isVideo, String fromName, String toName, String image, String toImage}) async {
+  static dial({String from, String to, context, bool isVideo, String fromName, String toName, String image, String toImage, String sessionid, String programName}) async {
     Call call = Call(
       callerId: from,
       callerName: fromName,
@@ -19,6 +21,8 @@ class CallUtils {
       receiverPic: toImage,
       isVideo: isVideo,
       channelId: Random().nextInt(1000).toString(),
+      sessionid: sessionid,
+      programName: programName
     );
 
     bool callMade = await callMethods.makeCall(call: call);
@@ -31,32 +35,10 @@ class CallUtils {
         MaterialPageRoute(
           builder: (context) => CallScreen(call: call, myId: from,),
         ),
-      );
+      ).then((value) =>{
+        Navigator.pushNamed(context, ReviewPage.RouteName, arguments: ReviewPageArgument(sessionid, programName))
+      });
     }
   }
-  // static dial({String from, String to, context, bool isVideo}) async {
-  //   Call call = Call(
-  //     callerId: from,
-  //     callerName: from,
-  //     callerPic: '',
-  //     receiverId: to,
-  //     receiverName: to,
-  //     receiverPic: '',
-  //     isVideo: isVideo,
-  //     channelId: Random().nextInt(1000).toString(),
-  //   );
 
-  //   bool callMade = await callMethods.makeCall(call: call);
-
-  //   call.hasDialled = true;
-
-  //   if (callMade) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => CallScreen(call: call, myId: from,),
-  //       ),
-  //     );
-  //   }
-  // }
 }

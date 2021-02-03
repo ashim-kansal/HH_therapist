@@ -8,6 +8,8 @@ class Call {
   String channelId;
   bool hasDialled;
   bool isVideo;
+  String sessionid;
+  String programName;
 
   Call({
     this.callerId,
@@ -18,7 +20,9 @@ class Call {
     this.receiverPic,
     this.channelId,
     this.hasDialled,
-    this.isVideo
+    this.isVideo,
+    this.sessionid,
+    this.programName
   });
 
   // to map
@@ -33,6 +37,8 @@ class Call {
     callMap["channel_id"] = call.channelId;
     callMap["has_dialled"] = call.hasDialled;
     callMap["is_video"] = call.isVideo;
+    callMap["sessionid"] = call.sessionid;
+    callMap["programName"] = call.programName;
     return callMap;
   }
 
@@ -46,5 +52,7 @@ class Call {
     this.channelId = callMap["channel_id"];
     this.hasDialled = callMap["has_dialled"];
     this.isVideo = callMap["is_video"];
+    this.sessionid = callMap["sessionid"];
+    this.programName = callMap["programName"];
   }
 }
