@@ -286,9 +286,9 @@ class SessionPageState extends State<SessionDetails>{
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       SizedBox(width: 10,),
-                                      Icon(Icons.arrow_back_ios_rounded, color: Colors.white,),
-                                      Text('20th Oct to 14th Nov', style: TextStyle(color: Colors.white),),
-                                      Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
+                                      // Icon(Icons.arrow_back_ios_rounded, color: Colors.white,),
+                                      Text(label, style: TextStyle(color: Colors.white),),
+                                      // Icon(Icons.arrow_forward_ios_rounded,color: Colors.white,),
                                       SizedBox(width: 10,),
                                     ],
                                   ),
@@ -308,7 +308,11 @@ class SessionPageState extends State<SessionDetails>{
                                     child: Container(
                                       padding: EdgeInsets.all(10),
                                       height: MediaQuery.of(context).size.height/3,
-                                      child: SimpleLineChart.withData(graphData),
+                                      child: mDiaryList != null && mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
+                                        title: "No data found.",
+                                        color: HH_Colors.purpleColor,
+                                        size: 17,
+                                      ),
                                     )
 
                                 ),
@@ -474,7 +478,7 @@ class SessionPageState extends State<SessionDetails>{
       if(result.length > pos+7){
         mList.addAll(result.getRange(pos, pos+7));
       }else{
-        mList.addAll(result.getRange(pos, result.length-1));
+        mList.addAll(result.getRange(pos, result.length));
       }
     }
     return mList;

@@ -16,11 +16,12 @@ import 'call_methods.dart';
 class CallScreen extends StatefulWidget {
   final Call call;
   final String myId;
+  bool callGenerate = false;
 
   CallScreen({
     @required this.call,
     @required this.myId,
-
+    this.callGenerate
   });
 
   @override
@@ -32,10 +33,12 @@ class _CallScreenState extends State<CallScreen> {
 
   StreamSubscription callStreamSubscription;
   int time = 0;
+  int ringTime = 0;
   static final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
-  Timer _timer;
+  Timer slotTimer;
+  Timer ringTimer;
   // Soundpool pool = Soundpool(streamType: StreamType.notification);
 
   @override
@@ -46,6 +49,10 @@ class _CallScreenState extends State<CallScreen> {
     super.initState();
     addPostFrameCallback();
     initializeAgora();
+
+    if(widget.callGenerate){
+      startRingTimer();
+    }
   }
 
   int streamId;
@@ -60,26 +67,28 @@ class _CallScreenState extends State<CallScreen> {
     }
   }*/
 
-  void startTimer() {
+  void startSlotTimer() {
     print("widget.call.callDuration"+ widget.call.callDuration.toString());
     const oneSec = const Duration(minutes: 1);
 
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (time >= widget.call.callDuration) {
-        // if (time >= (widget.call.callDuration * 60)) {
-          timer.cancel();
-          callMethods.endCall(
-            call: widget.call,
-          );
-        } else {
-          setState(() {
-            time++;
-          });
-        }
-      },
-    );
+    slotTimer = Timer(Duration(minutes:widget.call.callDuration),(){
+      AgoraRtcEngine.stopEffect(1);
+      callMethods.endCall(
+        call: widget.call,
+      );
+    });
+
+  }
+
+  void startRingTimer() {
+
+    ringTimer = Timer(Duration(seconds:40),(){
+      AgoraRtcEngine.stopEffect(1);
+      callMethods.endCall(
+        call: widget.call,
+      );
+    });
+
   }
 
   Future<void> initializeAgora() async {
@@ -166,8 +175,9 @@ class _CallScreenState extends State<CallScreen> {
         if(_users.length>0){
           print("BUBUB"+_users.length.toString());
           AgoraRtcEngine.stopEffect(1);
-          startTimer();
-       //   pool.stop(streamId);
+          startSlotTimer();
+          if(ringTimer != null)
+            ringTimer.cancel();
 
         }
       });
@@ -435,11 +445,13 @@ class _CallScreenState extends State<CallScreen> {
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
-            onPressed: () => callMethods.endCall(
+            onPressed: () =>{
+            AgoraRtcEngine.stopEffect(1),
+            callMethods.endCall(
               call: widget.call,
-            ),
+            )
+            },
             child: Container(
-
               child: Image.asset('assets/end_call.png',fit: BoxFit.fill,),
               width: 70.0,
             height:70.0
@@ -470,8 +482,10 @@ class _CallScreenState extends State<CallScreen> {
   void dispose() {
     // clear users
     //pool.dispose();
+    print('dispose');
     _users.clear();
-    _timer.cancel();
+    if(slotTimer != null) slotTimer.cancel();
+    if(ringTimer != null) ringTimer.cancel();
     // destroy sdk
     AgoraRtcEngine.leaveChannel();
     AgoraRtcEngine.destroy();
