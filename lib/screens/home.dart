@@ -11,6 +11,7 @@ import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/screens/sessionsDetails.dart';
 import 'package:flutter_app/screens/tharapist.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -116,7 +117,7 @@ class HomePageState extends State<HomePage> {
                     drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
                     completed: index%2 == 0, onClick: (){
-                      Navigator.pushNamed(context, SessionPage.RouteName);
+                      Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(snapshot.data.result[index], snapshot.data.result[index].patientId.id));
                     },
                       onClickVideo:(){
                           callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId.id, snapshot.data.result[index]);
