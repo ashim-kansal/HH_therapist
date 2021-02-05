@@ -347,7 +347,7 @@ class InAppAPIServices {
     var token = await GetStringToSP("token");
 
     final url = HHString.baseURL +"therapist/patient_assessmentList?patientId="+patientId;
-    final response = await http.post(url,
+    final response = await http.get(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           "token": token??HHString.token
@@ -377,11 +377,12 @@ class InAppAPIServices {
     var token = await GetStringToSP("token");
 
     final url = HHString.baseURL +"therapist/patient_journals_List?patientId="+patientId;
-    final response = await http.post(url,
+    final response = await http.get(url,
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
           "token": token??HHString.token
         },);
+      print("response:- "+response.body);
     if(response.statusCode == 200){
       return patientAssesmentListFromJson(response.body);
     }else {

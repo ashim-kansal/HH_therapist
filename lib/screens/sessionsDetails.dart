@@ -3,6 +3,7 @@ import 'dart:io';
 
 // import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/api/API_services.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
@@ -44,6 +45,9 @@ class SessionPageState extends State<SessionDetails>{
   Future journalList;
   Future drinkingDiaryList;
   int pos = 0;
+  var mDiaryList;
+  var journalListItems;
+  var assesmentListItems;
 
   // PlatformFile prescription;
   // PlatformFile handOut;
@@ -268,6 +272,13 @@ class SessionPageState extends State<SessionDetails>{
                               if(snapshot.hasError){
                                 return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                               }
+
+                              SchedulerBinding.instance.addPostFrameCallback((_){
+                                setState(() {
+                                  mDiaryList = snapshot.data.result;
+                                });
+                              });
+
                               graphData = getGraphData(snapshot.data.result, pos);
                               label = getLabel(graphData);
 
@@ -356,10 +367,18 @@ class SessionPageState extends State<SessionDetails>{
                                     if(snapshot.hasError){
                                       return HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600);
                                     }
+
                                     var item = snapshot.data.result;
+
+                                    // SchedulerBinding.instance.addPostFrameCallback((_){
+                                    //   setState(() {
+                                    //     journalListItems = item;
+                                    //   });
+                                    // });
+
                                     return ListView.builder(
                                         itemBuilder: (context, index) {
-                                          return Column(children: [
+                                          return  snapshot.data.result.length > 0 ? Column(children: [
                                                   Container(
                                                     padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                                                     decoration: BoxDecoration(
@@ -396,7 +415,11 @@ class SessionPageState extends State<SessionDetails>{
                                                       size: 16,
                                                       color: HH_Colors.color_707070,),
                                                   )
-                                                ],);
+                                                ],) : HHTextView(
+                                        title: "No data found.",
+                                        color: HH_Colors.purpleColor,
+                                        size: 17,
+                                      );
                                         },
                                         itemCount: item.length,
                                       );
