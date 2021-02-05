@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/forgotpasswrd.dart';
 import 'package:flutter_app/login.dart';
+import 'package:flutter_app/model/UpcomingSessionsModel.dart';
 import 'package:flutter_app/otp.dart';
 import 'package:flutter_app/resetpassword.dart';
 import 'package:flutter_app/screens/Notes.dart';
@@ -49,8 +50,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case TherapistPage.RouteName:
       return MaterialPageRoute(builder: (context) => TherapistPage());
     case BookSessionPage.RouteName:
-      final SessionArguments args = settings.arguments;
-      return MaterialPageRoute(builder: (context) => BookSessionPage(id: args.id, name: args.name, image: args.profilePic, role: args.type, sessionId: args.sessionId,));
+      final Result args = settings.arguments;
+      return MaterialPageRoute(builder: (context) => BookSessionPage(id: args.therapistId, sessionId: args.id,));
    case SessionPage.RouteName:
       return MaterialPageRoute(builder: (context) => SessionPage());
     case ChatListPage.RouteName:

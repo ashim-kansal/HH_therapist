@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/api/Therapist_service.dart' as service;
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/model/GetBookingSlotsResponse.dart';
 import 'package:flutter_app/model/GetTherapistsResponse.dart' as Therapist;
 import 'package:flutter_app/screens/dashboard.dart';
 import 'package:flutter_app/screens/sessions.dart';
+import 'package:flutter_app/utils/DBHelper.dart';
 import 'package:flutter_app/utils/colors.dart';
 import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
@@ -21,12 +23,9 @@ class BookSessionPage extends StatefulWidget{
 
   static const String RouteName = '/schedule';
 
-  var name= '';
   var id= '';
   var sessionId= '';
-  var role= '';
-  var image= '';
-  BookSessionPage({Key key, @required this.name, @required this.id, @required this.sessionId, @required this.role, @required this.image}) : super(key: key);
+  BookSessionPage({Key key, @required this.id, @required this.sessionId}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => BookSessionState();
@@ -37,7 +36,9 @@ class BookSessionState extends State<BookSessionPage>{
   int selectedDatePos = 0;
   int selectedSlotPos = 0;
   Future<GetBookingSlotsResponse> _listFuture;
-
+  var role= '';
+  var image= '';
+  var name= '';
   List<Result> list;
 
   _updateSelectedDate(int pos) {
@@ -59,15 +60,31 @@ class BookSessionState extends State<BookSessionPage>{
     list ?? List();
     _listFuture = getBookingSlots();
     super.initState();
+    getProfile();
   }
+
+  void getProfile() {
+
+    UserAPIServices().getProfile().then((value) => {
+      if (value.responseCode == 200) {
+        setState(() {
+          name = value.result.firstName+" "+value.result.lastName;
+          image = value.result.profilePic;
+          role = value.result.userType;
+        })
+      }
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context){
     return MyWidget(title: AppLocalizations.of(context).reschedule, child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        TharapistCell(name: widget.name, role: widget.role,
-          image: widget.image, showBook: false, onClick: (){},),
+        TharapistTempCell(name: name, role: role,
+          image: image),
         FutureBuilder<GetBookingSlotsResponse>(
             future: _listFuture,
             builder: (context, snapshot) {
@@ -174,7 +191,7 @@ class BookSessionState extends State<BookSessionPage>{
           print(value.responseCode),
           if (value.responseCode == 200) {
             Navigator.pop(context),
-            Navigator.pushNamed(context, Dashboard.RouteName)
+            Navigator.pushNamed(context, Dashboard.RouteName, arguments: DashboardArgument(widget.id))
           }
         });
 

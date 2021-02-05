@@ -86,6 +86,54 @@ class TharapistCell extends StatelessWidget {
   }
 }
 
+
+class TharapistTempCell extends StatelessWidget {
+  var name = "";
+  String image = "";
+  var role = "";
+
+  TharapistTempCell({@required this.name, @required this.role, this.image});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return               Container(
+      padding: EdgeInsets.all(5),
+      child: Row(
+
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(25.0),
+                  child:               Image.network(image, height: 50, width: 50,)
+
+              )
+              ,
+              SizedBox(
+                width: 8,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(children: [
+                    Text("$name", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
+                  ]),
+                  Row(children: [
+                    Text("Role : $role", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070),),
+                  ]),
+                ],
+              ) ,
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class ChatUserCell extends StatelessWidget {
   var name = "";
   var online = false;

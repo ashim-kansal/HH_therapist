@@ -308,7 +308,7 @@ class SessionPageState extends State<SessionDetails>{
                                     child: Container(
                                       padding: EdgeInsets.all(10),
                                       height: MediaQuery.of(context).size.height/3,
-                                      child: mDiaryList != null && mDiaryList.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
+                                      child: snapshot.data.result != null && snapshot.data.result.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
                                         title: "No data found.",
                                         color: HH_Colors.purpleColor,
                                         size: 17,

@@ -116,7 +116,8 @@ class HomePageState extends State<HomePage> {
                     data: snapshot.data.result[index],
                     drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,
-                    completed: index%2 == 0, onClick: (){
+                    completed: index%2 == 0,
+                    onClick: (){
                       Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(snapshot.data.result[index], snapshot.data.result[index].patientId.id));
                     },
                       onClickVideo:(){
