@@ -481,7 +481,7 @@ class AssesmentItem extends StatelessWidget {
   var title;
   var subTitle;
   var value;
-  double size;
+  var size;
   var color;
 
   AssesmentItem({@required this.title, @required this.value, @required this.subTitle, this.size, this.color});
