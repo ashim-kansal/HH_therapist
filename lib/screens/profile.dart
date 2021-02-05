@@ -245,39 +245,6 @@ class _CreateAccountState extends State<ProfilePage> {
                                                 )
                                               ],)
                                           ),
-                                          Container(
-                                              alignment: Alignment.topLeft,
-                                              margin: const EdgeInsets.all(10.0),
-                                              padding: const EdgeInsets.all(3.0),
-                                              decoration: BoxDecoration(
-                                                  border: Border(bottom: BorderSide(
-                                                      color: HH_Colors.borderGrey,
-                                                      width: 0.5
-                                                  ))
-                                              ),
-                                              child: Column(children: [
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                                  child: HHTextView(
-                                                      title: AppLocalizations.of(context).address,
-                                                      size: 18,
-                                                      textweight: FontWeight.w500,
-                                                      color: Color(0xff777CEA)
-                                                  ),
-                                                ),
-                                                Container(
-                                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                                  alignment: Alignment.topLeft,
-                                                  child:  HHTextView(
-                                                    title: snapshot.data.result.address,
-                                                    size: 16,
-                                                    color: HH_Colors.grey_585858,
-                                                    textweight: FontWeight.w400,
-                                                  ),
-                                                )
-                                              ],)
-                                          ),
                                         ],)
                                     ),
                                     Align(
