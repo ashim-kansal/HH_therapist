@@ -420,7 +420,7 @@ class SessionPageState extends State<SessionDetails>{
                                                             Padding(
                                                               padding: EdgeInsets.only(top: 15),
                                                               child:  HHTextView(color: HH_Colors.color_white,
-                                                              title: "14/11/2020",
+                                                              title: snapshot.data.result[index].,
                                                               size: 16),
                                                             ),
 

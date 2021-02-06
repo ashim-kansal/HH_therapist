@@ -109,7 +109,7 @@ class _NotificationState extends State<NotificationPage> {
             height: double.infinity,
             color: Colors.white,
             child: FutureBuilder<NotificationListing>(
-              future: notificationFuture,
+              future: getNotificationList(),
               builder: (builder, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if(snapshot.hasError){

@@ -53,14 +53,15 @@ class SettingAPIService {
     );
     
     var res = json.decode(response.body);
-
-    if(response.statusCode == 200){
-      if(res["responseCode"] == 200){
-        return FeedbackResponseModel.fromJson(json.decode(response.body));
-      }
-    }else {
-      throw Exception('Failed to load data!');
-    }
+    print(res);
+    return FeedbackResponseModel.fromJson(json.decode(response.body));
+    // if(response.statusCode == 200){
+    //   if(res["responseCode"] == 200){
+    //     return FeedbackResponseModel.fromJson(json.decode(response.body));
+    //   }
+    // }else {
+    //   throw Exception('Failed to load data!');
+    // }
   }
 
   // chnage notification status 

@@ -82,21 +82,22 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
       });
     }
 
-    setState(() {
-        confPasswordErrorMsg = AppLocalizations.of(context).password_donotmatch;
-        errorOld = false;
-        errorNew = false;
-        errorConfirm = true;    
-      });
+    // setState(() {
+    //     confPasswordErrorMsg = AppLocalizations.of(context).password_donotmatch;
+    //     errorOld = false;
+    //     errorNew = false;
+    //     errorConfirm = true;
+    //   });
 
       SettingAPIService settingAPIService = new SettingAPIService();
 
       settingAPIService.changePassword(oldpwd, newpassword, confpassword).then((value) => {
         showToast(value.responseMsg),
         if(value.responseCode == 200){
-          oldpwd = '',
-          newpassword = '',
-          confpassword = ''
+          // oldpwd = '',
+          // newpassword = '',
+          // confpassword = ''
+          Navigator.pop(context)
         }
       });
 

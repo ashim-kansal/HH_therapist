@@ -33,7 +33,10 @@ class LanguagePageState extends State<LanguagePage> {
     // spanish = true;
   }
 
-  void changeLanguage (String lang){
+  void changeLanguage (String lang) async{
+    setState(() {
+      AppLocalizations.load(Locale(lang, ''));
+    });
     SettingAPIService settingAPIService = new SettingAPIService();
 
     settingAPIService.changeLanguage(lang).then((value) => {

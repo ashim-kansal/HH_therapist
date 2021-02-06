@@ -142,7 +142,7 @@ class SessionPageState extends State<SessionPage>{
             return ListView.separated(
               itemCount: searchList.length,
               itemBuilder: (context, index){
-              var _date = searchList[index].createdAt;
+              var _date = searchList[index].date;
               Moment createdDt = Moment.parse('$_date');
               return UpcomingSessionItem(
                 name: searchList[index].programName,
@@ -197,7 +197,7 @@ class SessionPageState extends State<SessionPage>{
           return ListView.separated(
             itemCount: searchList.length,
             itemBuilder: (context, index){
-            var _date = searchList[index].createdAt;
+            var _date = searchList[index].date;
             Moment createdDt = Moment.parse('$_date');
             return UpcomingSessionItem(
               name: searchList[index].programName,
