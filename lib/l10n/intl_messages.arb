@@ -130,8 +130,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "Passwords do not matched.": "Passwords do not matched.",
-  "@Passwords do not matched.": {
+  "Password do not match.": "Password do not match.",
+  "@Password do not match.": {
     "type": "text",
     "placeholders": {}
   },

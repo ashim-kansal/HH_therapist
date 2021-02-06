@@ -60,6 +60,7 @@ class NotesPageState extends State<NotesPage> {
       showToast(value.responseMsg),
       if(value.responseCode == 200){
         Navigator.pop(context),
+        noteController.text = '',
         setState((){}),
         // notesList = getPatientNotes(widget.patientId),
         // Timer(Duration(seconds: 3),

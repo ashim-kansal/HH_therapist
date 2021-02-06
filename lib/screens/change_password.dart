@@ -152,7 +152,7 @@ class ChnagePasswordPageState extends State<ChnagePasswordPage> {
                 ),
                 SizedBox(height: 10,),
                 HHEditText(
-                    hint: AppLocalizations.of(context).change_password,
+                    hint: AppLocalizations.of(context).confirm_password,
                     obscureText: secureConfirm,
                     controller: cPasswordController,
                     error: errorConfirm,

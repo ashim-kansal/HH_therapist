@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Old Password" : MessageLookupByLibrary.simpleMessage("ancien mot de passe"),
     "Open" : MessageLookupByLibrary.simpleMessage("Ouvert"),
     "Password containes be alpha-numeric with 1 Small, Capital and Special character" : MessageLookupByLibrary.simpleMessage("Le mot de passe doit être alphanumérique avec 1 petit, majuscule et caractère spécial"),
-    "Passwords do not matched." : MessageLookupByLibrary.simpleMessage("Les mots de passe ne correspondent pas."),
+    "Password do not match." : MessageLookupByLibrary.simpleMessage("Les mots de passe ne correspondent pas."),
     "Phone Number" : MessageLookupByLibrary.simpleMessage("Téléphone"),
     "Physician" : MessageLookupByLibrary.simpleMessage("Docteur"),
     "Please enter a confirm password" : MessageLookupByLibrary.simpleMessage("Veuillez entrer le mot de passe"),

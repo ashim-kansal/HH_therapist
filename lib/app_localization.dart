@@ -28,7 +28,7 @@ class AppLocalizations {
   String get valid_otp_msg => Intl.message('Please enter the valid OTP');
   String get reset => Intl.message('Reset');
   String get alert => Intl.message('Alert');
-  String get password_donotmatch => Intl.message('Passwords do not matched.');
+  String get password_donotmatch => Intl.message('Password do not match.');
 
   static Future<AppLocalizations> load(Locale locale) {
     final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();

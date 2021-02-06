@@ -60,7 +60,10 @@ class _NotificationState extends State<NotificationPage> {
       }),
       
       if(value.responseCode == 200){
-        notificationFuture = getNotificationList(),
+        // notificationFuture = getNotificationList(),
+      setState((){
+
+      })
       }
     });
   }
