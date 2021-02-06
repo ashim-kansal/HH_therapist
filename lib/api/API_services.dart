@@ -373,7 +373,7 @@ class InAppAPIServices {
   }
 
    // fetch patient journal list
-  Future<PatientAssesmentList> getPatientJournal(patientId) async {
+  Future<JournalingList> getPatientJournal(patientId) async {
     var token = await GetStringToSP("token");
 
     final url = HHString.baseURL +"therapist/patient_journals_List?patientId="+patientId;
@@ -384,7 +384,7 @@ class InAppAPIServices {
         },);
       print("response:- "+response.body);
     if(response.statusCode == 200){
-      return patientAssesmentListFromJson(response.body);
+      return journalingListFromJson(response.body);
     }else {
       throw Exception("Failed to add note");
     }

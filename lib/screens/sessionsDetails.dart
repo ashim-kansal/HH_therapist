@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_app/api/API_services.dart';
+import 'package:flutter_app/model/JournalList.dart';
 import 'package:flutter_app/model/PatientAssesmentList.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart' as Diary;
 import 'package:flutter_app/model/UpcomingSessionsModel.dart' as SessionModal;
@@ -374,7 +375,7 @@ class SessionPageState extends State<SessionDetails>{
                         // height: MediaQuery.of(context).size.height / 3.7,
                         padding: EdgeInsets.all(10),
                         child: Container(
-                          child: FutureBuilder<PatientAssesmentList>( 
+                          child: FutureBuilder<JournalList>( 
                                 future: journalList,
                                 builder: (context,snapshot){
                                   if(snapshot.connectionState == ConnectionState.done){
