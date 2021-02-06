@@ -21,7 +21,7 @@ class SettingsPage extends StatefulWidget{
 
 class SettingsPageState extends State<SettingsPage>{
 
-  bool isSwitched = false;
+  bool isSwitched = true;
 
   String language = "";
 
@@ -32,8 +32,14 @@ class SettingsPageState extends State<SettingsPage>{
   @override
   void initState() {
     super.initState();
-    
+    getUserDetails();
+    // isSwitched??true;
+  }
+
+  getUserDetails() {
+    // buildShowDialog(context);
     userAPIServices.getProfile().then((value) => {
+      // Navigator.of(context).pop(),
       if (value.responseCode == 200) {
         setState(() {
           isSwitched = value.result.notificationStatus??false;
@@ -41,7 +47,6 @@ class SettingsPageState extends State<SettingsPage>{
         })
       }
     });
-    // isSwitched??true;
   }
 
   void notificationHandler(bool value){
@@ -55,6 +60,18 @@ class SettingsPageState extends State<SettingsPage>{
     settingAPIService.updateNotificationStatus(value).then((value) => {
       showToast(value.responseMessage),
     });
+  }
+
+  // show circular 
+  buildShowDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child:CircularProgressIndicator(),
+          );
+      });
   }
 
   //show Toast

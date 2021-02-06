@@ -99,6 +99,7 @@ class _CreateAccountState extends State<ProfilePage> {
               Material(
                 child: ClipPath(
                   child: Container(
+                    height: MediaQuery.of(context).size.height,
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                     color: Colors.white,
                     child: SingleChildScrollView(

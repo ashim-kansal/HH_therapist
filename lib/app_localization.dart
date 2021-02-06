@@ -78,7 +78,7 @@ class AppLocalizations {
   String get not_data_found => Intl.message("No Data Found");
   String get my_programs => Intl.message("My Programs");
   String get please_share_thoughts => Intl.message("Please share your thoughts with us");
-  String get please_contact_us => Intl.message("Please use this form to connect us ");
+  String get please_contact_us => Intl.message("Please use this form to connect with care team");
   String get please_enter_feedback => Intl.message("Please enter a feedback");
   String get please_enter_review => Intl.message("Please enter your review");
   String get no_record_found => Intl.message("No Record Found");
@@ -90,7 +90,7 @@ class AppLocalizations {
   String get viewall => Intl.message("View All");
   String get drinking_diary => Intl.message("Drinking Diary");
   String get dailyjournaling => Intl.message("Daily Journaling");
-  String get mysession => Intl.message("My Session");
+  String get mysession => Intl.message("My Sessions");
   String get upcoming_sessions => Intl.message("Upcoming Sessions");
   String get Settings => Intl.message("Settings");
   String get search_pharma => Intl.message("Search Nearest Pharmacies");

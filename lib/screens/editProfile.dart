@@ -131,7 +131,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                       )
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(left: 155),
+                                    margin: EdgeInsets.only(left: 130),
                                     child: Container(
                                       width: 35,
                                       height:35,
@@ -147,7 +147,7 @@ class _CreateAccountState extends State<EditProfilePage> {
                                               ),
                                             )
                                           ],
-                                          color: Colors.white,
+                                          color: HH_Colors.color_f0f0f0,
                                           borderRadius: BorderRadius.all(Radius.circular(30.0))),
                                       child: IconButton(
                                         icon: Icon(

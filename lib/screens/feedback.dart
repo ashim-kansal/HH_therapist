@@ -93,32 +93,36 @@ class FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) => MyWidget(
       title: 'Contact Us',
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              margin: EdgeInsets.all(20),
-              child: Column(children: [
-                HHTextView(
-                  color: HH_Colors.color_707070,
-                  title: AppLocalizations.of(context).please_contact_us,
-                  size: 16,
-                    textweight:FontWeight.w600
+            margin: EdgeInsets.all(20),
+            child: Column(children: [
+              HHTextView(
+                color: HH_Colors.color_707070,
+                title: AppLocalizations.of(context).please_contact_us,
+                size: 16,
+                  textweight:FontWeight.w600
 
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                HHEditText(
-                  minLines: 5,
-                  controller: textController,
-                  error: error,
-                  errorText: 'Please enter your thoughts.',
-                ),
-              ])),
-          HHButton(title: AppLocalizations.of(context).send, type: 4, onClick: (){
-            submitHandler();
-          },)
-
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              HHEditText(
+                minLines: 5,
+                controller: textController,
+                error: error,
+                errorText: 'Please enter your thoughts.',
+              ),
+            ])
+          ),
+          Container(
+            margin: EdgeInsets.all(20),
+            child: HHButton(title: AppLocalizations.of(context).send, type: 4, onClick: (){
+              submitHandler();
+            },),
+          )
         ],
       ));
 }

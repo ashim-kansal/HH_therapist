@@ -185,13 +185,11 @@ class ChatUserCell extends StatelessWidget {
                     ),
                     Column(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(children: [
-                          Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
-                        ]),
-                        Row(children: [
-                          Text(message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
-                        ]),
+                        Text(name, textAlign:TextAlign.start,style: TextStyle(fontSize:20,color: HH_Colors.grey_585858),),
+                        Text(message, textAlign:TextAlign.start,style: TextStyle(fontSize:15, color: HH_Colors.grey_707070),),
                       ],
                     ) ,
                   ],

@@ -150,7 +150,7 @@ class SessionPageState extends State<SessionPage>{
                 drname: searchList[index].patientId.firstName+" "+searchList[index].patientId.lastName,
                 sdate: createdDt.format("dd MMM, yyyy")+' '+searchList[index].startTime,
                 role: '', onClick: (){}, completed: !isSwitched,
-                  onClickVideo: (){
+                onClickVideo: (){
                     callParticipent(snapshot.data.result[index].id, snapshot.data.result[index].patientId.id, snapshot.data.result[index]);
                   },
                 onClickCancel: () {

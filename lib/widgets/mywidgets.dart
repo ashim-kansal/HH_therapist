@@ -510,7 +510,8 @@ class AssesmentItem extends StatelessWidget {
                 ),
                 Positioned(child: Align(
                   alignment: Alignment.bottomRight,
-                  child: Text(value, style: TextStyle(color: HH_Colors.color_707070, fontSize: 14)))),
+                  child: Text(value.toString(), style: TextStyle(color: HH_Colors.color_707070, fontSize: 14)))),
+                  // child: Text(value, style: TextStyle(color: HH_Colors.color_707070, fontSize: 14)))),
               ]),
             )
           ],),

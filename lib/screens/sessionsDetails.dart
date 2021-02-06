@@ -13,6 +13,7 @@ import 'package:flutter_app/widgets/MyScaffoldWidget.dart';
 import 'package:flutter_app/widgets/linechart.dart';
 import 'package:flutter_app/widgets/mywidgets.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
+import 'package:flutter_html/style.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
@@ -221,7 +222,6 @@ class SessionPageState extends State<SessionDetails>{
                       LimitedBox(
                         maxHeight: MediaQuery.of(context).size.height / 3.7,
                         child: Container(
-                          color: HH_Colors.color_FBF4F4,
                           margin: EdgeInsets.only(top: 10),
                           child: FutureBuilder<PatientAssesmentList>( 
                             future: assesmentList,
@@ -231,7 +231,16 @@ class SessionPageState extends State<SessionDetails>{
                                   return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                                 }
                                 var item = snapshot.data.result;
-                                return ListView.builder(
+                                if(item.length == 0){
+                                  return Container(
+                                    child: HHTextView(title: "No data found.",
+                                      color: HH_Colors.purpleColor,
+                                      size: 18, 
+                                      textweight: FontWeight.w500));
+                                }
+                                return Container(
+                                  color: HH_Colors.color_FBF4F4,
+                                  child: ListView.builder(
                                     itemBuilder: (context, index) {
                                     return Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
                                       child: AssesmentItem(title: item[index].title, 
@@ -239,7 +248,7 @@ class SessionPageState extends State<SessionDetails>{
                                       subTitle: "Total Obtained Marks"));
                                         },
                                       itemCount: item.length,
-                                  );
+                                  ));
                               }else {
                                 return Container(
                                   child: Center(child: CircularProgressIndicator()),
@@ -262,7 +271,7 @@ class SessionPageState extends State<SessionDetails>{
                     }, bColor: HH_Colors.orange_FF8A73, arrowContainerColor: HH_Colors.light_FBB7A9),
                     isDiary == true ?
                       Container(
-                        color: HH_Colors.color_FBF4F4,
+                        margin: EdgeInsets.only(top: 10),
                         // height: MediaQuery.of(context).size.height / 3.7,
                         child:
                           FutureBuilder<Diary.GetDrinkingDiaryList>(
@@ -273,6 +282,15 @@ class SessionPageState extends State<SessionDetails>{
                                 return  HHTextView(title: "No Record Found", size: 18, color: HH_Colors.purpleColor, textweight: FontWeight.w600,);
                               }
 
+                              if(snapshot.data.result.length == 0){
+                                return HHTextView(
+                                        title: "No data found.",
+                                        color: HH_Colors.purpleColor,
+                                        size: 18,
+                                        textweight: FontWeight.w500,
+                                      );
+                              }
+
                               SchedulerBinding.instance.addPostFrameCallback((_){
                                 setState(() {
                                   mDiaryList = snapshot.data.result;
@@ -281,6 +299,8 @@ class SessionPageState extends State<SessionDetails>{
 
                               graphData = getGraphData(snapshot.data.result, pos);
                               label = getLabel(graphData);
+
+                             
 
                               // var item = snapshot.data.result;
                               return Column( children: [
@@ -317,13 +337,12 @@ class SessionPageState extends State<SessionDetails>{
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Container(
+                                      color: HH_Colors.color_FBF4F4,
                                       padding: EdgeInsets.all(10),
                                       height: MediaQuery.of(context).size.height/3,
-                                      child: snapshot.data.result != null && snapshot.data.result.length > 0 ? SimpleLineChart.withData(graphData) : HHTextView(
-                                        title: "No data found.",
-                                        color: HH_Colors.purpleColor,
-                                        size: 17,
-                                      ),
+                                      child: 
+                                      // snapshot.data.result != null && snapshot.data.result.length > 0 ? 
+                                      SimpleLineChart.withData(graphData),
                                     )
 
                                 ),
@@ -350,17 +369,12 @@ class SessionPageState extends State<SessionDetails>{
                     }, bColor: HH_Colors.orange_FF8A73, arrowContainerColor: HH_Colors.light_FBB7A9),
                     isJournling == true ?
                       Container(
-                        color: HH_Colors.color_FBF4F4,
+                        // color: HH_Colors.color_FBF4F4,
                         margin: EdgeInsets.only(top: 10),
                         // height: MediaQuery.of(context).size.height / 3.7,
                         padding: EdgeInsets.all(10),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffEDEDF8),
-                              borderRadius: BorderRadius.circular(8.0)
-                            ),
-                          child: 
-                          FutureBuilder<PatientAssesmentList>( 
+                          child: FutureBuilder<PatientAssesmentList>( 
                                 future: journalList,
                                 builder: (context,snapshot){
                                   if(snapshot.connectionState == ConnectionState.done){
@@ -369,6 +383,14 @@ class SessionPageState extends State<SessionDetails>{
                                     }
 
                                     var item = snapshot.data.result;
+                                    if(snapshot.data.result.length == 0){
+                                      return HHTextView(
+                                              title: "No data found.",
+                                              color: HH_Colors.purpleColor,
+                                              size: 18,
+                                              textweight: FontWeight.w500,
+                                            );
+                                    }
 
                                     // SchedulerBinding.instance.addPostFrameCallback((_){
                                     //   setState(() {
@@ -376,52 +398,56 @@ class SessionPageState extends State<SessionDetails>{
                                     //   });
                                     // });
 
-                                    return ListView.builder(
-                                        itemBuilder: (context, index) {
-                                          return  snapshot.data.result.length > 0 ? Column(children: [
-                                                  Container(
-                                                    padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
-                                                      color: Color(0xffCBCEFC),
+                                    return 
+                                      Container(
+                                        color: HH_Colors.color_FBF4F4,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xffEDEDF8),
+                                          borderRadius: BorderRadius.circular(8.0)
+                                        ),
+                                        child: ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            return Column(children: [
+                                                    Container(
+                                                      padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
+                                                        color: Color(0xffCBCEFC),
+                                                      ),
+                                                      child: Row(children: <Widget>[
+                                                        Expanded(
+                                                          child: Stack(children: [ 
+                                                            Padding(
+                                                              padding: EdgeInsets.only(top: 15),
+                                                              child:  HHTextView(color: HH_Colors.color_white,
+                                                              title: "14/11/2020",
+                                                              size: 16),
+                                                            ),
+
+                                                            Positioned(child: Align(
+                                                              alignment: Alignment.bottomRight,
+                                                              child: IconButton(icon: Icon(
+                                                                Icons.keyboard_arrow_right_outlined,
+                                                                size: 32,
+                                                                color: HH_Colors.color_white,
+                                                              ), onPressed: () {  },),
+                                                            ))
+
+                                                          ],)
+                                                        )],
+                                                      )
                                                     ),
-                                                    child: Row(children: <Widget>[
-                                                      Expanded(
-                                                        child: Stack(children: [ 
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 15),
-                                                            child:  HHTextView(color: HH_Colors.color_white,
-                                                            title: "14/11/2020",
-                                                            size: 16),
-                                                          ),
-
-                                                          Positioned(child: Align(
-                                                            alignment: Alignment.bottomRight,
-                                                            child: IconButton(icon: Icon(
-                                                              Icons.keyboard_arrow_right_outlined,
-                                                              size: 32,
-                                                              color: HH_Colors.color_white,
-                                                            ), onPressed: () {  },),
-                                                          ))
-
-                                                        ],)
-                                                      )],
+                                                    Container(
+                                                      padding: EdgeInsets.fromLTRB(8, 5, 8, 10),
+                                                      child: HHTextView(
+                                                        title: "Lorem Ipsum is simply dummy text of the the printing and typesetting industry.",
+                                                        size: 16,
+                                                        color: HH_Colors.color_707070,),
                                                     )
-                                                  ),
-                                                  Container(
-                                                    padding: EdgeInsets.fromLTRB(8, 5, 8, 10),
-                                                    child: HHTextView(
-                                                      title: "Lorem Ipsum is simply dummy text of the the printing and typesetting industry.",
-                                                      size: 16,
-                                                      color: HH_Colors.color_707070,),
-                                                  )
-                                                ],) : HHTextView(
-                                        title: "No data found.",
-                                        color: HH_Colors.purpleColor,
-                                        size: 17,
-                                      );
-                                        },
-                                        itemCount: item.length,
+                                                  ],);
+                                          },
+                                          itemCount: item.length,
+                                        ),
                                       );
                                   }else {
                                     return Container(

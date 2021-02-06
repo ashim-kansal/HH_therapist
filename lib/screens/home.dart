@@ -112,7 +112,8 @@ class HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) {
                   var _date = snapshot.data.result[index].date;
                   Moment createdDt = Moment.parse('$_date');
-                  return SessionCard(name: snapshot.data.result[index].programName,
+                  return SessionCard(
+                    name: snapshot.data.result[index].programName,
                     data: snapshot.data.result[index],
                     drname: snapshot.data.result[index].patientId.firstName+" "+snapshot.data.result[index].patientId.lastName,
                     sdate: createdDt.format("dd MMM, yyyy")+' '+snapshot.data.result[index].startTime,

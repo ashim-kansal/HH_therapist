@@ -296,7 +296,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "Please use this form to connect us ": "Please use this form to connect us ",
+  "Please use this form to connect us ": "Please use this form to connect with care team ",
   "@Please use this form to connect us ": {
     "type": "text",
     "placeholders": {}
@@ -356,7 +356,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "My Session": "My Session",
+  "My Session": "My Sessions",
   "@My Session": {
     "type": "text",
     "placeholders": {}

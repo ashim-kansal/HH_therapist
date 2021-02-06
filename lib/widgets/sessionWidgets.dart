@@ -46,38 +46,45 @@ class SessionCard extends StatelessWidget {
                   children: [
                     SizedBox(height: 5,),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),),
+                        Flexible(
+                          flex: 8,
+                          fit: FlexFit.tight,
+                          child: Text(sdate, style: TextStyle(fontSize: 15, color: HH_Colors.grey_707070),)),
                         Spacer(),
-                        HHOptionButton(onClickCancel: (){
-                          showDialog(context: context,
-                            builder: (BuildContext dialogContext) {
-                              return CancelDialog(
-                                  onYesPress: ()async {
-                                    cancelSession(data.id).then(
-                                            (value) => {
+                        Flexible(
+                          flex: 2,
+                          fit:  FlexFit.tight,
+                          child: HHOptionButton(onClickCancel: (){
+                            showDialog(context: context,
+                              builder: (BuildContext dialogContext) {
+                                return CancelDialog(
+                                    onYesPress: ()async {
+                                      cancelSession(data.id).then(
+                                              (value) => {
 
-                                          print(value.responseCode),
-                                          if (value.responseCode == 200) {
-                                            Navigator.pop(context),
-                                            showToast(context, value.responseMessage),
+                                            print(value.responseCode),
+                                            if (value.responseCode == 200) {
+                                              Navigator.pop(context),
+                                              showToast(context, value.responseMessage),
 
-                                            onClickCancel()
-                                            // Navigator.pushNamed(context, Dashboard.RouteName)
-                                          }
-                                        });
-                                    // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                                  },
-                                  onDenyPress: (){
-                                    Navigator.pop(context);
-                                  }
-                              );
-                            },
-                          );
-                        }, onClickReSchedule: (){
-                          Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
-                        },)
+                                              onClickCancel()
+                                              // Navigator.pushNamed(context, Dashboard.RouteName)
+                                            }
+                                          });
+                                      // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                    },
+                                    onDenyPress: (){
+                                      Navigator.pop(context);
+                                    }
+                                );
+                              },
+                            );
+                          }, onClickReSchedule: (){
+                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                          },),
+                        )
                       ],
                     ),
                     SizedBox(height: 10,),
@@ -89,23 +96,24 @@ class SessionCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Flexible(flex: 3, fit: FlexFit.loose,child: data.patientId.profilePic == ""?
-                        Image.asset(
-                          'assets/images/ic_avatar.png',
-                          height: 18,
-                          width: 18,
-                        ) : CircleAvatar(
-                          backgroundImage: NetworkImage(data.patientId.profilePic),
-                          radius: 18,
-                        )),
+                          Image.asset(
+                            'assets/images/ic_avatar.png',
+                            height: 18,
+                            width: 18,
+                          ) : CircleAvatar(
+                            backgroundImage: NetworkImage(data.patientId.profilePic),
+                            radius: 18,
+                          )
+                        ),
                         SizedBox(width: 10,),
                         Flexible(flex:7, fit: FlexFit.loose,
                             child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                                children: [
-                                  Text(drname ,textAlign:TextAlign.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(drname ,textAlign:TextAlign.start,
                                       overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 18, color: HH_Colors.grey_585858, fontWeight: FontWeight.w600)),
                                 ]),
 
@@ -278,6 +286,7 @@ class UpcomingSessionItem extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.fromLTRB(10, 10, 1, 10),
               child:
+              Column(children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -285,119 +294,128 @@ class UpcomingSessionItem extends StatelessWidget {
                     onTap: (){
                       Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data, data.patientId.id));
                     },
-                    child: Row(
-                      children: [
-                        data.patientId.profilePic == ""?
-                        Image.asset(
-                          'assets/images/ic_avatar.png',
-                          height: 18,
-                          width: 18,
-                        ) : CircleAvatar(
-                          backgroundImage: NetworkImage(data.patientId.profilePic),
-                          radius: 18,
-                        ),
+                    child: Flexible(
+                      flex: 6,
+                      fit: FlexFit.loose,
+                      child: Row(
+                        children: [
+                          data.patientId.profilePic == ""?
+                          Image.asset(
+                            'assets/images/ic_avatar.png',
+                            height: 18,
+                            width: 18,
+                          ) : CircleAvatar(
+                            backgroundImage: NetworkImage(data.patientId.profilePic),
+                            radius: 18,
+                          ),
 
-                        SizedBox(width: 10,),
+                          SizedBox(width: 10,),
 
-                        Column(
-                          children: [
-                            Row(children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
                               Text(
                                 drname,
-
                                 overflow: TextOverflow.ellipsis,
                                 style: new TextStyle(
                                     fontSize: 18.0,
                                     color: HH_Colors.grey_585858,
                                     fontWeight: FontWeight.w600
                                 ),
-                              )
-
-                            ]),
-                            Row(children: [
+                              ),
                               Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
-                            ]),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-
-                  completed?
-                  Row(
-                    children: [
-                      Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
-                      Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
-
-                    ],
-                  )
-                      :
-                  Row(
-                    children: [
-                      ButtonTheme(
-                        height: 35,
-                        minWidth: 25,
-                        child: FlatButton(
-                          color: Colors.white,
-                          child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
-                          onPressed: (){
-                            Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id));
-                          },
-                          shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
-
-                        ),
-                      ),
-
-                      ButtonTheme(
-                          height: 35,
-                          minWidth: 25,
-                          child: FlatButton(
-
-                            color: Colors.white,
-                            child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
-                            onPressed: (){
-                              // Navigator.pushNamed(context, ReviewPage.RouteName);
-                              onClickVideo();
-                            },
-                            shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                            ],
                           )
-                        ),
-
-                      Container(
+                        ],
+                      ),
+                    )
+                  ),
+                  completed?
+                    Flexible(flex: 6,
+                      child: Container(
                         margin: EdgeInsets.only(right: 10),
-                        child: HHOptionButton(onClickCancel: (){
-                        showDialog(context: context,
-                          builder: (BuildContext dialogContext) {
-                            return CancelDialog(
-                                onYesPress: ()async {
-                                  cancelSession(data.id).then(
-                                          (value) => {
+                        child: Column(
+                          children: [
+                            Icon(Icons.check_box, color: HH_Colors.color_17AB35,),
+                            Text('Completed', style: TextStyle(color: HH_Colors.color_17AB35),)
+                          ],
+                        ),
+                      )
+                    )
+                  :
+                  Flexible(flex: 7,
+                    fit: FlexFit.loose,
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ButtonTheme(
+                            height: 35,
+                            minWidth: 25,
+                            child: FlatButton(
+                              color: Colors.white,
+                              child: Icon(Icons.chat, color: HH_Colors.accentColor, size: 18,),
+                              onPressed: (){
+                                Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(data.patientId.id));
+                              },
+                              shape: CircleBorder( side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                            ),
+                          ),
 
-                                        print(value.responseCode),
-                                        if (value.responseCode == 200) {
-                                          Navigator.pop(context),
-                                          showToast(context, value.responseMessage),
-                                          onClickCancel()
-                                          // Navigator.pushNamed(context, Dashboard.RouteName)
-                                        }
-                                      });
-                                  // Navigator.pushNamed(context, SelectLanguage.RouteName);
-                                },
-                                onDenyPress: (){
-                                  Navigator.pop(context);
-                                }
+                          ButtonTheme(
+                            height: 35,
+                            minWidth: 25,
+                            child: FlatButton(
+                              color: Colors.white,
+                              child: Icon(Icons.video_call, color: HH_Colors.primaryColor,size: 18,),
+                              onPressed: (){
+                                // Navigator.pushNamed(context, ReviewPage.RouteName);
+                                onClickVideo();
+                              },
+                              shape: CircleBorder(side: BorderSide(color: HH_Colors.color_EEDDDD, width: 1)),
+                            )
+                          ),
+
+                          HHOptionButton(onClickCancel: (){
+                            showDialog(context: context,
+                              builder: (BuildContext dialogContext) {
+                                return CancelDialog(
+                                    onYesPress: ()async {
+                                      cancelSession(data.id).then(
+                                          (value) => {
+                                            print(value.responseCode),
+                                            if (value.responseCode == 200) {
+                                              Navigator.pop(context),
+                                              showToast(context, value.responseMessage),
+                                              onClickCancel()
+                                              // Navigator.pushNamed(context, Dashboard.RouteName)
+                                            }
+                                          });
+                                      // Navigator.pushNamed(context, SelectLanguage.RouteName);
+                                    },
+                                    onDenyPress: (){
+                                      Navigator.pop(context);
+                                    }
+                                );
+                              },
                             );
-                          },
-                        );
-                      }, onClickReSchedule: (){
-                        Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
-                      },),)
-                    ],
+                          }, onClickReSchedule: (){
+                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                          },),
+                          Spacer(),
+                          Spacer(),
+                        ],
+                      ),
+                    )
+                  
                   )
                 ],
 
               ),
 
+              ],)
 
             )));
   }

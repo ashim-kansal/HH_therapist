@@ -46,20 +46,22 @@ class Result {
         this.totalMarks,
         this.correctMarks,
         this.patientId,
+        this.remarks,
     });
 
-    String status;
-    String id;
-    String formId;
-    String programId;
-    String title;
+    var status;
+    var id;
+    var formId;
+    var programId;
+    var title;
     List<Question> questions;
     DateTime createdAt;
     DateTime updatedAt;
-    int v;
-    int totalMarks;
-    int correctMarks;
-    String patientId;
+    var v;
+    var totalMarks;
+    var correctMarks;
+    var patientId;
+    var remarks;
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         status: json["status"],
@@ -74,6 +76,7 @@ class Result {
         totalMarks: json["totalMarks"],
         correctMarks: json["correctMarks"],
         patientId: json["patientId"],
+        remarks: json["remarks"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -89,6 +92,7 @@ class Result {
         "totalMarks": totalMarks,
         "correctMarks": correctMarks,
         "patientId": patientId,
+        "remarks": remarks
     };
 }
 
@@ -102,12 +106,12 @@ class Question {
         this.answer,
     });
 
-    int marks;
-    String id;
-    int questionNumber;
-    String questionType;
-    String questionText;
-    String answer;
+    var marks;
+    var id;
+    var questionNumber;
+    var questionType;
+    var questionText;
+    var answer;
 
     factory Question.fromJson(Map<String, dynamic> json) => Question(
         marks: json["marks"],

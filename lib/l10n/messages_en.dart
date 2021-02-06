@@ -75,7 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "More Information" : MessageLookupByLibrary.simpleMessage("More Information"),
     "My Chats" : MessageLookupByLibrary.simpleMessage("My Chats"),
     "My Programs" : MessageLookupByLibrary.simpleMessage("My Programs"),
-    "My Session" : MessageLookupByLibrary.simpleMessage("My Session"),
+    "My Session" : MessageLookupByLibrary.simpleMessage("My Sessions"),
     "My Therapists" : MessageLookupByLibrary.simpleMessage("My Therapists"),
     "Name" : MessageLookupByLibrary.simpleMessage("Name"),
     "New Journal" : MessageLookupByLibrary.simpleMessage("New Journal"),
