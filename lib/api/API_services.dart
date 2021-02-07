@@ -6,6 +6,7 @@ import 'package:flutter_app/model/ClientListing.dart';
 import 'package:flutter_app/model/CommonModel.dart';
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
 import 'package:flutter_app/model/GetTokenResponse.dart';
+import 'package:flutter_app/model/JournalList.dart';
 import 'package:flutter_app/model/JournalingListModel.dart';
 import 'package:flutter_app/model/LibraryModel.dart';
 import 'package:flutter_app/model/NotificationList.dart';
@@ -373,7 +374,7 @@ class InAppAPIServices {
   }
 
    // fetch patient journal list
-  Future<JournalingList> getPatientJournal(patientId) async {
+  Future<JournalList> getPatientJournal(patientId) async {
     var token = await GetStringToSP("token");
 
     final url = HHString.baseURL +"therapist/patient_journals_List?patientId="+patientId;
@@ -384,7 +385,7 @@ class InAppAPIServices {
         },);
       print("response:- "+response.body);
     if(response.statusCode == 200){
-      return journalingListFromJson(response.body);
+      return journalListFromJson(response.body);
     }else {
       throw Exception("Failed to add note");
     }
