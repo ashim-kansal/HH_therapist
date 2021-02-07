@@ -333,7 +333,7 @@ class UpcomingSessionItem extends StatelessWidget {
                     ),
                   // ),
                   completed?
-                    Flexible(flex: 6,
+                    Flexible(flex: 4,
                       child: Container(
                         margin: EdgeInsets.only(right: 10),
                         child: Column(
@@ -345,7 +345,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       )
                     )
                   :
-                  Flexible(flex: 7,
+                  Flexible(flex: 4,
                     fit: FlexFit.loose,
                     child: Container(
                       child: Row(
