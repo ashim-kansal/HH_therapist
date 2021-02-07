@@ -374,7 +374,7 @@ class SessionPageState extends State<SessionDetails>{
                     isJournling == true ?
                       Container(
                         // color: HH_Colors.color_FBF4F4,
-                        margin: EdgeInsets.only(top: 10),
+                        // margin: EdgeInsets.only(top: 10),
                         height: MediaQuery.of(context).size.height / 3.7,
                         padding: EdgeInsets.all(10),
                         child: Container(

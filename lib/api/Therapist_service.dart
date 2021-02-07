@@ -27,7 +27,7 @@ Future<GetBookingSlotsResponse> getSlotsForBooking(String id) async {
 Future<GetBookingResponse> bookSession(String id, String sessionId) async {
   var token = await GetStringToSP("token");
 
-  final response = await http.post(HHString.baseURL+"/user/reschedule_session",
+  final response = await http.post(HHString.baseURL+"therapist/reschedule_session",
       body: jsonEncode(<String, String>{"slotId":id, "sessionId":sessionId, }),
       headers: {
         HttpHeaders.contentTypeHeader: 'application/json',
@@ -40,15 +40,16 @@ Future<GetBookingResponse> bookSession(String id, String sessionId) async {
 
 Future<GetBookingResponse> cancelSession(String sessionId) async {
   var token = await GetStringToSP("token");
-print(token);
-  final response = await http.post(url+"/cancelSession",
+print(sessionId);
+    print(token);
+  final response = await http.post(HHString.baseURL+"therapist/cancelSession",
       body: jsonEncode(<String, String>{"sessionId":sessionId}),
       headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
+         "Content-Type": "application/json",
         'token' : token
       });
+    print("cancel session");
   print(response.body);
   return getBookingResponseFromJson(response.body);
-
 }
 

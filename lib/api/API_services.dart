@@ -271,15 +271,18 @@ class InAppAPIServices {
   //cancel session 
   Future<CommonResponse> cancelSession(sessionID) async {
     var token = await GetStringToSP("token");
+    print(sessionID);
+    print(token);
     final url = HHString.baseURL +"therapist/cancelSession";
     final response = await http.post(url,
         headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
+          "Content-Type": "application/json",
           "token": token?? HHString.token
         },
         body:  jsonEncode({
           "sessionId": sessionID})
       );
+      print(response.body);
     if(response.statusCode == 200){
       return CommonResponse.fromJson(json.decode(response.body));
     }else {

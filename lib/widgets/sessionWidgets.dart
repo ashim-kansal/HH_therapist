@@ -61,8 +61,9 @@ class SessionCard extends StatelessWidget {
                               builder: (BuildContext dialogContext) {
                                 return CancelDialog(
                                     onYesPress: ()async {
+                                      print("doneee");
                                       cancelSession(data.id).then(
-                                              (value) => {
+                                            (value) => {
 
                                             print(value.responseCode),
                                             if (value.responseCode == 200) {
@@ -294,42 +295,46 @@ class UpcomingSessionItem extends StatelessWidget {
                     onTap: (){
                       Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data, data.patientId.id));
                     },
-                    child: Row(
-                      children: [
-                        data.patientId.profilePic == ""?
-                        Image.asset(
-                          'assets/images/ic_avatar.png',
-                          height: 18,
-                          width: 18,
-                        ) : CircleAvatar(
-                          backgroundImage: NetworkImage(data.patientId.profilePic),
-                          radius: 18,
-                        ),
+                    // child: Flexible(
+                    //   flex: 6,
+                    //   fit: FlexFit.loose,
+                      child: Row(
+                        children: [
+                          data.patientId.profilePic == ""?
+                          Image.asset(
+                            'assets/images/ic_avatar.png',
+                            height: 18,
+                            width: 18,
+                          ) : CircleAvatar(
+                            backgroundImage: NetworkImage(data.patientId.profilePic),
+                            radius: 18,
+                          ),
 
-                        SizedBox(width: 10,),
+                          SizedBox(width: 10,),
 
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              drname+drname,
-                              overflow: TextOverflow.ellipsis,
-                              style: new TextStyle(
-                                  fontSize: 18.0,
-                                  color: HH_Colors.grey_585858,
-                                  fontWeight: FontWeight.w600
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                drname,
+                                overflow: TextOverflow.ellipsis,
+                                style: new TextStyle(
+                                    fontSize: 18.0,
+                                    color: HH_Colors.grey_585858,
+                                    fontWeight: FontWeight.w600
+                                ),
                               ),
-                            ),
-                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
-                          ],
-                        )
-                      ],
-                    )
-                  ),
+                              Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  // ),
                   completed?
-
-                      Container(
+                    Flexible(flex: 6,
+                      child: Container(
                         margin: EdgeInsets.only(right: 10),
                         child: Column(
                           children: [
@@ -338,13 +343,14 @@ class UpcomingSessionItem extends StatelessWidget {
                           ],
                         ),
                       )
-
+                    )
                   :
-
-                    Container(
+                  Flexible(flex: 7,
+                    fit: FlexFit.loose,
+                    child: Container(
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           ButtonTheme(
                             height: 35,
@@ -378,6 +384,7 @@ class UpcomingSessionItem extends StatelessWidget {
                               builder: (BuildContext dialogContext) {
                                 return CancelDialog(
                                     onYesPress: ()async {
+                                      print("sCancelll");
                                       cancelSession(data.id).then(
                                           (value) => {
                                             print(value.responseCode),
@@ -405,7 +412,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       ),
                     )
                   
-
+                  )
                 ],
 
               ),
