@@ -204,7 +204,8 @@ class SessionPageState extends State<SessionPage>{
               data: searchList[index],
               drname: searchList[index].patientId.firstName+" "+searchList[index].patientId.lastName,
               sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
-              role: '', onClick: (){}, completed: !isSwitched,);
+              role: '',
+              completed: !isSwitched,);
           },
               separatorBuilder: (context, index) {
                 return Divider();

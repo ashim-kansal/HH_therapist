@@ -294,46 +294,42 @@ class UpcomingSessionItem extends StatelessWidget {
                     onTap: (){
                       Navigator.pushNamed(context, SessionDetails.RouteName, arguments: SessionDetailsArguments(data, data.patientId.id));
                     },
-                    child: Flexible(
-                      flex: 6,
-                      fit: FlexFit.loose,
-                      child: Row(
-                        children: [
-                          data.patientId.profilePic == ""?
-                          Image.asset(
-                            'assets/images/ic_avatar.png',
-                            height: 18,
-                            width: 18,
-                          ) : CircleAvatar(
-                            backgroundImage: NetworkImage(data.patientId.profilePic),
-                            radius: 18,
-                          ),
+                    child: Row(
+                      children: [
+                        data.patientId.profilePic == ""?
+                        Image.asset(
+                          'assets/images/ic_avatar.png',
+                          height: 18,
+                          width: 18,
+                        ) : CircleAvatar(
+                          backgroundImage: NetworkImage(data.patientId.profilePic),
+                          radius: 18,
+                        ),
 
-                          SizedBox(width: 10,),
+                        SizedBox(width: 10,),
 
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                drname,
-                                overflow: TextOverflow.ellipsis,
-                                style: new TextStyle(
-                                    fontSize: 18.0,
-                                    color: HH_Colors.grey_585858,
-                                    fontWeight: FontWeight.w600
-                                ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              drname+drname,
+                              overflow: TextOverflow.ellipsis,
+                              style: new TextStyle(
+                                  fontSize: 18.0,
+                                  color: HH_Colors.grey_585858,
+                                  fontWeight: FontWeight.w600
                               ),
-                              Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                            Text(sdate, textAlign:TextAlign.start,style: TextStyle(fontSize: 16, color: HH_Colors.grey_707070),),
+                          ],
+                        )
+                      ],
                     )
                   ),
                   completed?
-                    Flexible(flex: 6,
-                      child: Container(
+
+                      Container(
                         margin: EdgeInsets.only(right: 10),
                         child: Column(
                           children: [
@@ -342,14 +338,13 @@ class UpcomingSessionItem extends StatelessWidget {
                           ],
                         ),
                       )
-                    )
+
                   :
-                  Flexible(flex: 7,
-                    fit: FlexFit.loose,
-                    child: Container(
+
+                    Container(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           ButtonTheme(
                             height: 35,
@@ -410,7 +405,7 @@ class UpcomingSessionItem extends StatelessWidget {
                       ),
                     )
                   
-                  )
+
                 ],
 
               ),
