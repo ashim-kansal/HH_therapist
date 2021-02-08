@@ -65,15 +65,15 @@ class ReviewState extends State<ReviewPage> {
                               textweight: FontWeight.w400,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                            alignment: Alignment.topLeft,
-                            child:HHTextView(
-                                title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                                size: 14,
-                                color: Color(0xff707070)
-                            ),
-                          )
+                          // Container(
+                          //   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                          //   alignment: Alignment.topLeft,
+                          //   child:HHTextView(
+                          //       title: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                          //       size: 14,
+                          //       color: Color(0xff707070)
+                          //   ),
+                          // )
                         ],)
                     ),
                     Container(
