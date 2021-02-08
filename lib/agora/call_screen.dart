@@ -50,7 +50,7 @@ class _CallScreenState extends State<CallScreen> {
     addPostFrameCallback();
     initializeAgora();
 
-    if(widget.callGenerate){
+    if(widget.callGenerate??false){
       startRingTimer();
     }
   }
