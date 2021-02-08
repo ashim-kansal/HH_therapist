@@ -54,6 +54,35 @@ class DBProvider {
     return list.last??Client();
   }
 
+
+  Future<bool> setChecked(bool  isChecked) async {
+    final db = await database;
+    db.delete("Terms");
+    if(isChecked) {
+      var res = await db.insert("Terms", Terms(isChecked: 1).toMap());
+      return res > 0 ? true : false;
+    }
+    return false;
+  }
+
+  Future<bool> checkIsFirst() async {
+    final db = await database;
+    var res = await db.query("Client");
+    if(res.isNotEmpty)
+      return false;
+    else
+      return true;
+  }
+
+  Future<bool> isChecked() async {
+    final db = await database;
+    var res = await db.query("Client");
+    if(res.isNotEmpty)
+      return true;
+    else
+      return false;
+  }
+
 }
 
 
@@ -98,3 +127,35 @@ class Client {
     "programname": programname,
   };
 }
+
+
+Client termsFromJson(String str) {
+  final jsonData = json.decode(str);
+  return Client.fromMap(jsonData);
+}
+
+String termsToJson(Client data) {
+  final dyn = data.toMap();
+  return json.encode(dyn);
+}
+
+class Terms {
+  int id;
+  int isChecked;
+
+  Terms({
+    this.id,
+    this.isChecked,
+  });
+
+  factory Terms.fromMap(Map<String, dynamic> json) => new Terms(
+    id: json["id"],
+    isChecked: json["isChecked"],
+  );
+
+  Map<String, dynamic> toMap() => {
+    "id": id,
+    "isChecked": isChecked,
+  };
+}
+

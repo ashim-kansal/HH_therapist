@@ -32,16 +32,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  @override
-  void initState() {
-    super.initState(); 
-  }
+
 
   var emailerror = false;
   var pwderror = false;
   bool securepwd = true;
   bool isChecked = false;
   bool isApiCallProcess = false;
+
+  @override
+  void initState() {
+    super.initState();
+    DBProvider.db.isChecked().then((value) => {
+      setState((){
+        isChecked = value;
+      })
+    });
+  }
 
   String token = "";
 
@@ -116,6 +123,8 @@ class _LoginPageState extends State<LoginPage> {
       showToast("Please agree with terms & conditions");
       return;
     }
+    DBProvider.db.setChecked(isChecked);
+
 
     APIService apiService = new APIService();
     buildShowDialog(context);
