@@ -70,15 +70,21 @@ class DashboardState extends State<Dashboard> {
           actions: [
             Container(
                 margin: EdgeInsets.only(right: 10),
-                child: IconButton(
-                  icon: Icon(
-                    Icons.notifications_on_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () => {
-                    Navigator.pushNamed(context, NotificationPage.RouteName)
-                  },
-                ))
+                child:new Stack(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.notifications_on_outlined,
+                        color: Colors.white,
+                      ),
+                      onPressed: () => {
+                        Navigator.pushNamed(context, NotificationPage.RouteName)
+                      },
+                    ),
+                    showBadge()
+                  ],
+                )
+                )
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -140,6 +146,26 @@ class DashboardState extends State<Dashboard> {
                     color: Colors.white),
                 child: listScreens[tabIndex])),
       ));
+
+  Widget showBadge() {
+    bool a = true;
+    return a ? new Positioned(
+      right: 0,
+      child: new Container(
+        padding: EdgeInsets.all(1),
+        margin: EdgeInsets.all(10),
+        decoration: new BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        constraints: BoxConstraints(
+          minWidth: 12,
+          minHeight: 12,
+        ),
+
+      ),
+    ) : Container();
+  }
 }
 
 class DashboardArgument{
