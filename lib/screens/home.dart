@@ -129,6 +129,11 @@ class HomePageState extends State<HomePage> {
 
                     });
                     },
+                    onClickReSchedule: (){
+                    setState(() {
+
+                    });
+                    },
                   );
                 },
                 separatorBuilder: (context, index) {

@@ -61,6 +61,7 @@ class Result {
         this.updatedAt,
         this.v,
         this.programSubscription,
+        this.totalUnreadNotificationList,
     });
 
     String userType;
@@ -68,6 +69,7 @@ class Result {
     String deviceToken;
     String profilePic;
     int otpTime;
+    int totalUnreadNotificationList;
     bool verifyOtp;
     bool notificationStatus;
     bool programSubscribed;
@@ -119,6 +121,7 @@ class Result {
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"]?? 1,
         programSubscription: json["programSubscription"]?? "",
+        totalUnreadNotificationList: json["totalUnreadNotificationList"]?? 0,
     );
 
     Map<String, dynamic> toJson() => {
@@ -149,5 +152,6 @@ class Result {
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,
         "programSubscription": programSubscription,
+        "totalUnreadNotificationList": totalUnreadNotificationList,
     };
 }

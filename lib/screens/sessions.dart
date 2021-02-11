@@ -157,7 +157,12 @@ class SessionPageState extends State<SessionPage>{
                   setState(() {
 
                   });
-                },);
+                },onClickReSchedule: () {
+                  setState(() {
+
+                  });
+                },
+              );
             },
                 separatorBuilder: (context, index) {
                   return Divider();

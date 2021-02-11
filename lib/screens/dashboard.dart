@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/agora/pickup_layout.dart';
+import 'package:flutter_app/api/User_service.dart';
 import 'package:flutter_app/app_localization.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/chatlist.dart';
@@ -25,6 +26,7 @@ class DashboardState extends State<Dashboard> {
   var tabIndex = 0;
   String title = 'Dashboard';
   String id = '';
+  int count = 0;
 
   List<Widget> listScreens;
   List<String> listNames = ['Dashboard', 'Patient Chat', 'Settings'];
@@ -37,7 +39,22 @@ class DashboardState extends State<Dashboard> {
       print("stoage value:- "+value),
           setState(() => {id = value})
         });
+    getProfile();
   }
+
+  void getProfile() {
+    UserAPIServices userAPIServices = new UserAPIServices();
+
+    userAPIServices.getProfile().then((value) => {
+      if (value.responseCode == 200)
+        {
+          setState(() {
+            count = value.result.totalUnreadNotificationList??0;
+          })
+        }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) => PickupLayout(
@@ -78,7 +95,11 @@ class DashboardState extends State<Dashboard> {
                         color: Colors.white,
                       ),
                       onPressed: () => {
-                        Navigator.pushNamed(context, NotificationPage.RouteName)
+                        Navigator.pushNamed(context, NotificationPage.RouteName).then((value) => {
+                          setState((){
+
+                          })
+                        })
                       },
                     ),
                     showBadge()
@@ -148,8 +169,7 @@ class DashboardState extends State<Dashboard> {
       ));
 
   Widget showBadge() {
-    bool a = true;
-    return a ? new Positioned(
+    return count>0 ? new Positioned(
       right: 0,
       child: new Container(
         padding: EdgeInsets.all(1),

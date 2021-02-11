@@ -20,10 +20,12 @@ class SessionCard extends StatelessWidget {
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
   final VoidCallback onClickVideo;
+  final VoidCallback onClickReSchedule;
+
   Result data;
 
   SessionCard(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClick, this.onClickReSchedule, this.onClickVideo, this.onClickCancel, this.drname, this.sdate});
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class SessionCard extends StatelessWidget {
                               },
                             );
                           }, onClickReSchedule: (){
-                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
                           },),
                         )
                       ],
@@ -270,10 +272,11 @@ class UpcomingSessionItem extends StatelessWidget {
   final VoidCallback onClick;
   final VoidCallback onClickCancel;
   final VoidCallback onClickVideo;
+  final VoidCallback onClickReSchedule;
 
 
   UpcomingSessionItem(
-      {@required this.name,@required this.data, @required this.role, this.completed, this.onClickVideo, this.onClick, this.drname, this.sdate, this.onClickCancel});
+      {@required this.name,@required this.data, @required this.role, this.completed, this.onClickVideo, this.onClickReSchedule, this.onClick, this.drname, this.sdate, this.onClickCancel});
 
   @override
   Widget build(BuildContext context) {
@@ -404,7 +407,7 @@ class UpcomingSessionItem extends StatelessWidget {
                               },
                             );
                           }, onClickReSchedule: (){
-                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data);
+                            Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
                           },),
                           Spacer(),
                           Spacer(),
