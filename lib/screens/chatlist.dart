@@ -67,11 +67,12 @@ class _ChatListPageState extends State<ChatListPage> {
                 return ChatUserCell(
                   name: item.receiverId ==null ?"": (item.receiverId.id == userId ? item.senderId.firstName+" "+item.senderId.lastName : item.receiverId.firstName+" "+item.receiverId.lastName),
                   message: item.message[item.message.length - 1].message,
-                  profile: item.receiverId.profilePic,
+                  // profile: item.receiverId.profilePic,
+                  profile: item.receiverId == null ? '': (item.receiverId.id == userId ? item.senderId.profilePic : item.receiverId.profilePic),
                   time: createdDt.format("hh:mm a"),
                   online: true,
                   onClick: () {
-                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.receiverId.id == userId ? item.senderId.id : item.receiverId.id));
+                    Navigator.pushNamed(context, ChatPage.RouteName, arguments: ChatArguments(item.receiverId.id == userId ? item.senderId.id : item.receiverId.id, item.receiverId.id == userId ? item.senderId.profilePic : item.receiverId.profilePic));
                   },
                 );
               },

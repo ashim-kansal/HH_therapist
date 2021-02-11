@@ -68,7 +68,7 @@ class AppLocalizations {
   String get ABOUT_US => Intl.message("ABOUT_US");
   String get error => Intl.message("Error");
   String get submit => Intl.message("Submit");
-  String get save => Intl.message("save");
+  String get save => Intl.message("Save");
   String get chat => Intl.message("Chat");
   String get mychat => Intl.message("My Chats");
   String get myclients => Intl.message("My Clients");

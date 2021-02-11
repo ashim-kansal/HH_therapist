@@ -94,7 +94,7 @@ class _NotificationState extends State<NotificationPage> {
 
     return new Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).Notification, style: TextStyle(color: Colors.white)),
+          title: Text(AppLocalizations.of(context).Notifications, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           iconTheme: IconThemeData(
             color: Colors.white, //change your color here

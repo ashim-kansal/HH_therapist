@@ -16,7 +16,8 @@ class ChatPage extends StatefulWidget {
   static const String RouteName = '/chat';
 
   String senderId;
-  ChatPage({Key key, this.title, this.senderId}) : super(key: key);
+  String receiverImg;
+  ChatPage({Key key, this.title, this.senderId, this.receiverImg}) : super(key: key);
   String title;
 
   @override
@@ -79,6 +80,7 @@ class _ChatPageState extends State<ChatPage> {
                                 var _date = message[index].createdAt;
                                 Moment createdDt = Moment.parse('$_date');
                                 return MessageWidget(
+                                  receiverImg: widget.receiverImg,
                                   msg: message[index].message,
                                   direction: message[index].senderId == widget.senderId ? "left" : "right",
                                   dateTime: createdDt.format("dd MMM, yyyy hh:mm a"),
@@ -188,6 +190,7 @@ class _ChatPageState extends State<ChatPage> {
 
 class ChatArguments {
   final String senderId;
+  final String receiverImg;
 
-  ChatArguments(this.senderId);
+  ChatArguments(this.senderId, this.receiverImg);
 }
