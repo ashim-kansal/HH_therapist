@@ -36,6 +36,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
           child: FutureBuilder<SubmitAssessmentResponse>(
               future: getAssessments(widget.id),
               builder: (context, snapshot) {
+                // print(snapshot.data)
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(child: Text(AppLocalizations.of(context).not_data_found),);
@@ -58,9 +59,9 @@ class AssessmentFormState extends State<AssessmentFormPage> {
                       ),
                       Expanded(
                           child: ListView.separated(
-                            itemCount: snapshot.data.result.length,
+                            itemCount: snapshot.data.result.questions.length,
                             itemBuilder: (context, index) {
-                              return buildContainerForQuestionWithAnswer(index, snapshot.data.result[index]);
+                              return buildContainerForQuestionWithAnswer(index, snapshot.data.result.questions[index]);
                             },
                             separatorBuilder: (context, index) {
                               return Divider();
@@ -79,7 +80,7 @@ class AssessmentFormState extends State<AssessmentFormPage> {
         ));
   }
 
-  Column buildContainerForQuestionWithAnswer(int index, Result question) {
+  Column buildContainerForQuestionWithAnswer(int index, Question question) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

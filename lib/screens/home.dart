@@ -66,7 +66,9 @@ class HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 HHHomeButton(title: AppLocalizations.of(context).mysession, type: 2, onClick: (){
-                  Navigator.pushNamed(context, SessionPage.RouteName);
+                  Navigator.pushNamed(context, SessionPage.RouteName).then((value) => {
+                    setState((){})
+                  });
                 },),
                 SizedBox(height: 15),
                 HHHomeButton(title: 'My Clients', type: 2, onClick: (){

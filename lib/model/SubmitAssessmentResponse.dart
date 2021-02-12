@@ -17,23 +17,63 @@ class SubmitAssessmentResponse {
 
   int responseCode;
   String responseMessage;
-  List<Result> result;
+  Result result;
 
   factory SubmitAssessmentResponse.fromJson(Map<String, dynamic> json) => SubmitAssessmentResponse(
     responseCode: json["responseCode"],
     responseMessage: json["responseMessage"],
-    result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
+    result: Result.fromJson(json["result"]),
   );
 
   Map<String, dynamic> toJson() => {
     "responseCode": responseCode,
     "responseMessage": responseMessage,
-    "result": List<dynamic>.from(result.map((x) => x.toJson())),
+    "result": result.toJson(),
   };
 }
 
 class Result {
   Result({
+    this.questions,
+    this.programSubscription,
+  });
+
+  List<Question> questions;
+  ProgramSubscription programSubscription;
+
+  factory Result.fromJson(Map<String, dynamic> json) => Result(
+    questions: List<Question>.from(json["Questions"].map((x) => Question.fromJson(x))),
+    programSubscription: ProgramSubscription.fromJson(json["programSubscription"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "Questions": List<dynamic>.from(questions.map((x) => x.toJson())),
+    "programSubscription": programSubscription.toJson(),
+  };
+}
+
+class ProgramSubscription {
+  ProgramSubscription({
+    this.id,
+    this.title,
+  });
+
+  String id;
+  String title;
+
+  factory ProgramSubscription.fromJson(Map<String, dynamic> json) => ProgramSubscription(
+    id: json["_id"],
+    title: json["title"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "_id": id,
+    "title": title,
+  };
+}
+
+class Question {
+  Question({
     this.id,
     this.questionText,
     this.questionType,
@@ -47,7 +87,7 @@ class Result {
   List<Option> options;
   String questionNumber;
 
-  factory Result.fromJson(Map<String, dynamic> json) => Result(
+  factory Question.fromJson(Map<String, dynamic> json) => Question(
     id: json["_id"],
     questionText: json["QuestionText"],
     questionType: json["QuestionType"],
