@@ -66,10 +66,11 @@ dependencies:
   cached_network_image: ^2.4.1
   agora_rtc_engine: ^1.0.15
   flutter_ringtone_player: ^2.0.0
+  flutter_local_notifications: ^4.0.1
 
 
-dependency_overrides:
-  intl: 0.17.0-nullsafety.2
+#dependency_overrides:
+#  intl: 0.17.0-nullsafety.2
   
 dev_dependencies:
   flutter_test:

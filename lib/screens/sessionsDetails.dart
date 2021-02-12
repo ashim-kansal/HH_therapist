@@ -18,6 +18,7 @@ import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_app/utils/DateTimeUtils.dart';
+import 'package:flutter_app/widgets/MyExpansionTile.dart';
 
 
 
@@ -247,8 +248,8 @@ class SessionPageState extends State<SessionDetails>{
                                     itemBuilder: (context, index) {
                                     return Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
                                       child: AssesmentItem(title: item[index].title, 
-                                      value: item[index].correctMarks, 
-                                      subTitle: "Total Obtained Marks"));
+                                      value: item[index].remarks.toString().split(":")[0],
+                                      subTitle: "Remarks:"));
                                         },
                                       itemCount: item.length,
                                   ));
@@ -294,11 +295,11 @@ class SessionPageState extends State<SessionDetails>{
                                       );
                               }
 
-                              SchedulerBinding.instance.addPostFrameCallback((_){
-                                setState(() {
-                                  mDiaryList = snapshot.data.result;
-                                });
-                              });
+                              // SchedulerBinding.instance.addPostFrameCallback((_){
+                              //   setState(() {
+                              //     mDiaryList = snapshot.data.result;
+                              //   });
+                              // });
 
                               graphData = getGraphData(snapshot.data.result, pos);
                               label = getLabel(graphData);
@@ -373,69 +374,69 @@ class SessionPageState extends State<SessionDetails>{
                                             var _date = snapshot.data.result[index].createdAt;
                                             Moment createdDt = Moment.parse('$_date');
                                             return Column(children: [
-                                                    Container(
-                                                      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                                                      padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
-                                                        color: Color(0xffCBCEFC),
-                                                      ),
-                                                      child: Container(
-                                                          child: Stack(children: [ 
-                                                           Row(
-                                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                             crossAxisAlignment: CrossAxisAlignment.center,
-                                                             children: [
-                                                                Padding(
-                                                                  padding: EdgeInsets.only(top: 0),
-                                                                  child:  HHTextView(color: HH_Colors.color_white,
-                                                                  title: createdDt.format("dd/mm/yyyy"),
-                                                                  size: 16,
-                                                                  textweight: FontWeight.w600,),
-                                                                ),
-
-                                                                Container(
-                                                                  // alignment: Alignment.bottomRight,
-                                                                  child: IconButton(icon: Icon(
-                                                                    Icons.keyboard_arrow_right_outlined,
-                                                                    size: 32,
-                                                                    color: HH_Colors.color_white,
-                                                                  ), onPressed: () { 
-                                                                    
-                                                                   },),
-                                                                )
-                                                             ],
-                                                           )
-                                                          ],)
-                                                        ),
-                                                    ),
-                                                    // for (Question  quess in snapshot.data.result[index].questions)
-                                                    Container(
-                                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                                      padding: EdgeInsets.fromLTRB(10, 5, 10, 2),
-                                                      color: HH_Colors.color_EDEDF8,
-                                                      child: ExpandableListTile(
-                                                        result: snapshot.data.result[index],
-                                                      ),
-                                                    )
-                                                    // ListView.builder(
-                                                    //   itemBuilder: (context, qindex) {
-                                                    //   return  
-                                                    //     Row(
-                                                    //       mainAxisAlignment: MainAxisAlignment.start,
-                                                    //       children: [
-                                                    //         Container(
-                                                    //           padding: EdgeInsets.fromLTRB(8, 5, 8, 10),
-                                                    //           child: HHTextView(
-                                                    //             // title: "aaa",
-                                                    //             title: snapshot.data.result[index].questions[qindex].answer,
-                                                    //             size: 16,
-                                                    //             color: HH_Colors.color_707070,),
-                                                    //         ),
-                                                    //       ],
-                                                    //     );
-                                                    // }, itemCount: snapshot.data.result[index].questions.length,
+                                                MyExpansionTile(
+                                                title: Text(''),
+                                            headerBackgroundColor: HH_Colors.color_9ca031,
+                                            leading: Text(
+                                              createdDt.format("dd/MM/yyyy"),
+                                            style: TextStyle(color: Colors.white),
+                                            ),
+                                            children: [
+                                            Container(
+                                            color: HH_Colors.color_EDEDF8,
+                                            width: MediaQuery.of(context).size.width,
+                                            padding: EdgeInsets.only(
+                                            left: 15, top: 15, bottom: 10, right: 10),
+                                            child: ExpandableListTile(result:snapshot.data.result[index], date:createdDt.format("hh:mm a"))
+                                            )
+                                            ],
+                                            )
+                                                    // Container(
+                                                    //   margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                                                    //   padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                                    //   decoration: BoxDecoration(
+                                                    //     borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight:  Radius.circular(8.0)),
+                                                    //     color: Color(0xffCBCEFC),
+                                                    //   ),
+                                                    //   child: Container(
+                                                    //       child: Stack(children: [
+                                                    //        Row(
+                                                    //          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    //          crossAxisAlignment: CrossAxisAlignment.center,
+                                                    //          children: [
+                                                    //             Padding(
+                                                    //               padding: EdgeInsets.only(top: 0),
+                                                    //               child:  HHTextView(color: HH_Colors.color_white,
+                                                    //               title: createdDt.format("dd/mm/yyyy"),
+                                                    //               size: 16,
+                                                    //               textweight: FontWeight.w600,),
+                                                    //             ),
+                                                    //
+                                                    //             Container(
+                                                    //               // alignment: Alignment.bottomRight,
+                                                    //               child: IconButton(icon: Icon(
+                                                    //                 Icons.keyboard_arrow_right_outlined,
+                                                    //                 size: 32,
+                                                    //                 color: HH_Colors.color_white,
+                                                    //               ), onPressed: () {
+                                                    //
+                                                    //                },),
+                                                    //             )
+                                                    //          ],
+                                                    //        )
+                                                    //       ],)
+                                                    //     ),
+                                                    // ),
+                                                    // // for (Question  quess in snapshot.data.result[index].questions)
+                                                    // Container(
+                                                    //   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                                    //   padding: EdgeInsets.fromLTRB(10, 5, 10, 2),
+                                                    //   color: HH_Colors.color_EDEDF8,
+                                                    //   child: ExpandableListTile(
+                                                    //     result: snapshot.data.result[index],
+                                                    //   ),
                                                     // )
+
                                                   ],);
                                           },
                                           itemCount: snapshot.data.result.length,

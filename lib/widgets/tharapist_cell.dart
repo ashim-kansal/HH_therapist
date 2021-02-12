@@ -41,9 +41,9 @@ class TharapistCell extends StatelessWidget {
                   Row(children: [
                     Text("$name", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_35444D),),
                   ]),
-                  Row(children: [
-                    Text("Role : "+role.replaceAll("_", " ")??"", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070),),
-                  ]),
+                  // Row(children: [
+                  //   Text("Role : "+role.replaceAll("_", " ")??"", textAlign:TextAlign.start,style: TextStyle(color: HH_Colors.grey_707070),),
+                  // ]),
                 ],
               ) ,
             ],

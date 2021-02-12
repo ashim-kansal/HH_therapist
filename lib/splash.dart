@@ -8,12 +8,18 @@ import 'package:flutter_app/ChangeLanguage.dart';
 import 'package:flutter_app/agora/permissions.dart';
 import 'package:flutter_app/common/SharedPreferences.dart';
 import 'package:flutter_app/screens/dashboard.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async{
+
+  print(message);
   // WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
 }
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 class Splash extends StatefulWidget{
 
@@ -61,6 +67,14 @@ class SplashState extends State<Splash>{
     _register();
     getMessage();
 
+
+
+    var initializationSettingsAndroid = AndroidInitializationSettings('mipmap/ic_launcher'); // <- default icon name is @mipmap/ic_launcher
+    var initializationSettingsIOS = IOSInitializationSettings(onDidReceiveLocalNotification: null);
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: null);
+
+
     const MethodChannel('plugins.flutter.io/shared_preferences')
       .setMockMethodCallHandler(
       (MethodCall methodcall) async {
@@ -84,6 +98,21 @@ class SplashState extends State<Splash>{
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         print('on receive N message $message');
+        AndroidNotificationDetails notificationAndroidSpecifics =
+        AndroidNotificationDetails(
+            '10', "HH Patient", " ",
+            importance: Importance.max,
+            priority: Priority.high,
+            groupKey: "aa");
+
+        NotificationDetails notificationPlatformSpecifics =
+        NotificationDetails(android: notificationAndroidSpecifics, iOS: null);
+
+        await flutterLocalNotificationsPlugin.show(
+            1,
+            message["notification"]["title"],
+            message["notification"]["body"],
+            notificationPlatformSpecifics);
 
       },
         onBackgroundMessage: myBackgroundMessageHandler,

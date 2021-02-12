@@ -37,6 +37,10 @@ class DBProvider {
           "roomname TEXT,"
           "programname TEXT"
           ")");
+      await db.execute("CREATE TABLE Terms ("
+          "id INTEGER PRIMARY KEY,"
+          "isChecked INTEGER"
+          ")");
     });
   }
 
@@ -76,7 +80,7 @@ class DBProvider {
 
   Future<bool> isChecked() async {
     final db = await database;
-    var res = await db.query("Client");
+    var res = await db.query("Terms");
     if(res.isNotEmpty)
       return true;
     else
