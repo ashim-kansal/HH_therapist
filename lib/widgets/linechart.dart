@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_app/model/GetDrinkingDiaryList.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class SimpleLineChart extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -20,20 +21,46 @@ class SimpleLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList, animate: animate,defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: false));
+    return new charts.TimeSeriesChart(seriesList,
+      animate: animate,
+      defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: true),
+      dateTimeFactory: const charts.LocalDateTimeFactory(),
+      behaviors: [
+        charts.SlidingViewport(),
+        charts.PanAndZoomBehavior(),
+        charts.LinePointHighlighter(
+          drawFollowLinesAcrossChart: true,
+          showHorizontalFollowLine: charts.LinePointHighlighterFollowLineType.all,
+        ),
+      ],
+      domainAxis: charts.DateTimeAxisSpec(
+        tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
+          day: charts.TimeFormatterSpec(
+            format: 'EEE',
+            transitionFormat: 'EEE',
+          ),
+        ),
+      ),
+    );
   }
 
   /// Create one series with sample hard coded data.
-  static List<charts.Series<Result, int>> _createSampleData(List<Result> data) {
+  static List<charts.Series<Result, DateTime>> _createSampleData(List<Result> data) {
     return [
-      new charts.Series<Result, int>(
+      new charts.Series<Result, DateTime>(
         id: 'Goals',
         colorFn: (_, __) => charts.Color.fromHex(code: '#777CEA'),
-        domainFn: (Result sales, _) => sales.date.day,
+        domainFn: (Result sales, _) => sales.date,
         measureFn: (Result sales, _) => sales.achivedGoal,
         data: data,
       )
 
     ];
+  }
+
+  String getDateLabel(mdate){
+    Moment date = Moment.parse(mdate.toString());
+    return date.format("dd");
+
   }
 }
