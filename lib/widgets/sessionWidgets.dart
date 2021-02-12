@@ -29,6 +29,30 @@ class SessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    compareDateTime(Result result) {
+
+      print("dateee___ "+result.date.toString());
+
+      var flag = false;
+      var currentDate = new DateTime.now();
+
+      currentDate = currentDate.subtract(Duration(hours: 24));
+      print("currrD"+currentDate.toString());
+
+      var apptDate = result.date.toString().split(" ")[0].split("-");
+
+      // ignore: unrelated_type_equality_checks
+      if(int.parse(apptDate[2]) - 1 != (currentDate.day)){
+        flag = true;
+      }
+      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
+      //   flag = true;
+      // }
+
+      return flag;
+    }
+
     return Container(
         width: MediaQuery.of(context).size.width*(2/3),
         child: Card(
@@ -59,6 +83,19 @@ class SessionCard extends StatelessWidget {
                           flex: 2,
                           fit:  FlexFit.tight,
                           child: HHOptionButton(onClickCancel: (){
+                            if(!compareDateTime(data)){
+
+                              showDialog(context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return DialogWithSingleButton(
+                                    title: "Session",
+                                    content: "You can't cancel session\nwithin 24 hour.",
+                                  );
+                                },
+                              );               
+
+                              return;
+                            }
                             showDialog(context: context,
                               builder: (BuildContext dialogContext) {
                                 return CancelDialog(
@@ -85,6 +122,18 @@ class SessionCard extends StatelessWidget {
                               },
                             );
                           }, onClickReSchedule: (){
+                            if(!compareDateTime(data)){
+                              showDialog(context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return DialogWithSingleButton(
+                                    title: "Session",
+                                    content: "You can't reschedule session\nwithin 24 hour.",
+                                  );
+                                },
+                              );               
+
+                              return;
+                            }
                             Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
                           },),
                         )
@@ -280,6 +329,30 @@ class UpcomingSessionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     compareDateTime(Result result) {
+
+      print("dateee___ "+result.date.toString());
+
+      var flag = false;
+      var currentDate = new DateTime.now();
+
+      currentDate = currentDate.subtract(Duration(hours: 24));
+      print("currrD"+currentDate.toString());
+
+      var apptDate = result.date.toString().split(" ")[0].split("-");
+
+      // ignore: unrelated_type_equality_checks
+      if(int.parse(apptDate[2]) - 1 != (currentDate.day)){
+        flag = true;
+      }
+      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
+      //   flag = true;
+      // }
+
+      return flag;
+    }
+
     return Container(
         child: Card(
             elevation: 3,
@@ -383,6 +456,19 @@ class UpcomingSessionItem extends StatelessWidget {
                           ),
 
                           HHOptionButton(onClickCancel: (){
+                            if(!compareDateTime(data)){
+
+                              showDialog(context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return DialogWithSingleButton(
+                                    title: "Session",
+                                    content: "You can't cancel session\nwithin 24 hour.",
+                                  );
+                                },
+                              );               
+
+                              return;
+                            }
                             showDialog(context: context,
                               builder: (BuildContext dialogContext) {
                                 return CancelDialog(
@@ -407,6 +493,19 @@ class UpcomingSessionItem extends StatelessWidget {
                               },
                             );
                           }, onClickReSchedule: (){
+                            if(!compareDateTime(data)){
+
+                              showDialog(context: context,
+                                builder: (BuildContext dialogContext) {
+                                  return DialogWithSingleButton(
+                                    title: "Session",
+                                    content: "You can't reschedule session\nwithin 24 hour.",
+                                  );
+                                },
+                              );               
+
+                              return;
+                            }
                             Navigator.pushNamed(context, BookSessionPage.RouteName, arguments: data).then((value) => {onClickReSchedule()});
                           },),
                           Spacer(),
