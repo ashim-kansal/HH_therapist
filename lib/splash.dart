@@ -105,6 +105,7 @@ class SplashState extends State<Splash>{
             priority: Priority.high,
             groupKey: "aa");
 
+
         NotificationDetails notificationPlatformSpecifics =
         NotificationDetails(android: notificationAndroidSpecifics, iOS: null);
 
