@@ -170,7 +170,7 @@ class HomePageState extends State<HomePage> {
       }
     );
   }
-
+  
   void callParticipent(String sessionId, String patientId, Result result) {
     print("Result:- "+ result.therapistId);
     print("Result pid:- "+ result.patientId.id);

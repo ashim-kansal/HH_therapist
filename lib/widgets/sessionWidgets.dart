@@ -34,17 +34,17 @@ class SessionCard extends StatelessWidget {
 
       print("dateee___ "+result.date.toString());
 
-      var flag = false;
+      var flag = true;
       var currentDate = new DateTime.now();
 
-      currentDate = currentDate.subtract(Duration(hours: 24));
+      currentDate = currentDate.add(Duration(hours: 24));
       print("currrD"+currentDate.toString());
 
       var apptDate = result.date.toString().split(" ")[0].split("-");
 
       // ignore: unrelated_type_equality_checks
-      if(int.parse(apptDate[2]) - 1 != (currentDate.day)){
-        flag = true;
+      if(int.parse(apptDate[2]) <= (currentDate.day)){
+        flag = false;
       }
       // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
       //   flag = true;
@@ -337,13 +337,13 @@ class UpcomingSessionItem extends StatelessWidget {
       var flag = false;
       var currentDate = new DateTime.now();
 
-      currentDate = currentDate.subtract(Duration(hours: 24));
+      currentDate = currentDate.add(Duration(hours: 24));
       print("currrD"+currentDate.toString());
 
       var apptDate = result.date.toString().split(" ")[0].split("-");
 
       // ignore: unrelated_type_equality_checks
-      if(int.parse(apptDate[2]) - 1 != (currentDate.day)){
+      if(int.parse(apptDate[2]) <= (currentDate.day)){
         flag = true;
       }
       // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
