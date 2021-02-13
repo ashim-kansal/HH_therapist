@@ -32,25 +32,33 @@ class SessionCard extends StatelessWidget {
 
     compareDateTime(Result result) {
 
-      print("dateee___ "+result.date.toString());
 
-      var flag = true;
       var currentDate = new DateTime.now();
 
-      currentDate = currentDate.add(Duration(hours: 24));
       print("currrD"+currentDate.toString());
+      DateTime sessionDate = result.date.subtract(Duration(hours: 24));
 
-      var apptDate = result.date.toString().split(" ")[0].split("-");
-
-      // ignore: unrelated_type_equality_checks
-      if(int.parse(apptDate[2]) <= (currentDate.day)){
-        flag = false;
-      }
-      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
-      //   flag = true;
+      print('session date before 24 hours  : '+sessionDate.toString());
+      var time = result.startTime.split(":");
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
       // }
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
+        }
+      }
 
-      return flag;
+      return true;
+
     }
 
     return Container(
@@ -330,27 +338,35 @@ class UpcomingSessionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-     compareDateTime(Result result) {
+    compareDateTime(Result result) {
 
-      print("dateee___ "+result.date.toString());
 
-      var flag = false;
       var currentDate = new DateTime.now();
 
-      currentDate = currentDate.add(Duration(hours: 24));
       print("currrD"+currentDate.toString());
+      DateTime sessionDate = result.date.subtract(Duration(hours: 24));
 
-      var apptDate = result.date.toString().split(" ")[0].split("-");
-
-      // ignore: unrelated_type_equality_checks
-      if(int.parse(apptDate[2]) <= (currentDate.day)){
-        flag = true;
-      }
-      // else if(currentDate.hour > (int.parse(result.startTime.split(":")[0]))){
-      //   flag = true;
+      print('session date before 24 hours  : '+sessionDate.toString());
+      var time = result.startTime.split(":");
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
       // }
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
+        }
+      }
 
-      return flag;
+      return true;
+
     }
 
     return Container(
