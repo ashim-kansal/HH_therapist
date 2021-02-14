@@ -40,16 +40,24 @@ class SessionCard extends StatelessWidget {
 
       print('session date before 24 hours  : '+sessionDate.toString());
       var time = result.startTime.split(":");
-      if(!currentDate.isAfter(sessionDate)){
-        if(currentDate.hour<int.parse(time[0]) ){
-          return true;
-        }
-        if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
-          return true;
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
+      // }
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
         }
       }
 
-      return false;
+      return true;
 
     }
 
@@ -340,16 +348,24 @@ class UpcomingSessionItem extends StatelessWidget {
 
       print('session date before 24 hours  : '+sessionDate.toString());
       var time = result.startTime.split(":");
-      if(!currentDate.isAfter(sessionDate)){
-        if(currentDate.hour<int.parse(time[0]) ){
-          return true;
-        }
-        if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
-          return true;
+      // if(!currentDate.isAfter(sessionDate)){
+      //   if(currentDate.hour<int.parse(time[0]) ){
+      //     return true;
+      //   }
+      //   if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+      //     return true;
+      //   }
+      // }
+      if(currentDate.isAfter(sessionDate)){
+        if(currentDate.hour>int.parse(time[0]) ){
+          // if(currentDate.hour==int.parse(time[0]) && currentDate.minute<int.parse(time[1])){
+            return false;
+          // }
+          // return true;
         }
       }
 
-      return false;
+      return true;
 
     }
 
