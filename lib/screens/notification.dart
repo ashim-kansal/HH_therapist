@@ -14,8 +14,9 @@ import 'package:toast/toast.dart';
 class NotificationPage extends StatefulWidget {
   static const String RouteName = '/notification';
 
-  NotificationPage({Key key, this.title}) : super(key: key);
+  NotificationPage({Key key, this.title, this.count}) : super(key: key);
   String title;
+  int count = 0;
 
   @override
   State<StatefulWidget> createState() =>_NotificationState();
@@ -126,6 +127,7 @@ class _NotificationState extends State<NotificationPage> {
                       NotificationList(title:
                           snapshot.data.result[index].title,
                           subtitle: createdDt.format("dd MMM, yyyy"),
+                        highlight: index<(widget.count??0),
                           onDelete: () {
                             deleteNotification(snapshot.data.result[index].id);
 
@@ -148,4 +150,8 @@ class _NotificationState extends State<NotificationPage> {
               )
             ));
   }
+}
+class NotificationArgument{
+  int count;
+  NotificationArgument(this.count);
 }

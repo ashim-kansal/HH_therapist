@@ -95,7 +95,8 @@ class DashboardState extends State<Dashboard> {
                         color: Colors.white,
                       ),
                       onPressed: () => {
-                        Navigator.pushNamed(context, NotificationPage.RouteName).then((value) => {
+                        Navigator.pushNamed(context, NotificationPage.RouteName, arguments: NotificationArgument(count))
+                            .then((value) => {
                           getProfile()
                         })
                       },

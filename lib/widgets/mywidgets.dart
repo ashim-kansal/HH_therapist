@@ -373,13 +373,14 @@ class NotificationList extends StatelessWidget {
   final String subtitle;
   // final String notifcationId;
   final VoidCallback onDelete;
-  
-  
+  bool highlight;
+
   NotificationList({
     @required
     this.title,
     @required
     this.subtitle,
+    this.highlight,
     // this.notifcationId,
     @required
     this.onDelete
@@ -401,7 +402,7 @@ class NotificationList extends StatelessWidget {
             child: Column(children: [
               Container(
                 padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                color: HH_Colors.color_F3F3F3,
+                  color: highlight?HH_Colors.color_5017AB35 : HH_Colors.color_F3F3F3,
                 child: new ListTile(
                   title: Column(children: [
                   HHTextView(
