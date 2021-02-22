@@ -23,7 +23,7 @@ class SimpleLineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return new charts.TimeSeriesChart(seriesList,
       animate: animate,
-      defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: true),
+      defaultRenderer: new charts.LineRendererConfig(includePoints: true, radiusPx: 5,stacked: false,includeArea: true, roundEndCaps: true, ),
       dateTimeFactory: const charts.LocalDateTimeFactory(),
       behaviors: [
         charts.SlidingViewport(),
@@ -34,6 +34,7 @@ class SimpleLineChart extends StatelessWidget {
         ),
       ],
       domainAxis: charts.DateTimeAxisSpec(
+        renderSpec: new charts.NoneRenderSpec(),
         tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
           day: charts.TimeFormatterSpec(
             format: 'EEE',
