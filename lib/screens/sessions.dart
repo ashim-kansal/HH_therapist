@@ -208,7 +208,7 @@ class SessionPageState extends State<SessionPage>{
               name: searchList[index].programName,
               data: searchList[index],
               drname: searchList[index].patientId.firstName+" "+searchList[index].patientId.lastName,
-              sdate: createdDt.format("dd MMM, yyyy hh:mm a"),
+              sdate: createdDt.format("dd MMM, yyyy")+' '+searchList[index].startTime,
               role: '',
               completed: !isSwitched,);
           },
