@@ -571,8 +571,28 @@ List<Diary.Result> getWeekDataFromList(DateTime weekStartDate, List<Diary.Result
     }
   });
 
-  return results;
+  List<Diary.Result> results1 = List();
+  Diary.Result firstday = new Diary.Result();
+  firstday.achivedGoal = 0;
+  firstday.date = weekStartDate;
 
+  results1.add(firstday);
+
+  for(int i=2; i<8; i++){
+    Diary.Result newDay = new Diary.Result();
+    newDay.achivedGoal = 0;
+    newDay.date = weekStartDate.add(Duration(days: i-1));
+    results1.add(newDay);
+  }
+
+  results.forEach((element) {
+    List<Diary.Result> list = List();
+    list.add(element);
+    results1[element.date.weekday-1] = element;
+    // results1.sereplaceRange(element.date.weekday-1, element.date.weekday-1, list);
+  });
+
+  return results1;
 }
 
 class WeekSlotModal{
