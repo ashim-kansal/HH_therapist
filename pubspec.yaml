@@ -69,8 +69,8 @@ dependencies:
   flutter_local_notifications: ^4.0.1
 
 
-#dependency_overrides:
-#  intl: 0.17.0-nullsafety.2
+dependency_overrides:
+  intl: 0.17.0-nullsafety.2
   
 dev_dependencies:
   flutter_test:

@@ -55,6 +55,10 @@ class SessionCard extends StatelessWidget {
           // }
           // return true;
         }
+      }else if((sessionDate.day + 1) == currentDate.day){
+        if(currentDate.hour>int.parse(time[0]) ){
+          return false;
+        }
       }
 
       return true;
@@ -363,8 +367,11 @@ class UpcomingSessionItem extends StatelessWidget {
           // }
           // return true;
         }
+      }else if((sessionDate.day + 1) == currentDate.day){
+        if(currentDate.hour>int.parse(time[0]) ){
+          return false;
+        }
       }
-
       return true;
 
     }
