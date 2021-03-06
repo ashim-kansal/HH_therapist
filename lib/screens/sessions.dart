@@ -224,8 +224,35 @@ class SessionPageState extends State<SessionPage>{
       });
   }
 
+  getCurrentDateTime(Result result) {
+
+    var currentDate = new DateTime.now();
+
+    print("currrD"+currentDate.toString());
+    DateTime sessionDate = result.date;
+
+    print('session date before 24 hours  : '+sessionDate.toString());
+    var time = result.startTime.split(":");
+    var endtime = result.endTime.split(":");
+    if(currentDate.day == sessionDate.day && currentDate.month == sessionDate.month && currentDate.year == sessionDate.year ){
+
+      if(currentDate.hour>=int.parse(time[0]) && currentDate.minute>=int.parse(time[1]) &&
+          currentDate.hour<=int.parse(endtime[0]) && currentDate.minute<=int.parse(endtime[1]) ){
+        return true;
+      }
+    }
+    return false;
+
+  }
 
   void callParticipent(String sessionId, String patientId, Result result) {
+
+    var sessionTimeStatus = getCurrentDateTime(result);
+
+    if(!sessionTimeStatus){
+      showToast("You're not able to call before time.");
+      return;
+    }
 
     Permissions.cameraAndMicrophonePermissionsGranted().then((value) => {
       CallUtils.dial(
