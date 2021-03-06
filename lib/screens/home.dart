@@ -184,10 +184,10 @@ class HomePageState extends State<HomePage> {
     var endtime = result.endTime.split(":");
     if(currentDate.day == sessionDate.day && currentDate.month == sessionDate.month && currentDate.year == sessionDate.year ){
 
-      if(currentDate.hour>=int.parse(time[0]) && currentDate.minute>=int.parse(time[1]) &&
-          currentDate.hour<=int.parse(endtime[0]) && currentDate.minute<=int.parse(endtime[1]) ){
+      // if(currentDate.hour>=int.parse(time[0]) && currentDate.minute>=int.parse(time[1]) &&
+      //     currentDate.hour<=int.parse(endtime[0]) && currentDate.minute<=int.parse(endtime[1]) ){
         return true;
-      }
+      // }
     }
     return false;
 
