@@ -55,7 +55,8 @@ class _MessageWidgetState extends State<MessageWidget> {
                      new Container(
                         margin: EdgeInsets.only(left: 6.0),
                         decoration: new BoxDecoration(
-                          color: Color(0x4545455c),
+                          color: HH_Colors.primaryColor,
+                          // color: Color(0x4545455c),
                           // border: new Border.all(
                           //     color: Color(0x4545455c),
                           //     width: .25,
@@ -86,7 +87,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                   new Container(
                     margin: EdgeInsets.only(left: 6.0),
                     decoration: new BoxDecoration(
-                      color: Color(0x4545455c),
+                      color: HH_Colors.primaryColor,
                       // border: new Border.all(
                       //     color: Color(0x4545455c),
                       //     width: .25,
